@@ -57,7 +57,7 @@ define(['angularAMD','moment'],function(angularAMD,moment){
 		    for (var i = 0; i < dataPointsIn.length; i++) {
 		    	var dataPoint = dataPointsIn[i];
 		    	this.dataPoints.push([new Date(dataPoint.time),parseFloat(dataPoint.value)]);
-		    	this.latest = dataPoint.value;//parseFloat(dataPoint.value);
+		    	this.latest = JSON.parse(dataPoint.value);//parseFloat(dataPoint.value);
 		    }
 		};
 		
