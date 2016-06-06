@@ -48,8 +48,10 @@ define(['angularAMD','underscore','jquery',
 		    "Cooling boil kettle. Make sure the cooling setup is in place.",
 		    "Pumping cooled wort into fermeneter.",
 		];
-		$scope.currentStatusText = statuses[$scope.currentStatus.latest];
-		$scope.nextStatusText = statuses[$scope.currentStatus.latest + 1];
+		$scope.$watch('currentStatus',function(){
+			$scope.currentStatusText = statuses[$scope.currentStatus.latest];
+			$scope.nextStatusText = statuses[$scope.currentStatus.latest + 1];
+		},true);
 		$scope.adjustState = function(amount){$scope.currentStatus.set($scope.currentStatus.latest + amount);};
 		
 		//add all the relevant time series to the chart data.
