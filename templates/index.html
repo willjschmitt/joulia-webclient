@@ -91,12 +91,11 @@
 							<div class="col-xs-12">
 								<div class="panel panel-default">
 									<div class="panel-heading">
-										<header>Status ({{"{{"}}currentStatus.latest}})</header>
+										<header>{{"{{"}} currentStatusText }} (Status #{{"{{"}}currentStatus.latest}})</header>
 									</div>
 									<div class="panel-body no-top-padding">
 										<div class="row">
 											<div class="col-xs-4">
-												<p>Now:{{"{{"}} currentStatusText }}</p>
 												<p>Next:{{"{{"}} nextStatusText }}</p>
 											</div>
 											<div class="col-xs-4">
@@ -130,7 +129,7 @@
 								</div>
 							</div>							
 							<div class="col-lg-3 col-sm-6">
-								<div class="row"><div class="col-sm-12"><value-card title="'Electric Load'" value="boilKettlePower.latest" units="'kW'""/></div></div>
+								<div class="row"><div class="col-sm-12"><value-card title="'Electric Load'" value="boilKettlePower.latest / 1000. " units="'kW'""/></div></div>
 								<div class="row"><div class="col-sm-12"><value-card title="'Energy Consumption'" value="systemEnergy.latest" value-alternate="systemEnergyCost.latest" units="'Wh'" units-alternate="'$'"/></div></div>
 								<div class="row"><div class="col-sm-12"><value-card title="'Boil Kettle Temperature'" value="boilTemperatureActual.latest" value-alternate="boilTemperatureSetPoint.latest" units="'&deg;F'"/></div></div>
 								<div class="row"><div class="col-sm-12"><value-card title="'Mash Tun Temperature'" value="mashTemperatureActual.latest" value-alternate="mashTemperatureSetPoint.latest" units="'&deg;F'"/></div></div>							
