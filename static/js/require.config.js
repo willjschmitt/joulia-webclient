@@ -11,11 +11,11 @@ requirejs.config({
         "underscore": 'third-party/underscore-min',
         
         //angular
-        "angular":          "//ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular",
-        "angular-route":    "//ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-route",
-        "angular-resource": "//ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-resource",
-        "angular-sanitize": "//ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-sanitize",
-        "angularAMD":       "//cdn.jsdelivr.net/angular.amd/0.2/angularAMD.min",
+        "angular":          "lib/angular-1.4.4",
+        "angular-route":    "lib/angular-route-1.4.4",
+        "angular-resource": "lib/angular-resource-1.4.4",
+        "angular-sanitize": "lib/angular-sanitize-1.4.4",
+        "angularAMD":       "lib/angularAMD.min",
         
         //page plugins
 		"prettify":             "../vendor/google-code-prettify/prettify",
