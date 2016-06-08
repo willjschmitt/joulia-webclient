@@ -73,7 +73,6 @@
  					};
 
 				settings = $.extend({}, defaults, options, metaData);
-				console.log(settings.duration);
 
 				// Auto-defaults Chart Structure
 				// --------------------------------------------------
