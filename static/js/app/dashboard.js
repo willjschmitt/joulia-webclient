@@ -86,11 +86,6 @@ define(['angularAMD','underscore','jquery',
 		];		
 		
 		$.toasts("add",{msg: "Welcome to Joulia!"});
-		$.snackbar("add",{
-			type: 		"danger",
-			msg: 		"Connection lost. Reestablishing connection.",
-			buttonText: "Close",
-		});
 
 		
 		/**
