@@ -32,6 +32,7 @@ define(['angularAMD','underscore','jquery',
 		$scope.systemEnergy = new timeSeriesUpdater($scope.recipeInstance,'systemEnergy');
 		$scope.systemEnergyCost = new timeSeriesUpdater($scope.recipeInstance,'systemEnergyCost');
 		$scope.currentStatus = new timeSeriesUpdater($scope.recipeInstance,'state');
+		$scope.timer = new timeSeriesUpdater($scope.recipeInstance,'timer');
 		
 		var statuses = [
 		    "System is currently offline.",

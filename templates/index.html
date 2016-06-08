@@ -99,7 +99,7 @@
 												<p>Next:{{"{{"}} nextStatusText }}</p>
 											</div>
 											<div class="col-xs-4">
-												<dial ng-if="timerActive" title="'Time Left'" value="boilKettleDutyCycle.latest" />
+												<span ng-if="timer">Time Left: {{"{{"}}timer.latest | number:2 }}</span>
 											</div>
 											<div class="col-xs-4">
 												<button class="btn btn-lg btn-info"    ng-click="adjustState(-1)">Previous</button>
