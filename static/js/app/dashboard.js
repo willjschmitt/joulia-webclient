@@ -33,6 +33,8 @@ define(['angularAMD','underscore','jquery',
 		$scope.systemEnergyCost = new timeSeriesUpdater($scope.recipeInstance,'systemEnergyCost');
 		$scope.currentStatus = new timeSeriesUpdater($scope.recipeInstance,'state');
 		$scope.timer = new timeSeriesUpdater($scope.recipeInstance,'timer');
+		$scope.requestPermission = new timeSeriesUpdater($scope.recipeInstance,'requestPermission');
+		$scope.grantPermission = new timeSeriesUpdater($scope.recipeInstance,'grantPermission');
 		
 		var statuses = [
 		    "System is currently offline.",
@@ -53,7 +55,12 @@ define(['angularAMD','underscore','jquery',
 			$scope.currentStatusText = statuses[$scope.currentStatus.latest];
 			$scope.nextStatusText = statuses[$scope.currentStatus.latest + 1];
 		},true);
-		$scope.adjustState = function(amount){$scope.currentStatus.set($scope.currentStatus.latest + amount);};
+		$scope.adjustState = function(amount){
+			if ($scope.requestPermission.latest && amount==+1)
+				$scope.grantPermission();
+			else
+				$scope.currentStatus.set($scope.currentStatus.latest + amount);
+		};
 		
 		//add all the relevant time series to the chart data.
 		$scope.dataPoints = [];
@@ -61,9 +68,34 @@ define(['angularAMD','underscore','jquery',
 		$scope.dataPoints.push({'key':'Boil Set Point','values':$scope.boilTemperatureSetPoint.dataPoints});
 		$scope.dataPoints.push({'key':'Mash Actual',values:$scope.mashTemperatureActual.dataPoints});
 		$scope.dataPoints.push({'key':'Mash Set Point','values':$scope.mashTemperatureSetPoint.dataPoints});
-	
 		
-		
+		//watch for permission request
+		$scope.nextStateColor = 'btn-success';
+		var requestPermissionFlasher = null;
+		$scope.$watch('requestPermission',function(){
+			if ($scope.requestPermission.latest)
+				requestPermissionFlasher = $interval(function(){
+					if ($scope.nextStateColor == 'btn-success')
+						$scope.nextStateColor = 'btn-danger';
+					else
+						$scope.nextStateColor = 'btn-success';
+				},1000);
+			else{
+				if(requestPermissionFlasher) $interval.cancel(requestPermissionFlasher);
+			}
+		});
+		$scope.grantPermission = function(){
+			var now = moment().toISOString();
+			$.ajax({
+    			url: "/live/timeseries/new/", type: "POST", dataType: "text",
+    			data: $.param({
+	    			recipe_instance: $scope.recipeInstance,
+	    			sensor: $scope.elementStatus.sensor,
+	    			value: true,
+	    			time: now,
+	    		})
+	    	});
+		}
 		
 		//overridable statuses - sensor ids for the child elements
 		$scope.heatingElementStatusSensor = 9;
