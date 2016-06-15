@@ -1,4 +1,4 @@
-define(['angularAMD','underscore','jquery',
+define(['angularAMD','underscore','jquery','moment',
            "prettify","perfect-scrollbar","icheck","bootstrap-select",
            "datatables.net","jquery_fullscreen",
            "moment",
@@ -12,7 +12,7 @@ define(['angularAMD','underscore','jquery',
            "jquery-ui","bootstrap","modernizr",
            
            'timeseries',"toggleable-element",'value-card','dial',
-    ],function(angularAMD,_,$){
+    ],function(angularAMD,_,$,moment){
 	var app = angular.module('dashboard', [])
 	.controller('dashboardController',['$scope','$timeout','$interval','timeSeriesUpdater',function($scope,$timeout,$interval,timeSeriesUpdater){
 		function getCookie(name) {
@@ -57,7 +57,7 @@ define(['angularAMD','underscore','jquery',
 		},true);
 		$scope.adjustState = function(amount){
 			if ($scope.requestPermission.latest && amount==+1)
-				$scope.grantPermission();
+				$scope.grantPermission.set(true);
 			else
 				$scope.currentStatus.set($scope.currentStatus.latest + amount);
 		};
@@ -84,18 +84,6 @@ define(['angularAMD','underscore','jquery',
 				if(requestPermissionFlasher) $interval.cancel(requestPermissionFlasher);
 			}
 		});
-		$scope.grantPermission = function(){
-			var now = moment().toISOString();
-			$.ajax({
-    			url: "/live/timeseries/new/", type: "POST", dataType: "text",
-    			data: $.param({
-	    			recipe_instance: $scope.recipeInstance,
-	    			sensor: $scope.elementStatus.sensor,
-	    			value: true,
-	    			time: now,
-	    		})
-	    	});
-		}
 		
 		//overridable statuses - sensor ids for the child elements
 		$scope.heatingElementStatusSensor = 9;
