@@ -71,19 +71,17 @@ define(['angularAMD','underscore','jquery','moment',
 		
 		//watch for permission request
 		$scope.nextStateColor = 'btn-success';
-		var requestPermissionFlasher = null;
-		$scope.$watch('requestPermission',function(){
+		var requestPermissionFlasher = $interval(function(){
 			if ($scope.requestPermission.latest)
-				requestPermissionFlasher = $interval(function(){
-					if ($scope.nextStateColor == 'btn-success')
-						$scope.nextStateColor = 'btn-danger';
-					else
-						$scope.nextStateColor = 'btn-success';
-				},1000);
+				if ($scope.nextStateColor == 'btn-success')
+					$scope.nextStateColor = 'btn-danger';
+				else
+					$scope.nextStateColor = 'btn-success';
 			else{
-				if(requestPermissionFlasher) $interval.cancel(requestPermissionFlasher);
+				$scope.nextStateColor = 'btn-success';
 			}
-		});
+			
+		},1000);
 		
 		//overridable statuses - sensor ids for the child elements
 		$scope.heatingElementStatusSensor = 9;
