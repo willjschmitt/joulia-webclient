@@ -12,8 +12,8 @@ define(['angularAMD','moment','timeseries'],function(angularAMD,moment){
 	    templateUrl: 'static/html/angular-directives/toggleable-element.html',
 	    link: function ($scope) {
 	    	//subscribe to value and override 
-	    	$scope.elementOverride = new timeSeriesUpdater($scope.recipeInstance,$scope.sensorName);
-	    	$scope.elementStatus = new timeSeriesUpdater($scope.recipeInstance,$scope.sensorName + "Override");
+	    	$scope.elementStatus = new timeSeriesUpdater($scope.recipeInstance,$scope.sensorName);
+	    	$scope.elementOverride = new timeSeriesUpdater($scope.recipeInstance,$scope.sensorName + "Override");
 	    	
 	    	//status setters
 	    	$scope.toggleElementStatus = function(){$scope.setElementStatus(!$scope.elementStatus.latest);};
