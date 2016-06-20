@@ -4,11 +4,15 @@
 			<div class="mini-card-left">
 				<span>{{title}}</span>
 				<h2>
-					{{ value | number : 1}}{{units}} 
-					<span ng-if="valueAlternate && unitsAlternate=='$'">({{ valueAlternate | currency: "$" }})</span>
-					<span ng-if="valueAlternate && unitsAlternate!='$'">({{ valueAlternate | number: 1 }}{{unitsAlternate}})</span>
-					
+					{{ value.latest | number : 1}}{{units}} 
+					<span ng-if="valueAlternate && unitsAlternate=='$'">({{ valueAlternate.latest | currency: "$" }})</span>
+					<span ng-if="valueAlternate && unitsAlternate!='$'">({{ valueAlternate.latest | number: 1 }}{{unitsAlternate}})</span>					
 				</h2>
+			</div>
+			<div ng-if="valueOverride.latest"><i class="material-icons" ng-click="toggleOverride()">lock_open</i></div>
+			<div ng-if="overridable || overridableAlternate">
+				<div><i class="material-icons" ng-click="increase_value()">arrow_drop_up</i></div>
+				<div><i class="material-icons" ng-click="decrease_value()">arrow_drop_down</i></div>
 			</div>
 			<div class="mini-card-right">
 				<div class="bemat-mini-chart bemat-mini-chart-primary">
