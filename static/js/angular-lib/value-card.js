@@ -1,4 +1,4 @@
-define(['angularAMD',"peity",'timeseries'],function(angularAMD){
+define(['angularAMD','moment',"peity",'timeseries'],function(angularAMD,moment){
 	angularAMD
 	.directive('valueCard', ['timeSeriesUpdater', function(timeSeriesUpdater){
 		return {
@@ -25,13 +25,13 @@ define(['angularAMD',"peity",'timeseries'],function(angularAMD){
 		    	if ($scope.overridableAlternate) $scope.valueOverride = new timeSeriesUpdater($scope.recipeInstance,$scope.valueAlternateName + "Override");
 		    	
 		    	
-		    	if ($scope.overridable){
+		    	if ($scope.overridable || $scope.overridableAlternate){
 		    		$scope.overridden = false;
 		    		$scope.increase_value = function(){
-		    			$scope.setValue(($scope.overridable ? $scope.value.latest : $scope.valueOverride.latest) + 1.);
+		    			$scope.setValue(($scope.overridable ? $scope.value.latest : $scope.valueAlternate.latest) + 1.);
 		    		};
 		    		$scope.decrease_value = function(){
-		    			$scope.setValue(($scope.overridable ? $scope.value.latest : $scope.valueOverride.latest) - 1.);
+		    			$scope.setValue(($scope.overridable ? $scope.value.latest : $scope.valueAlternate.latest) - 1.);
 		    		};
 		    	}
 		    	
@@ -42,7 +42,7 @@ define(['angularAMD',"peity",'timeseries'],function(angularAMD){
 			    			url: "/live/timeseries/new/", type: "POST", dataType: "text",
 			    			data: $.param({
 				    			recipe_instance: $scope.recipeInstance,
-				    			sensor: $scope.overridable ? $scope.value.sensor : $scope.valueOverride.sensor,
+				    			sensor: $scope.overridable ? $scope.value.sensor : $scope.valueAlternate.sensor,
 				    			value: value,
 				    			time: now,
 				    		})
@@ -50,7 +50,7 @@ define(['angularAMD',"peity",'timeseries'],function(angularAMD){
 			    	}
 		    		
 		    		//make sure we have the override set
-		    		if (!$scope.override.latest)
+		    		if (!$scope.valueOverride.latest)
 		    			$scope.toggleOverride(function(){__setValue(value);});
 		    		else
 		    			__setValue(value);
