@@ -23,7 +23,9 @@ define(['angularAMD','moment','underscore'],function(angularAMD,moment,_){
 		};
 		self._socket.onmessage = function(msg){
 			var parsed = JSON.parse(msg.data);
-			self._subscribers[parsed.sensor].newData([parsed]);
+			_.each(_.where(self._subscribers,{sensor:parsed.sensor}),function(subscriber){
+				subscriber.subscriber.newData([parsed]);
+			});
 		};
 		self._socket.onclose = function(){
 			self._isopen=false;
@@ -36,11 +38,11 @@ define(['angularAMD','moment','underscore'],function(angularAMD,moment,_){
 		
 
 		//entry point for subscriptions to initiate the subscription
-		this._subscribers = {};
+		this._subscribers = [];
 		this.subscribe = function(subscriber){
 			$.post( "live/timeseries/identify/",{recipe_instance:subscriber.recipe_instance,name:subscriber.name}, function( data ) {
 				subscriber.sensor = data.sensor;
-				self._subscribers[subscriber.sensor] = subscriber;
+				self._subscribers.push({sensor:subscriber.sensor,subscriber:subscriber});
 				self._msgqueue.push({
 					recipe_instance: subscriber.recipe_instance,
 					sensor: subscriber.sensor,
