@@ -1,3 +1,4 @@
+{% load static from staticfiles %}
 <aside id="left-content" data-toggle="open" data-default="open" data-size="">
 	<header class="header-container">
 		<div class="header-wrapper">
@@ -13,7 +14,7 @@
 		<div id="userbox">
 			<div id="useravatar">
 				<div class="avatar-thumbnail">
-					<img src="{{ static_url("img/avatar.png") }}" class="img-circle"/>
+					<img src="{% static "img/avatar.png" %}" class="img-circle"/>
 				</div>
 			</div>
 
