@@ -1,5 +1,5 @@
-define(['angularAMD','angular-route','angular-resource',
-    ],function(angularAMD,_,$,moment){
+define(['jquery','angularAMD','angular-route','angular-resource',
+    ],function($,angularAMD){
 	var app = angular.module('joulia', ['ngRoute','ngResource'])
 		.config(['$locationProvider', '$routeProvider',function config($locationProvider, $routeProvider) {
 			$locationProvider.hashPrefix('!');
