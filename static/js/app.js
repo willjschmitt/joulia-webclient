@@ -10,7 +10,12 @@ define(['jquery','angularAMD','angular-route','angular-resource',
 					controllerUrl:'dashboard'
 				}))
 				.otherwise('/');
-		}
-	]);
+		}])
+		.config(['$httpProvider', function($httpProvider){
+	        // django and angular both support csrf tokens. This tells
+	        // angular which cookie to add to what header.
+	        $httpProvider.defaults.xsrfCookieName = 'csrftoken';
+	        $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
+	    }]);
 	return angularAMD.bootstrap(app);
 });

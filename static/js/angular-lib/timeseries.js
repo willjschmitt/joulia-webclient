@@ -1,6 +1,6 @@
 define(['angularAMD','moment','underscore'],function(angularAMD,moment,_){
 	angularAMD
-	.service('timeSeriesSocket',['$timeout',function($timeout){
+	.service('timeSeriesSocket',['$timeout','$http',function($timeout,$http){
 		var self = this;
 		
 		//message queue lets us queue up items while the socket is not currently open
@@ -40,7 +40,8 @@ define(['angularAMD','moment','underscore'],function(angularAMD,moment,_){
 		//entry point for subscriptions to initiate the subscription
 		this._subscribers = [];
 		this.subscribe = function(subscriber){
-			$.post( "live/timeseries/identify/",{recipe_instance:subscriber.recipe_instance,name:subscriber.name}, function( data ) {
+			$http.post( "live/timeseries/identify/",{recipe_instance:subscriber.recipe_instance,name:subscriber.name}).then( function( response ) {
+				var data = response.data;
 				subscriber.sensor = data.sensor;
 				self._subscribers.push({sensor:subscriber.sensor,subscriber:subscriber});
 				self._msgqueue.push({
@@ -81,15 +82,13 @@ define(['angularAMD','moment','underscore'],function(angularAMD,moment,_){
 		
 		service.prototype.set = function(value){
 			var now = moment().toISOString();
-			$.ajax({
-    			url: "/live/timeseries/new/", type: "POST", dataType: "text",
-    			data: $.param({
+			$http.post("/live/timeseries/new/",{
 	    			recipe_instance: this.recipe_instance,
 	    			sensor: this.sensor,
 	    			value: value,
 	    			time: now,
-	    		})
-	    	});
+	    		}
+	    	);
 		};
 	    
 	    return service;

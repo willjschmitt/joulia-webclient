@@ -14,12 +14,7 @@ define(['angularAMD','underscore','jquery','moment',
            'timeseries',"toggleable-element",'value-card','dial',
     ],function(app,_,$,moment){
 	app
-	.controller('dashboardController',['$scope','$timeout','$interval','timeSeriesUpdater',function($scope,$timeout,$interval,timeSeriesUpdater){
-		function getCookie(name) {
-		    var r = document.cookie.match("\\b" + name + "=([^;]*)\\b");
-		    return r ? r[1] : undefined;
-		}
-		
+	.controller('dashboardController',['$scope','$timeout','$interval','timeSeriesUpdater',function($scope,$timeout,$interval,timeSeriesUpdater){		
 		$scope.recipeInstance = 1;
 		
 		//subscribe to all the time series
