@@ -66,6 +66,10 @@ requirejs.config({
 		'value-card':"angular-lib/value-card",
 		'dial':"angular-lib/dial",
 		
+		
+		//app
+        "dashboard":           "app/dashboard",
+		
     },
     shim : {
         "bootstrap" :       { "deps" :['jquery-ui'] },
@@ -105,5 +109,5 @@ requirejs.config({
         "bemat-demo-dashboard": {"deps":['bemat-common','jquery']},
         
     },
-    deps: ['app/dashboard']
+    deps: ['app']
 });

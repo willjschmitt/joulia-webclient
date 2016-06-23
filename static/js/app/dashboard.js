@@ -12,8 +12,8 @@ define(['angularAMD','underscore','jquery','moment',
            "jquery-ui","bootstrap","modernizr",
            
            'timeseries',"toggleable-element",'value-card','dial',
-    ],function(angularAMD,_,$,moment){
-	var app = angular.module('dashboard', [])
+    ],function(app,_,$,moment){
+	app
 	.controller('dashboardController',['$scope','$timeout','$interval','timeSeriesUpdater',function($scope,$timeout,$interval,timeSeriesUpdater){
 		function getCookie(name) {
 		    var r = document.cookie.match("\\b" + name + "=([^;]*)\\b");
@@ -158,5 +158,4 @@ define(['angularAMD','underscore','jquery','moment',
 		$interval(updateChart,5000.);//replot every second rather than everytime we get new data so we arent plotting all the time
 	}]);
 	//angular.module('toggleableElementModule', []);
-	return angularAMD.bootstrap(app);
 });
