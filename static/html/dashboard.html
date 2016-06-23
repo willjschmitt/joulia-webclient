@@ -18,15 +18,15 @@
 			<div class="col-xs-12">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<header>{{"{{"}} currentStatusText }} (Status #{{"{{"}}currentStatus.latest}})</header>
+						<header>{{ currentStatusText }} (Status #{{currentStatus.latest}})</header>
 					</div>
 					<div class="panel-body no-top-padding">
 						<div class="row">
 							<div class="col-xs-4">
-								<p>Next:{{"{{"}} nextStatusText }}</p>
+								<p>Next:{{ nextStatusText }}</p>
 							</div>
 							<div class="col-xs-4">
-								<span ng-if="timer">Time Left: {{"{{"}}timer.latest/60. | number:0 }}:{{"{{"}}timer.latest%60. | number:0 }}</span>
+								<span ng-if="timer">Time Left: {{timer.latest/60. | number:0 }}:{{timer.latest%60. | number:0 }}</span>
 							</div>
 							<div class="col-xs-4">
 								<button class="btn btn-lg btn-info"    ng-click="adjustState(-1)">Previous</button>
@@ -78,7 +78,7 @@
 								<ul class="list">
 									<li class="list-item list-1-line" ng-repeat="task in tasks">
 										<div class="list-icon"><input class="checkbox checkbox-primary" type="checkbox" /></div>
-										<div class="list-item-text layout-column"><h3>{{"{{"}}task.name}}</h3></div>
+										<div class="list-item-text layout-column"><h3>{{task.name}}</h3></div>
 										<button type="button" class="secondary-container btn btn-default btn-icon-toggle" data-toggle="tooltip" data-placement="left" title="Delete Task"><i class="material-icons">delete</i></button>
 									</li>
 								</ul>
