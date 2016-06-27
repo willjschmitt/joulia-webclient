@@ -4,8 +4,7 @@ define(['angularAMD','underscore','jquery','moment',
            "moment",
            "nvd3",
            
-           "materialRipple","snackbar","toasts","speedDial","circularProgress",
-           "linearProgress","subheader","simplePieChart",
+           "snackbar","toasts",
            
            "bemat-common",
            
@@ -14,7 +13,7 @@ define(['angularAMD','underscore','jquery','moment',
            'timeseries',"toggleable-element",'value-card','dial',
     ],function(app,_,$,moment){
 	app
-	.controller('dashboardController',['$scope','$timeout','$interval','timeSeriesUpdater',function($scope,$timeout,$interval,timeSeriesUpdater){		
+	.controller('breweryController',['$scope','$timeout','$interval','timeSeriesUpdater',function($scope,$timeout,$interval,timeSeriesUpdater){		
 		$scope.recipeInstance = 1;
 		
 		//subscribe to all the time series

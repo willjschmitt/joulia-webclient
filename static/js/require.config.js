@@ -68,7 +68,7 @@ requirejs.config({
 		
 		
 		//app
-        "dashboard":           "app/dashboard",
+        "brewery":           "app/brewery",
 		
     },
     shim : {
@@ -77,7 +77,6 @@ requirejs.config({
         "angular-route":    ['angular'],
         "angular-resource": ['angular'],
         "angular-sanitize": ['angular'],
-        "bemat-common": [],
         
         //jquery plugins
         "perfect-scrollbar": {"deps":['jquery-ui']},
@@ -103,7 +102,13 @@ requirejs.config({
         "nvd3":{"deps":['d3']},
         
         //bemat reqs
-        "bemat-common": {"deps":['perfect-scrollbar','bootstrap-select']},
+        "bemat-common": {
+        	"deps":['perfect-scrollbar','bootstrap-select',
+        	        "jquery","jquery-ui","bootstrap","modernizr",
+                    "icheck","materialRipple","speedDial",
+                    "circularProgress","linearProgress","subheader",
+                    "snackbar","toasts","simplePieChart"]
+        },
         "bemat-demo": {"deps":['bemat-common','jquery']},
         "bemat-demo-chartist": {"deps":['bemat-common','jquery']},
         "bemat-demo-dashboard": {"deps":['bemat-common','jquery']},

@@ -40,8 +40,13 @@
 				<li>
 					<a href="">
 						<span class="menu-item-ico"><i class="material-icons">dashboard</i></span>
-						<span class="menu-item-name">Dashboard</span>
+						<span class="menu-item-name">Breweries <span class="badge badge-success">{{brewerys|length}}</span></span>
 					</a>
+					<ul>
+						{% for brewery in brewerys %}
+						<li><a href="#!/brewery/{{brewery.id}}">{{brewery.name}}</a></li>
+						{% endfor %}
+					</ul>
 				</li>
 				<li>
 					<a href="recipes">
