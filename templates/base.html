@@ -1,0 +1,32 @@
+{% load static from staticfiles %}
+<!DOCTYPE html>
+<html>
+    <head>
+		<meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+		<title>Joule</title>
+		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
+		<!-- Bootstrap Core CSS - Include with every page -->
+		<link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet">
+
+		<!-- Bemat Admin CSS - Include with every page -->
+		<link href="{% static "css/themes/theme-default/bemat-admin.min.css" %}" rel="stylesheet" id="theme-switcher">
+
+		<!-- Documentation Prettify -->
+		<link href="{% static "vendor/google-code-prettify/prettify-tomorrow.css" %}" rel="stylesheet" />
+		
+		<!-- Dashboard Level NVD3 Charts -->
+		<link href="{% static "vendor/nvd3/nv.d3.css" %}" rel="stylesheet">
+		
+		{% if user.is_authenticated %}
+		<script data-main="{% static "js/require.config.js" %}" src="{% static "js/third-party/require.js" %}"></script>
+		{% endif %}
+	</head>
+
+	<body class="dark-sidebar dark-header-brand container-fluid">
+		{% block content %}{% endblock %}
+	</body>
+</html>

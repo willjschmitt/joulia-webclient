@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<form method="post" action="{% url 'login' %}">
+{% csrf_token %}
+
+	<div id="authentication-box" class="authentication-style1">
+		<div class="authentication-box-wrapper">
+			<div class="panel panel-default">
+				<div class="panel-body no-padding">
+					
+					<div class="authentication-header">
+						<div class="logo-box logo-box-primary-light padding-top-4">
+							<div class="logo">
+								<b>J</b>
+							</div>
+						</div>
+						<span>Sign in to joulia</span>
+					</div>
+	
+					<div class="authentication-body">
+						<form class="form" role="form" action="index.html">
+							<div class="form-group floating-label">
+								<input type="text" class="form-control" id="id_username" maxlength="254" name="username" >
+								<label for="regular2">username</label>
+							</div>
+							<div class="form-group floating-label">
+								<input type="password" class="form-control" id="id_password" name="password" >
+								<label for="password">password</label>
+							</div>
+	
+							<button type="submit" class="btn btn-info btn-raised btn-block" value="login">Sign in</button>
+							<input type="hidden" name="next" value="{{ next }}" />
+							<div class="authentication-body-footer margin-top-5">
+								<div>
+									<label>
+										<input class="checkbox checkbox-primary" type="checkbox" />
+										<span>Stay signed in</span>
+									</label>
+								</div>
+								<!-- <div class="text-right">
+									<a href="{% url 'password_reset' %}">Forgot password?</a>
+								</div>-->
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<!-- <div class="text-center">
+				Don't have an account? <a href="page-authentication-register.html" class="text-default-bright">Create an account</a>
+			</div>-->
+		</div>
+	</div>
+
+</form>
+
+{% endblock %}
