@@ -10,7 +10,7 @@ define(['jquery','angularAMD','angular-route','angular-resource',
 					controller:'breweryController',
 					controllerUrl:'brewery'
 				}))
-				.when('/recipies/', angularAMD.route({
+				.when('/recipes/', angularAMD.route({
 					templateUrl:'static/brewery/html/recipes.html',
 					controller:'recipesController',
 					controllerUrl:'recipes'
