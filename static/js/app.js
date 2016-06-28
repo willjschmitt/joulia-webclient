@@ -6,7 +6,7 @@ define(['jquery','angularAMD','angular-route','angular-resource',
 			$locationProvider.hashPrefix('!');
 			$routeProvider
 				.when('/brewery/:breweryId', angularAMD.route({
-					templateUrl:'static/html/brewery.html',
+					templateUrl:'static/brewery/html/brewery.html',
 					controller:'breweryController as brewery',
 					controllerUrl:'brewery'
 				}))

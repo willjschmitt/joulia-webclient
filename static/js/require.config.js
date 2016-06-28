@@ -68,7 +68,7 @@ requirejs.config({
 		
 		
 		//app
-        "brewery":           "app/brewery",
+        "brewery":           "../brewery/js/brewery",
 		
     },
     shim : {
