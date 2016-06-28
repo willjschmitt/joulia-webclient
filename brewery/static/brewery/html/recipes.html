@@ -1,0 +1,31 @@
+<section id="right-content-wrapper">
+	<section class="page-header alternative-header">
+		<ol class="breadcrumb">
+			<li>Joulia</li>
+			<li>Recipies</li>
+		</ol>
+		<div class="page-header_title">
+			<h1>
+				Recipes
+			</h1>
+		</div>
+	</section>
+
+	<section class="page-content">
+		<div class="row-fluid">
+			<div class="col-lg-6 col-xs-12" ng-repeat="recipe in recipes">
+				<div class="panel panel-default panel-divider">
+					<div class="panel-heading">
+						<header>{{recipe.name}}</header>
+					</div>
+					<div class="panel-body">
+						<div class="row" ng-repeat="recipe_property in recipe_properties">
+							<div class="col-md-3 col-xs-12">{{recipe_property.header}}</div>
+							<div class="col-md-9 col-xs-12">{{recipe[recipe_property.name]}}</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section><!-- /#page-content -->
+</section><!-- /#right-content -->

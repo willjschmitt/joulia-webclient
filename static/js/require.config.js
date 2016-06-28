@@ -68,7 +68,11 @@ requirejs.config({
 		
 		
 		//app
-        "brewery":           "../brewery/js/brewery",
+        "brewery": "../brewery/js/brewery",
+        "recipes": "../brewery/js/recipes",
+        
+        //api
+        "brewery-api": "../brewery/js/api",
 		
     },
     shim : {

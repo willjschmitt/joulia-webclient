@@ -7,8 +7,18 @@ define(['jquery','angularAMD','angular-route','angular-resource',
 			$routeProvider
 				.when('/brewery/:breweryId', angularAMD.route({
 					templateUrl:'static/brewery/html/brewery.html',
-					controller:'breweryController as brewery',
+					controller:'breweryController',
 					controllerUrl:'brewery'
+				}))
+				.when('/recipies/', angularAMD.route({
+					templateUrl:'static/brewery/html/recipes.html',
+					controller:'recipesController',
+					controllerUrl:'recipes'
+				}))
+				.when('/recipe/:recipeId', angularAMD.route({
+					templateUrl:'static/brewery/html/recipe.html',
+					controller:'recipeController',
+					controllerUrl:'recipe'
 				}))
 				.otherwise('/');
 		}])
