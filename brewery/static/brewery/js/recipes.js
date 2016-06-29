@@ -38,9 +38,9 @@ define(['angularAMD','underscore','jquery','moment',
 		    {header:'Last Brewed',name:'last_brewed'}
 		];
 	}])
-	.controller('LaunchRecipeModalCtrl', function ($scope, $uibModalInstance) {
+	.controller('LaunchRecipeModalCtrl', ['$scope','$uibModalInstance','breweryApi',function ($scope, $uibModalInstance,breweryApi) {
 
-		$scope.brewerys = [{id:1,name:"Main Facility"}];
+		$scope.brewerys = breweryApi.brewery.query();
 		$scope.selectedBrewery = null;
 		
 		$scope.ok = function () {
@@ -50,5 +50,5 @@ define(['angularAMD','underscore','jquery','moment',
 		$scope.cancel = function () {
 			$uibModalInstance.dismiss('cancel');
 		};
-	});
+	}]);
 });
