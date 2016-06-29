@@ -16,7 +16,14 @@
 			<div class="col-lg-6 col-xs-12" ng-repeat="recipe in recipes">
 				<div class="panel panel-default panel-divider">
 					<div class="panel-heading">
-						<header>{{recipe.name}}</header>
+						<header>
+							{{recipe.name}}
+							<a href="" ng-click="launch_recipe(recipe)">
+								<div class="pull-right">
+									<i class="material-icons">launch</i> Start
+								</div>	
+							</a>
+						</header>
 					</div>
 					<div class="panel-body">
 						<div class="row" ng-repeat="recipe_property in recipe_properties">

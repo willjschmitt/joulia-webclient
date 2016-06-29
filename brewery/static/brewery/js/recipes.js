@@ -15,13 +15,40 @@ define(['angularAMD','underscore','jquery','moment',
            "brewery-api",
     ],function(app,_,$,moment){
 	app
-	.controller('recipesController',['$scope','breweryApi',function($scope,breweryApi){		
-		$scope.recipes = breweryApi.recipe.query(function(){console.log($scope.recipes);});
+	.controller('recipesController',['$scope','breweryApi','$uibModal',function($scope,breweryApi,$uibModal){		
+		$scope.recipes = breweryApi.recipe.query();
+		
+		$scope.launch_recipe = function(recipe){
+			var modalInstance = $uibModal.open({
+				animation: true,
+				templateUrl: 'static/brewery/html/launch-recipe-modal.html',
+				controller: 'LaunchRecipeModalCtrl',
+//				resolve: {
+//					items: function () {return $scope.items;}
+//				}
+			});
+
+			modalInstance.result.then(function (result) {
+			});
+		}
 		
 		$scope.recipe_properties = [
 		    {header:'Style',name:'style'},
 		    {header:'Number of Batches',name:'number_of_batches'},
 		    {header:'Last Brewed',name:'last_brewed'}
 		];
-	}]);
+	}])
+	.controller('LaunchRecipeModalCtrl', function ($scope, $uibModalInstance) {
+
+		$scope.brewerys = [{id:1,name:"Main Facility"}];
+		$scope.selectedBrewery = null;
+		
+		$scope.ok = function () {
+			$uibModalInstance.close(true);
+		};
+		
+		$scope.cancel = function () {
+			$uibModalInstance.dismiss('cancel');
+		};
+	});
 });

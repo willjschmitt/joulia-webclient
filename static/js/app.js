@@ -1,7 +1,7 @@
-define(['jquery','angularAMD','angular-route','angular-resource',
+define(['jquery','angularAMD','angular-route','angular-resource','angular-ui',
         "bemat-common",
     ],function($,angularAMD){
-	var app = angular.module('joulia', ['ngRoute','ngResource'])
+	var app = angular.module('joulia', ['ngRoute','ngResource','ui.bootstrap'])
 		.config(['$locationProvider', '$routeProvider',function config($locationProvider, $routeProvider) {
 			$locationProvider.hashPrefix('!');
 			$routeProvider
