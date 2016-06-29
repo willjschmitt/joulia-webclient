@@ -22,10 +22,18 @@ define(['angularAMD','underscore','jquery','moment',
 			var modalInstance = $uibModal.open({
 				animation: true,
 				templateUrl: 'static/brewery/html/launch-recipe-modal.html',
-				controller: 'LaunchRecipeModalCtrl',
-//				resolve: {
-//					items: function () {return $scope.items;}
-//				}
+				controller: 'LaunchRecipeModalCtrl'
+			});
+
+			modalInstance.result.then(function (result) {
+			});
+		};
+		
+		$scope.addRecipe = function(){
+			var modalInstance = $uibModal.open({
+				animation: true,
+				templateUrl: 'static/brewery/html/add-recipe-modal.html',
+				controller: 'addRecipeModalCtrl'
 			});
 
 			modalInstance.result.then(function (result) {
@@ -45,6 +53,19 @@ define(['angularAMD','underscore','jquery','moment',
 		
 		$scope.ok = function () {
 			$uibModalInstance.close(true);
+		};
+		
+		$scope.cancel = function () {
+			$uibModalInstance.dismiss('cancel');
+		};
+	}])
+	.controller('addRecipeModalCtrl', ['$scope','$uibModalInstance','breweryApi',function ($scope, $uibModalInstance,breweryApi) {		
+		$scope.newRecipe = new breweryApi.recipe();
+		
+		$scope.ok = function () {
+			$scope.newRecipe.$save(function(){
+				$uibModalInstance.close(true);
+			});
 		};
 		
 		$scope.cancel = function () {

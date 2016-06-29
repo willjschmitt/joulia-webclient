@@ -1,0 +1,18 @@
+<!-- Modal HTML -->
+<div class="modal-header">
+	<h4 class="modal-title">Add recipe</h4>
+</div>
+<div class="modal-body">
+	<div class="form-group">
+		<input name="name" id="name" class="form-control" ng-model="newRecipe.name" type="text">
+		<label>Name</label>
+	</div>
+	<div class="form-group">
+		<input name="style" id="style" class="form-control" ng-model="newRecipe.style" type="text">
+		<label>Style</label>
+	</div>
+</div>
+<div class="modal-footer">
+	<button type="button" class="btn btn-primary btn-flat btn-ripple" data-dismiss="modal" ng-click="cancel()">Cancel</button>
+	<button type="button" class="btn btn-primary btn-flat btn-ripple" ng-click="ok()">Let's go!</button>
+</div>
