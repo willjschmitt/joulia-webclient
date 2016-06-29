@@ -37,11 +37,12 @@ define(['angularAMD','underscore','jquery','moment',
 			});
 
 			modalInstance.result.then(function (result) {
+				$scope.recipes = breweryApi.recipe.query();
 			});
 		}
 		
 		$scope.recipe_properties = [
-		    {header:'Style',name:'style'},
+		    //{header:'Style',name:'style'}, // moved to be explicitly styled
 		    {header:'Number of Batches',name:'number_of_batches'},
 		    {header:'Last Brewed',name:'last_brewed'}
 		];
@@ -61,6 +62,8 @@ define(['angularAMD','underscore','jquery','moment',
 	}])
 	.controller('addRecipeModalCtrl', ['$scope','$uibModalInstance','breweryApi',function ($scope, $uibModalInstance,breweryApi) {		
 		$scope.newRecipe = new breweryApi.recipe();
+		
+		$scope.beerStyles = breweryApi.beerStyle.query();
 		
 		$scope.ok = function () {
 			$scope.newRecipe.$save(function(){

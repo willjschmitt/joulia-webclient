@@ -17,19 +17,21 @@
 				<div class="panel panel-default panel-divider">
 					<div class="panel-heading">
 						<header>
-							{{recipe.name}}
-							<a href="" ng-click="launch_recipe(recipe)">
-								<div class="pull-right">
-									<i class="material-icons">launch</i> Start
-								</div>	
-							</a>
+							<div>
+								{{recipe.name}}
+								<a href="" ng-click="launch_recipe(recipe)">
+									<div class="pull-right">
+										<i class="material-icons">launch</i> Start
+									</div>	
+								</a>
+							</div>
+							<p class="subhead-1">{{recipe.style}}</p>
 						</header>
 					</div>
 					<div class="panel-body">
-						<div class="row" ng-repeat="recipe_property in recipe_properties">
-							<div class="col-md-3 col-xs-12">{{recipe_property.header}}</div>
-							<div class="col-md-9 col-xs-12">{{recipe[recipe_property.name]}}</div>
-						</div>
+						<p ng-repeat="recipe_property in recipe_properties">
+							{{recipe_property.header}}: {{recipe[recipe_property.name]}}
+						</p>
 					</div>
 				</div>
 			</div>
