@@ -1,0 +1,17 @@
+<!-- Modal HTML -->
+<div class="modal-header">
+	<h4 class="modal-title">Launch Recipe Instance</h4>
+</div>
+<div class="modal-body">
+	<p>Select a brewing system to launch this recipe on.</p>
+	<div class="form-group">
+		<select name="brewerySelector" id="brewerySelector" class="form-control"
+		 ng-options="option.name for option in brewerys track by option.id"
+		 ng-model="selectedBrewery"></select>
+		 <label>Brewery</label>
+	</div>
+</div>
+<div class="modal-footer">
+	<button type="button" class="btn btn-primary btn-flat btn-ripple" data-dismiss="modal" ng-click="cancel()">Cancel</button>
+	<button type="button" class="btn btn-primary btn-flat btn-ripple" ng-click="ok()">Let's go!</button>
+</div>

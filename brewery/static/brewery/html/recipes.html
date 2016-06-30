@@ -1,0 +1,55 @@
+<section id="right-content-wrapper">
+	<section class="page-header alternative-header">
+		<ol class="breadcrumb">
+			<li>Joulia</li>
+			<li>Recipies</li>
+		</ol>
+		<div class="page-header_title">
+			<h1>
+				Recipes
+			</h1>
+		</div>
+	</section>
+
+	<section class="page-content">
+		<div class="row-fluid">
+			<div class="col-lg-6 col-xs-12" ng-repeat="recipe in recipes">
+				<div class="panel panel-default panel-divider">
+					<div class="panel-heading">
+						<header>
+							<div>
+								{{recipe.name}}
+								<a href="" ng-click="launch_recipe(recipe)">
+									<div class="pull-right">
+										<i class="material-icons">launch</i> Start
+									</div>	
+								</a>
+							</div>
+							<p class="subhead-1">{{recipe.style}}</p>
+						</header>
+					</div>
+					<div class="panel-body">
+						<p ng-repeat="recipe_property in recipe_properties">
+							{{recipe_property.header}}: {{recipe[recipe_property.name]}}
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-6 col-xs-12">
+				<a href="" ng-click="addRecipe()">
+					<div class="panel panel-default panel-divider">
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-xs-12">
+									<h1 class="text-success" style="text-align:center;">
+										<i class="material-icons">add_circle</i> Add
+									</h1>
+								</div>
+							</div>
+						</div>
+					</div>
+				</a>
+			</div>
+		</div>
+	</section><!-- /#page-content -->
+</section><!-- /#right-content -->

@@ -34,6 +34,9 @@ var/
 pip-log.txt
 pip-delete-this-directory.txt
 
+#django setup
+static_assets/
+
 # Unit test / coverage reports
 htmlcov/
 .tox/

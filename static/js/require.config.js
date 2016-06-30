@@ -16,6 +16,7 @@ requirejs.config({
         "angular-resource": "lib/angular-resource-1.4.4",
         "angular-sanitize": "lib/angular-sanitize-1.4.4",
         "angularAMD":       "lib/angularAMD.min",
+        "angular-ui":       "lib/ui-bootstrap-tpls-1.3.3.min",
         
         //page plugins
 		"prettify":             "../vendor/google-code-prettify/prettify",
@@ -68,7 +69,11 @@ requirejs.config({
 		
 		
 		//app
-        "brewery":           "app/brewery",
+        "brewery": "../brewery/js/brewery",
+        "recipes": "../brewery/js/recipes",
+        
+        //api
+        "brewery-api": "../brewery/js/api",
 		
     },
     shim : {
@@ -77,6 +82,7 @@ requirejs.config({
         "angular-route":    ['angular'],
         "angular-resource": ['angular'],
         "angular-sanitize": ['angular'],
+        "angular-ui":       ['angular'],
         
         //jquery plugins
         "perfect-scrollbar": {"deps":['jquery-ui']},
