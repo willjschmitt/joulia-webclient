@@ -26,18 +26,15 @@ define(['angularAMD','underscore','jquery','moment',
 			});
 
 			modalInstance.result.then(function (result) {
-				console.log(recipe);
-				var data = {
-					recipe:recipe.id,
-					brewery:result.brewery.id
-				};
-				console.log(data);
 				$http({
 					method: 'POST',
 					url: '/brewery/launch',
-					data:data
+					data:{
+						recipe:recipe.id,
+						brewery:result.brewery.id
+					}
 				}).then(function(response) {
-					
+					$location.path('/recipes');
 				});
 			});
 		};

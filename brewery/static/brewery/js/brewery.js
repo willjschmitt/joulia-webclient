@@ -17,19 +17,21 @@ define(['angularAMD','underscore','jquery','moment',
 	app
 	.controller('breweryController',['$scope','$timeout','$interval',
 	                                 'timeSeriesUpdater','breweryApi',
-	                                 '$routeParams',
+	                                 '$routeParams','$uibModal','$http',
 	                                 function($scope,$timeout,$interval,
 	                                		 timeSeriesUpdater,breweryApi,
-	                                		 $routeParams){		
-		$scope.brewery = breweryApi.brewery.get({id:$routeParams.breweryId},function(){
+	                                		 $routeParams,$uibModal,$http){		
+		$scope.brewery = breweryApi.brewery.get({id:$routeParams.breweryId},getRecipeInstance);
+		
+		function getRecipeInstance (){
 			breweryApi.recipeInstance.query({
 				brewery:$scope.brewery.id,
 				active:true,
 			},function(result){
 				$scope.recipeInstance = result[0];
 				initializeBrewery();
-			});
-		});
+			},function(){$scope.recipeInstance = null;});
+		}
 		
 		function initializeBrewery(){
 			//first set up a brew session end function
@@ -37,7 +39,7 @@ define(['angularAMD','underscore','jquery','moment',
 				var modalInstance = $uibModal.open({
 					animation: true,
 					templateUrl: 'static/brewery/html/end-recipe-modal.html',
-					controller: 'EndRecipeModalCtrl'
+					controller: 'endRecipeModalCtrl'
 				});
 
 				modalInstance.result.then(function (result) {
@@ -45,7 +47,9 @@ define(['angularAMD','underscore','jquery','moment',
 						method: 'POST',
 						url: '/brewery/end',
 						data:{recipe_instance:$scope.recipeInstance.id}
-					}).then(function(response) {});
+					}).then(function() {
+						$scope.recipeInstance = null;
+					});
 				});
 			};
 			
@@ -150,7 +154,6 @@ define(['angularAMD','underscore','jquery','moment',
 				.tickFormat(d3.format(',.1f'));
 			
 			function updateChart(){
-				console.log('update');
 				d3.select('#chart svg')
 				    //TODO: I shouldnt need to do a deep copy. nvd3 seems to screw around with the references in $scope.dataPoints otherwise and it becomes detached from the service (I think its from a map call that sets to itself)
 					.datum(angular.copy($scope.dataPoints))
@@ -189,7 +192,9 @@ define(['angularAMD','underscore','jquery','moment',
 	}])
 	.controller('endRecipeModalCtrl', ['$scope','$uibModalInstance',function ($scope, $uibModalInstance) {		
 		
-		$scope.ok = function () {};
+		$scope.ok = function () {
+			$uibModalInstance.close(true);
+		};
  		$scope.cancel = function () {
 			$uibModalInstance.dismiss('cancel');
 		};
