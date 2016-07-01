@@ -44,6 +44,7 @@ define(['angularAMD','moment','underscore'],function(angularAMD,moment,_){
 				var data = response.data;
 				subscriber.sensor = data.sensor;
 				self._subscribers.push({sensor:subscriber.sensor,subscriber:subscriber});
+				console.log(subscriber.recipe_instance);
 				self._msgqueue.push({
 					recipe_instance: subscriber.recipe_instance,
 					sensor: subscriber.sensor,

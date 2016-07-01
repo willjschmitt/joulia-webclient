@@ -63,7 +63,7 @@ define(['angularAMD','underscore','jquery','moment',
 			$scope.timer = new timeSeriesUpdater($scope.recipeInstance.id,'timer');
 			$scope.requestPermission = new timeSeriesUpdater($scope.recipeInstance.id,'requestPermission');
 			$scope.grantPermission = new timeSeriesUpdater($scope.recipeInstance.id,'grantPermission');
-		
+			
 			var statuses = [
 			    "System is currently offline.",
 			    "Heating water for strike.",
@@ -150,6 +150,7 @@ define(['angularAMD','underscore','jquery','moment',
 				.tickFormat(d3.format(',.1f'));
 			
 			function updateChart(){
+				console.log('update');
 				d3.select('#chart svg')
 				    //TODO: I shouldnt need to do a deep copy. nvd3 seems to screw around with the references in $scope.dataPoints otherwise and it becomes detached from the service (I think its from a map call that sets to itself)
 					.datum(angular.copy($scope.dataPoints))
