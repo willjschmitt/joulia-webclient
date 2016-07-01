@@ -15,7 +15,7 @@ define(['angularAMD','underscore','jquery','moment',
            "brewery-api",
     ],function(app,_,$,moment){
 	app
-	.controller('recipesController',['$scope','breweryApi','$uibModal',function($scope,breweryApi,$uibModal){		
+	.controller('recipesController',['$scope','breweryApi','$uibModal','$http',function($scope,breweryApi,$uibModal,$http){		
 		$scope.recipes = breweryApi.recipe.query();
 		
 		$scope.launch_recipe = function(recipe){
@@ -26,6 +26,19 @@ define(['angularAMD','underscore','jquery','moment',
 			});
 
 			modalInstance.result.then(function (result) {
+				console.log(recipe);
+				var data = {
+					recipe:recipe.id,
+					brewery:result.brewery.id
+				};
+				console.log(data);
+				$http({
+					method: 'POST',
+					url: '/brewery/launch',
+					data:data
+				}).then(function(response) {
+					
+				});
 			});
 		};
 		
@@ -53,7 +66,7 @@ define(['angularAMD','underscore','jquery','moment',
 		$scope.selectedBrewery = null;
 		
 		$scope.ok = function () {
-			$uibModalInstance.close(true);
+			$uibModalInstance.close({brewery:$scope.selectedBrewery});
 		};
 		
 		$scope.cancel = function () {

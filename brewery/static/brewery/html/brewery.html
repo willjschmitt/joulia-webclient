@@ -13,9 +13,19 @@
 		</div>
 	</section>
 
-	<section class="page-content">
+	<section class="page-content" ng-if="recipeInstance.active">
 		<div class="row">
-			<div class="col-xs-12">
+			<div class="col-md-4 col-xs-12">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<header>Control</header>
+					</div>
+					<div class="panel-body no-top-padding">
+						<button type="button" class="btn btn-raised btn-danger" ng-click="end_recipe()">End Brewing Session</button>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-8 col-xs-12">
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<header>{{ currentStatusText }} (Status #{{currentStatus.latest}})</header>
@@ -91,5 +101,23 @@
 
 
 	</section><!-- /#page-content -->
+	
+	<section class="page-content" ng-if="!recipeInstance.active">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<header>Brewery not active</header>
+					</div>
+					<div class="panel-body no-top-padding">
+						<p>Brewery is not active. Visit the recipes page to launch a recipe.</p>
+					</div>
+					<div class="panel-footer">
+						<a href="#!/recipes" class="btn btn-default btn-flat">Recipes</a>
+					</div>
+				</div>
+			</div>	
+		</div>
+	</section>
 
 </section><!-- /#right-content -->
