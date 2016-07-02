@@ -44,7 +44,7 @@
 					</a>
 					<ul>
 						{% for brewery in brewerys %}
-						<li><a href="#!/brewery/{{brewery.id}}">{{brewery.name}}</a></li>
+						<li><a href="#!/brewery/{{brewery.id}}">{{brewery.name}} {%if brewery.active %}<span class="label label-warning">Active</span>{% endif %}</a></li>
 						{% endfor %}
 					</ul>
 				</li>
