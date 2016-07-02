@@ -15,7 +15,8 @@ define(['angularAMD','underscore','jquery','moment',
            "brewery-api",
     ],function(app,_,$,moment){
 	app
-	.controller('recipesController',['$scope','breweryApi','$uibModal','$http',function($scope,breweryApi,$uibModal,$http){		
+	.controller('recipesController',['$scope','breweryApi','$uibModal','$http',
+	                                 '$location',function($scope,breweryApi,$uibModal,$http,$location){		
 		$scope.recipes = breweryApi.recipe.query();
 		
 		$scope.launch_recipe = function(recipe){
@@ -34,7 +35,7 @@ define(['angularAMD','underscore','jquery','moment',
 						brewery:result.brewery.id
 					}
 				}).then(function(response) {
-					$location.path('/recipes');
+					$location.path('/brewery/'+result.brewery.id).replace();
 				});
 			});
 		};
