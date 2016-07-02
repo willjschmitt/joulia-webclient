@@ -26,7 +26,7 @@ define(['angularAMD','underscore','jquery','moment',
 		function getRecipeInstance (){
 			breweryApi.recipeInstance.query({
 				brewery:$scope.brewery.id,
-				active:true,
+				active:'True',
 			},function(result){
 				$scope.recipeInstance = result[0];
 				initializeBrewery();
