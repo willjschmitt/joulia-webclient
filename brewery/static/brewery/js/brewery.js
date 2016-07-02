@@ -28,8 +28,12 @@ define(['angularAMD','underscore','jquery','moment',
 				brewery:$scope.brewery.id,
 				active:'True',
 			},function(result){
-				$scope.recipeInstance = result[0];
-				initializeBrewery();
+				if (result.length == 1){
+					$scope.recipeInstance = result[0];
+					initializeBrewery();
+				}
+				else
+					$scope.recipeInstance = null;
 			},function(){$scope.recipeInstance = null;});
 		}
 		
