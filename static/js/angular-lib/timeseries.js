@@ -56,7 +56,7 @@ define(['angularAMD','moment','underscore'],function(angularAMD,moment,_){
 		//TODO: add websocket sending of data
 		/*this.send = function(subscriber,value){}*/
 	}])
-	.factory('timeSeriesUpdater',['timeSeriesSocket',function(timeSeriesSocket){
+	.factory('timeSeriesUpdater',['timeSeriesSocket','$http',function(timeSeriesSocket,$http){
 		var service = function(recipe_instance,name){
 			this.recipe_instance = recipe_instance;
 			this.name = name;
