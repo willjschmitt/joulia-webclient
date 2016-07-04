@@ -25,6 +25,7 @@ define(['angularAMD','moment','underscore'],function(angularAMD,moment,_){
 			var parsed = JSON.parse(msg.data);
 			_.each(_.where(self._subscribers,{sensor:parsed.sensor}),function(subscriber){
 				subscriber.subscriber.newData([parsed]);
+				if (subscriber.hasOwnProperty('callback')){ subscriber.callback() };
 			});
 		};
 		self._socket.onclose = function(){
@@ -39,11 +40,13 @@ define(['angularAMD','moment','underscore'],function(angularAMD,moment,_){
 
 		//entry point for subscriptions to initiate the subscription
 		this._subscribers = [];
-		this.subscribe = function(subscriber){
+		this.subscribe = function(subscriber,callback){
 			$http.post( "live/timeseries/identify/",{recipe_instance:subscriber.recipe_instance,name:subscriber.name}).then( function( response ) {
 				var data = response.data;
 				subscriber.sensor = data.sensor;
-				self._subscribers.push({sensor:subscriber.sensor,subscriber:subscriber});
+				var new_subscriber_obj = {sensor:subscriber.sensor,subscriber:subscriber};
+				if (callback){new_subscriber_obj.callback=callback};
+				self._subscribers.push(new_subscriber_obj);
 				self._msgqueue.push({
 					recipe_instance: subscriber.recipe_instance,
 					sensor: subscriber.sensor,
@@ -57,7 +60,7 @@ define(['angularAMD','moment','underscore'],function(angularAMD,moment,_){
 		/*this.send = function(subscriber,value){}*/
 	}])
 	.factory('timeSeriesUpdater',['timeSeriesSocket','$http',function(timeSeriesSocket,$http){
-		var service = function(recipe_instance,name){
+		var service = function(recipe_instance,name,callback){
 			this.recipe_instance = recipe_instance;
 			this.name = name;
 			
@@ -69,7 +72,7 @@ define(['angularAMD','moment','underscore'],function(angularAMD,moment,_){
 			
 			var self = this;
 			this.timeSeriesSocket = timeSeriesSocket;
-			this.timeSeriesSocket.subscribe(self);
+			this.timeSeriesSocket.subscribe(self,callback);
 		}
 	
 		service.prototype.newData = function(dataPointsIn) {

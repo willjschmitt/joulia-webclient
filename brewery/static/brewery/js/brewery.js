@@ -67,7 +67,7 @@ define(['angularAMD','underscore','jquery','moment',
 			$scope.boilKettlePower = new timeSeriesUpdater($scope.recipeInstance.id,'boilKettle__power');
 			$scope.systemEnergy = new timeSeriesUpdater($scope.recipeInstance.id,'systemEnergy');
 			$scope.systemEnergyCost = new timeSeriesUpdater($scope.recipeInstance.id,'systemEnergyCost');
-			$scope.currentStatus = new timeSeriesUpdater($scope.recipeInstance.id,'state');
+			$scope.currentStatus = new timeSeriesUpdater($scope.recipeInstance.id,'state',updateStatusText);
 			$scope.timer = new timeSeriesUpdater($scope.recipeInstance.id,'timer');
 			$scope.requestPermission = new timeSeriesUpdater($scope.recipeInstance.id,'requestPermission');
 			$scope.grantPermission = new timeSeriesUpdater($scope.recipeInstance.id,'grantPermission');
@@ -87,10 +87,13 @@ define(['angularAMD','underscore','jquery','moment',
 			    "Cooling boil kettle. Make sure the cooling setup is in place.",
 			    "Pumping cooled wort into fermeneter.",
 			];
-			$scope.$watch('currentStatus',function(){
+			function updateStatusText(){
 				$scope.currentStatusText = statuses[$scope.currentStatus.latest];
 				$scope.nextStatusText = statuses[$scope.currentStatus.latest + 1];
-			},true);
+			}
+//			$scope.$watch('currentStatus',function(){
+//				
+//			},true);
 			$scope.adjustState = function(amount){
 				if ($scope.requestPermission.latest && amount==+1)
 					$scope.grantPermission.set(true);
