@@ -76,7 +76,7 @@ define(['angularAMD','moment','underscore'],function(angularAMD,moment,_){
 		}
 	
 		service.prototype.newData = function(dataPointsIn) {
-		    var staleDataMinutes = 5.;
+		    var staleDataMinutes = 20.;
 			
 			for (var i = 0; i < dataPointsIn.length; i++) {
 		    	var timeDiff = moment().diff(moment(dataPointsIn[i].time));
