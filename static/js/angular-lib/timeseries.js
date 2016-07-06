@@ -76,15 +76,28 @@ define(['angularAMD','moment','underscore'],function(angularAMD,moment,_){
 		}
 	
 		service.prototype.newData = function(dataPointsIn) {
-		    for (var i = 0; i < dataPointsIn.length; i++) {
+		    var staleDataMinutes = 5.;
+			
+			for (var i = 0; i < dataPointsIn.length; i++) {
 		    	var timeDiff = moment().diff(moment(dataPointsIn[i].time));
 		    	var timeDiffMinutes = moment.duration(timeDiff).asMinutes();
-		    	if (timeDiffMinutes < 20.){
+		    	if (timeDiffMinutes < staleDataMinutes){
 		    		var dataPoint = dataPointsIn[i];
 		    		this.dataPoints.push([new Date(dataPoint.time),parseFloat(dataPoint.value)]);
 		    		this.latest = JSON.parse(dataPoint.value);//parseFloat(dataPoint.value);
 		    	}
 		    }
+		    
+		    //remove any data older than 20min
+		    while (this.dataPoints.length > 0){
+		    	var timeDiff = moment().diff(moment(this.dataPoints[0][0]));
+		    	var timeDiffMinutes = moment.duration(timeDiff).asMinutes();
+		    	if (timeDiffMinutes > staleDataMinutes)
+		    		this.dataPoints.shift();
+		    	else
+		    		break;
+		    }
+		    
 		};
 		
 		service.prototype.set = function(value){
