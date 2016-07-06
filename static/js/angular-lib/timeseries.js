@@ -77,9 +77,13 @@ define(['angularAMD','moment','underscore'],function(angularAMD,moment,_){
 	
 		service.prototype.newData = function(dataPointsIn) {
 		    for (var i = 0; i < dataPointsIn.length; i++) {
-		    	var dataPoint = dataPointsIn[i];
-		    	this.dataPoints.push([new Date(dataPoint.time),parseFloat(dataPoint.value)]);
-		    	this.latest = JSON.parse(dataPoint.value);//parseFloat(dataPoint.value);
+		    	var timeDiff = moment().diff(moment(dataPointsIn[i].time));
+		    	var timeDiffMinutes = moment.duration(timeDiff).asMinutes();
+		    	if (timeDiffMinutes < 20.){
+		    		var dataPoint = dataPointsIn[i];
+		    		this.dataPoints.push([new Date(dataPoint.time),parseFloat(dataPoint.value)]);
+		    		this.latest = JSON.parse(dataPoint.value);//parseFloat(dataPoint.value);
+		    	}
 		    }
 		};
 		
