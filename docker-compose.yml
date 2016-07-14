@@ -1,0 +1,17 @@
+version: '2'
+services:
+  db:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: joule
+      MYSQL_DATABASE: joule
+      MYSQL_USER: joule
+      MYSQL_PASSWORD: joule
+  web:
+    build: .
+    volumes:
+      - .:/code
+    ports:
+      - "8888:8888"
+    depends_on:
+      - db

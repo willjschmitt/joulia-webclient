@@ -94,4 +94,8 @@ ENV/
 .settings/
 .project
 .cproject
-.pydevproject
+.pydevproject
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
