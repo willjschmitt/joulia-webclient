@@ -1,4 +1,14 @@
 {
- "AWSEBDockerrunVersion": "1",
- "Logging": "/var/eb_log"
+  "AWSEBDockerrunVersion": 2,
+  "containerDefinitions": [
+    {
+      "name": "web",
+      "portMappings": [
+        {
+          "hostPort": 8888,
+          "containerPort": 8888
+        }
+      ]
+    }
+  ]
 }
