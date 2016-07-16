@@ -1,14 +1,8 @@
 {
-  "AWSEBDockerrunVersion": 2,
-  "containerDefinitions": [
+  "AWSEBDockerrunVersion": 1,
+  "Ports": [
     {
-      "name": "web",
-      "portMappings": [
-        {
-          "hostPort": 8888,
-          "containerPort": 8888
-        }
-      ]
+      "ContainerPort": "8888"
     }
   ]
 }
