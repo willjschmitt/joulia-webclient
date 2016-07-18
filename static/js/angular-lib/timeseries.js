@@ -14,7 +14,7 @@ define(['angularAMD','moment','underscore'],function(angularAMD,moment,_){
 		
 		//handle the fundamentals of creating and managing the websocket
 		this._isopen=false;		
-		self._socket = new WebSocket("ws://localhost:8888/live/timeseries/socket/");
+		self._socket = new WebSocket("ws://"+window.location.host+"/live/timeseries/socket/");
 		if (self._isopen) self._flushqueue();
 		
 		self._socket.onopen = function(){
