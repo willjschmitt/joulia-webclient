@@ -113,7 +113,7 @@ requirejs.config({
         	        "jquery","jquery-ui","bootstrap","modernizr",
                     "icheck","materialRipple","speedDial",
                     "circularProgress","linearProgress","subheader",
-                    "snackbar","toasts","simplePieChart"]
+                    "snackbar","toasts","simplePieChart","jquery_fullscreen"]
         },
         "bemat-demo": {"deps":['bemat-common','jquery']},
         "bemat-demo-chartist": {"deps":['bemat-common','jquery']},

@@ -1,0 +1,40 @@
+{% load static from staticfiles %}
+<section id="right-content">
+	<header class="header-container">
+		<div class="header-wrapper">
+			<div id="header-toolbar">
+				<ul class="toolbar toolbar-left">
+					<li>
+						<a id="sidebar-toggle" href="javascript:void(0);" class="SidebarOpen"><i class="material-icons">menu</i></a>
+					</li>
+				</ul>
+				<ul class="toolbar toolbar-right">
+					<li>
+						<a href="javascript:void(0);" id="fullscreen-toggle" data-toggle="tooltip" data-placement="bottom" title="Toggle Fullscreen" data-i18n="[title]headerToolbar.fullscreenToggle" data-original-title="Toggle Fullscreen"><i class="material-icons">fullscreen</i></a>
+					</li>
+					<li id="user-profile" class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+							<div class="avatar">
+								<img src="{% static "img/avatar.png" %}" class="img-circle img-responsive">
+							</div>
+							<div class="user">
+								<span class="username">{{user.get_full_name}}</span>
+							</div>
+							<span class="expand-ico"><i class="material-icons">expand_more</i></span>
+						</a>
+						<ul class="dropdown-menu dropdown-menu-right">
+							<li class="materialRipple-dark materialRipple-btn"><a href="#"><i class="material-icons">person</i> <span data-i18n="userinfo.profile">Profile</span></a><div class="materialRipple-md-ripple-container"></div></li>
+							<li class="materialRipple-dark materialRipple-btn"><a href="#"><i class="material-icons">settings</i> <span data-i18n="userinfo.settings">Settings</span></a><div class="materialRipple-md-ripple-container"></div></li>
+							<li class="divider-horizontal materialRipple-dark materialRipple-btn"><div class="materialRipple-md-ripple-container"></div></li>
+							<li class="materialRipple-dark materialRipple-btn"><a href="#"><i class="material-icons">lock</i> <span data-i18n="userinfo.lock">Lock</span></a><div class="materialRipple-md-ripple-container"></div></li>
+							<li class="divider-horizontal materialRipple-dark materialRipple-btn"><div class="materialRipple-md-ripple-container"></div></li>
+							<li class="materialRipple-dark materialRipple-btn"><a href="{% url 'logout' %}"><i class="material-icons">exit_to_app</i> <span data-i18n="userinfo.logout">Log Out</span></a><div class="materialRipple-md-ripple-container"></div></li>
+						</ul>
+					</li><!-- /#user-profile -->
+				</ul><!-- /.navbar-right -->
+			</div>
+		</div><!-- /#header-toolbar -->
+	</header>
+
+	<div ng-view></div>
+</section><!-- /#right-content-wrapper -->
