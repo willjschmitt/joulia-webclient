@@ -27,6 +27,9 @@ define(['jquery','angularAMD','angular-route','angular-resource','angular-ui',
 	        // angular which cookie to add to what header.
 	        $httpProvider.defaults.xsrfCookieName = 'csrftoken';
 	        $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
-	    }]);
+	    }])
+	    .config(['$resourceProvider',function($resourceProvider) {
+	    	$resourceProvider.defaults.stripTrailingSlashes = false;
+		}]);
 	return angularAMD.bootstrap(app);
 });
