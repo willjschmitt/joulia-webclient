@@ -61,10 +61,10 @@ define(['angularAMD','underscore','jquery','moment',
 	.controller('LaunchRecipeModalCtrl', ['$scope','$uibModalInstance','breweryApi',function ($scope, $uibModalInstance,breweryApi) {
 
 		$scope.brewhouses = breweryApi.brewhouse.query();
-		$scope.selectedBrewery = null;
+		$scope.selectedBrewhouse = null;
 		
 		$scope.ok = function () {
-			$uibModalInstance.close({brewery:$scope.selectedBrewery});
+			$uibModalInstance.close({brewhouse:$scope.selectedBrewhouse});
 		};
 		
 		$scope.cancel = function () {

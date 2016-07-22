@@ -23,7 +23,7 @@ define(['angularAMD','underscore','jquery','moment',
 	                                		 $routeParams,$uibModal,$http){		
 		$scope.brewhouse = breweryApi.brewhouse.get({id:$routeParams.brewhouseId},
 			function(){
-				$scope.location = breweryApi.brewingFacility.get({id:$scope.brewhouse.location});
+				$scope.brewery = breweryApi.brewery.get({id:$scope.brewhouse.brewery});
 				getRecipeInstance();
 			});
 		
