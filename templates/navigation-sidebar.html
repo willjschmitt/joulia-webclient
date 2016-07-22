@@ -37,17 +37,20 @@
 
 		<nav id="sidebar">
 			<ul>
+				{% for location in locations %}
 				<li>
 					<a href="">
 						<span class="menu-item-ico"><i class="material-icons">dashboard</i></span>
-						<span class="menu-item-name">Breweries <span class="badge badge-success">{{brewerys|length}}</span></span>
+						<span class="menu-item-name">{{location.location.name}} <span class="badge badge-success">{{location.brewerys|length}}</span></span>
 					</a>
 					<ul>
-						{% for brewery in brewerys %}
+						
+						{% for brewery in location.brewerys %}
 						<li><a href="#!/brewery/{{brewery.id}}">{{brewery.name}} {%if brewery.active %}<span class="label label-warning">Active</span>{% endif %}</a></li>
 						{% endfor %}
 					</ul>
 				</li>
+				{% endfor %}
 				<li>
 					<a href="#!/recipes/">
 						<span class="menu-item-ico"><i class="material-icons">collections_bookmark</i></span>

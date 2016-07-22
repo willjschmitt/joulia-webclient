@@ -21,7 +21,12 @@ define(['angularAMD','underscore','jquery','moment',
 	                                 function($scope,$timeout,$interval,
 	                                		 timeSeriesUpdater,breweryApi,
 	                                		 $routeParams,$uibModal,$http){		
-		$scope.brewery = breweryApi.brewery.get({id:$routeParams.breweryId},getRecipeInstance);
+		$scope.brewery = breweryApi.brewery.get({id:$routeParams.breweryId},
+			function(){
+				$scope.location = breweryApi.brewingFacility.get({id:$scope.brewery.location});
+				getRecipeInstance();
+			});
+		
 		
 		function getRecipeInstance (){
 			breweryApi.recipeInstance.query({
@@ -91,9 +96,6 @@ define(['angularAMD','underscore','jquery','moment',
 				$scope.currentStatusText = statuses[$scope.currentStatus.latest];
 				$scope.nextStatusText = statuses[$scope.currentStatus.latest + 1];
 			}
-//			$scope.$watch('currentStatus',function(){
-//				
-//			},true);
 			$scope.adjustState = function(amount){
 				if ($scope.requestPermission.latest && amount==+1)
 					$scope.grantPermission.set(true);
