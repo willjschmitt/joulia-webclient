@@ -14,23 +14,27 @@
 	<section class="page-content" ng-repeat="brewery in brewerys">
 		<h1>{{brewery.name}}</h1>
 		<div class="row-fluid">
+			<a href="#!/brewhouse/{{brewery.id}}">
 			<div class="col-lg-6 col-xs-12" ng-repeat="brewhouse in brewhouses[brewery]">
 				<div class="panel panel-default panel-divider">
 					<div class="panel-heading">
 						<header>
 							<div>
 								{{brewhouse.name}}
-								<div ng-if-"brewhouse.active" class="pull-right">
-									<span class="label label-warning">Active</span>
-								</div>	
+								<div class="pull-right">
+									<span ng-if="brewhouse.active" class="label label-warning">Active</span>
+									<span ng-if="brewhouse.active" class="label label-primary">Ready</span>
+								</div>
 							</div>
 						</header>
 					</div>
 					<div class="panel-body">
-						INSERT INFO ABOUT BREWHOUSE HERE
+						<span ng-if="brewhouse.active">Brewhouse is currently brewing.</span>
+						<span ng-if="!brewhouse.active">Brewhouse is not currently brewing.</span>
 					</div>
 				</div>
 			</div>
+			</a>
 		</div>
 	</section><!-- /#page-content -->
 </section><!-- /#right-content -->
