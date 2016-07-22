@@ -15,22 +15,22 @@ define(['angularAMD','underscore','jquery','moment',
            'brewery-api',
     ],function(app,_,$,moment){
 	app
-	.controller('breweryController',['$scope','$timeout','$interval',
+	.controller('brewhouseController',['$scope','$timeout','$interval',
 	                                 'timeSeriesUpdater','breweryApi',
 	                                 '$routeParams','$uibModal','$http',
 	                                 function($scope,$timeout,$interval,
 	                                		 timeSeriesUpdater,breweryApi,
 	                                		 $routeParams,$uibModal,$http){		
-		$scope.brewery = breweryApi.brewery.get({id:$routeParams.breweryId},
+		$scope.brewhouse = breweryApi.brewhouse.get({id:$routeParams.brewhouseId},
 			function(){
-				$scope.location = breweryApi.brewingFacility.get({id:$scope.brewery.location});
+				$scope.location = breweryApi.brewingFacility.get({id:$scope.brewhouse.location});
 				getRecipeInstance();
 			});
 		
 		
 		function getRecipeInstance (){
 			breweryApi.recipeInstance.query({
-				brewery:$scope.brewery.id,
+				brewhouse:$scope.brewhouse.id,
 				active:'True',
 			},function(result){
 				if (result.length == 1){
@@ -54,7 +54,7 @@ define(['angularAMD','underscore','jquery','moment',
 				modalInstance.result.then(function (result) {
 					$http({
 						method: 'POST',
-						url: '/brewery/end',
+						url: '/brewery/brewhouse/end',
 						data:{recipe_instance:$scope.recipeInstance.id}
 					}).then(function() {
 						$scope.recipeInstance = null;

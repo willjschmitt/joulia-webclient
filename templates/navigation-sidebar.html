@@ -41,12 +41,12 @@
 				<li>
 					<a href="">
 						<span class="menu-item-ico"><i class="material-icons">dashboard</i></span>
-						<span class="menu-item-name">{{location.name}} <span class="badge badge-success">{{location.brewery_set.count}}</span></span>
+						<span class="menu-item-name">{{location.name}} <span class="badge badge-success">{{location.brewhouse_set.count}}</span></span>
 					</a>
 					<ul>
 						
-						{% for brewery in location.brewery_set.all %}
-						<li><a href="#!/brewery/{{brewery.id}}">{{brewery.name}} {%if brewery.active %}<span class="label label-warning">Active</span>{% endif %}</a></li>
+						{% for brewery in location.brewhouse_set.all %}
+						<li><a href="#!/brewhouse/{{brewery.id}}">{{brewery.name}} {%if brewery.active %}<span class="label label-warning">Active</span>{% endif %}</a></li>
 						{% endfor %}
 					</ul>
 				</li>

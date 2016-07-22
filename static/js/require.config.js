@@ -69,7 +69,7 @@ requirejs.config({
 		
 		
 		//app
-        "brewery": "../brewery/js/brewery",
+        "brewhouse": "../brewery/js/brewhouse",
         "recipes": "../brewery/js/recipes",
         
         //api
