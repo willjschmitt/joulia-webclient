@@ -4,6 +4,7 @@ define(['app','angular-resource'], function (app) {
         return {
             recipe: $resource('brewery/api/recipe/:id', {id:'@id'}, {update:{method:'PUT'}}),
             recipeInstance: $resource('brewery/api/recipeInstance/:id', {id:'@id'}, {update:{method:'PUT'}}),
+            brewhouse: $resource('brewery/api/brewhouse/:id', {id:'@id'}, {update:{method:'PUT'}}),
             brewery: $resource('brewery/api/brewery/:id', {id:'@id'}, {update:{method:'PUT'}}),
             beerStyle: $resource('brewery/api/beerStyle/:id', {id:'@id'}, {update:{method:'PUT'}}),
         };

@@ -15,17 +15,22 @@ define(['angularAMD','underscore','jquery','moment',
            'brewery-api',
     ],function(app,_,$,moment){
 	app
-	.controller('breweryController',['$scope','$timeout','$interval',
+	.controller('brewhouseController',['$scope','$timeout','$interval',
 	                                 'timeSeriesUpdater','breweryApi',
 	                                 '$routeParams','$uibModal','$http',
 	                                 function($scope,$timeout,$interval,
 	                                		 timeSeriesUpdater,breweryApi,
 	                                		 $routeParams,$uibModal,$http){		
-		$scope.brewery = breweryApi.brewery.get({id:$routeParams.breweryId},getRecipeInstance);
+		$scope.brewhouse = breweryApi.brewhouse.get({id:$routeParams.brewhouseId},
+			function(){
+				$scope.brewery = breweryApi.brewery.get({id:$scope.brewhouse.brewery});
+				getRecipeInstance();
+			});
+		
 		
 		function getRecipeInstance (){
 			breweryApi.recipeInstance.query({
-				brewery:$scope.brewery.id,
+				brewhouse:$scope.brewhouse.id,
 				active:'True',
 			},function(result){
 				if (result.length == 1){
@@ -49,7 +54,7 @@ define(['angularAMD','underscore','jquery','moment',
 				modalInstance.result.then(function (result) {
 					$http({
 						method: 'POST',
-						url: '/brewery/end',
+						url: '/brewery/brewhouse/end',
 						data:{recipe_instance:$scope.recipeInstance.id}
 					}).then(function() {
 						$scope.recipeInstance = null;
@@ -91,9 +96,6 @@ define(['angularAMD','underscore','jquery','moment',
 				$scope.currentStatusText = statuses[$scope.currentStatus.latest];
 				$scope.nextStatusText = statuses[$scope.currentStatus.latest + 1];
 			}
-//			$scope.$watch('currentStatus',function(){
-//				
-//			},true);
 			$scope.adjustState = function(amount){
 				if ($scope.requestPermission.latest && amount==+1)
 					$scope.grantPermission.set(true);
