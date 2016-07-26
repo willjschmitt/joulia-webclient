@@ -37,10 +37,16 @@
 
 		<nav id="sidebar">
 			<ul>
+				<li>
+					<a href="#!/">
+						<span class="menu-item-ico"><i class="material-icons">dashboard</i></span>
+						<span class="menu-item-name">Dashboard</span>
+					</a>
+				</li>
 				{% for location in locations %}
 				<li>
 					<a href="">
-						<span class="menu-item-ico"><i class="material-icons">dashboard</i></span>
+						<span class="menu-item-ico"><i class="material-icons">location_city</i></span>
 						<span class="menu-item-name">{{location.name}} <span class="badge badge-success">{{location.brewhouse_set.count}}</span></span>
 					</a>
 					<ul>

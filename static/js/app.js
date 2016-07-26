@@ -5,6 +5,11 @@ define(['jquery','angularAMD','angular-route','angular-resource','angular-ui',
 		.config(['$locationProvider', '$routeProvider',function config($locationProvider, $routeProvider) {
 			$locationProvider.hashPrefix('!');
 			$routeProvider
+				.when('/', angularAMD.route({
+					templateUrl:'static/brewery/html/dashboard.html',
+					controller:'dashboardController',
+					controllerUrl:'dashboard'
+				}))
 				.when('/brewhouse/:brewhouseId', angularAMD.route({
 					templateUrl:'static/brewery/html/brewhouse.html',
 					controller:'brewhouseController',

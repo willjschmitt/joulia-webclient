@@ -69,6 +69,7 @@ requirejs.config({
 		
 		
 		//app
+		"dashboard": "../brewery/js/dashboard",
         "brewhouse": "../brewery/js/brewhouse",
         "recipes": "../brewery/js/recipes",
         

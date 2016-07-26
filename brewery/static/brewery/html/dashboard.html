@@ -1,0 +1,40 @@
+<section id="right-content-wrapper">
+	<section class="page-header alternative-header">
+		<ol class="breadcrumb">
+			<li>Joulia</li>
+			<li>Dashboard</li>
+		</ol>
+		<div class="page-header_title">
+			<h1>
+				Dashboard
+			</h1>
+		</div>
+	</section>
+
+	<section class="page-content" ng-repeat="brewery in brewerys">
+		<h1>{{brewery.name}}</h1>
+		<div class="row-fluid">
+			<a href="#!/brewhouse/{{brewery.id}}">
+			<div class="col-lg-6 col-xs-12" ng-repeat="brewhouse in brewhouses[brewery]">
+				<div class="panel panel-default panel-divider">
+					<div class="panel-heading">
+						<header>
+							<div>
+								{{brewhouse.name}}
+								<div class="pull-right">
+									<span ng-if="brewhouse.active" class="label label-warning">Active</span>
+									<span ng-if="!brewhouse.active" class="label label-primary">Ready</span>
+								</div>
+							</div>
+						</header>
+					</div>
+					<div class="panel-body">
+						<span ng-if="brewhouse.active">Brewhouse is currently brewing.</span>
+						<span ng-if="!brewhouse.active">Brewhouse is not currently brewing.</span>
+					</div>
+				</div>
+			</div>
+			</a>
+		</div>
+	</section><!-- /#page-content -->
+</section><!-- /#right-content -->
