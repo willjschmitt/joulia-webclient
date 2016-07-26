@@ -14,8 +14,8 @@
 	<section class="page-content" ng-repeat="brewery in brewerys">
 		<h1>{{brewery.name}}</h1>
 		<div class="row-fluid">
-			<a href="#!/brewhouse/{{brewery.id}}">
-			<div class="col-lg-6 col-xs-12" ng-repeat="brewhouse in brewhouses[brewery]">
+			<a href="#!/brewhouse/{{brewhouse.id}}" ng-repeat="brewhouse in brewhouses[brewery]">
+			<div class="col-lg-6 col-xs-12">
 				<div class="panel panel-default panel-divider">
 					<div class="panel-heading">
 						<header>
