@@ -34,6 +34,10 @@ var/
 pip-log.txt
 pip-delete-this-directory.txt
 
+#eclipse p=files
+*.project
+*.pydevproject
+
 #django setup
 static_assets/
 
