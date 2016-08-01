@@ -102,4 +102,8 @@ ENV/
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
-!.elasticbeanstalk/*.global.yml
+!.elasticbeanstalk/*.global.yml
+
+#Bower
+components/
+bower_components/

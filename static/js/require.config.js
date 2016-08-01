@@ -18,42 +18,45 @@ requirejs.config({
         "angularAMD":       "lib/angularAMD.min",
         "angular-ui":       "lib/ui-bootstrap-tpls-1.3.3.min",
         
+        
+        "moment":               "third-party/moment",
+        
         //page plugins
-		"prettify":             "../vendor/google-code-prettify/prettify",
-		"perfect-scrollbar":    "../vendor/perfectscrollbar/perfect-scrollbar.jquery.min",
-		"icheck":               "../vendor/iCheck/icheck.min",
-		"bootstrap-select":     "../vendor/bootstrap-select/bootstrap-select.min",
-		"datatables.net":       "../vendor/DataTables/js/jquery.dataTables.min",
-		"bootstrap_dataTables": "../vendor/DataTables/js/dataTables.bootstrap.min",
-		"jquery_fullscreen":    "../vendor/fullscreen/jquery.fullscreen-min",
-		"moment":               "third-party/moment",
-		"fullcalendar":         "../vendor/fullcalendar/fullcalendar.min",
-		"sparkline":            "../vendor/sparkline/jquery.sparkline.min",
-		"peity":                "../vendor/peity/jquery.peity.min",
-		"chartist":             "../vendor/chartist/chartist.min",
-		"summernote":           "../vendor/summernote/summernote.min",
-		"ckeditor":             "../vendor/ckeditor/ckeditor",
-		"wysihtml5":            "../vendor/wysihtml5/bootstrap3-wysihtml5.all.min",
+		"prettify":             "../bemat-admin/vendor/google-code-prettify/prettify",
+		"perfect-scrollbar":    "../bemat-admin/vendor/perfectscrollbar/perfect-scrollbar.jquery.min",
+		"icheck":               "../bemat-admin/vendor/iCheck/icheck.min",
+		"bootstrap-select":     "../bemat-admin/vendor/bootstrap-select/bootstrap-select.min",
+		"datatables.net":       "../bemat-admin/vendor/DataTables/js/jquery.dataTables.min",
+		"bootstrap_dataTables": "../bemat-admin/vendor/DataTables/js/dataTables.bootstrap.min",
+		"jquery_fullscreen":    "../bemat-admin/vendor/fullscreen/jquery.fullscreen-min",
+		
+		"fullcalendar":         "../bemat-admin/vendor/fullcalendar/fullcalendar.min",
+		"sparkline":            "../bemat-admin/vendor/sparkline/jquery.sparkline.min",
+		"peity":                "../bemat-admin/vendor/peity/jquery.peity.min",
+		"chartist":             "../bemat-admin/vendor/chartist/chartist.min",
+		"summernote":           "../bemat-admin/vendor/summernote/summernote.min",
+		"ckeditor":             "../bemat-admin/vendor/ckeditor/ckeditor",
+		"wysihtml5":            "../bemat-admin/vendor/wysihtml5/bootstrap3-wysihtml5.all.min",
 		
 		//cerocreative plugins
-		"materialRipple":   "../vendor/materialRipple/jquery.materialRipple",
-		"snackbar":         "../vendor/snackbar/jquery.snackbar",
-		"toasts":           "../vendor/toasts/jquery.toasts",
-		"speedDial":        "../vendor/speedDial/jquery.speedDial",
-		"circularProgress": "../vendor/circularProgress/jquery.circularProgress",
-		"linearProgress":   "../vendor/linearProgress/jquery.linearProgress",
-		"subheader":        "../vendor/subheader/jquery.subheader",
-		"simplePieChart":   "lib/jquery.simplePieChart",//"../vendor/simplePieChart/jquery.simplePieChart",
+		"materialRipple":   "../bemat-admin/vendor/materialRipple/jquery.materialRipple",
+		"snackbar":         "../bemat-admin/vendor/snackbar/jquery.snackbar",
+		"toasts":           "../bemat-admin/vendor/toasts/jquery.toasts",
+		"speedDial":        "../bemat-admin/vendor/speedDial/jquery.speedDial",
+		"circularProgress": "../bemat-admin/vendor/circularProgress/jquery.circularProgress",
+		"linearProgress":   "../bemat-admin/vendor/linearProgress/jquery.linearProgress",
+		"subheader":        "../bemat-admin/vendor/subheader/jquery.subheader",
+		"simplePieChart":   "lib/jquery.simplePieChart",//"../components/bemat-adminvendor/simplePieChart/jquery.simplePieChart",
 		
 		//d3 plugins
 		"d3": "../vendor/d3/d3.v3",
 		"nvd3": "../vendor/nvd3/nv.d3",
 		
 		//bemat
-		"bemat-common":        "bemat/bemat-admin-common",
-		"bemat-demo":          "bemat/bemat-admin-demo",
-		"bemat-demo-chartist": "bemat/bemat-admin-demo-chartist",
-		"bemat-demo-dashboard":"bemat/bemat-admin-demo-dashboard",
+		"bemat-common":        "../bemat-admin/js/bemat-admin-common",
+		"bemat-demo":          "../bemat-admin/js/bemat-admin-demo",
+		"bemat-demo-chartist": "../bemat-admin/js/bemat-admin-demo-chartist",
+		"bemat-demo-dashboard":"../bemat-admin/js/bemat-admin-demo-dashboard",
         
 		//core deps
         'jquery':    "lib/jquery-1.12.3.min",
