@@ -14,14 +14,14 @@
 	<section class="page-content" ng-repeat="brewery in brewerys">
 		<h1>{{brewery.name}}</h1>
 		<div class="row-fluid">
-			<a href="#!/brewhouse/{{brewhouse.id}}" ng-repeat="brewhouse in brewhouses[brewery]">
-			<div class="col-lg-6 col-xs-12">
+			<div class="col-lg-6 col-xs-12" ng-repeat="brewhouse in brewhouses[brewery]">
 				<div class="panel panel-default panel-divider">
 					<div class="panel-heading">
 						<header>
 							<div>
 								{{brewhouse.name}}
 								<div class="pull-right">
+									<span><a href="#!/brewhouse/{{brewhouse.id}}"><i class="material-icons">launch</i> Go To</a></span>
 									<span ng-if="brewhouse.active" class="label label-warning">Active</span>
 									<span ng-if="!brewhouse.active" class="label label-primary">Ready</span>
 								</div>
@@ -29,12 +29,32 @@
 						</header>
 					</div>
 					<div class="panel-body">
-						<span ng-if="brewhouse.active">Brewhouse is currently brewing.</span>
-						<span ng-if="!brewhouse.active">Brewhouse is not currently brewing.</span>
+						<div class="row">
+							<div class="col-xs-12">
+								<span ng-if="brewhouse.active">Brewhouse is currently brewing.</span>
+								<span ng-if="!brewhouse.active">Brewhouse is not currently brewing.</span>
+							</div>
+						</div>
+						<hr/>
+						<div class="row">
+							<div class="col-xs-12">
+								<div ng-if="!showBrewhouseKeys[brewhouse.id]">
+									<a href="" ng-click="toggleShowBrewhouseKey(brewhouse.id)">
+										<i class="material-icons">lock</i> Show Keys
+									</a>
+								</div>
+								<div ng-if="showBrewhouseKeys[brewhouse.id]">
+									<a href="" ng-click="toggleShowBrewhouseKey(brewhouse.id)">
+										<i class="material-icons">unlock</i> Hide Keys
+									</a>
+									<p>Key: {{brewhouse.key}}</p>
+									<p>Secret: {{brewhouse.secret}}</p>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
-			</a>
 		</div>
 	</section><!-- /#page-content -->
 </section><!-- /#right-content -->

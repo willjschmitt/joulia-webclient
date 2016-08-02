@@ -21,5 +21,13 @@ define(['angularAMD','underscore','jquery','moment',
 			});
 		}
 		
+		$scope.showBrewhouseKeys = {}; //empty dict for which brewhouses to show the keys for
+		$scope.toggleShowBrewhouseKey = function(brewhouseId){
+			if (!$scope.showBrewhouseKeys.hasOwnProperty(brewhouseId))
+				$scope.showBrewhouseKeys[brewhouseId] = true;
+			else
+				$scope.showBrewhouseKeys[brewhouseId] = !$scope.showBrewhouseKeys[brewhouseId];
+		}
+		
 	}]);
 });
