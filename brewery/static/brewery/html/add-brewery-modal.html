@@ -1,0 +1,20 @@
+<!-- Modal HTML -->
+<div class="modal-header">
+	<h4 class="modal-title">Add brewery facility</h4>
+</div>
+<div class="modal-body">
+	<div class="form-group">
+		<input name="name" id="name" class="form-control" ng-model="newBrewery.name" type="text">
+		<label>Name</label>
+	</div>
+	<div class="form-group">
+		<select name="brewingCompanySelector" id="brewingCompanySelector" class="form-control"
+		 ng-options="option.name as option.name for option in brewingCompanys track by option.id"
+		 ng-model="newBrewery.company"></select>
+		 <label>Brewing Company</label>
+	</div>
+</div>
+<div class="modal-footer">
+	<button type="button" class="btn btn-primary btn-flat btn-ripple" data-dismiss="modal" ng-click="cancel()">Cancel</button>
+	<button type="button" class="btn btn-primary btn-flat btn-ripple" ng-click="ok()">Let's go!</button>
+</div>

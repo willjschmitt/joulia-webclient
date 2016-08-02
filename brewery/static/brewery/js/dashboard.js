@@ -11,13 +11,13 @@ define(['angularAMD','underscore','jquery','moment',
            'brewery-api',
     ],function(app,_,$,moment){
 	app
-	.controller('dashboardController',['$scope','breweryApi',function($scope,breweryApi){
+	.controller('dashboardController',['$scope','breweryApi','$uibModal',function($scope,breweryApi,$uibModal){
 		$scope.brewerys = breweryApi.brewery.query(initializeBrewerys);
 		
 		function initializeBrewerys(){
 			$scope.brewhouses = {};
 			_.each($scope.brewerys,function(brewery){
-				$scope.brewhouses[brewery] = breweryApi.brewhouse.query({brewery:brewery.id});
+				$scope.brewhouses[brewery.id] = breweryApi.brewhouse.query({brewery:brewery.id});
 			});
 		}
 		
@@ -29,5 +29,32 @@ define(['angularAMD','underscore','jquery','moment',
 				$scope.showBrewhouseKeys[brewhouseId] = !$scope.showBrewhouseKeys[brewhouseId];
 		}
 		
-	}]);
+		$scope.addBrewery = function(){
+			var modalInstance = $uibModal.open({
+				animation: true,
+				templateUrl: 'static/brewery/html/add-brewery-modal.html',
+				controller: 'addBreweryModalCtrl'
+			});
+
+			modalInstance.result.then(function (result) {
+				$scope.brewerys = breweryApi.brewery.query(initializeBrewerys);
+			});
+		}
+		
+	}])
+	.controller('addBreweryModalCtrl', ['$scope','$uibModalInstance','breweryApi',function ($scope, $uibModalInstance,breweryApi) {		
+		$scope.newBrewery = new breweryApi.brewery();
+		
+		$scope.brewingCompanys = new breweryApi.brewingCompany.query();
+		
+		$scope.ok = function () {
+			$scope.newBrewery.$save(function(){
+				$uibModalInstance.close(true);
+			});
+		};
+		
+		$scope.cancel = function () {
+			$uibModalInstance.dismiss('cancel');
+		};
+	}]);;
 });
