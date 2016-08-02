@@ -11,7 +11,7 @@ requirejs.config({
         "underscore": 'third-party/underscore-min',
         
         //angular
-        "angular":          "lib/angular-1.4.4",
+        "angular":          "../angular/angular",
         "angular-route":    "lib/angular-route-1.4.4",
         "angular-resource": "lib/angular-resource-1.4.4",
         "angular-sanitize": "lib/angular-sanitize-1.4.4",
@@ -49,8 +49,8 @@ requirejs.config({
 		"simplePieChart":   "lib/jquery.simplePieChart",//"../components/bemat-adminvendor/simplePieChart/jquery.simplePieChart",
 		
 		//d3 plugins
-		"d3": "../vendor/d3/d3.v3",
-		"nvd3": "../vendor/nvd3/nv.d3",
+		"d3": "../bemat-admin/vendor/d3/d3.v3",
+		"nvd3": "../bemat-admin/vendor/nvd3/nv.d3",
 		
 		//bemat
 		"bemat-common":        "../bemat-admin/js/bemat-admin-common",

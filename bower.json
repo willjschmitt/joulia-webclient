@@ -1,0 +1,21 @@
+{
+  "name": "joulia-webserver",
+  "homepage": "https://github.com/willjschmitt/joulia-webserver",
+  "authors": [
+    "William Schmitt <willj@schmittnet.com>"
+  ],
+  "description": "Webserver for Joulia brewing software suite",
+  "main": "main.py",
+  "license": "None",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.8"
+  }
+}
