@@ -27,7 +27,7 @@ define(['angularAMD','underscore','jquery','moment',
 				$scope.showBrewhouseKeys[brewhouseId] = true;
 			else
 				$scope.showBrewhouseKeys[brewhouseId] = !$scope.showBrewhouseKeys[brewhouseId];
-		}
+		};
 		
 		$scope.addBrewery = function(){
 			var modalInstance = $uibModal.open({
@@ -39,8 +39,10 @@ define(['angularAMD','underscore','jquery','moment',
 			modalInstance.result.then(function (result) {
 				$scope.brewerys = breweryApi.brewery.query(initializeBrewerys);
 			});
-		}
+		};
 		
+		//initializes all the tooltips dynamically loaded, etc
+		window.bematadmin.App.init();
 	}])
 	.controller('addBreweryModalCtrl', ['$scope','$uibModalInstance','breweryApi',function ($scope, $uibModalInstance,breweryApi) {		
 		$scope.newBrewery = new breweryApi.brewery();

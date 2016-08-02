@@ -9,10 +9,21 @@
 				Dashboard
 			</h1>
 		</div>
+		
+	</section>
+
+	<section>
+		<div class="pull-right">
+			<a href="" ng-click="addBrewery()"
+			   data-toggle="tooltip" data-placement="bottom" title="Add Brewery Facility"
+			   data-i18n="[title]contentHeader.Add Brewery Facility" data-original-title="Add Brewery Facility">
+				<i class="material-icons">add_circle</i>
+			</a>
+		</div>
 	</section>
 
 	<section class="page-content" ng-repeat="brewery in brewerys">
-		<h1>{{brewery.name}}</h1>
+		<h2>{{brewery.name}}</h2>
 		<div class="row-fluid">
 			<div class="col-lg-6 col-xs-12" ng-repeat="brewhouse in brewhouses[brewery.id]">
 				<div class="panel panel-default panel-divider">
@@ -55,33 +66,6 @@
 					</div>
 				</div>
 			</div>
-		</div>
-	</section><!-- /#page-content -->
-	
-	<section class="page-content" ng-repeat="brewery in brewerys">
-		<div class="row-fluid">
-			<a href="" ng-click="addBrewery()">
-				<div class="col-xs-12">
-					<div class="panel panel-default panel-divider">
-						<div class="panel-heading">
-							<header>
-								<div>
-									Add New Brewery Facility
-								</div>
-							</header>
-						</div>
-						<div class="panel-body">
-							<div class="row">
-								<div class="col-xs-12">
-									<h1 class="text-success" style="text-align:center;">
-										<i class="material-icons">add_circle</i> Add
-									</h1>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</a>
 		</div>
 	</section><!-- /#page-content -->
 </section><!-- /#right-content -->
