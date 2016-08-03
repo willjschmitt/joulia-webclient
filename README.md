@@ -30,3 +30,8 @@ This project is part of the series of projects for the Joulia Brewing System:
 * [joulia-webserver](https://github.com/willjschmitt/joulia-webserver) - This project.
 * [joulia-controller](https://github.com/willjschmitt/joula-controller) - Brewhouse control system for controling the brewday operations.
 * joulia-fermentation - Planned project to control the femermentation operations.
+
+## Licensing
+Copyright 2016 William Schmitt. All Rights Reserved.
+
+The intention is to make this project open-sourced, but at this moment is maintained under personal copyright until a few things can be worked through.
