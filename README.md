@@ -1,4 +1,6 @@
 # joulia-webserver
+[![Build Status](https://travis-ci.org/willjschmitt/joulia-webserver.svg?branch=develop)](https://travis-ci.org/willjschmitt/joulia-webserver)
+
 Webserver and logging for electric brewing controller connecting distributed users to the equipment.
 
 ## Quickstart
