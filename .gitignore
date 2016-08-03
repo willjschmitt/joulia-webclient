@@ -99,7 +99,11 @@ ENV/
 .project
 .cproject
 .pydevproject
+
 # Elastic Beanstalk Files
-.elasticbeanstalk/*
-!.elasticbeanstalk/*.cfg.yml
-!.elasticbeanstalk/*.global.yml
+.elasticbeanstalk/
+
+#Bower
+components/
+bower_components/
+

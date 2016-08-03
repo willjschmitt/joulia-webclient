@@ -13,6 +13,8 @@ Create a database and change your database settings to connect to your instance 
 Migrate the database to create the database schema using the django management tools:
 `python manage.py migrate`
 
+Add the stylization from Bemat Admin. This project uses a purchased license of Bemat Admin from Wrap Bootstrap. Purchase a license of [Bemat](https://wrapbootstrap.com/theme/bemat-material-design-admin-template-WB042J880) for your use from WrapBootstrap. As of this writing, the licenses for single-use were $10. Unzip the Bemat package and place the `js`,`css`, and `vendor` directories into the `components/bemat-admin` directory.
+
 Run the server:
 `python main.py`
 
