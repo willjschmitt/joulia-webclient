@@ -10,20 +10,18 @@
 			</h1>
 		</div>
 		
-	</section>
-
-	<section>
 		<div class="pull-right">
 			<a href="" ng-click="addBrewery()"
+			   style="color:#ffffff;"
 			   data-toggle="tooltip" data-placement="bottom" title="Add Brewery Facility"
 			   data-i18n="[title]contentHeader.addBrewery" data-original-title="Add Brewery Facility">
-				<i class="material-icons">add_circle</i>
+				<i class="material-icons">add_circle</i> Add Brewery Facility
 			</a>
 		</div>
 	</section>
 
 	<section class="page-content" ng-repeat="brewery in brewerys">
-		<h2>
+		<h2 class="text-primary">
 			{{brewery.name}}
 			<a href="" ng-click="addBrewhouse(brewery);"
 			   data-toggle="tooltip" data-placement="bottom" title="Add Brewhouse"

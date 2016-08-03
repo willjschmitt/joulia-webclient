@@ -11,7 +11,7 @@ define(['angularAMD','underscore','jquery','moment',
            'brewery-api',
     ],function(app,_,$,moment){
 	app
-	.controller('dashboardController',['$scope','breweryApi','$uibModal','$timeout',function($scope,breweryApi,$uibModal,$timeout){
+	.controller('dashboardController',['$scope','breweryApi','$uibModal',function($scope,breweryApi,$uibModal){
 		$scope.brewerys = breweryApi.brewery.query(initializeBrewerys);
 		
 		function initializeBrewerys(){
@@ -43,21 +43,21 @@ define(['angularAMD','underscore','jquery','moment',
 		
 		$scope.addBrewhouse = function(brewery){
 			var modalInstance = $uibModal.open({
-			animation: true,
-			templateUrl: 'static/brewery/html/add-brewhouse-modal.html',
-			controller: 'addBrewhouseModalCtrl',
-			resolve:{
-				brewery: function(){return brewery;}
-			}
-		});
-
-		modalInstance.result.then(function (result) {
-			$scope.brewerys = breweryApi.brewery.query(initializeBrewerys);
-		});
-	};
+				animation: true,
+				templateUrl: 'static/brewery/html/add-brewhouse-modal.html',
+				controller: 'addBrewhouseModalCtrl',
+				resolve:{
+					brewery: function(){return brewery;}
+				}
+			});
+	
+			modalInstance.result.then(function (result) {
+				$scope.brewerys = breweryApi.brewery.query(initializeBrewerys);
+			});
+		};
 		
 		//initializes all the tooltips dynamically loaded, etc
-		$timeout(function(){window.bematadmin.App.init();console.log('hi');},10000.);
+		window.bematadmin.App.init();
 	}])
 	.controller('addBreweryModalCtrl', function ($scope, $uibModalInstance,breweryApi) {		
 		$scope.newBrewery = new breweryApi.brewery();
