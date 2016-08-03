@@ -1,5 +1,5 @@
 # joulia-webserver
-[![Build Status](https://travis-ci.org/willjschmitt/joulia-webserver.svg?branch=develop)](https://travis-ci.org/willjschmitt/joulia-webserver)
+[![Build Status](https://travis-ci.org/willjschmitt/joulia-webserver.svg?branch=develop)](https://travis-ci.org/willjschmitt/joulia-webserver) [![Coverage Status](https://coveralls.io/repos/github/willjschmitt/joulia-webserver/badge.svg)](https://coveralls.io/github/willjschmitt/joulia-webserver)
 
 Webserver and logging for electric brewing controller connecting distributed users to the equipment.
 
