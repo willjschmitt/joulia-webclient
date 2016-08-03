@@ -11,7 +11,7 @@ define(['angularAMD','underscore','jquery','moment',
            'brewery-api',
     ],function(app,_,$,moment){
 	app
-	.controller('dashboardController',['$scope','breweryApi','$uibModal',function($scope,breweryApi,$uibModal){
+	.controller('dashboardController',['$scope','breweryApi','$uibModal','$timeout',function($scope,breweryApi,$uibModal,$timeout){
 		$scope.brewerys = breweryApi.brewery.query(initializeBrewerys);
 		
 		function initializeBrewerys(){
@@ -41,10 +41,25 @@ define(['angularAMD','underscore','jquery','moment',
 			});
 		};
 		
+		$scope.addBrewhouse = function(brewery){
+			var modalInstance = $uibModal.open({
+			animation: true,
+			templateUrl: 'static/brewery/html/add-brewhouse-modal.html',
+			controller: 'addBrewhouseModalCtrl',
+			resolve:{
+				brewery: function(){return brewery;}
+			}
+		});
+
+		modalInstance.result.then(function (result) {
+			$scope.brewerys = breweryApi.brewery.query(initializeBrewerys);
+		});
+	};
+		
 		//initializes all the tooltips dynamically loaded, etc
-		window.bematadmin.App.init();
+		$timeout(function(){window.bematadmin.App.init();console.log('hi');},10000.);
 	}])
-	.controller('addBreweryModalCtrl', ['$scope','$uibModalInstance','breweryApi',function ($scope, $uibModalInstance,breweryApi) {		
+	.controller('addBreweryModalCtrl', function ($scope, $uibModalInstance,breweryApi) {		
 		$scope.newBrewery = new breweryApi.brewery();
 		
 		$scope.brewingCompanys = new breweryApi.brewingCompany.query();
@@ -58,5 +73,20 @@ define(['angularAMD','underscore','jquery','moment',
 		$scope.cancel = function () {
 			$uibModalInstance.dismiss('cancel');
 		};
-	}]);;
+	})
+	.controller('addBrewhouseModalCtrl', function ($scope, $uibModalInstance,breweryApi,brewery) {
+		$scope.brewery = brewery;
+		
+		$scope.newBrewhouse = new breweryApi.brewhouse({brewery:brewery.id});
+		
+		$scope.ok = function () {
+			$scope.newBrewhouse.$save(function(){
+				$uibModalInstance.close(true);
+			});
+		};
+		
+		$scope.cancel = function () {
+			$uibModalInstance.dismiss('cancel');
+		};
+	});
 });

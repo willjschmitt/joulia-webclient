@@ -1,0 +1,14 @@
+<!-- Modal HTML -->
+<div class="modal-header">
+	<h4 class="modal-title">Add brewhouse to {{brewery.name}}</h4>
+</div>
+<div class="modal-body">
+	<div class="form-group">
+		<input name="name" id="name" class="form-control" ng-model="newBrewhouse.name" type="text">
+		<label>Name</label>
+	</div>
+</div>
+<div class="modal-footer">
+	<button type="button" class="btn btn-primary btn-flat btn-ripple" data-dismiss="modal" ng-click="cancel()">Cancel</button>
+	<button type="button" class="btn btn-primary btn-flat btn-ripple" ng-click="ok()">Add</button>
+</div>

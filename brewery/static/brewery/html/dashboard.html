@@ -16,14 +16,21 @@
 		<div class="pull-right">
 			<a href="" ng-click="addBrewery()"
 			   data-toggle="tooltip" data-placement="bottom" title="Add Brewery Facility"
-			   data-i18n="[title]contentHeader.Add Brewery Facility" data-original-title="Add Brewery Facility">
+			   data-i18n="[title]contentHeader.addBrewery" data-original-title="Add Brewery Facility">
 				<i class="material-icons">add_circle</i>
 			</a>
 		</div>
 	</section>
 
 	<section class="page-content" ng-repeat="brewery in brewerys">
-		<h2>{{brewery.name}}</h2>
+		<h2>
+			{{brewery.name}}
+			<a href="" ng-click="addBrewhouse(brewery);"
+			   data-toggle="tooltip" data-placement="bottom" title="Add Brewhouse"
+			   data-i18n="[title]contentHeader.addBrewhouse" data-original-title="Add Brewhouse">
+				<i class="material-icons">add_circle</i>
+			</a>
+		</h2>
 		<div class="row-fluid">
 			<div class="col-lg-6 col-xs-12" ng-repeat="brewhouse in brewhouses[brewery.id]">
 				<div class="panel panel-default panel-divider">
