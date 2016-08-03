@@ -9,32 +9,72 @@
 				Dashboard
 			</h1>
 		</div>
+		
+		<div class="pull-right">
+			<a href="" ng-click="addBrewery()"
+			   style="color:#ffffff;"
+			   data-toggle="tooltip" data-placement="bottom" title="Add Brewery Facility"
+			   data-i18n="[title]contentHeader.addBrewery" data-original-title="Add Brewery Facility">
+				<i class="material-icons">add_circle</i> Add Brewery Facility
+			</a>
+		</div>
 	</section>
 
-	<section class="page-content" ng-repeat="brewery in brewerys">
-		<h1>{{brewery.name}}</h1>
-		<div class="row-fluid">
-			<a href="#!/brewhouse/{{brewhouse.id}}" ng-repeat="brewhouse in brewhouses[brewery]">
-			<div class="col-lg-6 col-xs-12">
-				<div class="panel panel-default panel-divider">
-					<div class="panel-heading">
-						<header>
-							<div>
-								{{brewhouse.name}}
-								<div class="pull-right">
-									<span ng-if="brewhouse.active" class="label label-warning">Active</span>
-									<span ng-if="!brewhouse.active" class="label label-primary">Ready</span>
+	<section class="page-content" >
+		<div class="row" ng-repeat="brewery in brewerys">
+			<div class="col-xs-12">
+				<h2 class="text-primary">
+					{{brewery.name}}
+					<a href="" ng-click="addBrewhouse(brewery);"
+					   data-toggle="tooltip" data-placement="bottom" title="Add Brewhouse"
+					   data-i18n="[title]contentHeader.addBrewhouse" data-original-title="Add Brewhouse">
+						<i class="material-icons">add_circle</i>
+					</a>
+				</h2>
+				<div class="row-fluid">
+					<div class="col-lg-6 col-xs-12" ng-repeat="brewhouse in brewhouses[brewery.id]">
+						<div class="panel panel-default panel-divider">
+							<div class="panel-heading">
+								<header>
+									<div>
+										{{brewhouse.name}}
+										<div class="pull-right">
+											<span><a href="#!/brewhouse/{{brewhouse.id}}"><i class="material-icons">launch</i> Go To</a></span>
+											<span ng-if="brewhouse.active" class="label label-warning">Active</span>
+											<span ng-if="!brewhouse.active" class="label label-primary">Ready</span>
+										</div>
+									</div>
+								</header>
+							</div>
+							<div class="panel-body">
+								<div class="row">
+									<div class="col-xs-12">
+										<span ng-if="brewhouse.active">Brewhouse is currently brewing.</span>
+										<span ng-if="!brewhouse.active">Brewhouse is not currently brewing.</span>
+									</div>
+								</div>
+								<hr/>
+								<div class="row">
+									<div class="col-xs-12">
+										<div ng-if="!showBrewhouseKeys[brewhouse.id]">
+											<a href="" ng-click="toggleShowBrewhouseKey(brewhouse.id)">
+												<i class="material-icons">lock</i> Show Keys
+											</a>
+										</div>
+										<div ng-if="showBrewhouseKeys[brewhouse.id]">
+											<a href="" ng-click="toggleShowBrewhouseKey(brewhouse.id)">
+												<i class="material-icons">unlock</i> Hide Keys
+											</a>
+											<p>Key: {{brewhouse.key}}</p>
+											<p>Secret: {{brewhouse.secret}}</p>
+										</div>
+									</div>
 								</div>
 							</div>
-						</header>
-					</div>
-					<div class="panel-body">
-						<span ng-if="brewhouse.active">Brewhouse is currently brewing.</span>
-						<span ng-if="!brewhouse.active">Brewhouse is not currently brewing.</span>
+						</div>
 					</div>
 				</div>
 			</div>
-			</a>
 		</div>
 	</section><!-- /#page-content -->
 </section><!-- /#right-content -->

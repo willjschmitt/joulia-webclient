@@ -1,17 +1,17 @@
 <!-- Modal HTML -->
 <div class="modal-header">
-	<h4 class="modal-title">Add recipe</h4>
+	<h4 class="modal-title">Add brewery facility</h4>
 </div>
 <div class="modal-body">
 	<div class="form-group">
-		<input name="name" id="name" class="form-control" ng-model="newRecipe.name" type="text">
+		<input name="name" id="name" class="form-control" ng-model="newBrewery.name" type="text">
 		<label>Name</label>
 	</div>
 	<div class="form-group">
-		<select name="beerStyleSelector" id="beerStyleSelector" class="form-control"
-		 ng-options="option.name as option.name for option in beerStyles track by option.id"
-		 ng-model="newRecipe.style"></select>
-		 <label>Style</label>
+		<select name="brewingCompanySelector" id="brewingCompanySelector" class="form-control"
+		 ng-options="option.name as option.name for option in brewingCompanys track by option.id"
+		 ng-model="newBrewery.company"></select>
+		 <label>Brewing Company</label>
 	</div>
 </div>
 <div class="modal-footer">
