@@ -12,9 +12,14 @@ install:
   - travis_retry pip install -r requirements.txt
   - travis_retry pip install mysqlclient
   - travis_retry pip install -e .
+  - travis_retry pip install coverage
+  - travis_retry pip install coveralls
 before_script:
   - mysql -e 'create database joule'
-script: python manage.py test
+script: 
+- python manage.py test
+- coverage run --source='.' manage.py test
+after_success: coveralls
 notifications:
   email: false
   slack: joulia:WNFyeuBeiJJAGjU6Gwj9rPnX
