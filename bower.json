@@ -16,6 +16,16 @@
     "tests"
   ],
   "dependencies": {
-    "angular": "^1.5.8"
+    "angular": "^1.5.8",
+    "angular-route": "^1.5.8",
+    "angular-resource": "^1.5.8",
+    "angular-sanitize": "^1.5.8",
+    "angularAMD": "^0.2.1",
+    "angular-bootstrap": "^2.0.1",
+    "jquery": "^1.12.3",
+    "jquery-ui": "^1.12.0",
+    "bootstrap": "^3.3.7",
+    "moment": "^2.14.1",
+    "underscore": "^1.8.3"
   }
 }

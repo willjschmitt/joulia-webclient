@@ -8,18 +8,14 @@
 requirejs.config({
     baseUrl: 'static/js',
     paths: {
-        "underscore": 'third-party/underscore-min',
-        
         //angular
-        "angular":          "../angular/angular",
-        "angular-route":    "lib/angular-route-1.4.4",
-        "angular-resource": "lib/angular-resource-1.4.4",
-        "angular-sanitize": "lib/angular-sanitize-1.4.4",
-        "angularAMD":       "lib/angularAMD.min",
-        "angular-ui":       "lib/ui-bootstrap-tpls-1.3.3.min",
+        "angular":          "../angular/angular.min",
+        "angular-route":    "../angular-route/angular-route.min",
+        "angular-resource": "../angular-resource/angular-resource.min",
+        "angular-sanitize": "../angular-sanitize.min",
+        "angularAMD":       "../angularAMD/angularAMD.min",
+        "angular-ui":       "../angular-bootstrap/ui-bootstrap-tpls.min",
         
-        
-        "moment":               "third-party/moment",
         
         //page plugins
 		"prettify":             "../bemat-admin/vendor/google-code-prettify/prettify",
@@ -59,10 +55,12 @@ requirejs.config({
 		"bemat-demo-dashboard":"../bemat-admin/js/bemat-admin-demo-dashboard",
         
 		//core deps
-        'jquery':    "lib/jquery-1.12.3.min",
-		'jquery-ui': "lib/jquery-ui.min",
-		'bootstrap': "lib/bootstrap.min",
+        'jquery':    "../jquery/dist/jquery.min",
+		'jquery-ui': "../jquery-ui/jquery-ui.min",
+		'bootstrap': "../bootstrap/dist/js/bootstrap.min",
 		'modernizr': "lib/modernizr-2.6.2-respond-1.1.0.min",
+		"moment":     "../moment/min/moment.min",
+        "underscore": '../underscore/underscore-min',
 		
 		//directives
 		'timeseries': "angular-lib/timeseries",
