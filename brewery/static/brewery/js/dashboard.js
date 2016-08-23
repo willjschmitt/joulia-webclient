@@ -21,12 +21,12 @@ define(['angularAMD','underscore','jquery','moment',
 			});
 		}
 		
-		$scope.showBrewhouseKeys = {}; //empty dict for which brewhouses to show the keys for
-		$scope.toggleShowBrewhouseKey = function(brewhouseId){
-			if (!$scope.showBrewhouseKeys.hasOwnProperty(brewhouseId))
-				$scope.showBrewhouseKeys[brewhouseId] = true;
+		$scope.showBrewhouseTokens = {}; //empty dict for which brewhouses to show the keys for
+		$scope.toggleShowBrewhouseToken = function(brewhouseId){
+			if (!$scope.showBrewhouseTokens.hasOwnProperty(brewhouseId))
+				$scope.showBrewhouseTokens[brewhouseId] = true;
 			else
-				$scope.showBrewhouseKeys[brewhouseId] = !$scope.showBrewhouseKeys[brewhouseId];
+				$scope.showBrewhouseTokens[brewhouseId] = !$scope.showBrewhouseTokens[brewhouseId];
 		};
 		
 		$scope.addBrewery = function(){

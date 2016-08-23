@@ -56,17 +56,16 @@
 								<hr/>
 								<div class="row">
 									<div class="col-xs-12">
-										<div ng-if="!showBrewhouseKeys[brewhouse.id]">
-											<a href="" ng-click="toggleShowBrewhouseKey(brewhouse.id)">
+										<div ng-if="!showBrewhouseTokens[brewhouse.id]">
+											<a href="" ng-click="toggleShowBrewhouseToken(brewhouse.id)">
 												<i class="material-icons">lock</i> Show Keys
 											</a>
 										</div>
-										<div ng-if="showBrewhouseKeys[brewhouse.id]">
-											<a href="" ng-click="toggleShowBrewhouseKey(brewhouse.id)">
-												<i class="material-icons">unlock</i> Hide Keys
+										<div ng-if="showBrewhouseTokens[brewhouse.id]">
+											<a href="" ng-click="toggleShowBrewhouseToken(brewhouse.id)">
+												<i class="material-icons">unlock</i> Hide Authentication Token
 											</a>
-											<p>Key: {{brewhouse.key}}</p>
-											<p>Secret: {{brewhouse.secret}}</p>
+											<p>{{brewhouse.token}}</p>
 										</div>
 									</div>
 								</div>
