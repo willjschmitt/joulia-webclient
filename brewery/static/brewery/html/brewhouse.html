@@ -1,120 +1,198 @@
 <section id="right-content-wrapper">
-	<section class="page-header alternative-header">
-		<ol class="breadcrumb">
-			<li>Joule</li>
-			<li>{{ brewery.name }}</li>
-			<li>{{ brewhouse.name }}</li>
-		</ol>
-		<div class="page-header_title">
-			<h1>Brewhouse Management</h1>
-		</div>
-	</section>
+  <section class="page-header alternative-header">
+    <ol class="breadcrumb">
+      <li>Joulia</li>
+      <li>{{ brewery.name }}</li>
+      <li>{{ brewhouse.name }}</li>
+    </ol>
+    <div class="page-header_title">
+      <h1>Brewhouse Management</h1>
+    </div>
+  </section>
 
-	<section class="page-content" ng-if="recipeInstance.active">
-		<div class="row">
-			<div class="col-md-4 col-xs-12">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<header>Control</header>
-					</div>
-					<div class="panel-body no-top-padding">
-						<button type="button" class="btn btn-raised btn-danger" ng-click="end_recipe()">End Brewing Session</button>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-8 col-xs-12">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<header>{{ currentStatusText }} (Status #{{currentStatus.latest}})</header>
-					</div>
-					<div class="panel-body no-top-padding">
-						<div class="row">
-							<div class="col-xs-4">
-								<p>Next:{{ nextStatusText }}</p>
-							</div>
-							<div class="col-xs-4">
-								<span ng-if="timer">Time Left: {{timer.latest/60. | number:0 }}:{{timer.latest%60. | number:0 }}</span>
-							</div>
-							<div class="col-xs-4">
-								<button class="btn btn-lg btn-info"    ng-click="adjustState(-1)">Previous</button>
-								<button class="btn btn-lg" ng-class="nextStateColor" ng-click="adjustState(+1)">Next</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>	
-		</div>
+  <section class="page-content" ng-if="recipeInstance.active">
+    <div class="row">
+      <div class="col-md-4 col-xs-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <header>Control</header>
+          </div>
+          <div class="panel-body no-top-padding">
+            <button type="button"
+                class="btn btn-raised btn-danger"
+                ng-click="end_recipe()">
+              End Brewing Session
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-8 col-xs-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <header>
+              {{ currentStatusText }} (Status #{{currentStatus.latest}})
+            </header>
+          </div>
+          <div class="panel-body no-top-padding">
+            <div class="row">
+              <div class="col-xs-4">
+                <p>Next:{{ nextStatusText }}</p>
+              </div>
+              <div class="col-xs-4">
+                <span ng-if="timer">
+                  Time Left: {{timer.latest/60. | number:0 }}:{{timer.latest%60. | number:0 }}
+                </span>
+              </div>
+              <div class="col-xs-4">
+                <button class="btn btn-lg btn-info"
+                    ng-click="adjustState(-1)">
+                  Previous
+                </button>
+                <button class="btn btn-lg"
+                    ng-class="nextStateColor"
+                    ng-click="adjustState(+1)">
+                  Next
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>  
+    </div>
+    <div class="row">
+    
+      <!--  Temperature Plots -->
+      <div class="col-lg-6 col-sm-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <header>Temperatures</header>
+          </div>
+          <div class="panel-body no-top-padding">
+            <div class="row">
+              <div class="col-xs-12">
+                <div id="chart">
+                  <svg class="height-5"></svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> 
+      
+      <!--  Value Cards for Text Values (and setpoints/controls) -->
+      <div class="col-lg-3 col-sm-6">
+        <div class="row">
+          <div class="col-sm-12">
+            <value-card title="'Electric Load'" 
+                value-name="'boilKettle__power'" 
+                units="'W'" 
+                recipe-instance="recipeInstance.id" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <value-card title="'Energy Consumption'" 
+                value-name="'systemEnergy'"
+                value-alternate-name="'systemEnergyCost'"
+                units="'Wh'" units-alternate="'$'"
+                recipe-instance="recipeInstance.id" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <value-card title="'Boil Kettle Temperature'"
+                value-name="'boilKettle__temperature'"
+                value-alternate-name="'boilKettle__temperatureSetPoint'"
+                units="'&deg;F'"
+                overridable-alternate="true" 
+                recipe-instance="recipeInstance.id" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <value-card title="'Mash Tun Temperature'" 
+                value-name="'mashTun__temperature'"
+                value-alternate-name="'mashTun__temperatureSetPoint'"
+                units="'&deg;F'" 
+                overridable-alternate="true" 
+                recipe-instance="recipeInstance.id" />
+          </div>
+        </div>
+      </div>
+      
+      <!-- Power Dials -->
+      <div class="col-lg-3 col-sm-6">
+        <dial title="'Power'" value="boilKettleDutyCycle.latest" />
+      </div>
+      
+    </div>
+    <div class="row">
+    
+      <!-- Binary control overrides -->
+      <div class="col-lg-3 col-xs-6">
+        <toggleable-element name="'Heating Element Status'"
+            recipe-instance="recipeInstance.id"
+            sensor-name="'boilKettle__elementStatus'"/>
+      </div>
+      <div class="col-lg-3 col-xs-6">
+        <toggleable-element name="'Pump Status'" 
+            recipe-instance="recipeInstance.id"
+            sensor-name="'pumpStatus'"/>
+      </div>
+      
+      <!-- Task list -->
+      <div class="col-lg-6 col-xs-12">
+        <div class="panel panel-default panel-divider">
+          <div class="panel-heading">
+            <header>Your Task List</header>
+          </div>
+          <div class="panel-body no-padding">
+            <div class="tasks-list height-5" data-toggle="subheader">
+              <section>
+                <div class="list-subheader" data-mode="sticky">To Do Tasks</div>
+                <ul class="list">
+                  <li class="list-item list-1-line" ng-repeat="task in tasks">
+                    <div class="list-icon">
+                      <input class="checkbox checkbox-primary" type="checkbox" />
+                    </div>
+                    <div class="list-item-text layout-column">
+                      <h3>{{task.name}}</h3>
+                    </div>
+                    <button type="button" 
+                        class="secondary-container btn btn-default btn-icon-toggle"
+                        data-toggle="tooltip" data-placement="left"
+                        title="Delete Task">
+                      <i class="material-icons">delete</i>
+                    </button>
+                  </li>
+                </ul>
+              </section>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
 
-		<div class="row">
-			<div class="col-lg-6 col-sm-12">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<header>Temperatures</header>
-					</div>
-					<div class="panel-body no-top-padding">
-						<div class="row">
-							<div class="col-xs-12">
-								<div id="chart">
-									<svg class="height-5"></svg>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>							
-			<div class="col-lg-3 col-sm-6">
-				<div class="row"><div class="col-sm-12"><value-card title="'Electric Load'" value-name="'boilKettle__power'" units="'W'" recipe-instance="recipeInstance.id" /></div></div>
-				<div class="row"><div class="col-sm-12"><value-card title="'Energy Consumption'" value-name="'systemEnergy'" value-alternate-name="'systemEnergyCost'" units="'Wh'" units-alternate="'$'" recipe-instance="recipeInstance.id" /></div></div>
-				<div class="row"><div class="col-sm-12"><value-card title="'Boil Kettle Temperature'" value-name="'boilKettle__temperature'" value-alternate-name="'boilKettle__temperatureSetPoint'" units="'&deg;F'" overridable-alternate="true" recipe-instance="recipeInstance.id" /></div></div>
-				<div class="row"><div class="col-sm-12"><value-card title="'Mash Tun Temperature'" value-name="'mashTun__temperature'" value-alternate-name="'mashTun__temperatureSetPoint'" units="'&deg;F'" overridable-alternate="true" recipe-instance="recipeInstance.id" /></div></div>							
-			</div>
-			<div class="col-lg-3 col-sm-6"><dial title="'Power'" value="boilKettleDutyCycle.latest" /></div>
-		</div>
-		<div class="row">
-			<div class="col-lg-3 col-xs-6"><toggleable-element name="'Heating Element Status'" recipe-instance="recipeInstance.id" sensor-name="'boilKettle__elementStatus'"/></div>
-			<div class="col-lg-3 col-xs-6"><toggleable-element name="'Pump Status'" recipe-instance="recipeInstance.id" sensor-name="'pumpStatus'"/></div>
-			<div class="col-lg-6 col-xs-12">
-				<div class="panel panel-default panel-divider">
-					<div class="panel-heading">
-						<header>Your Task List</header>
-					</div>
-					<div class="panel-body no-padding">
-						<div class="tasks-list height-5" data-toggle="subheader">
-							<section>
-								<div class="list-subheader" data-mode="sticky">To Do Tasks</div>
-								<ul class="list">
-									<li class="list-item list-1-line" ng-repeat="task in tasks">
-										<div class="list-icon"><input class="checkbox checkbox-primary" type="checkbox" /></div>
-										<div class="list-item-text layout-column"><h3>{{task.name}}</h3></div>
-										<button type="button" class="secondary-container btn btn-default btn-icon-toggle" data-toggle="tooltip" data-placement="left" title="Delete Task"><i class="material-icons">delete</i></button>
-									</li>
-								</ul>
-							</section>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
 
-
-	</section><!-- /#page-content -->
-	
-	<section class="page-content" ng-if="!recipeInstance.active">
-		<div class="row">
-			<div class="col-xs-12">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<header>Brewhouse not active</header>
-					</div>
-					<div class="panel-body no-top-padding">
-						<p>Brewhouse is not active. Visit the recipes page to launch a recipe.</p>
-					</div>
-					<div class="panel-footer">
-						<a href="#!/recipes" class="btn btn-default btn-flat">Recipes</a>
-					</div>
-				</div>
-			</div>	
-		</div>
-	</section>
+  </section><!-- /#page-content -->
+  
+  <section class="page-content" ng-if="!recipeInstance.active">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <header>Brewhouse not active</header>
+          </div>
+          <div class="panel-body no-top-padding">
+            <p>Brewhouse is not active. Visit the recipes page to launch a recipe.</p>
+          </div>
+          <div class="panel-footer">
+            <a href="#!/recipes" class="btn btn-default btn-flat">Recipes</a>
+          </div>
+        </div>
+      </div>  
+    </div>
+  </section>
 
 </section><!-- /#right-content -->
