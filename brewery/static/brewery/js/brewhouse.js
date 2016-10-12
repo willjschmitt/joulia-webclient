@@ -64,18 +64,18 @@ define(['angularAMD','underscore','jquery','moment',
 			
 			
 			//subscribe to all the time series
-			$scope.boilTemperatureActual = new timeSeriesUpdater($scope.recipeInstance.id,'boilKettle__temperature');
-			$scope.boilTemperatureSetPoint = new timeSeriesUpdater($scope.recipeInstance.id,'boilKettle__temperatureSetPoint');
-			$scope.mashTemperatureActual = new timeSeriesUpdater($scope.recipeInstance.id,'mashTun__temperature');
-			$scope.mashTemperatureSetPoint = new timeSeriesUpdater($scope.recipeInstance.id,'mashTun__temperatureSetPoint');
-			$scope.boilKettleDutyCycle = new timeSeriesUpdater($scope.recipeInstance.id,'boilKettle__dutyCycle');
-			$scope.boilKettlePower = new timeSeriesUpdater($scope.recipeInstance.id,'boilKettle__power');
-			$scope.systemEnergy = new timeSeriesUpdater($scope.recipeInstance.id,'systemEnergy');
-			$scope.systemEnergyCost = new timeSeriesUpdater($scope.recipeInstance.id,'systemEnergyCost');
+			$scope.boilTemperatureActual = new timeSeriesUpdater($scope.recipeInstance.id,'boil_kettle__temperature');
+			$scope.boilTemperatureSetPoint = new timeSeriesUpdater($scope.recipeInstance.id,'boil_kettle__temperatureSetPoint');
+			$scope.mashTemperatureActual = new timeSeriesUpdater($scope.recipeInstance.id,'mash_tun__temperature');
+			$scope.mashTemperatureSetPoint = new timeSeriesUpdater($scope.recipeInstance.id,'mash_tun__temperatureSetPoint');
+			$scope.boilKettleDutyCycle = new timeSeriesUpdater($scope.recipeInstance.id,'boil_kettle__dutyCycle');
+			$scope.boilKettlePower = new timeSeriesUpdater($scope.recipeInstance.id,'boil_kettle__power');
+			$scope.systemEnergy = new timeSeriesUpdater($scope.recipeInstance.id,'system_energy');
+			$scope.systemEnergyCost = new timeSeriesUpdater($scope.recipeInstance.id,'system_energy_cost');
 			$scope.currentStatus = new timeSeriesUpdater($scope.recipeInstance.id,'state',updateStatusText);
 			$scope.timer = new timeSeriesUpdater($scope.recipeInstance.id,'timer');
-			$scope.requestPermission = new timeSeriesUpdater($scope.recipeInstance.id,'requestPermission');
-			$scope.grantPermission = new timeSeriesUpdater($scope.recipeInstance.id,'grantPermission');
+			$scope.requestPermission = new timeSeriesUpdater($scope.recipeInstance.id,'request_permission');
+			$scope.grantPermission = new timeSeriesUpdater($scope.recipeInstance.id,'grant_permission');
 			
 			var statuses = [
 			    "System is currently offline.",
