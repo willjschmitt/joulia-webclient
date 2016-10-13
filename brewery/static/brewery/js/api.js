@@ -8,6 +8,7 @@ define(['app','angular-resource'], function (app) {
             brewery: $resource('brewery/api/brewery/:id', {id:'@id'}, {update:{method:'PUT'}}),
             brewingCompany: $resource('brewery/api/brewingCompany/:id', {id:'@id'}, {update:{method:'PUT'}}),
             beerStyle: $resource('brewery/api/beerStyle/:id', {id:'@id'}, {update:{method:'PUT'}}),
+            timeSeriesDataPoint: $resource('/live/timeseries/new/', {}),
         };
     });
 });

@@ -1,6 +1,8 @@
-define(['angularAMD','moment',"peity",'timeseries'],function(angularAMD,moment){
+define(['angularAMD','moment',"peity",'timeseries',
+        'brewery-api'],function(angularAMD,moment){
   angularAMD
-  .directive('valueCard', ['timeSeriesUpdater', function(timeSeriesUpdater){
+  .directive('valueCard', ['timeSeriesUpdater','breweryApi',
+                           function(timeSeriesUpdater,breweryApi){
     return {
       restrict: 'E',
       transclude: true,
@@ -38,15 +40,14 @@ define(['angularAMD','moment',"peity",'timeseries'],function(angularAMD,moment){
         $scope.setValue = function(value){
           function __setValue(value){
             var now = moment().toISOString();
-            $.ajax({
-              url: "/live/timeseries/new/", type: "POST", dataType: "text",
-              data: $.param({
-                recipe_instance: $scope.recipeInstance,
-                sensor: $scope.overridable ? $scope.value.sensor : $scope.valueAlternate.sensor,
-                value: value,
-                time: now,
-              })
-            });
+            var data = {
+              recipe_instance: $scope.recipeInstance,
+              sensor: $scope.overridable ? $scope.value.sensor : $scope.valueAlternate.sensor,
+              value: value,
+              time: now,
+            };
+            var newData = new breweryApi.timeSeriesDataPoint(data);
+            newData.$save();
           }
           
           //make sure we have the override set
@@ -58,20 +59,20 @@ define(['angularAMD','moment',"peity",'timeseries'],function(angularAMD,moment){
         
         
         //override setters
-        $scope.toggleOverride = function(callback){$scope.setOverride(!$scope.valueOverride.latest,callback);};
+        $scope.toggleOverride = function(callback){
+        	$scope.setOverride(!$scope.valueOverride.latest,callback);
+        };
         $scope.setOverride = function(value,callback){
           var now = moment().toISOString();
-          $.ajax({
-            url: "/live/timeseries/new/", type: "POST", dataType: "text",
-            data: $.param({
-              recipe_instance: $scope.recipeInstance,
-              sensor: $scope.valueOverride.sensor,
-              value: value,
-              time: now,
-            }), success: function(){ if (callback) callback(); }
-          });
+          var data = {
+            recipe_instance: $scope.recipeInstance,
+            sensor: $scope.valueOverride.sensor,
+            value: value,
+            time: now,
+          };
+          var newData = new breweryApi.timeSeriesDataPoint(data);
+          newData.$save(function(){ if (callback) callback(); });
         }
-        
         //give us all the little line things for the little cards
         $(".peity-line").peity("line",{height: 28,width: 64});
       }
