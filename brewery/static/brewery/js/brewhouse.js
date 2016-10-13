@@ -65,10 +65,10 @@ define(['angularAMD','underscore','jquery','moment',
 			
 			//subscribe to all the time series
 			$scope.boilTemperatureActual = new timeSeriesUpdater($scope.recipeInstance.id,'boil_kettle__temperature');
-			$scope.boilTemperatureSetPoint = new timeSeriesUpdater($scope.recipeInstance.id,'boil_kettle__temperatureSetPoint');
+			$scope.boilTemperatureSetPoint = new timeSeriesUpdater($scope.recipeInstance.id,'boil_kettle__temperature_set_point');
 			$scope.mashTemperatureActual = new timeSeriesUpdater($scope.recipeInstance.id,'mash_tun__temperature');
-			$scope.mashTemperatureSetPoint = new timeSeriesUpdater($scope.recipeInstance.id,'mash_tun__temperatureSetPoint');
-			$scope.boilKettleDutyCycle = new timeSeriesUpdater($scope.recipeInstance.id,'boil_kettle__dutyCycle');
+			$scope.mashTemperatureSetPoint = new timeSeriesUpdater($scope.recipeInstance.id,'mash_tun__temperature_set_point');
+			$scope.boilKettleDutyCycle = new timeSeriesUpdater($scope.recipeInstance.id,'boil_kettle__duty_cycle');
 			$scope.boilKettlePower = new timeSeriesUpdater($scope.recipeInstance.id,'boil_kettle__power');
 			$scope.systemEnergy = new timeSeriesUpdater($scope.recipeInstance.id,'system_energy');
 			$scope.systemEnergyCost = new timeSeriesUpdater($scope.recipeInstance.id,'system_energy_cost');
