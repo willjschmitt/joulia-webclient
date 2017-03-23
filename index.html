@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+    <title>Joulia</title>
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+
+    <!-- Bootstrap Core CSS - Include with every page -->
+    <link href="vendor/bemat-admin/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Bemat Admin CSS - Include with every page -->
+    <link href="vendor/bemat-admin/css/themes/theme-default/bemat-admin.css" rel="stylesheet" id="theme-switcher">
+
+    <!-- Documentation Prettify -->
+    <link href="vendor/bemat-admin/vendor/google-code-prettify/prettify-tomorrow.css" rel="stylesheet" />
+    
+    <!-- Dashboard Level NVD3 Charts -->
+    <link href="vendor/bemat-admin/vendor/nvd3/nv.d3.css" rel="stylesheet">
+
+    <script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+  </head>
+
+  <body class="dark-sidebar dark-header-brand container-fluid">
+    <div id="page-wrapper">
+
+      <aside id="left-content" data-toggle="open" data-default="open" data-size="">
+        <header class="header-container">
+          <div class="header-wrapper">
+            <div id="header-brand">
+              <div class="logo padding-left-2">
+                <span class="logo-image">J</span>
+                <span class="logo-text">Joulia</span>
+              </div>
+            </div>
+          </div>
+        </header>
+        <div id="sidebar-wrapper">
+          <div id="userbox">
+            <div id="useravatar">
+              <div class="avatar-thumbnail">
+                <img src="vendor/bemat-admin/img/avatar.png" class="img-circle"/>
+              </div>
+            </div>
+
+            <div id="userinfo">
+              <div class="btn-group">
+                <button type="button" class="btn btn-default-bright btn-flat dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{user.get_full_name}} <i class="material-icons">arrow_drop_down</i>
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a href="#"><i class="material-icons">person</i>Your Profile</a></li>
+                  <li><a href="#"><i class="material-icons">settings</i>Settings</a></li>
+                  <li class="divider"></li>
+                  <li><a href="#"><i class="material-icons">lock</i> Lock</a></li>
+                  <li class="divider"></li>
+                  <li><a href="{% url 'logout' %}"><i class="material-icons">exit_to_app</i> Log Out</a></li>
+                </ul>
+              </div>
+            </div>
+          </div> <!-- END: #userbox -->
+
+
+          <nav id="sidebar">
+            <ul>
+              <li>
+                <a href="#!/">
+                  <span class="menu-item-ico"><i class="material-icons">dashboard</i></span>
+                  <span class="menu-item-name">Dashboard</span>
+                </a>
+              </li>
+              {% for location in locations %}
+              <li>
+                <a href="">
+                  <span class="menu-item-ico"><i class="material-icons">location_city</i></span>
+                  <span class="menu-item-name">{{location.name}} <span class="badge badge-success">{{location.brewhouse_set.count}}</span></span>
+                </a>
+                <ul>
+                  
+                  {% for brewery in location.brewhouse_set.all %}
+                  <li><a href="#!/brewhouse/{{brewery.id}}">{{brewery.name}} {%if brewery.active %}<span class="label label-warning">Active</span>{% endif %}</a></li>
+                  {% endfor %}
+                </ul>
+              </li>
+              {% endfor %}
+              <li>
+                <a href="#!/recipes/">
+                  <span class="menu-item-ico"><i class="material-icons">collections_bookmark</i></span>
+                  <span class="menu-item-name">Recipes</span>
+                </a>
+              </li>
+              <li>
+                <a href="configuration">
+                  <span class="menu-item-ico"><i class="material-icons">settings</i></span>
+                  <span class="menu-item-name">Configuration</span>
+                </a>
+              </li>
+            </ul>
+          </nav><!-- END: nav#sidebar --> 
+        </div>
+      </aside>
+
+      <section id="right-content">
+        <header class="header-container">
+          <div class="header-wrapper">
+            <div id="header-toolbar">
+              <ul class="toolbar toolbar-left">
+                <li>
+                  <a id="sidebar-toggle" href="javascript:void(0);" class="SidebarOpen"><i class="material-icons">menu</i></a>
+                </li>
+              </ul>
+              <ul class="toolbar toolbar-right">
+                <li>
+                  <a href="javascript:void(0);" id="fullscreen-toggle" data-toggle="tooltip" data-placement="bottom" title="Toggle Fullscreen" data-i18n="[title]headerToolbar.fullscreenToggle" data-original-title="Toggle Fullscreen"><i class="material-icons">fullscreen</i></a>
+                </li>
+                <li id="user-profile" class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <div class="avatar">
+                      <img src="vendor/bemat-admin/img/avatar.png" class="img-circle img-responsive">
+                    </div>
+                    <div class="user">
+                      <span class="username">{{user.get_full_name}}</span>
+                    </div>
+                    <span class="expand-ico"><i class="material-icons">expand_more</i></span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-right">
+                    <li class="materialRipple-dark materialRipple-btn"><a href="#"><i class="material-icons">person</i> <span data-i18n="userinfo.profile">Profile</span></a><div class="materialRipple-md-ripple-container"></div></li>
+                    <li class="materialRipple-dark materialRipple-btn"><a href="#"><i class="material-icons">settings</i> <span data-i18n="userinfo.settings">Settings</span></a><div class="materialRipple-md-ripple-container"></div></li>
+                    <li class="divider-horizontal materialRipple-dark materialRipple-btn"><div class="materialRipple-md-ripple-container"></div></li>
+                    <li class="materialRipple-dark materialRipple-btn"><a href="#"><i class="material-icons">lock</i> <span data-i18n="userinfo.lock">Lock</span></a><div class="materialRipple-md-ripple-container"></div></li>
+                    <li class="divider-horizontal materialRipple-dark materialRipple-btn"><div class="materialRipple-md-ripple-container"></div></li>
+                    <li class="materialRipple-dark materialRipple-btn"><a href="{% url 'logout' %}"><i class="material-icons">exit_to_app</i> <span data-i18n="userinfo.logout">Log Out</span></a><div class="materialRipple-md-ripple-container"></div></li>
+                  </ul>
+                </li><!-- /#user-profile -->
+              </ul><!-- /.navbar-right -->
+            </div>
+          </div><!-- /#header-toolbar -->
+        </header>
+
+        <div ng-view></div>
+      </section><!-- /#right-content-wrapper -->
+    </div>
+  </body>
+</html>

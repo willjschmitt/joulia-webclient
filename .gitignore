@@ -107,3 +107,6 @@ ENV/
 components/
 bower_components/
 
+# Third Party Files
+vendor/
+
