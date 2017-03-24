@@ -9,11 +9,11 @@ function timeSeriesSocket($timeout, $http) {
   // open.
   this._msgqueue = [];
   this._flushqueue = function() {
-    for (msg in self._msgqueue) {
-      self._socket.send(JSON.stringify(self._msgqueue[msg]))
+    for (var msg in self._msgqueue) {
+      self._socket.send(JSON.stringify(self._msgqueue[msg]));
     } 
     self._msgqueue = []; 
-  }
+  };
 
   // Handle the fundamentals of creating and managing the websocket.
   this._isopen = false;

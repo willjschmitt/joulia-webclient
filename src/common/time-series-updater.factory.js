@@ -16,10 +16,10 @@ function timeSeriesUpdater(timeSeriesSocket, $http) {
     var self = this;
     this.timeSeriesSocket = timeSeriesSocket;
     this.timeSeriesSocket.subscribe(self, callback);
-  }
+  };
 
   service.prototype.newData = function(dataPointsIn) {
-    var staleDataMinutes = 20.;
+    var staleDataMinutes = 20.0;
 
     for (var i = 0; i < dataPointsIn.length; i++) {
       var timeDiff = moment().diff(moment(dataPointsIn[i].time));
@@ -54,5 +54,5 @@ function timeSeriesUpdater(timeSeriesSocket, $http) {
     };
       
     return service;
-  }
+  };
 }

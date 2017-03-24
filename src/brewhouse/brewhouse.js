@@ -132,10 +132,11 @@ function BrewhouseController(
   $scope.nextStateColor = 'btn-success';
   function updateStateColor(){
     if ($scope.requestPermission.latest) {
-      if ($scope.nextStateColor == 'btn-success')
+      if ($scope.nextStateColor == 'btn-success') {
         $scope.nextStateColor = 'btn-danger';
-      else
+      } else {
         $scope.nextStateColor = 'btn-success';
+      }
     } else {
       $scope.nextStateColor = 'btn-success';
     }
@@ -167,7 +168,7 @@ function BrewhouseController(
 
   // Create and maintain chart.
   $scope.chart = null;
-  $scope.chart = nv.models.lineChart();
+  $scope.chart = nv.models.lineChart()
     .x(function(d) { return d[0]; })
     .y(function(d) { return d[1]; })
     .color(d3.scale.category10().range())
