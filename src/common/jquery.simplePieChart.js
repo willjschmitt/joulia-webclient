@@ -11,6 +11,8 @@
  * http://www.cerocreativo.cl
  * http://www.rockandthemes.com
  *
+ * Modified by: William Schmitt
+ *
  */
 
 ;(function ($) {
