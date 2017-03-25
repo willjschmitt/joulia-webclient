@@ -1,23 +1,25 @@
-angular
-  .module('app.recipes')
-  .controller('LaunchRecipeModalController', LaunchRecipeModalController);
+(function loadLaunchRecipeModalController() {
+  angular
+    .module('app.recipes')
+    .controller('LaunchRecipeModalController', LaunchRecipeModalController);
 
-LaunchRecipeModalController.$inject = [
-  '$scope', '$uibModalInstance', 'breweryApi'];
+  LaunchRecipeModalController.$inject = [
+    '$scope', '$uibModalInstance', 'breweryApi'];
 
-function LaunchRecipeModalController($scope, $uibModalInstance, breweryApi) {
-  $scope.brewhouses = breweryApi.brewhouse.query();
-  $scope.selectedBrewhouse = null;
+  function LaunchRecipeModalController($scope, $uibModalInstance, breweryApi) {
+    $scope.brewhouses = breweryApi.brewhouse.query();
+    $scope.selectedBrewhouse = null;
 
-  $scope.ok = ok;
+    $scope.ok = ok;
 
-  $scope.cancel = cancel;
+    $scope.cancel = cancel;
 
-  function ok() {
-    $uibModalInstance.close({ brewhouse: $scope.selectedBrewhouse });
+    function ok() {
+      $uibModalInstance.close({ brewhouse: $scope.selectedBrewhouse });
+    }
+
+    function cancel() {
+      $uibModalInstance.dismiss('cancel');
+    }
   }
-
-  function cancel() {
-    $uibModalInstance.dismiss('cancel');
-  }
-}
+}());

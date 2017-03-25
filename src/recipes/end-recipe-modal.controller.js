@@ -1,18 +1,20 @@
-angular
-  .module('app.brewhouse')
-  .controller('EndRecipeModalController', EndRecipeModalController);
+(function loadEndRecipeModalController() {
+  angular
+    .module('app.brewhouse')
+    .controller('EndRecipeModalController', EndRecipeModalController);
 
-EndRecipeModalController.$inject = ['$scope', '$uibModalInstance'];
+  EndRecipeModalController.$inject = ['$scope', '$uibModalInstance'];
 
-function EndRecipeModalController($scope, $uibModalInstance) {
-  $scope.ok = ok;
-  $scope.cancel = cancel;
+  function EndRecipeModalController($scope, $uibModalInstance) {
+    $scope.ok = ok;
+    $scope.cancel = cancel;
 
-  function ok() {
-    $uibModalInstance.close(true);
+    function ok() {
+      $uibModalInstance.close(true);
+    }
+
+    function cancel() {
+      $uibModalInstance.dismiss('cancel');
+    }
   }
-
-  function cancel() {
-    $uibModalInstance.dismiss('cancel');
-  }
-}
+}());

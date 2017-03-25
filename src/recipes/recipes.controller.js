@@ -1,56 +1,58 @@
-angular
-  .module('app.recipes', [])
-  .controller('RecipesController', RecipesController);
+(function loadRecipesController() {
+  angular
+    .module('app.recipes')
+    .controller('RecipesController', RecipesController);
 
-RecipesController.$inject = [
-  '$scope', 'breweryApi', '$uibModal', '$http', '$location'];
+  RecipesController.$inject = [
+    '$scope', 'breweryApi', '$uibModal', '$http', '$location'];
 
-function RecipesController($scope, breweryApi, $uibModal, $http, $location) {
-  $scope.recipes = breweryApi.recipe.query();
+  function RecipesController($scope, breweryApi, $uibModal, $http, $location) {
+    $scope.recipes = breweryApi.recipe.query();
 
-  $scope.launchRecipe = launchRecipe;
-  $scope.addRecipe = addRecipe;
-  $scope.recipe_properties = [
-    { header: 'Number of Batches', name: 'number_of_batches' },
-    { header: 'Last Brewed', name: 'last_brewed' },
-  ];
+    $scope.launchRecipe = launchRecipe;
+    $scope.addRecipe = addRecipe;
+    $scope.recipe_properties = [
+      { header: 'Number of Batches', name: 'number_of_batches' },
+      { header: 'Last Brewed', name: 'last_brewed' },
+    ];
 
-  function launchRecipe(recipe) {
-    const modalInstance = $uibModal.open({
-      animation: true,
-      templateUrl: 'static/brewery/html/launch-recipe-modal.html',
-      controller: 'LaunchRecipeModalCtrl',
-    });
+    function launchRecipe(recipe) {
+      const modalInstance = $uibModal.open({
+        animation: true,
+        templateUrl: 'static/brewery/html/launch-recipe-modal.html',
+        controller: 'LaunchRecipeModalCtrl',
+      });
 
-    modalInstance.result.then(performLaunch);
+      modalInstance.result.then(performLaunch);
 
-    function performLaunch(result) {
-      $http({
-        method: 'POST',
-        url: '/brewery/brewhouse/launch',
-        data: {
-          recipe: recipe.id,
-          brewhouse: result.brewhouse.id,
-        },
-      }).then(navigateToBrewhouse);
+      function performLaunch(result) {
+        $http({
+          method: 'POST',
+          url: '/brewery/brewhouse/launch',
+          data: {
+            recipe: recipe.id,
+            brewhouse: result.brewhouse.id,
+          },
+        }).then(navigateToBrewhouse);
 
-      function navigateToBrewhouse() {
-        $location.path(`/brewhouse/${result.brewhouse.id}`).replace();
+        function navigateToBrewhouse() {
+          $location.path(`/brewhouse/${result.brewhouse.id}`).replace();
+        }
       }
     }
-  }
 
-  function addRecipe() {
-    const modalInstance = $uibModal.open({
-      animation: true,
-      templateUrl: 'static/brewery/html/add-recipe-modal.html',
-      controller: 'addRecipeModalController',
-    });
+    function addRecipe() {
+      const modalInstance = $uibModal.open({
+        animation: true,
+        templateUrl: 'static/brewery/html/add-recipe-modal.html',
+        controller: 'addRecipeModalController',
+      });
 
-    modalInstance.result.then(updateRecipes);
-  }
+      modalInstance.result.then(updateRecipes);
+    }
 
-  function updateRecipes() {
-    $scope.recipes = breweryApi.recipe.query();
+    function updateRecipes() {
+      $scope.recipes = breweryApi.recipe.query();
+    }
   }
-}
+}());

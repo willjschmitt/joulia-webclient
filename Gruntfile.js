@@ -13,7 +13,8 @@ module.exports = function(grunt) {
     distDir: 'dist',
     pkg: grunt.file.readJSON('package.json'),
     src: {
-      js: ['src/**/*.js']
+      js: ['src/**/*.js'],
+      tests: ['src/**/*.spec.js'],
     },
     uglify: {
       options: {
@@ -21,7 +22,13 @@ module.exports = function(grunt) {
       },
       build: {
         src: ['<%= src.js %>'],
-        dest: 'build/<%= pkg.name %>.min.js'
+        dest: 'build/<%= pkg.name %>.min.js',
+      }
+    },
+    clean: ['<%= distDir %>/*'],
+    karma: {
+      unit: {
+        configFile: 'karma.conf.js',
       }
     },
     eslint: {
