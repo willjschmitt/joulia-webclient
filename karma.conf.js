@@ -18,6 +18,9 @@ module.exports = function(config) {
       // Third-party libraries loaded by bower.
       'bower_components/jquery/dist/jquery.js',
       'bower_components/angular/angular.js',
+      'bower_components/angular-bootstrap/ui-bootstrap.js',
+      'bower_components/angular-resource/angular-resource.js',
+      'bower_components/angular-mocks/angular-mocks.js',
 
       // Need to manually load the modules for now to make sure they are
       // available for when adding the controllers, etc., to them.

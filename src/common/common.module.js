@@ -1,4 +1,4 @@
 (function loadCommonModule() {
   angular
-    .module('app.common', []);
+    .module('app.common', ['ngResource']);
 }());

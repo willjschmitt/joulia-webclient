@@ -1,7 +1,7 @@
 (function loadResourcesFactory() {
   angular
     .module('app.common')
-    .factory('breweryResouces', breweryResources);
+    .factory('breweryResources', breweryResources);
 
   breweryResources.$inject = ['$resource'];
 

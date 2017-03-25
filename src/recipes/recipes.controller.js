@@ -4,10 +4,11 @@
     .controller('RecipesController', RecipesController);
 
   RecipesController.$inject = [
-    '$scope', 'breweryApi', '$uibModal', '$http', '$location'];
+    '$scope', 'breweryResources', '$uibModal', '$http', '$location'];
 
-  function RecipesController($scope, breweryApi, $uibModal, $http, $location) {
-    $scope.recipes = breweryApi.recipe.query();
+  function RecipesController($scope, breweryResources, $uibModal, $http,
+      $location) {
+    $scope.recipes = breweryResources.Recipe.query();
 
     $scope.launchRecipe = launchRecipe;
     $scope.addRecipe = addRecipe;
@@ -52,7 +53,7 @@
     }
 
     function updateRecipes() {
-      $scope.recipes = breweryApi.recipe.query();
+      $scope.recipes = breweryResources.recipe.query();
     }
   }
 }());
