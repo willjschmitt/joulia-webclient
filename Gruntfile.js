@@ -5,9 +5,11 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-karma');
 
-  grunt.registerTask('default', ['eslint','build','karma:unit']);
+  grunt.registerTask('default',
+      ['eslint', 'build', 'karma:unit']);
   grunt.registerTask('build', ['clean']);
-  grunt.registerTask('release', ['clean','uglify','eslint','karma:unit']);
+  grunt.registerTask('release',
+      ['clean', 'uglify', 'eslint', 'karma:unit']);
 
   grunt.initConfig({
     distDir: 'dist',
