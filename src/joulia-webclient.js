@@ -1,5 +1,5 @@
 angular
-  .module('joulia-webclient', ['ngRoute','ngResource','ui.bootstrap'])
+  .module('joulia-webclient', ['ngRoute', 'ngResource', 'ui.bootstrap'])
   .config(routeConfig)
   .config(httpConfig)
   .config(resourceConfig);
@@ -23,21 +23,19 @@ function routeConfig($locationProvider, $routeProvider) {
     .when('/recipes/', {
       templateUrl: 'static/brewery/html/recipes.html',
       controller: 'RecipesController',
-      controllerAs: 'recipes'
+      controllerAs: 'recipes',
     })
     .when('/recipe/:recipeId', {
       templateUrl: 'static/brewery/html/recipe.html',
       controller: 'RecipesController',
-      controllerAs: 'recipes'
+      controllerAs: 'recipes',
     })
     .otherwise('/');
 }
 
 httpConfig.$inject = ['$httpProvider'];
 
-function httpConfig($httpProvider){
-  // django and angular both support csrf tokens. This tells
-  // angular which cookie to add to what header.
+function httpConfig($httpProvider) {
   $httpProvider.defaults.xsrfCookieName = 'csrftoken';
   $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
 }
@@ -45,5 +43,5 @@ function httpConfig($httpProvider){
 resourceConfig.$inject = ['$resourceProvider'];
 
 function resourceConfig($resourceProvider) {
-  	$resourceProvider.defaults.stripTrailingSlashes = false;
+  $resourceProvider.defaults.stripTrailingSlashes = false;
 }

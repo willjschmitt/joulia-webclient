@@ -3,17 +3,21 @@ angular
   .controller('LaunchRecipeModalController', LaunchRecipeModalController);
 
 LaunchRecipeModalController.$inject = [
-    '$scope', '$uibModalInstance', 'breweryApi'];
+  '$scope', '$uibModalInstance', 'breweryApi'];
 
-function ($scope, $uibModalInstance, breweryApi) {
+function LaunchRecipeModalController($scope, $uibModalInstance, breweryApi) {
   $scope.brewhouses = breweryApi.brewhouse.query();
   $scope.selectedBrewhouse = null;
 
-  $scope.ok = function () {
-    $uibModalInstance.close({brewhouse: $scope.selectedBrewhouse});
-  };
+  $scope.ok = ok;
 
-  $scope.cancel = function () {
+  $scope.cancel = cancel;
+
+  function ok() {
+    $uibModalInstance.close({ brewhouse: $scope.selectedBrewhouse });
+  }
+
+  function cancel() {
     $uibModalInstance.dismiss('cancel');
-  };
+  }
 }

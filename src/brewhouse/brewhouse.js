@@ -3,97 +3,98 @@ angular
   .controller('BrewhouseController', BrewhouseController);
 
 BrewhouseController.$inject = [
-    '$scope', '$timeout', '$interval', 'timeSeriesUpdater', 'breweryApi',
-    '$routeParams','$uibModal','$http'];
+  '$scope', '$timeout', '$interval', 'TimeSeriesUpdater', 'breweryApi',
+  '$routeParams', '$uibModal', '$http'];
 
 function BrewhouseController(
-    $scope, $timeout, $interval, timeSeriesUpdater, breweryApi, $routeParams,
-    $uibModal,$http) {
-  $scope.brewhouse = breweryApi.brewhouse.get({id:$routeParams.brewhouseId},
-      function() {
-        $scope.brewery = breweryApi.brewery.get({id:$scope.brewhouse.brewery});
+    $scope, $timeout, $interval, TimeSeriesUpdater, breweryApi, $routeParams,
+    $uibModal, $http) {
+  $scope.brewhouse = breweryApi.Brewhouse.get({ id: $routeParams.brewhouseId },
+      function updateBrewery() {
+        $scope.brewery = breweryApi.Brewery.get({
+          id: $scope.brewhouse.brewery,
+        });
         getRecipeInstance();
       });
 
+  $scope.endSession = endSession;
+  $scope.adjustState = adjustState;
 
-  function getRecipeInstance () {
+  function getRecipeInstance() {
     breweryApi.recipeInstance.query({
       brewhouse: $scope.brewhouse.id,
       active: 'True',
-    }, function(result) {
-      if (result.length == 1) {
+    }, function loadRecipeInstance(result) {
+      if (result.length === 1) {
         $scope.recipeInstance = result[0];
-        initializeBrewery();
       } else {
         $scope.recipeInstance = null;
       }
-    }, function(){
+    }, function unsetrecipeInstance() {
       $scope.recipeInstance = null;
     });
   }
 
-  function initializeBrewery() {
-    // First set up a brew session end function.
-    $scope.end_recipe = function() {
-      var modalInstance = $uibModal.open({
-        animation: true,
-        templateUrl: 'static/brewery/html/end-recipe-modal.html',
-        controller: 'endRecipeModalCtrl'
-      });
+  function endSession() {
+    const modalInstance = $uibModal.open({
+      animation: true,
+      templateUrl: 'static/brewery/html/end-recipe-modal.html',
+      controller: 'endRecipeModalController',
+    });
 
-    modalInstance.result.then(function (result) {
+    modalInstance.result.then(function endRecipeInstanceOnServer() {
       $http({
         method: 'POST',
         url: '/brewery/brewhouse/end',
-        data:{
-          recipe_instance: $scope.recipeInstance.id
-        }
-      }).then(function() {
+        data: {
+          recipe_instance: $scope.recipeInstance.id,
+        },
+      }).then(function unsetrecipeInstance() {
         $scope.recipeInstance = null;
       });
     });
-  };
+  }
 
   // Subscribe to all the time series.
-  $scope.boilTemperatureActual = new timeSeriesUpdater(
+  $scope.boilTemperatureActual = new TimeSeriesUpdater(
       $scope.recipeInstance.id, 'boil_kettle__temperature');
-  $scope.boilTemperatureSetPoint = new timeSeriesUpdater(
+  $scope.boilTemperatureSetPoint = new TimeSeriesUpdater(
       $scope.recipeInstance.id, 'boil_kettle__temperature_set_point');
-  $scope.mashTemperatureActual = new timeSeriesUpdater(
+  $scope.mashTemperatureActual = new TimeSeriesUpdater(
       $scope.recipeInstance.id, 'mash_tun__temperature');
-  $scope.mashTemperatureSetPoint = new timeSeriesUpdater(
+  $scope.mashTemperatureSetPoint = new TimeSeriesUpdater(
       $scope.recipeInstance.id, 'mash_tun__temperature_set_point');
-  $scope.boilKettleDutyCycle = new timeSeriesUpdater(
+  $scope.boilKettleDutyCycle = new TimeSeriesUpdater(
       $scope.recipeInstance.id, 'boil_kettle__duty_cycle');
-  $scope.boilKettlePower = new timeSeriesUpdater(
+  $scope.boilKettlePower = new TimeSeriesUpdater(
       $scope.recipeInstance.id, 'boil_kettle__power');
-  $scope.systemEnergy = new timeSeriesUpdater(
+  $scope.systemEnergy = new TimeSeriesUpdater(
       $scope.recipeInstance.id, 'system_energy');
-  $scope.systemEnergyCost = new timeSeriesUpdater(
+  $scope.systemEnergyCost = new TimeSeriesUpdater(
       $scope.recipeInstance.id, 'system_energy_cost');
-  $scope.currentStatus = new timeSeriesUpdater(
+  $scope.currentStatus = new TimeSeriesUpdater(
       $scope.recipeInstance.id, 'state', updateStatusText);
-  $scope.timer = new timeSeriesUpdater(
+  $scope.timer = new TimeSeriesUpdater(
       $scope.recipeInstance.id, 'timer');
-  $scope.requestPermission = new timeSeriesUpdater(
+  $scope.requestPermission = new TimeSeriesUpdater(
       $scope.recipeInstance.id, 'request_permission');
-  $scope.grantPermission = new timeSeriesUpdater(
+  $scope.grantPermission = new TimeSeriesUpdater(
       $scope.recipeInstance.id, 'grant_permission');
 
- var statuses = [
-    "System is currently offline.",
-    "Heating water for strike.",
-    "Pumping water to mash tun for strike.",
-    "Stabilizing hot liquor tun water temperature.",
-    "Mashing grain.",
-    "Raising hot liquor tun to 170&deg;F for mashout.",
-    "Mashout. Recirculating at 170&deg;F.",
-    "Preparing for sparge. Waiting for reconfiguration. Ensure output of HLT is configured to pump to Mash Tun.",
-    "Sparging. Pumping hot liquor into mash tun.",
-    "Preparing for boil. Waiting for reconfiguration. Ensure sparged liquid is configured to pump into boil kettle and boil kettle is empty.",
-    "Preheating boil. Raising temperature to boil temperature.",
-    "Cooling boil kettle. Make sure the cooling setup is in place.",
-    "Pumping cooled wort into fermeneter.",
+  const statuses = [
+    'System is currently offline.',
+    'Heating water for strike.',
+    'Pumping water to mash tun for strike.',
+    'Stabilizing hot liquor tun water temperature.',
+    'Mashing grain.',
+    'Raising hot liquor tun to 170&deg;F for mashout.',
+    'Mashout. Recirculating at 170&deg;F.',
+    'Preparing for sparge. Waiting for reconfiguration. Ensure output of HLT is configured to pump to Mash Tun.',
+    'Sparging. Pumping hot liquor into mash tun.',
+    'Preparing for boil. Waiting for reconfiguration. Ensure sparged liquid is configured to pump into boil kettle and boil kettle is empty.',
+    'Preheating boil. Raising temperature to boil temperature.',
+    'Cooling boil kettle. Make sure the cooling setup is in place.',
+    'Pumping cooled wort into fermeneter.',
   ];
 
   function updateStatusText() {
@@ -101,38 +102,38 @@ function BrewhouseController(
     $scope.nextStatusText = statuses[$scope.currentStatus.latest + 1];
   }
 
-  $scope.adjustState = function(amount) {
-    if ($scope.requestPermission.latest && amount==+1) {
-      $scope.grantPermission.set(true);
-    } else {
-      $scope.currentStatus.set($scope.currentStatus.latest + amount);
-    }
-  };
-
   // Add all the relevant time series to the chart data.
   $scope.dataPoints = [];
   $scope.dataPoints.push({
     key: 'Boil Actual',
-    values: $scope.boilTemperatureActual.dataPoints
+    values: $scope.boilTemperatureActual.dataPoints,
   });
   $scope.dataPoints.push({
     key: 'Boil Set Point',
-    values: $scope.boilTemperatureSetPoint.dataPoints
+    values: $scope.boilTemperatureSetPoint.dataPoints,
   });
   $scope.dataPoints.push({
     key: 'Mash Actual',
-    values: $scope.mashTemperatureActual.dataPoints
+    values: $scope.mashTemperatureActual.dataPoints,
   });
   $scope.dataPoints.push({
     key: 'Mash Set Point',
-    values: $scope.mashTemperatureSetPoint.dataPoints
+    values: $scope.mashTemperatureSetPoint.dataPoints,
   });
+
+  function adjustState(amount) {
+    if ($scope.requestPermission.latest && amount === +1) {
+      $scope.grantPermission.set(true);
+    } else {
+      $scope.currentStatus.set($scope.currentStatus.latest + amount);
+    }
+  }
 
   // Watch for permission request.
   $scope.nextStateColor = 'btn-success';
-  function updateStateColor(){
+  function updateStateColor() {
     if ($scope.requestPermission.latest) {
-      if ($scope.nextStateColor == 'btn-success') {
+      if ($scope.nextStateColor === 'btn-success') {
         $scope.nextStateColor = 'btn-danger';
       } else {
         $scope.nextStateColor = 'btn-success';
@@ -153,28 +154,28 @@ function BrewhouseController(
 
   // List of tasks to be displayed in the task list.
   $scope.tasks = [
-    {name: "Sanitizing Soak"},
-    {name: "Hot Sanitizing Recirculation"},
-    {name: "Run Brew Cycle"},
-    {name: "Measure Post-Mash Gravity"},
-    {name: "Clean Mash Tun"},
-    {name: "Sanitize Fermenters"},
-    {name: "Measure Post-Boil Gravity"},
-    {name: "Rack to Fermenters"},
-    {name: "Clean Boil Kettle and Chiller"},
+    { name: 'Sanitizing Soak' },
+    { name: 'Hot Sanitizing Recirculation' },
+    { name: 'Run Brew Cycle' },
+    { name: 'Measure Post-Mash Gravity' },
+    { name: 'Clean Mash Tun' },
+    { name: 'Sanitize Fermenters' },
+    { name: 'Measure Post-Boil Gravity' },
+    { name: 'Rack to Fermenters' },
+    { name: 'Clean Boil Kettle and Chiller' },
   ];
 
-  $.toasts("add",{msg: "Welcome to Joulia!"});
+  $.toasts('add', { msg: 'Welcome to Joulia!' });
 
   // Create and maintain chart.
   $scope.chart = null;
   $scope.chart = nv.models.lineChart()
-    .x(function(d) { return d[0]; })
-    .y(function(d) { return d[1]; })
+    .x(function xValue(d) { return d[0]; })
+    .y(function yValue(d) { return d[1]; })
     .color(d3.scale.category10().range())
     .useInteractiveGuideline(true);
   $scope.chart.xAxis
-    .tickFormat(function(d) {
+    .tickFormat(function xAxisFormatter(d) {
       return d3.time.format('%H:%M')(new Date(d));
     });
   $scope.chart.yAxis
@@ -195,29 +196,39 @@ function BrewhouseController(
     // Clculate min/max in current dataset.
     // TODO(will): I don't know why nvd3 messes up sometimes, but we had to
     // force calculate this.
-    var min = _.reduce($scope.dataPoints, function(currentMin, dataPointArray) {
-      var min = _.reduce(dataPointArray.values, function(currentMin, dataPoint) {
-        return Math.min(dataPoint[1], currentMin);
-      }, Infinity);
-      return Math.min(min, currentMin);
-    }, Infinity);
+    let min = _.reduce($scope.dataPoints, minInArrays, Infinity);
 
-    var max = _.reduce($scope.dataPoints, function(currentMax, dataPointArray) {
-      var max = _.reduce(dataPointArray.values, function(currentMax, dataPoint) {
-        return Math.max(dataPoint[1], currentMax);
-      }, Infinity);
-      return Math.max(min, currentMax);
-    }, -Infinity);
+    function minInArrays(currentMin, dataPointArray) {
+      const minDataPointArray = _.reduce(
+          dataPointArray.values, minInArray, Infinity);
+      return Math.min(minDataPointArray, currentMin);
+    }
+
+    function minInArray(currentMin, dataPoint) {
+      return Math.min(dataPoint[1], currentMin);
+    }
+
+    let max = _.reduce($scope.dataPoints, maxInArrays, -Infinity);
+
+    function maxInArrays(currentMax, dataPointArray) {
+      const maxDataPointArray = _.reduce(
+          dataPointArray.values, maxInArray, Infinity);
+      return Math.max(maxDataPointArray, currentMax);
+    }
+
+    function maxInArray(currentMax, dataPoint) {
+      return Math.max(dataPoint[1], currentMax);
+    }
 
     // Make sure we have a spread.
-    var minSpread = 10.0;
-    if ((max-min) < minSpread) {
-      var spreadAdjust = (minSpread - (max - min)) * 0.5;
+    const minSpread = 10.0;
+    if ((max - min) < minSpread) {
+      const spreadAdjust = (minSpread - (max - min)) * 0.5;
       max += spreadAdjust;
-      max -= spreadAdjust;
+      min -= spreadAdjust;
     }
     // Update min/max.
-    $scope.chart.forceY([min,max]);
+    $scope.chart.forceY([min, max]);
 
     return $scope.chart;
   }

@@ -1,3 +1,4 @@
+/*eslint-disable */
 /**
  * jquery.simplePieChart.js v1.0.0
  * http://www.cerocreativo.cl

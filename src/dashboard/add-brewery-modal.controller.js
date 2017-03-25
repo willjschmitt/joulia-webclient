@@ -3,20 +3,23 @@ angular
   .controller('AddBreweryModalController', AddBreweryModalController);
 
 AddBreweryModalController.$inject = [
-    "$scope", "$uibModalInstance", "breweryApi"];
+  '$scope', '$uibModalInstance', 'breweryApi'];
 
 function AddBreweryModalController($scope, $uibModalInstance, breweryApi) {
-  $scope.newBrewery = new breweryApi.brewery();
+  $scope.newBrewery = new breweryApi.Brewery();
+  $scope.brewingCompanys = new breweryApi.BrewingCompany().query();
+  $scope.ok = ok;
+  $scope.cancel = cancel;
 
-  $scope.brewingCompanys = new breweryApi.brewingCompany.query();
+  function ok() {
+    $scope.newBrewery.$save(close);
+  }
 
-  $scope.ok = function () {
-    $scope.newBrewery.$save(function() {
-      $uibModalInstance.close(true);
-    });
-  };
+  function close() {
+    $uibModalInstance.close(true);
+  }
 
-  $scope.cancel = function () {
+  function cancel() {
     $uibModalInstance.dismiss('cancel');
-  };
+  }
 }

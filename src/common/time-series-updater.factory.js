@@ -1,10 +1,12 @@
-app
+angular
   .module('app.common')
-  .factory('timeSeriesUpdater', ['timeSeriesSocket', '$http', timeSeriesUpdater]);
+  .factory('TimeSeriesUpdater', ['timeSeriesSocket', '$http', TimeSeriesUpdater]);
 
-function timeSeriesUpdater(timeSeriesSocket, $http) {
-  var service = function(recipe_instance, name, callback) {
-    this.recipe_instance = recipe_instance;
+function TimeSeriesUpdater(timeSeriesSocket, $http) {
+  const service = function service(recipeInstance, name, callback) {
+    const self = this;
+
+    this.recipeInstance = recipeInstance;
     this.name = name;
 
     this.errorSleepTime = 500;
@@ -13,20 +15,22 @@ function timeSeriesUpdater(timeSeriesSocket, $http) {
     this.dataPoints = [];
     this.latest = null;
 
-    var self = this;
     this.timeSeriesSocket = timeSeriesSocket;
     this.timeSeriesSocket.subscribe(self, callback);
   };
 
-  service.prototype.newData = function(dataPointsIn) {
-    var staleDataMinutes = 20.0;
+  service.prototype.newData = newData;
+  service.prototype.set = set;
 
-    for (var i = 0; i < dataPointsIn.length; i++) {
-      var timeDiff = moment().diff(moment(dataPointsIn[i].time));
-      var timeDiffMinutes = moment.duration(timeDiff).asMinutes();
+  function newData(dataPointsIn) {
+    const staleDataMinutes = 20.0;
+
+    for (let i = 0; i < dataPointsIn.length; i += 1) {
+      const timeDiff = moment().diff(moment(dataPointsIn[i].time));
+      const timeDiffMinutes = moment.duration(timeDiff).asMinutes();
       if (timeDiffMinutes < staleDataMinutes) {
-        var dataPoint = dataPointsIn[i];
-        var newDataPoint = [new Date(dataPoint.time), parseFloat(dataPoint.value)];
+        const dataPoint = dataPointsIn[i];
+        const newDataPoint = [new Date(dataPoint.time), parseFloat(dataPoint.value)];
         this.dataPoints.push(newDataPoint);
         this.latest = JSON.parse(dataPoint.value);
       }
@@ -34,25 +38,25 @@ function timeSeriesUpdater(timeSeriesSocket, $http) {
 
     // Remove any data older than 20min.
     while (this.dataPoints.length > 0) {
-      var timeDiff = moment().diff(moment(this.dataPoints[0][0]));
-      var timeDiffMinutes = moment.duration(timeDiff).asMinutes();
+      const timeDiff = moment().diff(moment(this.dataPoints[0][0]));
+      const timeDiffMinutes = moment.duration(timeDiff).asMinutes();
       if (timeDiffMinutes > staleDataMinutes) {
         this.dataPoints.shift();
       } else {
         break;
       }
     }
+  }
 
-    service.prototype.set = function(value) {
-      var now = moment().toISOString();
-      $http.post("/live/timeseries/new/", {
-        recipe_instance: this.recipe_instance,
-        sensor: this.sensor,
-        value: value,
-        time: now,
-      });
-    };
-      
-    return service;
-  };
+  function set(value) {
+    const now = moment().toISOString();
+    $http.post('/live/timeseries/new/', {
+      recipe_instance: this.recipe_instance,
+      sensor: this.sensor,
+      value: value,
+      time: now,
+    });
+  }
+
+  return service;
 }

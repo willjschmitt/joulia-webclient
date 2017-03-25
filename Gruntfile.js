@@ -1,13 +1,13 @@
 module.exports = function(grunt) {
 
-  grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-eslint');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-karma');
 
-  grunt.registerTask('default', ['jshint','build','karma:unit']);
+  grunt.registerTask('default', ['eslint','build','karma:unit']);
   grunt.registerTask('build', ['clean']);
-  grunt.registerTask('release', ['clean','uglify','jshint','karma:unit']);
+  grunt.registerTask('release', ['clean','uglify','eslint','karma:unit']);
 
   grunt.initConfig({
     distDir: 'dist',
@@ -24,11 +24,8 @@ module.exports = function(grunt) {
         dest: 'build/<%= pkg.name %>.min.js'
       }
     },
-    jshint: {
-      files: ['Gruntfile.js', '<%= src.js %>'],
-      options: {
-        curly: true,
-      }
+    eslint: {
+      target: ['<%= src.js %>'],
     }
   });
 

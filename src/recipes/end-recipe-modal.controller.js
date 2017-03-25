@@ -5,10 +5,14 @@ angular
 EndRecipeModalController.$inject = ['$scope', '$uibModalInstance'];
 
 function EndRecipeModalController($scope, $uibModalInstance) {
-    $scope.ok = function () {
-      $uibModalInstance.close(true);
-    };
-    $scope.cancel = function () {
-      $uibModalInstance.dismiss('cancel');
-    };
+  $scope.ok = ok;
+  $scope.cancel = cancel;
+
+  function ok() {
+    $uibModalInstance.close(true);
+  }
+
+  function cancel() {
+    $uibModalInstance.dismiss('cancel');
+  }
 }
