@@ -4,14 +4,14 @@
     .controller('LaunchRecipeModalController', LaunchRecipeModalController);
 
   LaunchRecipeModalController.$inject = [
-    '$scope', '$uibModalInstance', 'breweryApi'];
+    '$scope', '$uibModalInstance', 'breweryResources'];
 
-  function LaunchRecipeModalController($scope, $uibModalInstance, breweryApi) {
-    $scope.brewhouses = breweryApi.brewhouse.query();
+  function LaunchRecipeModalController(
+      $scope, $uibModalInstance, breweryResources) {
+    $scope.brewhouses = breweryResources.Brewhouse.query();
     $scope.selectedBrewhouse = null;
 
     $scope.ok = ok;
-
     $scope.cancel = cancel;
 
     function ok() {

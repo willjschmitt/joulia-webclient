@@ -4,11 +4,12 @@
     .controller('AddRecipeModalController', AddRecipeModalController);
 
   AddRecipeModalController.$inject = [
-    '$scope', '$uibModalInstance', 'breweryApi'];
+    '$scope', '$uibModalInstance', 'breweryResources'];
 
-  function AddRecipeModalController($scope, $uibModalInstance, breweryApi) {
-    $scope.newRecipe = new breweryApi.Recipe();
-    $scope.beerStyles = breweryApi.beerStyle.query();
+  function AddRecipeModalController(
+      $scope, $uibModalInstance, breweryResources) {
+    $scope.newRecipe = new breweryResources.Recipe();
+    $scope.beerStyles = breweryResources.BeerStyle.query();
     $scope.ok = ok;
     $scope.cancel = cancel;
 
