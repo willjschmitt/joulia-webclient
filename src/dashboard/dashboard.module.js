@@ -1,4 +1,4 @@
 (function loadDashboardModule() {
   angular
-    .module('app.dashboard', []);
+    .module('app.dashboard', ['app.common', 'ui.bootstrap']);
 }());
