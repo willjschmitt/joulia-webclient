@@ -22,12 +22,16 @@
     "angular-sanitize": "^1.6.3",
     "angular-bootstrap": "^2.0.1",
     "jquery": "^1.12.3",
-    "jquery-ui": "^1.12.0",
+    "jquery-ui": "^1.12.1",
     "bootstrap": "^3.3.7",
     "moment": "^2.14.1",
     "underscore": "^1.8.3",
-    "modernizr": "^3.3.1",
-    "angular-mocks": "^1.6.3"
+    "angular-mocks": "^1.6.3",
+    "perfect-scrollbar": "^0.6.16",
+    "iCheck": "^1.0.2",
+    "bootstrap-select": "^1.12.2",
+    "nvd3": "^1.8.5",
+    "Modernizr": "http://modernizr.com/download?fontface-backgroundsize-borderimage-borderradius-boxshadow-flexbox-hsla-multiplebgs-opacity-rgba-textshadow-cssanimations-csscolumns-generatedcontent-cssgradients-cssreflections-csstransforms-csstransforms3d-csstransitions-applicationcache-canvas-canvastext-draganddrop-hashchange-history-audio-video-indexeddb-input-inputtypes-localstorage-postmessage-sessionstorage-websockets-websqldatabase-webworkers-geolocation-inlinesvg-smil-svg-svgclippaths-touch-webgl-shiv-mq-cssclasses-addtest-prefixed-teststyles-testprop-testallprops-hasevent-prefixes-domprefixes-load.zip"
   },
   "resolutions": {
     "angular": "1.6.3"

@@ -17,10 +17,31 @@ module.exports = function(config) {
     files: [
       // Third-party libraries loaded by bower.
       'bower_components/jquery/dist/jquery.js',
+      'bower_components/jquery-ui/jquery-ui.js',
       'bower_components/angular/angular.js',
       'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
       'bower_components/angular-resource/angular-resource.js',
       'bower_components/angular-mocks/angular-mocks.js',
+      'bower_components/perfect-scrollbar/js/perfect-scrollbar.jquery.js',
+      'bower_components/iCheck/icheck.js',
+      'bower_components/bootstrap-select/dist/js/bootstrap-select.js',
+      'bower_components/d3/d3.js',
+      'bower_components/nvd3/build/nv.d3.js',
+      'bower_components/underscore/underscore.js',
+      'bower_components/Modernizr/modernizr.custom.js',
+
+      // Third-party open-source licensed libaries.
+      'vendor/materialRipple/jquery.materialRipple.js',
+      'vendor/snackbar/jquery.snackbar.js',
+      'vendor/toasts/jquery.toasts.js',
+      'vendor/subheader/jquery.subheader.js',
+      'vendor/linearProgress/jquery.linearProgress.js',
+      'vendor/circularProgress/jquery.circularProgress.js',
+      'vendor/speedDial/jquery.speedDial.js',
+
+      // Third-party proprietary licensed libaries.
+      'vendor/bemat-admin/js/bemat-admin-common.js',
+
 
       // Need to manually load the modules for now to make sure they are
       // available for when adding the controllers, etc., to them.
