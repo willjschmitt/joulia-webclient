@@ -38,6 +38,7 @@ module.exports = function(config) {
       'vendor/linearProgress/jquery.linearProgress.js',
       'vendor/circularProgress/jquery.circularProgress.js',
       'vendor/speedDial/jquery.speedDial.js',
+      'vendor/simplePieChart/jquery.simplePieChart.js',
 
       // Third-party proprietary licensed libaries.
       'vendor/bemat-admin/js/bemat-admin-common.js',
