@@ -3,9 +3,9 @@
     .module('app.common')
     .directive('toggleableElement', toggleableElement);
 
-  toggleableElement.$inject = ['TimeSeriesUpdater', 'breweryApi'];
+  toggleableElement.$inject = ['TimeSeriesUpdater'];
 
-  function toggleableElement(TimeSeriesUpdater, breweryApi) {
+  function toggleableElement(TimeSeriesUpdater) {
     return {
       restrict: 'E',
       transclude: true,
@@ -14,7 +14,7 @@
         recipeInstance: '=',
         sensorName: '=',
       },
-      templateUrl: 'static/html/angular-directives/toggleable-element.html',
+      templateUrl: 'static/common/toggleable-element.html',
       link: function toggleableElementController($scope) {
         // Subscribe to value and override.
         $scope.elementStatus = new TimeSeriesUpdater(
@@ -30,16 +30,28 @@
         $scope.toggleElementOverride = toggleElementOverride;
         $scope.setElementOverride = setElementOverride;
 
+        /**
+         * Toggles the current element status to the inverse of itself.
+         */
         function toggleElementStatus() {
           setElementStatus(!$scope.elementStatus.latest);
         }
 
+        /**
+         * Sets the element status to the provided value. If the override is not
+         * set on the value currently, applies the override to true, providing
+         * the set function as a callback for future calling.
+         * @param {boolean} statusValue The boolean value to set to the current
+         *                              element status.
+         */
         function setElementStatus(statusValue) {
           function sendValue() {
-            sendValueToServer($scope.elementStatus.sensor, statusValue);
+            $scope.elementStatus.set(statusValue);
           }
 
-          // Make sure we have the override set.
+          // Make sure we have the override set before sending the value.
+          // Provides callback to sendValue if it wasn't. Otherwise immediately
+          // sendValue's.
           if (!$scope.elementOverride.latest) {
             toggleElementOverride(sendValue);
           } else {
@@ -47,29 +59,21 @@
           }
         }
 
+        /**
+         * Toggles the current element override value to the inverse of itself.
+         */
         function toggleElementOverride(callback) {
           setElementOverride(!$scope.elementOverride.latest, callback);
         }
 
+        /**
+         * Sets the element status override to the provided value. Provides
+         * callback with sending of value to server.
+         * @param {boolean}  overrideValue The value for the override to set.
+         * @param {function} callback      Function to call after setting.
+         */
         function setElementOverride(overrideValue, callback) {
-          sendValueToServer($scope.elementOverride.sensor, overrideValue,
-                            callback);
-        }
-
-        function sendValueToServer(sensor, value, callback) {
-          const now = moment().toISOString();
-          const data = {
-            recipe_instance: $scope.recipeInstance,
-            sensor: sensor,
-            value: value,
-            time: now,
-          };
-          const newData = new breweryApi.TimeSeriesDataPoint(data);
-          newData.$save(function callbackIfExists() {
-            if (callback) {
-              callback();
-            }
-          });
+          $scope.elementOverride.set(overrideValue, callback);
         }
       },
     };

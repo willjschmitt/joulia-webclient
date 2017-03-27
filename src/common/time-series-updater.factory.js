@@ -1,9 +1,11 @@
 (function loadTimeSeriesUpdaterFactory() {
   angular
     .module('app.common')
-    .factory('TimeSeriesUpdater', ['timeSeriesSocket', '$http', TimeSeriesUpdater]);
+    .factory('TimeSeriesUpdater', TimeSeriesUpdater);
 
-  function TimeSeriesUpdater(timeSeriesSocket, $http) {
+  TimeSeriesUpdater.$inject = ['timeSeriesSocket', 'breweryResources'];
+
+  function TimeSeriesUpdater(timeSeriesSocket, breweryResources) {
     const service = function service(recipeInstance, name, callback) {
       const self = this;
 
@@ -49,13 +51,19 @@
       }
     }
 
-    function set(value) {
+    function set(value, callback) {
       const now = moment().toISOString();
-      $http.post('/live/timeseries/new/', {
-        recipe_instance: this.recipe_instance,
+      const data = {
+        recipe_instance: this.recipeInstance,
         sensor: this.sensor,
         value: value,
         time: now,
+      };
+      const newDataPoint = new breweryResources.TimeSeriesDataPoint(data);
+      newDataPoint.$save(function callbackIfExists() {
+        if (callback) {
+          callback();
+        }
       });
     }
 
