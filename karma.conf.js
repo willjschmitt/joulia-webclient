@@ -22,6 +22,8 @@ module.exports = function(config) {
       'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
       'bower_components/angular-resource/angular-resource.js',
       'bower_components/angular-mocks/angular-mocks.js',
+      'bower_components/angular-websocket/dist/angular-websocket.js',
+      'bower_components/angular-websocket/dist/angular-websocket-mock.js',
       'bower_components/perfect-scrollbar/js/perfect-scrollbar.jquery.js',
       'bower_components/iCheck/icheck.js',
       'bower_components/bootstrap-select/dist/js/bootstrap-select.js',

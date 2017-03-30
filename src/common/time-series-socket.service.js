@@ -3,89 +3,109 @@
     .module('app.common')
     .service('timeSeriesSocket', timeSeriesSocket);
 
-  timeSeriesSocket.$inject = ['$timeout', '$http'];
+  timeSeriesSocket.$inject = ['$websocket', '$http'];
 
-  function timeSeriesSocket($timeout, $http) {
+  function timeSeriesSocket($websocket, $http) {
     const self = this;
 
-    // Message queue lets us queue up items while the socket is not currently
-    // open.
-    this.messageQueue = [];
-    function flushQueue() {
-      for (const msg in self.messageQueue) {
-        self.socket.send(JSON.stringify(self.messageQueue[msg]));
-      }
-      self.messageQueue = [];
-    }
+    self.socket = $websocket(
+        `ws://${window.location.host}/live/timeseries/socket/`,
+        { reconnectIfNotNormalClose: true });
 
-    // Handle the fundamentals of creating and managing the websocket.
-    this.socketOpen = false;
-    this.socket = new WebSocket(
-        `ws://${window.location.host}/live/timeseries/socket/`);
-    if (self.socketOpen) {
-      flushQueue();
-    }
+    self.socket.onMessage(onSocketMessage);
+    self.socket.onClose(onSocketClose);
+    self.sensorToSubscribers = {};
+    self.subscribe = subscribe;
 
-    this.socket.onopen = onSocketOpen;
-    this.socket.onmessage = onSocketMessage;
-    this.socket.onclose = onSocketClose;
-    this.subscribers = [];
-    this.subscribe = subscribe;
+    // Makes sure snackbar is ready to be added on connection closing.
+    $.snackbar('init');
 
-    function onSocketOpen() {
-      self.socketOpen = true;
-      flushQueue();
-    }
+    // TODO(will): These should not be set once the websocket-mock library
+    // supports sending data to consumers and closing the socket.
+    self.onSocketMessage = onSocketMessage;
+    self.onSocketClose = onSocketClose;
 
+    /**
+     * Callback handling incoming messages from websocket. Adds data to the
+     * data array for the sensor associated with the incoming message. If the
+     * sensor has any subscribers with callbacks registered, calls it.
+     * @param {string} msg Unparsed message from received from websocket.
+     */
     function onSocketMessage(msg) {
       const parsed = JSON.parse(msg.data);
-      const matchingSubscribers = _.where(self.subscribers, { sensor: parsed.sensor });
-      _.each(matchingSubscribers, function updateSubscriber(subscriber) {
-        subscriber.subscriber.newData([parsed]);
-        if (subscriber.hasOwnProperty('callback')) {
+      const subscribers = self.sensorToSubscribers[parsed.sensor];
+      _.each(subscribers, function updateSubscriber(subscriber) {
+        subscriber.newData([parsed]);
+        if (subscriber.callback) {
           subscriber.callback();
         }
       });
     }
 
+    /**
+     * Callback handling the closing of the websocket. Adds snackbar indicating
+     * the websocket closed unexpectedly.
+     */
     function onSocketClose() {
-      self.socketOpen = false;
       $.snackbar('add', {
         type: 'danger',
-        msg: 'Connection lost. Reestablishing connection.',
+        msg: 'Connection lost to server. Reestablishing connection.',
         buttonText: 'Close',
       });
     }
 
-    // Entry point for subscriptions to initiate the subscription.
+    /**
+     * Entry point for subscriptions to initiate the subscription. Identifies
+     * the sensor being subscribed to over http request, then sends a subscribe
+     * request over the websocket, which will register it to receive updates
+     * when that sensor time series is changed on the server. If a callback is
+     * provided, registers it to be called when the subscriber receives updates.
+     * @param {object}   subscriber Details about the sensor to subscribe to
+     *                              updates on the server. Contains recipe
+     *                              instance and sensor name.
+     * @param {function} callback   Function to call when the subscriber
+     *                              recieves updates.
+     */
     function subscribe(subscriber, callback) {
       const data = {
-        recipe_instance: subscriber.recipe_instance,
+        recipe_instance: subscriber.recipeInstance,
         name: subscriber.name,
       };
 
-      function handleIdentification(response) {
-        subscriber.sensor = response.data.sensor;
-        const newSubscriber = {
-          sensor: subscriber.sensor,
-          subscriber: subscriber,
-        };
-        if (callback) {
-          newSubscriber.callback = callback;
-        }
-        self.subscribers.push(newSubscriber);
-        self.messageQueue.push({
-          recipe_instance: subscriber.recipe_instance,
-          sensor: subscriber.sensor,
-          subscribe: true,
-        });
-        if (self.socketOpen) {
-          flushQueue();
-        }
-      }
-
       $http.post('live/timeseries/identify/', data)
-        .then(handleIdentification);
+        .then(response => handleIdentification(subscriber, callback, response));
+    }
+
+    /**
+     * Handles response from identification endpoint, by registering the
+     * subscription internally, and sending the subscription request over the
+     * websocket.
+     * @param {object}   subscriber Details about the sensor to subscribe to
+     *                              updates on the server. Contains recipe
+     *                              instance and sensor name.
+     * @param {function} callback   Function to call when the subscriber
+     *                              recieves updates.
+     * @param {object}   response   The response from the http request to
+     *                              identify the sensor.
+     */
+    function handleIdentification(subscriber, callback, response) {
+      // Extend the provided subscriber with extra information.
+      subscriber.sensor = response.data.sensor;
+      subscriber.callback = callback;
+
+      // Register subscriber with tracking arrays and maps.
+      if (!self.sensorToSubscribers.hasOwnProperty(subscriber.sensor)) {
+        self.sensorToSubscribers[subscriber.sensor] = [];
+      }
+      self.sensorToSubscribers[subscriber.sensor].push(subscriber);
+
+      // Send subscription request to server.
+      const message = JSON.stringify({
+        recipe_instance: subscriber.recipeInstance,
+        sensor: subscriber.sensor,
+        subscribe: true,
+      });
+      self.socket.send(message);
     }
   }
 }());

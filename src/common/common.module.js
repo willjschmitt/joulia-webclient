@@ -1,4 +1,4 @@
 (function loadCommonModule() {
   angular
-    .module('app.common', ['ngResource']);
+    .module('app.common', ['ngResource', 'ngWebSocket']);
 }());
