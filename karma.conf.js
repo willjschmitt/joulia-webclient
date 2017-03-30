@@ -31,6 +31,7 @@ module.exports = function(config) {
       'bower_components/nvd3/build/nv.d3.js',
       'bower_components/underscore/underscore.js',
       'bower_components/Modernizr/modernizr.custom.js',
+      'bower_components/moment/moment.js',
 
       // Third-party open-source licensed libaries.
       'vendor/materialRipple/jquery.materialRipple.js',

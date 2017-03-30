@@ -1,63 +1,81 @@
 (function loadTimeSeriesUpdaterFactory() {
   angular
     .module('app.common')
-    .factory('TimeSeriesUpdater', TimeSeriesUpdater);
+    .factory('TimeSeriesUpdater', TimeSeriesUpdaterFactory);
 
-  TimeSeriesUpdater.$inject = ['timeSeriesSocket', 'breweryResources'];
+  TimeSeriesUpdaterFactory.$inject = ['timeSeriesSocket', 'breweryResources'];
 
-  function TimeSeriesUpdater(timeSeriesSocket, breweryResources) {
-    const service = function service(recipeInstance, name, callback) {
+  function TimeSeriesUpdaterFactory(timeSeriesSocket, breweryResources) {
+    /**
+     * Creates an instance of TimeSeriesUpdater
+     *
+     * @constructor
+     * @this {TimeSeriesUpdater}
+     */
+    function TimeSeriesUpdater(recipeInstance, name) {
       const self = this;
 
-      this.recipeInstance = recipeInstance;
-      this.name = name;
+      self.recipeInstance = recipeInstance;
+      self.name = name;
 
-      this.errorSleepTime = 500;
-      this.cursor = null;
+      self.dataPoints = [];
+      self.latest = null;
 
-      this.dataPoints = [];
-      this.latest = null;
+      self.timeSeriesSocket = timeSeriesSocket;
+      self.timeSeriesSocket.subscribe(self);
+    }
 
-      this.timeSeriesSocket = timeSeriesSocket;
-      this.timeSeriesSocket.subscribe(self, callback);
-    };
+    TimeSeriesUpdater.prototype.newData = newData;
+    TimeSeriesUpdater.prototype.set = set;
+    TimeSeriesUpdater.prototype.getTime = getTime;
 
-    service.prototype.newData = newData;
-    service.prototype.set = set;
+    /**
+     * Adds new dataPoints to the dataPoints array as time, value pairs.
+     *
+     * @param {Object[]} samples Array of data points from websocket stream
+     *                           containing, sensor, time, and value data.
+     */
+    function newData(samples) {
+      const self = this;
+      const kStaleDataMinutes = 20.0;
 
-    function newData(dataPointsIn) {
-      const staleDataMinutes = 20.0;
-
-      for (let i = 0; i < dataPointsIn.length; i += 1) {
-        const timeDiff = moment().diff(moment(dataPointsIn[i].time));
-        const timeDiffMinutes = moment.duration(timeDiff).asMinutes();
-        if (timeDiffMinutes < staleDataMinutes) {
-          const dataPoint = dataPointsIn[i];
-          const newDataPoint = [new Date(dataPoint.time), parseFloat(dataPoint.value)];
-          this.dataPoints.push(newDataPoint);
-          this.latest = JSON.parse(dataPoint.value);
-        }
+      // Ignore datapoints received older than kStaleDataMinutes.
+      while (samples.length &&
+          diffMinutesFromNow(samples[0].time) > kStaleDataMinutes) {
+        samples.shift();
       }
 
-      // Remove any data older than 20min.
-      while (this.dataPoints.length > 0) {
-        const timeDiff = moment().diff(moment(this.dataPoints[0][0]));
-        const timeDiffMinutes = moment.duration(timeDiff).asMinutes();
-        if (timeDiffMinutes > staleDataMinutes) {
-          this.dataPoints.shift();
-        } else {
-          break;
-        }
+      // Add the valid new data to the internal dataPoints array.
+      _.each(samples, function addSample(sample) {
+        const newDataPoint = [
+          moment(sample.time),
+          sample.value,
+        ];
+        self.dataPoints.push(newDataPoint);
+        self.latest = sample.value;
+      });
+
+      // Remove any internal data older than kStaleDataMinutes.
+      while (self.dataPoints.length &&
+          diffMinutesFromNow(self.dataPoints[0][0]) > kStaleDataMinutes) {
+        self.dataPoints.shift();
       }
     }
 
+    /**
+     * Sets the value for the data stream and sends it to the server.
+     *
+     * @param {Number}   value    The value to update the sensor stream with.
+     * @param {function} callback A function to call after the value is
+     *                            successfully updated on the server.
+     */
     function set(value, callback) {
-      const now = moment().toISOString();
+      const self = this;
       const data = {
-        recipe_instance: this.recipeInstance,
-        sensor: this.sensor,
+        recipe_instance: self.recipeInstance,
+        sensor: self.sensor,
         value: value,
-        time: now,
+        time: self.getTime(),
       };
       const newDataPoint = new breweryResources.TimeSeriesDataPoint(data);
       newDataPoint.$save(function callbackIfExists() {
@@ -67,6 +85,32 @@
       });
     }
 
-    return service;
+    /**
+     * Internal function for getting current time. Set to allow stubbing out
+     * timer.
+     */
+    // TODO(will): Stub out into it's own service, which can be provided for in
+    // tests.
+    function getTime() {
+      return moment().toISOString();
+    }
+
+    /**
+     * Calculates the time difference of the provided date time from now in
+     * minutes.
+     *
+     * @param {Object} dateTime A moment() date time to compare to now.
+     * @returns {Number} The difference in time from dateTime until now in
+     *                   minutes. Larger, more positive numbers represent a
+     *                   dateTime further in the past.
+     */
+     // TODO(will): Separate this out into an independent service.
+    function diffMinutesFromNow(dateTime) {
+      const timeDiff = moment().diff(moment(dateTime));
+      const timeDiffMinutes = moment.duration(timeDiff).asMinutes();
+      return timeDiffMinutes;
+    }
+
+    return TimeSeriesUpdater;
   }
 }());

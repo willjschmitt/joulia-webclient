@@ -60,6 +60,8 @@
      * request over the websocket, which will register it to receive updates
      * when that sensor time series is changed on the server. If a callback is
      * provided, registers it to be called when the subscriber receives updates.
+     * The sensor id from the server will be set on the subscriber when it is
+     * received.
      * @param {object}   subscriber Details about the sensor to subscribe to
      *                              updates on the server. Contains recipe
      *                              instance and sensor name.
