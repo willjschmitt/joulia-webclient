@@ -1,9 +1,11 @@
 (function loadValueCardDirective() {
   angular
     .module('app.common')
-    .directive('valueCard', ['TimeSeriesUpdater', 'breweryApi', valueCard]);
+    .directive('valueCard', valueCard);
 
-  function valueCard(TimeSeriesUpdater, breweryApi) {
+  valueCard.$inject = ['TimeSeriesUpdater'];
+
+  function valueCard(TimeSeriesUpdater) {
     return {
       restrict: 'E',
       transclude: true,
@@ -17,16 +19,23 @@
         overridableAlternate: '=?',
         recipeInstance: '=',
       },
-      templateUrl: 'static/html/angular-directives/value-card.html',
+      templateUrl: 'static/common/value-card.html',
       link: function valueCardController($scope) {
         // Give us all the little line things for the little cards.
         $('.peity-line').peity('line', { height: 28, width: 64 });
 
+        if ($scope.overridable && $scope.overridableAlternate) {
+          throw new Error(
+            'overridable and overridableAlternate cannot both be set to true.');
+        }
+
+        // Default to the units for the alternate value if alternate units are
+        // not provided.
         if (!$scope.unitsAlternate) {
           $scope.unitsAlternate = $scope.units;
         }
 
-        // Subscribe to value and override.
+        // Subscribe to values and overrides.
         $scope.value = new TimeSeriesUpdater(
             $scope.recipeInstance, $scope.valueName);
         if ($scope.overridable) {
@@ -43,57 +52,24 @@
         }
 
         if ($scope.overridable || $scope.overridableAlternate) {
-          $scope.overridden = false;
-          $scope.increase_value = increaseValue;
-          $scope.decrease_value = decreaseValue;
+          $scope.increaseValue = increaseValue;
+          $scope.decreaseValue = decreaseValue;
+          $scope.toggleOverride = toggleOverride;
+          $scope.setValue = setValue;
         }
-
-        $scope.setValue = setValue;
-
-        // Override setters.
-        $scope.toggleOverride = toggleOverride;
-        $scope.setOverride = setOverride;
 
         function toggleOverride(callback) {
-          $scope.setOverride(!$scope.valueOverride.latest, callback);
-        }
-
-        function setOverride(value, callback) {
-          const now = moment().toISOString();
-          const data = {
-            recipe_instance: $scope.recipeInstance,
-            sensor: $scope.valueOverride.sensor,
-            value: value,
-            time: now,
-          };
-          const newData = new breweryApi.TimeSeriesDataPoint(data);
-          newData.$save(function callbackIfExists() {
-            if (callback) {
-              callback();
-            }
-          });
+          $scope.valueOverride.set(!$scope.valueOverride.latest, callback);
         }
 
         function setValue(value) {
-          function sendValueToServer() {
-            const now = moment().toISOString();
-            const sensor = ($scope.overridable ?
-                $scope.value.sensor : $scope.valueAlternate.sensor);
-            const data = {
-              recipe_instance: $scope.recipeInstance,
-              sensor: sensor,
-              value: value,
-              time: now,
-            };
-            const newData = new breweryApi.TimeSeriesDataPoint(data);
-            newData.$save();
-          }
-
+          const valueToSet = ($scope.overridable ?
+              $scope.value : $scope.valueAlternate);
           // Make sure we have the override set.
           if (!$scope.valueOverride.latest) {
-            $scope.toggleOverride(sendValueToServer);
+            $scope.toggleOverride(() => valueToSet.set(value));
           } else {
-            sendValueToServer();
+            valueToSet.set(value);
           }
         }
 
