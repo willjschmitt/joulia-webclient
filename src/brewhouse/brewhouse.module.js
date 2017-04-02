@@ -1,4 +1,4 @@
 (function loadBrewhouseModule() {
   angular
-    .module('app.brewhouse', ['ngResource', 'app.common']);
+    .module('app.brewhouse', ['app.common', 'app.recipes', 'ui.bootstrap']);
 }());

@@ -19,7 +19,7 @@
         function endSession() {
           const modalInstance = $uibModal.open({
             animation: true,
-            templateUrl: 'static/recipies/end-recipe-modal.html',
+            templateUrl: 'static/recipes/end-recipe-modal.html',
             controller: 'EndRecipeModalController',
           });
 
@@ -33,7 +33,7 @@
             method: 'POST',
             url: '/brewery/brewhouse/end',
             data: {
-              recipe_instance: $scope.recipeInstance.id,
+              recipe_instance: $scope.recipeInstance,
             },
           }).then(unsetrecipeInstance);
         }
