@@ -3,10 +3,9 @@ describe('app.common', function () {
   beforeEach(module('app.common'));
   beforeEach(module('joulia.templates'));
 
-  var $controller, $httpBackend, $location;
+  var $httpBackend, $rootScope, $compile, $interval;
 
   beforeEach(inject(function($injector) {
-    $controller = $injector.get('$controller');
     $httpBackend = $injector.get('$httpBackend');
     $rootScope = $injector.get('$rootScope');
     $compile = $injector.get('$compile');

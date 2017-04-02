@@ -56,6 +56,7 @@ module.exports = function(config) {
       'src/common/common.module.js',
       'src/dashboard/dashboard.module.js',
       'src/recipes/recipes.module.js',
+      'src/brewhouse/brewhouse.module.js',
 
       // The main source files.
       'src/**/*.js',

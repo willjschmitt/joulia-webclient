@@ -1,0 +1,47 @@
+<div class="col-lg-3 col-sm-6">
+  <div class="row">
+    <div class="col-sm-12">
+      <value-card
+          title="'Electric Load'" 
+          value-name="'boil_kettle__power'" 
+          units="'W'" 
+          recipe-instance="recipeInstance.id">
+      </value-card>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <value-card
+          title="'Energy Consumption'" 
+          value-name="'system_energy'"
+          value-alternate-name="'system_energy_cost'"
+          units="'Wh'" units-alternate="'$'"
+          recipe-instance="recipeInstance.id">
+      </value-card>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <value-card
+          title="'Boil Kettle Temperature'"
+          value-name="'boil_kettle__temperature'"
+          value-alternate-name="'boil_kettle__temperature_set_point'"
+          units="'&deg;F'"
+          overridable-alternate="true" 
+          recipe-instance="recipeInstance.id">
+      </value-card>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <value-card
+          title="'Mash Tun Temperature'" 
+          value-name="'mash_tun__temperature'"
+          value-alternate-name="'mash_tun__temperature_set_point'"
+          units="'&deg;F'" 
+          overridable-alternate="true" 
+          recipe-instance="recipeInstance.id">
+      </value-card>
+    </div>
+  </div>
+</div>
