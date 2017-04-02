@@ -147,11 +147,19 @@ describe('app.brewhouse', function () {
       });
 
       describe('clicking previous', function () {
-
+        it ('should regress the state', function () {
+          isolatedScope.currentStatus.latest = 1;
+          element[0].querySelector('.previous-state-button').click();
+          expect(isolatedScope.currentStatus.latest).toBe(0);
+        });
       });
 
       describe('clicking next', function () {
-
+        it ('should advance the state', function () {
+          isolatedScope.currentStatus.latest = 0;
+          element[0].querySelector('.next-state-button').click();
+          expect(isolatedScope.currentStatus.latest).toBe(1);
+        });
       });
     });
   });
