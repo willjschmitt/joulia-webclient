@@ -73,7 +73,7 @@
 
           function minInArrays(currentMin, dataPointArray) {
             const minDataPointArray = _.reduce(
-                dataPointArray.values, minInArray, Infinity);
+                dataPointArray.values, minInArray, +Infinity);
             return Math.min(minDataPointArray, currentMin);
           }
 
@@ -85,7 +85,7 @@
 
           function maxInArrays(currentMax, dataPointArray) {
             const maxDataPointArray = _.reduce(
-                dataPointArray.values, maxInArray, Infinity);
+                dataPointArray.values, maxInArray, -Infinity);
             return Math.max(maxDataPointArray, currentMax);
           }
 
