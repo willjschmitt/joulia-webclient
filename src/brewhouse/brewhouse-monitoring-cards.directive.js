@@ -9,7 +9,9 @@
     return {
       restrict: 'E',
       transclude: true,
-      scope: {},
+      scope: {
+        recipeInstance: "=",
+      },
       templateUrl: 'static/brewhouse/brewhouse-monitoring-cards.html',
       link: function brewhouseMonitoringCardsController() {},
     };

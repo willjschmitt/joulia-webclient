@@ -23,14 +23,12 @@ describe('app.brewhouse', function () {
     });
 
     describe('template binding', function () {
-      describe('clicking next', function () {
-        it ('should have some of the tasks in the html', function () {
-          // This test isn't perfect, but should be sufficient. This just checks
-          // a few tasks to be in the html.
-          expect(element.html()).toContain('Sanitizing Soak');
-          expect(element.html()).toContain('Measure Post-Boil Gravity');
-          expect(element.html()).toContain('Clean Boil Kettle and Chiller');
-        });
+      it ('should have some of the tasks in the html', function () {
+        // This test isn't perfect, but should be sufficient. This just checks
+        // a few tasks to be in the html.
+        expect(element.html()).toContain('Sanitizing Soak');
+        expect(element.html()).toContain('Measure Post-Boil Gravity');
+        expect(element.html()).toContain('Clean Boil Kettle and Chiller');
       });
     });
   });
