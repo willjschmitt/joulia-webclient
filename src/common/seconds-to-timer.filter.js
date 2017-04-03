@@ -10,7 +10,7 @@
       const minutes = Math.floor(secondsAbsolute / 60.0);
       secondsAbsolute -= minutes * 60.0;
       const seconds = Math.floor(secondsAbsolute);
-      const hoursString = (hours > 0) ? (`00${hours}:`).slice(-3) : "";
+      const hoursString = (hours > 0) ? (`00${hours}:`).slice(-3) : '';
       const minutesString = (`00${minutes}:`).slice(-3);
       const secondsString = (`00${seconds}`).slice(-2);
       return `${hoursString}${minutesString}${secondsString}`;

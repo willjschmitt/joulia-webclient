@@ -86,7 +86,7 @@
          * on a +1 state increase. Otherwise, just sets the status stream to the
          * new value.
          *
-         * @param {Number} amount The number of states to change (negative or 
+         * @param {Number} amount The number of states to change (negative or
          *                        positive).
          */
         function adjustState(amount) {

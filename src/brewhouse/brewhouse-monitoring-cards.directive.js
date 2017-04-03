@@ -10,7 +10,7 @@
       restrict: 'E',
       transclude: true,
       scope: {
-        recipeInstance: "=",
+        recipeInstance: '=',
       },
       templateUrl: 'static/brewhouse/brewhouse-monitoring-cards.html',
       link: function brewhouseMonitoringCardsController() {},
