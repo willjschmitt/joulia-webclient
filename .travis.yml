@@ -2,8 +2,9 @@ language: node_js
 node_js:
   - '0.10'
 before_script:
-  - 'bower install'
+  - 'npm install -g bower'
   - 'npm install -g grunt-cli'
+  - 'bower install'
 notifications:
   email: false
   slack: joulia:WNFyeuBeiJJAGjU6Gwj9rPnX
