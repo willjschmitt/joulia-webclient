@@ -1,6 +1,9 @@
 {
   "name": "joulia-webclient",
   "version": "0.0.0",
+  "scripts": {
+      "test": "grunt test"
+  },
   "devDependencies": {
     "angular-mocks": "^1.6.3",
     "eslint": "^3.15.0",

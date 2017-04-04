@@ -11,6 +11,8 @@ module.exports = function(grunt) {
   grunt.registerTask('release',
       ['clean', 'uglify', 'eslint', 'karma:unit']);
 
+  grunt.registerTask('test', ['karma:travis'])
+
   grunt.initConfig({
     distDir: 'dist',
     pkg: grunt.file.readJSON('package.json'),
@@ -31,6 +33,11 @@ module.exports = function(grunt) {
     karma: {
       unit: {
         configFile: 'karma.conf.js',
+      },
+      travis: {
+        configFile: 'karma.conf.js',
+        singleRun: true,
+        browsers: ['PhantomJS'],
       }
     },
     eslint: {
