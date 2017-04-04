@@ -12,22 +12,32 @@
 
   <section class="page-content" ng-if="recipeInstance.active">
     <div class="row">
-      <brewhouse-terminator></brewhouse-terminator>
-      <brewhouse-status></brewhouse-status>
+      <brewhouse-terminator recipe-instance="recipeInstance.id">
+      </brewhouse-terminator>
+
+      <brewhouse-status recipe-instance="recipeInstance.id">
+      </brewhouse-status>
     </div>
     <div class="row">
-      <brewhouse-temperature-plots></brewhouse-temperature-plots>
-      <brewhouse-monitoring-cards></brewhouse-monitoring-cards>
-      <brewhouse-dials></brewhouse-dials>
+      <brewhouse-temperature-plots recipe-instance="recipeInstance.id">
+      </brewhouse-temperature-plots>
+
+      <brewhouse-monitoring-cards recipe-instance="recipeInstance.id">
+      </brewhouse-monitoring-cards>
+
+      <brewhouse-dials recipe-instance="recipeInstance.id">
+      </brewhouse-dials>
     </div>
     <div class="row">
-      <brewhouse-overrides></brewhouse-overrides>
+      <brewhouse-overrides recipe-instance="recipeInstance.id">
+      </brewhouse-overrides>
+
       <brewhouse-task-list></brewhouse-task-list>
     </div>
 
 
-  </section><!-- /#page-content -->
+  </section>
 
   <brewhouse-inactive></brewhouse-inactive>
 
-</section><!-- /#right-content -->
+</section>
