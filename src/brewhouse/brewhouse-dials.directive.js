@@ -10,7 +10,7 @@
       restrict: 'E',
       transclude: true,
       scope: {
-        recipeInstance: "=",
+        recipeInstance: '=',
       },
       templateUrl: 'static/brewhouse/brewhouse-dials.html',
       link: function brewhouseDialsController($scope) {

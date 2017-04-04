@@ -38,7 +38,7 @@ module.exports = function(grunt) {
         configFile: 'karma.conf.js',
         singleRun: true,
         browsers: ['PhantomJS'],
-      }
+      },
     },
     eslint: {
       target: ['<%= src.js %>'],
