@@ -51,6 +51,7 @@ nosetests.xml
 coverage.xml
 *,cover
 .hypothesis/
+coverage/
 
 # Translations
 *.mo
@@ -107,3 +108,8 @@ ENV/
 components/
 bower_components/
 
+# Third Party Files
+vendor/bemat-admin/
+
+# NPM
+node_modules

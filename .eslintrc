@@ -1,0 +1,50 @@
+{
+  "extends": "airbnb",
+  "rules": {
+    // Let git enforce this on checkin/out.
+    "linebreak-style": "off",
+
+    // Angular style suggests defining object function after adding it to
+    // module.
+    "no-use-before-define": "off",
+
+    // Allows setting of parameters on $scope.
+    // TODO(will): Using controllerAs and this might allow us to reenable.
+    "no-param-reassign": "off",
+
+    "indent": ["error", 2, {
+      "VariableDeclarator": 2,
+    }],
+
+    // Temporary to allow focus on other issues rather than arrow callbacks.
+    "prefer-arrow-callback": "off",
+
+    // No intentions to shadow Object.prototype methods, and we should always
+    // inherit from Object.prototype.
+    // TODO(will): Revisit if this assumption changes.
+    "no-prototype-builtins": "off",
+    "guard-for-in": "off",
+    "no-restricted-syntax": "off",
+
+    // This has been disabled for readability. This project believes:
+    // { foo: foo } is more readable than { foo }.
+    "object-shorthand": "off",
+  },
+  "globals": {
+    "window": true,
+
+    "WebSocket": true,
+
+    // Angular should be available in all modules.
+    "angular": true,
+
+    "_": true,
+
+    "moment": true,
+
+    "$": true,
+
+    "d3": true,
+    "nv": true,
+  }
+}

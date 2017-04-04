@@ -1,0 +1,35 @@
+<div class="col-md-8 col-xs-12">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <header>
+        {{ currentStatusText(currentStatus.latest) }}&nbsp;
+        (Status #{{currentStatus.latest}})
+      </header>
+    </div>
+    <div class="panel-body no-top-padding">
+      <div class="row">
+        <div class="col-xs-4 next-status-text">
+          <p>Next: {{ nextStatusText(currentStatus.latest) }}</p>
+        </div>
+        <div class="col-xs-4">
+          <span ng-if="timer" class="timer">
+            Time Left: {{timer.latest | secondsToTimer}}
+          </span>
+        </div>
+        <div class="col-xs-4">
+          <button
+              class="btn btn-lg btn-info previous-state-button"
+              ng-click="adjustState(-1)">
+            Previous
+          </button>
+          <button
+              class="btn btn-lg next-state-button"
+              ng-class="nextStateColor"
+              ng-click="adjustState(+1)">
+            Next
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
