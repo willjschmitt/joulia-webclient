@@ -59,5 +59,47 @@ describe('app.common array-utilities.service', function () {
         expect(arrayUtilities.maximumInArrays(arrays)).toBe(-Infinity);
       });
     });
+
+    describe('minMaxWithSpread', function () {
+      it('add spread equally', function () {
+        const min = 5.0;
+        const max = 5.0;
+        const spread = 10.0;
+        expect(arrayUtilities.minMaxWithSpread(min, max, spread)).toEqual({
+          min: 0.0,
+          max: 10.0,
+        });
+      });
+
+      it('adds no spread', function () {
+        const min = -5.0;
+        const max = 15.0;
+        const spread = 10.0;
+        expect(arrayUtilities.minMaxWithSpread(min, max, spread)).toEqual({
+          min: -5.0,
+          max: 15.0,
+        });
+      });
+
+      it('corrects direction', function () {
+        const min = 10.0;
+        const max = 0.0;
+        const spread = 10.0;
+        expect(arrayUtilities.minMaxWithSpread(min, max, spread)).toEqual({
+          min: 0.0,
+          max: 10.0,
+        });
+      });
+
+      it('corrects direction with inifinity', function () {
+        const min = +Infinity;
+        const max = -Infinity;
+        const spread = 10.0;
+        expect(arrayUtilities.minMaxWithSpread(min, max, spread)).toEqual({
+          min: -5.0,
+          max: +5.0,
+        });
+      });
+    })
   });
 });

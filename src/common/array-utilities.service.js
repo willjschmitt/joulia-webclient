@@ -8,6 +8,7 @@
 
     self.minimumInArrays = minimumInArrays;
     self.maximumInArrays = maximumInArrays;
+    self.minMaxWithSpread = minMaxWithSpread;
 
     /**
      * Finds the minimum value in all value arrays provided. Assumes the
@@ -118,6 +119,28 @@
     function extremeInPoints(currentMin, point, minimumOrMaximum) {
       const extremeFunction = minimumOrMaximum ? Math.min : Math.max;
       return extremeFunction(point[1], currentMin);
+    }
+
+    /**
+     * Equally adds an offset to the min and max to ensure a wide enough spread
+     * between min and max. If either min or max is NaN (infinite), assumed both
+     * were 0.0. If max < min, applies a spread around the average of the two.
+     */
+    function minMaxWithSpread(min, max, spread) {
+      if (!isFinite(min) || !isFinite(max)) {
+        min = max = 0.0;
+      }
+
+      if ((max - min) < spread) {
+        const spreadAdjust = (spread - (max - min)) * 0.5;
+        max += spreadAdjust;
+        min -= spreadAdjust;
+      }
+
+      return {
+        min: min,
+        max: max,
+      }
     }
   }
 }());
