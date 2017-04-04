@@ -9,13 +9,13 @@
     return {
       restrict: 'E',
       transclude: true,
-      scope: {},
+      scope: {
+        recipeInstance: "=",
+      },
       templateUrl: 'static/brewhouse/brewhouse-dials.html',
       link: function brewhouseDialsController($scope) {
         $scope.boilKettleDutyCycle = new TimeSeriesUpdater(
-            $scope.recipeInstance.id, 'boil_kettle__duty_cycle');
-        $scope.boilKettlePower = new TimeSeriesUpdater(
-            $scope.recipeInstance.id, 'boil_kettle__power');
+            $scope.recipeInstance, 'boil_kettle__duty_cycle');
       },
     };
   }
