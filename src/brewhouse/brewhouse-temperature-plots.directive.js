@@ -3,26 +3,30 @@
     .module('app.brewhouse')
     .directive('brewhouseTemperaturePlots', brewhouseTemperaturePlots);
 
-  brewhouseTemperaturePlots.$inject = ['TimeSeriesUpdater', '$interval'];
+  brewhouseTemperaturePlots.$inject = [
+    'TimeSeriesUpdater', 'arrayUtilities', '$interval'];
 
-  function brewhouseTemperaturePlots(TimeSeriesUpdater, $interval) {
+  function brewhouseTemperaturePlots(
+      TimeSeriesUpdater, arrayUtilities, $interval) {
     return {
       restrict: 'E',
       transclude: true,
-      scope: {},
+      scope: {
+        recipeInstance: '=',
+      },
       templateUrl: 'static/brewhouse/brewhouse-temperature-plots.html',
       link: function brewhouseTemperaturePlotsController($scope) {
+        $scope.boilTemperatureActual = new TimeSeriesUpdater(
+            $scope.recipeInstance, 'boil_kettle__temperature');
+        $scope.boilTemperatureSetPoint = new TimeSeriesUpdater(
+            $scope.recipeInstance, 'boil_kettle__temperature_set_point');
+        $scope.mashTemperatureActual = new TimeSeriesUpdater(
+            $scope.recipeInstance, 'mash_tun__temperature');
+        $scope.mashTemperatureSetPoint = new TimeSeriesUpdater(
+            $scope.recipeInstance, 'mash_tun__temperature_set_point');
+
         // Add all the relevant time series to the chart data.
         $scope.dataPoints = [];
-        $scope.boilTemperatureActual = new TimeSeriesUpdater(
-            $scope.recipeInstance.id, 'boil_kettle__temperature');
-        $scope.boilTemperatureSetPoint = new TimeSeriesUpdater(
-            $scope.recipeInstance.id, 'boil_kettle__temperature_set_point');
-        $scope.mashTemperatureActual = new TimeSeriesUpdater(
-            $scope.recipeInstance.id, 'mash_tun__temperature');
-        $scope.mashTemperatureSetPoint = new TimeSeriesUpdater(
-            $scope.recipeInstance.id, 'mash_tun__temperature_set_point');
-
         $scope.dataPoints.push({
           key: 'Boil Actual',
           values: $scope.boilTemperatureActual.dataPoints,
@@ -69,37 +73,15 @@
           // Clculate min/max in current dataset.
           // TODO(will): I don't know why nvd3 messes up sometimes, but we had to
           // force calculate this.
-          let min = _.reduce($scope.dataPoints, minInArrays, Infinity);
-
-          function minInArrays(currentMin, dataPointArray) {
-            const minDataPointArray = _.reduce(
-                dataPointArray.values, minInArray, +Infinity);
-            return Math.min(minDataPointArray, currentMin);
-          }
-
-          function minInArray(currentMin, dataPoint) {
-            return Math.min(dataPoint[1], currentMin);
-          }
-
-          let max = _.reduce($scope.dataPoints, maxInArrays, -Infinity);
-
-          function maxInArrays(currentMax, dataPointArray) {
-            const maxDataPointArray = _.reduce(
-                dataPointArray.values, maxInArray, -Infinity);
-            return Math.max(maxDataPointArray, currentMax);
-          }
-
-          function maxInArray(currentMax, dataPoint) {
-            return Math.max(dataPoint[1], currentMax);
-          }
+          let min = arrayUtilities.minimumInArrays($scope.dataPoints);
+          let max = arrayUtilities.maximumInArrays($scope.dataPoints);
 
           // Make sure we have a spread.
           const minSpread = 10.0;
-          if ((max - min) < minSpread) {
-            const spreadAdjust = (minSpread - (max - min)) * 0.5;
-            max += spreadAdjust;
-            min -= spreadAdjust;
-          }
+          const extremes = arrayUtilities.minMaxWithSpread(min, max, minSpread);
+          min = extremes.min;
+          max = extremes.max;
+
           // Update min/max.
           $scope.chart.forceY([min, max]);
 
