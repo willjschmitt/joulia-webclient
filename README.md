@@ -1,4 +1,4 @@
-# joulia-webserver
+# joulia-webclient
 [![Build Status](https://travis-ci.org/willjschmitt/joulia-webclient.svg?branch=develop)](https://travis-ci.org/willjschmitt/joulia-webclient) [![Coverage Status](https://coveralls.io/repos/github/willjschmitt/joulia-webclient/badge.svg?branch=develop)](https://coveralls.io/github/willjschmitt/joulia-webclient?branch=develop)
 
 Webclient for connecting distributed users to electric brewing controller
