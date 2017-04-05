@@ -46,7 +46,7 @@ module.exports = function(config) {
       'vendor/peity/jquery.peity.min.js',
 
       // Third-party proprietary licensed libaries.
-      'vendor/bemat-admin/js/bemat-admin-common.js',
+      //'vendor/bemat-admin/js/bemat-admin-common.js',
 
 
       // Need to manually load the modules for now to make sure they are
