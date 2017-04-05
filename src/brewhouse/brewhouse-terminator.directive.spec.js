@@ -31,7 +31,7 @@ describe('app.brewhouse', function () {
       scope.$digest();
       isolatedScope = element.isolateScope();
 
-      endSesssionPost = $httpBackend.when('POST', '/brewery/brewhouse/end')
+      endSessionPost = $httpBackend.when('POST', '/brewery/brewhouse/end')
           .respond();
     });
 
