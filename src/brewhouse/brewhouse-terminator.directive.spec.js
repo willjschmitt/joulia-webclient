@@ -3,7 +3,7 @@ describe('app.brewhouse', function () {
   beforeEach(module('app.brewhouse'));
   beforeEach(module('joulia.templates'));
 
-  var $rootScope, $compile, $interval;
+  var $rootScope, $compile, $interval, $httpBackend;
 
   beforeEach(inject(function($injector) {
     $rootScope = $injector.get('$rootScope');
@@ -31,7 +31,7 @@ describe('app.brewhouse', function () {
       scope.$digest();
       isolatedScope = element.isolateScope();
 
-      endSesssionPost = $httpBackend.when('POST', '/brewery/brewhouse/end')
+      endSessionPost = $httpBackend.when('POST', '/brewery/brewhouse/end')
           .respond();
     });
 

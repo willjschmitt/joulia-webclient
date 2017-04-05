@@ -10,7 +10,7 @@ module.exports = function(config) {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['jasmine'],
+    frameworks: ['jasmine', 'es6-shim'],
 
 
     // list of files / patterns to load in the browser
@@ -46,7 +46,7 @@ module.exports = function(config) {
       'vendor/peity/jquery.peity.min.js',
 
       // Third-party proprietary licensed libaries.
-      'vendor/bemat-admin/js/bemat-admin-common.js',
+      //'vendor/bemat-admin/js/bemat-admin-common.js',
 
 
       // Need to manually load the modules for now to make sure they are
@@ -75,14 +75,27 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      'src/**/*.js': ['coverage'],
-      'src/**/*.html': ["ng-html2js"]
+      'src/**/*.js': ['coverage', 'babel'],
+      'src/**/*.html': ['ng-html2js']
     },
     
     ngHtml2JsPreprocessor: {
       moduleName: 'joulia.templates',
       stripPrefix: 'src',
       prependPrefix: 'static',
+    },
+
+    babelPreprocessor: {
+      options: {
+        presets: ['es2015'],
+        sourceMap: 'inline'
+      },
+      filename: function (file) {
+        return file.originalPath.replace(/\.js$/, '.es5.js');
+      },
+      sourceFileName: function (file) {
+        return file.originalPath;
+      }
     },
 
     // test results reporter to use

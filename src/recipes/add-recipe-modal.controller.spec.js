@@ -19,7 +19,7 @@ describe('app.recipes add-recipe-modal.controller', function () {
 
   describe('AddRecipeModalController', function () {
     var controller;
-    var beerStyleQuery;
+    var beerStyleQuery, recipeSave;
     var $uibModalInstance;
 
     beforeEach(function () {

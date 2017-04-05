@@ -3,7 +3,7 @@ describe('app.common', function () {
   beforeEach(module('app.common'));
   beforeEach(module('joulia.templates'));
 
-  var $controller, $httpBackend, $location;
+  var $controller, $httpBackend, $rootScope, $compile;
 
   beforeEach(module(function($provide) {
     $provide.value('TimeSeriesUpdater', function () { 

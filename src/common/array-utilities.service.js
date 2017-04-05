@@ -128,7 +128,8 @@
      */
     function minMaxWithSpread(min, max, spread) {
       if (!isFinite(min) || !isFinite(max)) {
-        min = max = 0.0;
+        min = 0.0;
+        max = 0.0;
       }
 
       if ((max - min) < spread) {
@@ -140,7 +141,7 @@
       return {
         min: min,
         max: max,
-      }
+      };
     }
   }
 }());
