@@ -1,6 +1,6 @@
 /**
  * Mock library to represent BematAdmin, which is a commercially licensed
- * library. This mocks it's behavior only by providing dead functions.
+ * library. This mocks it's behavior only by providing constructors.
  */
 
 (function loadBematAdminCommonMock() {
