@@ -3,7 +3,7 @@ describe('app.brewhouse', function () {
   beforeEach(module('app.brewhouse'));
   beforeEach(module('joulia.templates'));
 
-  var $controller, $httpBackend, $location;
+  var $controller, $httpBackend, $rootScope;
 
   beforeEach(inject(function($injector) {
     $controller = $injector.get('$controller');
