@@ -4,6 +4,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-karma');
+  grunt.loadNpmTasks('grunt-karma-coveralls');
 
   grunt.registerTask('default',
       ['eslint', 'build', 'karma:unit']);
@@ -11,7 +12,7 @@ module.exports = function(grunt) {
   grunt.registerTask('release',
       ['clean', 'uglify', 'eslint', 'karma:unit']);
 
-  grunt.registerTask('test', ['karma:travis'])
+  grunt.registerTask('test', ['karma:travis', 'coveralls'])
 
   grunt.initConfig({
     distDir: 'dist',
@@ -42,6 +43,15 @@ module.exports = function(grunt) {
     },
     eslint: {
       target: ['<%= src.js %>'],
+    },
+    coveralls: {
+      options: {
+        debug: true,
+        coverageDir: 'coverage',
+        dryRun: true,
+        force: true,
+        recursive: true
+      }
     }
   });
 
