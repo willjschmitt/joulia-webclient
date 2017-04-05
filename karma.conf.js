@@ -75,14 +75,27 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      'src/**/*.js': ['coverage'],
-      'src/**/*.html': ["ng-html2js"]
+      'src/**/*.js': ['coverage', 'babel'],
+      'src/**/*.html': ['ng-html2js']
     },
     
     ngHtml2JsPreprocessor: {
       moduleName: 'joulia.templates',
       stripPrefix: 'src',
       prependPrefix: 'static',
+    },
+
+    babelPreprocessor: {
+      options: {
+        presets: ['es2015'],
+        sourceMap: 'inline'
+      },
+      filename: function (file) {
+        return file.originalPath.replace(/\.js$/, '.es5.js');
+      },
+      sourceFileName: function (file) {
+        return file.originalPath;
+      }
     },
 
     // test results reporter to use
@@ -108,7 +121,7 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Chrome', 'PhantomJS2'],
+    browsers: ['Chrome'],
 
 
     // Continuous Integration mode
