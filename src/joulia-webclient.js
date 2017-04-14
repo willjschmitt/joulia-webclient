@@ -12,22 +12,22 @@
     $locationProvider.hashPrefix('!');
     $routeProvider
       .when('/', {
-        templateUrl: 'static/brewery/html/dashboard.html',
+        templateUrl: 'brewery/html/dashboard.tpl.html',
         controller: 'DashboardController',
         controllerAs: 'dashboard',
       })
       .when('/brewhouse/:brewhouseId', {
-        templateUrl: 'static/brewery/html/brewhouse.html',
+        templateUrl: 'brewery/html/brewhouse.tpl.html',
         controller: 'BrewhouseController',
         controllerAs: 'brewhouse',
       })
       .when('/recipes/', {
-        templateUrl: 'static/brewery/html/recipes.html',
+        templateUrl: 'brewery/html/recipes.tpl.html',
         controller: 'RecipesController',
         controllerAs: 'recipes',
       })
       .when('/recipe/:recipeId', {
-        templateUrl: 'static/brewery/html/recipe.html',
+        templateUrl: 'brewery/html/recipe.tpl.html',
         controller: 'RecipesController',
         controllerAs: 'recipes',
       })

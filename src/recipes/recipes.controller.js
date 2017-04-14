@@ -35,7 +35,7 @@
     function launchRecipe(recipe) {
       const modalInstance = $uibModal.open({
         animation: true,
-        templateUrl: 'static/recipes/launch-recipe-modal.html',
+        templateUrl: 'static/recipes/launch-recipe-modal.tpl.html',
         controller: 'LaunchRecipeModalController',
       });
 
@@ -78,7 +78,7 @@
     function addRecipe() {
       const modalInstance = $uibModal.open({
         animation: true,
-        templateUrl: 'static/recipes/add-recipe-modal.html',
+        templateUrl: 'static/recipes/add-recipe-modal.tpl.html',
         controller: 'AddRecipeModalController',
       });
 

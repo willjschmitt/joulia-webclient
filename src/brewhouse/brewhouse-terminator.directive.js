@@ -12,14 +12,14 @@
       scope: {
         recipeInstance: '=',
       },
-      templateUrl: 'static/brewhouse/brewhouse-terminator.html',
+      templateUrl: 'static/brewhouse/brewhouse-terminator.tpl.html',
       link: function brewhouseTerminatorController($scope) {
         $scope.endSession = endSession;
 
         function endSession() {
           const modalInstance = $uibModal.open({
             animation: true,
-            templateUrl: 'static/recipes/end-recipe-modal.html',
+            templateUrl: 'static/recipes/end-recipe-modal.tpl.html',
             controller: 'EndRecipeModalController',
           });
 

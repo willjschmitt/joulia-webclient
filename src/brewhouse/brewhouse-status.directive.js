@@ -12,7 +12,7 @@
       scope: {
         recipeInstance: '=',
       },
-      templateUrl: 'static/brewhouse/brewhouse-status.html',
+      templateUrl: 'static/brewhouse/brewhouse-status.tpl.html',
       link: function brewhouseStatusController($scope) {
         $scope.currentStatus = new TimeSeriesUpdater(
             $scope.recipeInstance, 'state');
