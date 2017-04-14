@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+
+{% block content %}
+
+<form method="post" action="{% url 'login' %}">
+{% csrf_token %}
+  <div id="authentication-box" class="authentication-style1">
+    <div class="authentication-box-wrapper">
+      <div class="panel panel-default">
+        <div class="panel-body no-padding">
+
+          <div class="authentication-header">
+            <div class="logo-box logo-box-primary-light padding-top-4">
+              <div class="logo">
+                <b>J</b>
+              </div>
+            </div>
+            <span>Sign in to joulia</span>
+          </div>
+
+          <div class="authentication-body">
+              <a
+                  class="btn btn-raised btn-block"
+                  href="{% url 'login-google-oauth2' %}">
+                <span style="padding-right: 24px;">
+                  <img
+                      style="padding-right: 0;"
+                      width="18px" height="18px"
+                      src="{% static 'img/google_icon.svg' %}">
+                </span>
+                Sign in with Google
+              </a>
+            </form>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</form>
+
+{% endblock %}
