@@ -6,12 +6,16 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-karma-coveralls');
   grunt.loadNpmTasks('grunt-html2js');
+  grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-copy');
 
   grunt.registerTask('default',
       ['eslint', 'build', 'karma:unit']);
   grunt.registerTask('build', ['clean']);
-  grunt.registerTask('release',
-      ['clean', 'eslint', 'html2js', 'karma:release']);
+  grunt.registerTask('release', [
+    'clean', 'eslint', 'html2js', 'karma:release', 'concat', 'copy:vendor',
+    'copy:assets',
+  ]);
 
   grunt.registerTask('test', ['karma:travis', 'coveralls'])
 
@@ -20,6 +24,7 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
     src: {
       js: ['src/**/*.js'],
+      html2JsTemplates: ['<%= distDir %>/templates/**/*.js'],
       tpl: {
         brewhouse: ['src/brewhouse/**/*.tpl.html'],
         common: ['src/common/**/*.tpl.html'],
@@ -88,6 +93,40 @@ module.exports = function(grunt) {
         dest: '<%= distDir %>/templates/recipes.js',
         module: 'templates.recipes',
       }
+    },
+    concat: {
+      dist :{
+        src: ['<%= src.js %>', '<%= src.html2JsTemplates %>'],
+        dest: '<%= distDir %>/<%= pkg.name %>.js',
+      },
+      index: {
+        src: ['src/index.html'],
+        dest: '<%= distDir %>/index.html',
+        options: {
+          process: true,
+        },
+      },
+    },
+    copy: {
+      assets: {
+        files: [
+          {
+            dest: '<%= distDir %>',
+            src: ['img/**'],
+            cwd: 'src/',
+            expand: true,
+          },
+        ],
+      },
+      vendor: {
+        files: [
+          {
+            dest: '<%= distDir %>',
+            src: ['vendor/**', 'bower_components/**'],
+            expand: true,
+          },
+        ],
+      },
     },
     coveralls: {
       options: {
