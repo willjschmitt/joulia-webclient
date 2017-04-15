@@ -103,7 +103,7 @@ module.exports = function(grunt) {
         },
         src: ['<%= src.tpl %>'],
         dest: '<%= distDir %>/templates/joulia.js',
-        module: 'joulia.templates',
+        module: 'app.templates',
       },
     },
     concat: {

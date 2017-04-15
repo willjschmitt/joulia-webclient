@@ -1,6 +1,9 @@
 (function loadJouliaWebserver() {
   angular
-    .module('joulia', ['ngRoute', 'ngResource', 'ui.bootstrap', 'joulia.templates'])
+    .module('app', [
+      'ngRoute', 'ngResource', 'ui.bootstrap',
+      'app.templates', 'app.dashboard', 'app.brewhouse', 'app.recipes',
+    ])
     .config(routeConfig)
     .config(httpConfig)
     .config(resourceConfig);
