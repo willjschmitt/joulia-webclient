@@ -10,7 +10,7 @@
       restrict: 'E',
       transclude: true,
       scope: {},
-      templateUrl: 'static/brewhouse/brewhouse-task-list.tpl.html',
+      templateUrl: 'brewhouse/brewhouse-task-list.tpl.html',
       link: function brewhouseTaskListController($scope) {
         $scope.tasks = [
           { name: 'Sanitizing Soak' },

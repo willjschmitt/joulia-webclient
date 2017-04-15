@@ -1,6 +1,6 @@
 (function loadJouliaWebserver() {
   angular
-    .module('app', ['ngRoute', 'ngResource', 'ui.bootstrap'])
+    .module('joulia', ['ngRoute', 'ngResource', 'ui.bootstrap', 'joulia.templates'])
     .config(routeConfig)
     .config(httpConfig)
     .config(resourceConfig);
@@ -12,22 +12,22 @@
     $locationProvider.hashPrefix('!');
     $routeProvider
       .when('/', {
-        templateUrl: 'brewery/html/dashboard.tpl.html',
+        templateUrl: 'dashboard/dashboard.tpl.html',
         controller: 'DashboardController',
         controllerAs: 'dashboard',
       })
       .when('/brewhouse/:brewhouseId', {
-        templateUrl: 'brewery/html/brewhouse.tpl.html',
+        templateUrl: 'dashboard/brewhouse.tpl.html',
         controller: 'BrewhouseController',
         controllerAs: 'brewhouse',
       })
       .when('/recipes/', {
-        templateUrl: 'brewery/html/recipes.tpl.html',
+        templateUrl: 'recipes/recipes.tpl.html',
         controller: 'RecipesController',
         controllerAs: 'recipes',
       })
       .when('/recipe/:recipeId', {
-        templateUrl: 'brewery/html/recipe.tpl.html',
+        templateUrl: 'recipes/recipes.tpl.html',
         controller: 'RecipesController',
         controllerAs: 'recipes',
       })

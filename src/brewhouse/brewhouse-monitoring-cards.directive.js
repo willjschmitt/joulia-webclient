@@ -12,7 +12,7 @@
       scope: {
         recipeInstance: '=',
       },
-      templateUrl: 'static/brewhouse/brewhouse-monitoring-cards.tpl.html',
+      templateUrl: 'brewhouse/brewhouse-monitoring-cards.tpl.html',
       link: function brewhouseMonitoringCardsController() {},
     };
   }

@@ -10,7 +10,7 @@
       restrict: 'E',
       transclude: true,
       scope: {},
-      templateUrl: 'static/brewhouse/brewhouse-inactive.tpl.html',
+      templateUrl: 'brewhouse/brewhouse-inactive.tpl.html',
       link: function brewhouseInactiveController() {},
     };
   }
