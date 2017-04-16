@@ -9,11 +9,38 @@
 
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
 
-    <link href="vendor.css" rel="stylesheet">
+    <link href="static/vendor/bemat-admin/css/bootstrap.css" rel="stylesheet">
+    <link href="static/vendor/bemat-admin/css/themes/theme-default/bemat-admin.css" rel="stylesheet">
+    <link href="static/vendor/bemat-admin/vendor/google-code-prettify/prettify-tomorrow.css" rel="stylesheet">
+    <link href="static/vendor/bemat-admin/vendor/nvd3/nv.d3.css" rel="stylesheet">
 
-    <script type="text/javascript" src="vendor.js"></script>
+    <script type="text/javascript" src="static/bower_components/jquery/dist/jquery.js"></script>
+    <script type="text/javascript" src="static/bower_components/jquery-ui/jquery-ui.js"></script>
+    <script type="text/javascript" src="static/bower_components/angular/angular.js"></script>
+    <script type="text/javascript" src="static/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script type="text/javascript" src="static/bower_components/angular-resource/angular-resource.js"></script>
+    <script type="text/javascript" src="static/bower_components/angular-route/angular-route.js"></script>
+    <script type="text/javascript" src="static/bower_components/angular-websocket/dist/angular-websocket.js"></script>
+    <script type="text/javascript" src="static/bower_components/perfect-scrollbar/js/perfect-scrollbar.jquery.js"></script>
+    <script type="text/javascript" src="static/bower_components/iCheck/icheck.js"></script>
+    <script type="text/javascript" src="static/bower_components/bootstrap-select/dist/js/bootstrap-select.js"></script>
+    <script type="text/javascript" src="static/bower_components/d3/d3.js"></script>
+    <script type="text/javascript" src="static/bower_components/nvd3/build/nv.d3.js"></script>
+    <script type="text/javascript" src="static/bower_components/underscore/underscore.js"></script>
+    <script type="text/javascript" src="static/bower_components/Modernizr/modernizr.custom.js"></script>
+    <script type="text/javascript" src="static/bower_components/moment/moment.js"></script>
 
-    <script type="text/javascript" src="<%= pkg.name %>.js"></script>
+    <script type="text/javascript" src="static/vendor/materialRipple/jquery.materialRipple.js"></script>
+    <script type="text/javascript" src="static/vendor/snackbar/jquery.snackbar.js"></script>
+    <script type="text/javascript" src="static/vendor/toasts/jquery.toasts.js"></script>
+    <script type="text/javascript" src="static/vendor/subheader/jquery.subheader.js"></script>
+    <script type="text/javascript" src="static/vendor/linearProgress/jquery.linearProgress.js"></script>
+    <script type="text/javascript" src="static/vendor/circularProgress/jquery.circularProgress.js"></script>
+    <script type="text/javascript" src="static/vendor/speedDial/jquery.speedDial.js"></script>
+    <script type="text/javascript" src="static/vendor/simplePieChart/jquery.simplePieChart.js"></script>
+    <script type="text/javascript" src="static/vendor/peity/jquery.peity.min.js"></script>
+
+    <script type="text/javascript" src="static/<%= pkg.name %>.js"></script>
   </head>
 
   <body class="dark-sidebar dark-header-brand container-fluid">
@@ -34,7 +61,7 @@
           <div id="userbox">
             <div id="useravatar">
               <div class="avatar-thumbnail">
-                <img src="vendor/bemat-admin/img/avatar.png" class="img-circle"/>
+                <img src="static/vendor/bemat-admin/img/avatar.png" class="img-circle"/>
               </div>
             </div>
 
@@ -110,7 +137,7 @@
                 <li id="user-profile" class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     <div class="avatar">
-                      <img src="vendor/bemat-admin/img/avatar.png" class="img-circle img-responsive">
+                      <img src="static/vendor/bemat-admin/img/avatar.png" class="img-circle img-responsive">
                     </div>
                     <div class="user">
                       <span class="username">{{user.get_full_name}}</span>
