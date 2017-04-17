@@ -8,14 +8,14 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-html2js');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-contrib-watch');
 
-  grunt.registerTask('default',
-      ['eslint', 'build', 'karma:unit']);
-  grunt.registerTask('build', ['clean']);
-  grunt.registerTask('release', [
-    'clean', 'eslint', 'html2js', 'karma:release', 'concat', 'copy:assets',
-    'copy:vendor',
-  ]);
+  grunt.registerTask('default', ['cleanbuild', 'watch']);
+  grunt.registerTask('release', ['build']);
+  grunt.registerTask('cleanbuild', [
+    'clean', 'build', 'copy:assets', 'copy:vendor']);
+  grunt.registerTask('build', [
+    'eslint', 'html2js', 'karma:release', 'concat']);
 
   grunt.registerTask('test', ['karma:travis', 'coveralls'])
 
@@ -102,6 +102,15 @@ module.exports = function(grunt) {
             expand: true,
           },
         ],
+      },
+    },
+    watch: {
+      scripts: {
+        files: ['<%= src.js %>', '<%= src.tpl %>'],
+        tasks: ['build'],
+        options: {
+          spawn: false,
+        },
       },
     },
     coveralls: {
