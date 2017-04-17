@@ -6,7 +6,8 @@
     ])
     .config(routeConfig)
     .config(httpConfig)
-    .config(resourceConfig);
+    .config(resourceConfig)
+    .run(getUser);
 
 
   routeConfig.$inject = ['$locationProvider', '$routeProvider'];
@@ -48,5 +49,12 @@
 
   function resourceConfig($resourceProvider) {
     $resourceProvider.defaults.stripTrailingSlashes = false;
+  }
+
+  getUser.$inject = ['$rootScope'];
+
+  function getUser($rootScope) {
+    // TODO(willjschmitt): Set user.
+    $rootScope.user = {};
   }
 }());
