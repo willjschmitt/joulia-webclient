@@ -51,9 +51,10 @@
     $resourceProvider.defaults.stripTrailingSlashes = false;
   }
 
-  getUser.$inject = ['$rootScope'];
+  getUser.$inject = ['$rootScope', '$resource'];
 
-  function getUser() {
-    // TODO(willjschmitt): Set user.
+  function getUser($rootScope, $resource) {
+    const userResource = $resource('auth/api/user');
+    $rootScope.user = userResource.get();
   }
 }());
