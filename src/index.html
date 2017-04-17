@@ -46,13 +46,19 @@
   <body class="dark-sidebar dark-header-brand container-fluid">
     <div id="page-wrapper">
 
-      <sidebar user="user"></sidebar>
+      <div ng-if="user">
+        <sidebar user="user"></sidebar>
 
-      <section id="right-content">
-        <joulia-header user="user"></joulia-header>
+        <section id="right-content">
+          <joulia-header user="user"></joulia-header>
 
-        <div ng-view></div>
-      </section><!-- /#right-content-wrapper -->
+          <div ng-view></div>
+        </section>
+      </div>
+
+      <div ng-if="!user" style="height: 100%; width: 100%;">
+        <joulia-login></joulia-login>
+      </div>
     </div>
   </body>
 </html>

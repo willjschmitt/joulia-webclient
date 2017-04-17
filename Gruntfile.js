@@ -87,7 +87,7 @@ module.exports = function(grunt) {
       assets: {
         files: [
           {
-            dest: '<%= distDir %>',
+            dest: '<%= distDir %>/static',
             src: ['img/**'],
             cwd: 'src/',
             expand: true,

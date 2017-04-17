@@ -53,8 +53,7 @@
 
   getUser.$inject = ['$rootScope'];
 
-  function getUser($rootScope) {
+  function getUser() {
     // TODO(willjschmitt): Set user.
-    $rootScope.user = {};
   }
 }());
