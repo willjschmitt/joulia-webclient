@@ -15,48 +15,7 @@
     </div>
   </header>
   <div id="sidebar-wrapper">
-    <div id="userbox">
-      <div id="useravatar">
-        <div class="avatar-thumbnail">
-          <img
-              src="static/vendor/bemat-admin/img/avatar.png"
-              class="img-circle"/>
-        </div>
-      </div>
-
-      <div id="userinfo">
-        <div class="btn-group">
-          <button
-              type="button"
-              class="btn btn-default-bright btn-flat dropdown-toggle"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false">
-            {{ fullName(user) }}&nbsp;
-            <i class="material-icons">arrow_drop_down</i>
-          </button>
-          <ul class="dropdown-menu">
-            <li>
-              <a href="#"><i class="material-icons">person</i>Your Profile</a>
-            </li>
-            <li>
-              <a href="#"><i class="material-icons">settings</i>Settings</a>
-            </li>
-            <li class="divider"></li>
-            <li>
-              <a href="#"><i class="material-icons">lock</i> Lock</a>
-            </li>
-            <li class="divider"></li>
-            <li>
-              <a href="{% url 'logout' %}">
-                <i class="material-icons">exit_to_app</i> Log Out
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div> <!-- END: #userbox -->
-
+    <sidebar-userbox user="user"></sidebar-userbox>
 
     <nav id="sidebar">
       <ul>
@@ -68,31 +27,13 @@
             <span class="menu-item-name">Dashboard</span>
           </a>
         </li>
+      </ul>
 
-        <li ng-repeat="brewery in brewerys">
-          <a href="">
-            <span class="menu-item-ico">
-              <i class="material-icons">location_city</i>
-            </span>
-            <span class="menu-item-name">
-              {{ brewery.name }}&nbsp;
-              <span class="badge badge-success">
-                {{ brewery.brewhouse.length }}
-              </span>
-            </span>
-          </a>
-          <ul>
-            <li ng-repeat="brewhouse in brewhouseMap[brewery.id]">
-              <a href="#!/brewhouse/{{brewhouse.id}}">
-                {{ brewhouse.name }}&nbsp;
-                <span class="label label-warning" ng-if="brewhouse.active">
-                  Active
-                </span>
-              </a>
-            </li>
-          </ul>
-        </li>
+      <!-- TODO(willjschmitt): Consider alternative if this causes alignment
+           issues from not containing all child li's in the parent ul. -->
+      <ul sidebar-brewery></ul>
 
+      <ul>
         <li>
           <a href="#!/recipes/">
             <span class="menu-item-ico">
@@ -101,6 +42,7 @@
             <span class="menu-item-name">Recipes</span>
           </a>
         </li>
+
 
         <li>
           <a href="configuration">
@@ -112,6 +54,7 @@
         </li>
 
       </ul>
-    </nav><!-- END: nav#sidebar -->
+    </nav>
+
   </div>
 </aside>
