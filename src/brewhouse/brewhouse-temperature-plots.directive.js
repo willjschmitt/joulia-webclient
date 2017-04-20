@@ -14,7 +14,7 @@
       scope: {
         recipeInstance: '=',
       },
-      templateUrl: 'static/brewhouse/brewhouse-temperature-plots.html',
+      templateUrl: 'brewhouse/brewhouse-temperature-plots.tpl.html',
       link: function brewhouseTemperaturePlotsController($scope) {
         $scope.boilTemperatureActual = new TimeSeriesUpdater(
             $scope.recipeInstance, 'boil_kettle__temperature');

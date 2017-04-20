@@ -1,0 +1,60 @@
+<aside
+    id="left-content"
+    data-toggle="open"
+    data-default="open"
+    data-size=""
+    style="height: 100%;">
+  <header class="header-container">
+    <div class="header-wrapper">
+      <div id="header-brand">
+        <div class="logo padding-left-2">
+          <span class="logo-image">J</span>
+          <span class="logo-text">Joulia</span>
+        </div>
+      </div>
+    </div>
+  </header>
+  <div id="sidebar-wrapper">
+    <sidebar-userbox user="user"></sidebar-userbox>
+
+    <nav id="sidebar">
+      <ul>
+        <li>
+          <a href="#!/">
+            <span class="menu-item-ico">
+              <i class="material-icons">dashboard</i>
+            </span>
+            <span class="menu-item-name">Dashboard</span>
+          </a>
+        </li>
+      </ul>
+
+      <!-- TODO(willjschmitt): Consider alternative if this causes alignment
+           issues from not containing all child li's in the parent ul. -->
+      <ul sidebar-brewery></ul>
+
+      <ul>
+        <li>
+          <a href="#!/recipes/">
+            <span class="menu-item-ico">
+              <i class="material-icons">collections_bookmark</i>
+            </span>
+            <span class="menu-item-name">Recipes</span>
+          </a>
+        </li>
+
+
+        <li>
+          <a href="configuration">
+            <span class="menu-item-ico">
+              <i class="material-icons">settings</i>
+            </span>
+            <span class="menu-item-name">Configuration</span>
+          </a>
+        </li>
+
+      </ul>
+    </nav>
+
+  </div>
+</aside>

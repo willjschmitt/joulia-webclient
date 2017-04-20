@@ -81,8 +81,7 @@ module.exports = function(config) {
     
     ngHtml2JsPreprocessor: {
       moduleName: 'joulia.templates',
-      stripPrefix: 'src',
-      prependPrefix: 'static',
+      stripPrefix: 'src/',
     },
 
     babelPreprocessor: {

@@ -12,7 +12,7 @@
       scope: {
         recipeInstance: '=',
       },
-      templateUrl: 'static/brewhouse/brewhouse-overrides.html',
+      templateUrl: 'brewhouse/brewhouse-overrides.tpl.html',
       link: function brewhouseOverridesController() {},
     };
   }

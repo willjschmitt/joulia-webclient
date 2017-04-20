@@ -14,7 +14,7 @@
         recipeInstance: '=',
         sensorName: '=',
       },
-      templateUrl: 'static/common/toggleable-element.html',
+      templateUrl: 'common/toggleable-element.tpl.html',
       link: function toggleableElementController($scope) {
         // Subscribe to value and override.
         $scope.elementStatus = new TimeSeriesUpdater(

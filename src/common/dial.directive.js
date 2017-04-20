@@ -13,7 +13,7 @@
         title: '=',
         value: '=',
       },
-      templateUrl: 'static/common/dial.html',
+      templateUrl: 'common/dial.tpl.html',
       link: function dialController($scope, $element) {
         // Update the pie chart dial color class based on the value.
         // TODO(will): Get duration to work.

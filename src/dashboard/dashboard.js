@@ -67,7 +67,7 @@
     function addBrewery() {
       const modalInstance = $uibModal.open({
         animation: true,
-        templateUrl: 'static/dashboard/add-brewery-modal.html',
+        templateUrl: 'dashboard/add-brewery-modal.tpl.html',
         controller: 'AddBreweryModalController',
       });
 
@@ -83,7 +83,7 @@
     function addBrewhouse(brewery) {
       const modalInstance = $uibModal.open({
         animation: true,
-        templateUrl: 'static/dashboard/add-brewhouse-modal.html',
+        templateUrl: 'dashboard/add-brewhouse-modal.tpl.html',
         controller: 'AddBrewhouseModalController',
         resolve: {
           brewery: brewery,

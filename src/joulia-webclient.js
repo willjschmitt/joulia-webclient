@@ -1,9 +1,13 @@
 (function loadJouliaWebserver() {
   angular
-    .module('app', ['ngRoute', 'ngResource', 'ui.bootstrap'])
+    .module('app', [
+      'ngRoute', 'ngResource', 'ui.bootstrap',
+      'app.templates', 'app.dashboard', 'app.brewhouse', 'app.recipes',
+    ])
     .config(routeConfig)
     .config(httpConfig)
-    .config(resourceConfig);
+    .config(resourceConfig)
+    .run(getUser);
 
 
   routeConfig.$inject = ['$locationProvider', '$routeProvider'];
@@ -12,22 +16,22 @@
     $locationProvider.hashPrefix('!');
     $routeProvider
       .when('/', {
-        templateUrl: 'static/brewery/html/dashboard.html',
+        templateUrl: 'dashboard/dashboard.tpl.html',
         controller: 'DashboardController',
         controllerAs: 'dashboard',
       })
       .when('/brewhouse/:brewhouseId', {
-        templateUrl: 'static/brewery/html/brewhouse.html',
+        templateUrl: 'dashboard/brewhouse.tpl.html',
         controller: 'BrewhouseController',
         controllerAs: 'brewhouse',
       })
       .when('/recipes/', {
-        templateUrl: 'static/brewery/html/recipes.html',
+        templateUrl: 'recipes/recipes.tpl.html',
         controller: 'RecipesController',
         controllerAs: 'recipes',
       })
       .when('/recipe/:recipeId', {
-        templateUrl: 'static/brewery/html/recipe.html',
+        templateUrl: 'recipes/recipes.tpl.html',
         controller: 'RecipesController',
         controllerAs: 'recipes',
       })
@@ -45,5 +49,12 @@
 
   function resourceConfig($resourceProvider) {
     $resourceProvider.defaults.stripTrailingSlashes = false;
+  }
+
+  getUser.$inject = ['$rootScope', '$resource'];
+
+  function getUser($rootScope, $resource) {
+    const userResource = $resource('auth/api/user');
+    $rootScope.user = userResource.get();
   }
 }());
