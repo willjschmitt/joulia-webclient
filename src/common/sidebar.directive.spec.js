@@ -40,6 +40,12 @@ describe('app.common', function () {
       $httpBackend.flush();
     });
 
+    describe('template', function () {
+      it('contains some template', function () {
+        expect(element.html()).toContain('aside');
+      })
+    });
+
   });
 
 });
