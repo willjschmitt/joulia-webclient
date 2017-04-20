@@ -106,7 +106,12 @@ module.exports = function(grunt) {
     },
     watch: {
       scripts: {
-        files: ['<%= src.js %>', '<%= src.tpl %>', 'src/index.html'],
+        files: [
+          '<%= src.js %>',
+          '<%= src.tests %>',
+          '<%= src.tpl %>',
+          'src/index.html',
+        ],
         tasks: ['build'],
         options: {
           spawn: false,
