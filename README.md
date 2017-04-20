@@ -18,10 +18,7 @@ Add the stylization from Bemat Admin. This project uses a purchased license of B
 
 
 ## Project Information
-This project is based on several web frameworks:
-* [django](https://www.djangoproject.com/) - Forms the main basis of the web backend. Defines the database models and manages migrations for the database schema.
-* [django-rest-framework](http://www.django-rest-framework.org/) - django plugin to serve REST APIs for many of the core views in the django site.
-* [tornado](http://www.tornadoweb.org/en/stable/) - Asynchronous framework to run the outer io loop for the webserver. Fallsback to django for unkwown URLs. Primarily allows for real-time streaming of data between clients over websockets and/or long-polling.
+This project is based on one web framework:
 * [AngularJS](https://angularjs.org/) - Dynamic frontend Javascript framework, allowing for asynchronous page operations. Communicates with backend primarily over REST and other XHR operations.
 
 ## Related Projects
