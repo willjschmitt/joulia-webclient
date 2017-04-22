@@ -3,18 +3,13 @@
     .module('app.dashboard')
     .controller('DashboardController', DashboardController);
 
-  DashboardController.$inject = ['breweryResources', '$uibModal'];
+  DashboardController.$inject = ['$scope', 'breweryResources', '$uibModal'];
 
-  function DashboardController(breweryResources, $uibModal) {
-    const vm = this;
-    vm.brewerys = [];
+  function DashboardController($scope, breweryResources, $uibModal) {
+    $scope.brewerys = [];
     // Map of brewery.id's to array of brewhouses in them.
-    vm.brewhouses = {};
-    // Empty dict for which brewhouses to show the keys for.
-    vm.showBrewhouseTokens = {};
-    vm.toggleShowBrewhouseToken = toggleShowBrewhouseToken;
-    vm.addBrewery = addBrewery;
-    vm.addBrewhouse = addBrewhouse;
+    $scope.brewhouses = {};
+    $scope.addBrewery = addBrewery;
     updateBrewerys();
     // Initializes all the tooltips dynamically loaded, etc.
     window.bematadmin.App.init();
@@ -24,7 +19,7 @@
      * Calls initializeBrewerys when done.
      */
     function updateBrewerys() {
-      vm.brewerys = breweryResources.Brewery.query(initializeBrewerys);
+      $scope.brewerys = breweryResources.Brewery.query(initializeBrewerys);
     }
 
     /**
@@ -32,8 +27,8 @@
      * brewhouses on each brewery key in brewhouses.
      */
     function initializeBrewerys() {
-      vm.brewhouses = {};
-      _.each(vm.brewerys, brewery => getBrewhouses(brewery));
+      $scope.brewhouses = {};
+      _.each($scope.brewerys, brewery => getBrewhouses(brewery));
     }
 
     /**
@@ -43,22 +38,8 @@
      *                         brewhouses.
      */
     function getBrewhouses(brewery) {
-      vm.brewhouses[brewery.id] = breweryResources.Brewhouse.query(
+      $scope.brewhouses[brewery.id] = breweryResources.Brewhouse.query(
           { brewery: brewery.id });
-    }
-
-    /**
-     * Toggles the show status for the authentication token for the brewhouse.
-     * If show status is not set, sets it to true.
-     * @param {number} brewhouseId The id for the brewhouse to toggle.
-     */
-    function toggleShowBrewhouseToken(brewhouseId) {
-      if (!vm.showBrewhouseTokens.hasOwnProperty(brewhouseId)) {
-        vm.showBrewhouseTokens[brewhouseId] = true;
-      } else {
-        vm.showBrewhouseTokens[brewhouseId] =
-            !vm.showBrewhouseTokens[brewhouseId];
-      }
     }
 
     /**
@@ -72,25 +53,6 @@
       });
 
       modalInstance.result.then(updateBrewerys);
-
-      return modalInstance;
-    }
-
-    /**
-     * Launches a modal for user input to add a new brewhouse to a brewery.
-     * @param{object} brewery The brewery to add a new brewhouse to.
-     */
-    function addBrewhouse(brewery) {
-      const modalInstance = $uibModal.open({
-        animation: true,
-        templateUrl: 'dashboard/add-brewhouse-modal.tpl.html',
-        controller: 'AddBrewhouseModalController',
-        resolve: {
-          brewery: brewery,
-        },
-      });
-
-      modalInstance.result.then(initializeBrewerys);
 
       return modalInstance;
     }

@@ -18,7 +18,7 @@
     }
 
     function close() {
-      $uibModalInstance.close(true);
+      $uibModalInstance.close(vm.newBrewery);
     }
 
     function cancel() {

@@ -17,7 +17,7 @@ describe('app.dashboard', function () {
   });
 
   describe('DashboardController', function () {
-    var controller;
+    var controller, scope;
     var breweryQuery, brewhouseQuery;
 
     var expectedBrewhouses = {
@@ -47,32 +47,13 @@ describe('app.dashboard', function () {
       $httpBackend.expectGET('brewery/api/brewery');
       $httpBackend.expectGET('brewery/api/brewhouse?brewery=0');
       $httpBackend.expectGET('brewery/api/brewhouse?brewery=1');
-      controller = $controller('DashboardController');
+      scope = $rootScope.$new();
+      controller = $controller('DashboardController', { $scope: scope });
       $httpBackend.flush();
     });
 
     it('should be created successfully', function () {
       expect(controller).toBeDefined();
-    });
-
-    describe('toggleShowBrewhouse', function () {
-      it('should set to true, if not yet set', function () {
-        expect(controller.showBrewhouseTokens[0]).not.toBeDefined();
-        controller.toggleShowBrewhouseToken(0);
-        expect(controller.showBrewhouseTokens[0]).toBeTruthy();
-      });
-
-      it('should set to true, if set to false', function () {
-        controller.showBrewhouseTokens[0] = false;
-        controller.toggleShowBrewhouseToken(0);
-        expect(controller.showBrewhouseTokens[0]).toBeTruthy();
-      });
-
-      it('should set to false, if set to true', function () {
-        controller.showBrewhouseTokens[0] = true;
-        controller.toggleShowBrewhouseToken(0);
-        expect(controller.showBrewhouseTokens[0]).toBeFalsy();
-      });
     });
 
     describe('addBrewery', function () {
@@ -87,7 +68,7 @@ describe('app.dashboard', function () {
           { group: 1, name: "Brewing Company 2" }]);
 
         $httpBackend.expectGET('brewery/api/brewingCompany');
-        modalInstance = controller.addBrewery();
+        modalInstance = scope.addBrewery();
         $httpBackend.flush();
       });
 
@@ -104,28 +85,5 @@ describe('app.dashboard', function () {
         $httpBackend.flush();
       });
     });
-
-    describe('addBrewhouse', function () {
-      var modalInstance;
-
-      beforeEach(function () {
-        modalInstance = controller.addBrewhouse({ id: 0 });
-        // TODO(will): Understand why this $rootScope.$apply is needed.
-        $rootScope.$apply();
-      });
-
-      it('should create a modal', function () {
-        expect(modalInstance).toBeDefined();
-      });
-
-      it('should call initializeBrewerys when closed', function () {
-        $httpBackend.expectGET('brewery/api/brewhouse?brewery=0');
-        $httpBackend.expectGET('brewery/api/brewhouse?brewery=1');
-        modalInstance.close();
-        $rootScope.$apply();
-        $httpBackend.flush();
-      });
-    });
-
   });
 });

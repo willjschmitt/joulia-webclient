@@ -19,7 +19,7 @@
     }
 
     function close() {
-      $uibModalInstance.close(true);
+      $uibModalInstance.close(vm.newBrewhouse);
     }
 
     function cancel() {
