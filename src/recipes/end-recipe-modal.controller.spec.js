@@ -18,7 +18,7 @@ describe('app.recipes end-recipe-modal.controller', function () {
   });
 
   describe('EndRecipeModalController', function () {
-    var controller;
+    var controller, scope;
     var beerStyleQuery;
     var $uibModalInstance;
 
@@ -26,7 +26,9 @@ describe('app.recipes end-recipe-modal.controller', function () {
       $uibModalInstance = jasmine.createSpyObj(
         '$uibModalInstance', ['close', 'dismiss']);
 
+      scope = $rootScope.$new();
       controller = $controller('EndRecipeModalController', {
+        $scope: scope,
         $uibModalInstance: $uibModalInstance
       });
     });
@@ -37,14 +39,14 @@ describe('app.recipes end-recipe-modal.controller', function () {
 
     describe('ok', function () {
       it('should close modal', function () {
-        controller.ok();
+        scope.ok();
         expect($uibModalInstance.close).toHaveBeenCalled();
       });
     });
 
     describe('cancel', function () {
       it('should dismiss modal', function () {
-        controller.cancel();
+        scope.cancel();
         expect($uibModalInstance.dismiss).toHaveBeenCalled();
       });
     });

@@ -4,18 +4,18 @@
     .controller('LaunchRecipeModalController', LaunchRecipeModalController);
 
   LaunchRecipeModalController.$inject = [
-    '$uibModalInstance', 'breweryResources'];
+    '$scope', '$uibModalInstance', 'breweryResources'];
 
-  function LaunchRecipeModalController($uibModalInstance, breweryResources) {
-    const vm = this;
-    vm.brewhouses = breweryResources.Brewhouse.query();
-    vm.selectedBrewhouse = null;
+  function LaunchRecipeModalController(
+      $scope, $uibModalInstance, breweryResources) {
+    $scope.brewhouses = breweryResources.Brewhouse.query();
+    $scope.selectedBrewhouse = null;
 
-    vm.ok = ok;
-    vm.cancel = cancel;
+    $scope.ok = ok;
+    $scope.cancel = cancel;
 
     function ok() {
-      $uibModalInstance.close({ brewhouse: vm.selectedBrewhouse });
+      $uibModalInstance.close({ brewhouse: $scope.selectedBrewhouse });
     }
 
     function cancel() {
