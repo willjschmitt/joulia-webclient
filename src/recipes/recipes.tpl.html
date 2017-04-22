@@ -11,28 +11,11 @@
 
   <section class="page-content">
     <div class="row-fluid">
-      <div class="col-lg-6 col-xs-12" ng-repeat="recipe in recipes">
-        <div class="panel panel-default panel-divider">
-          <div class="panel-heading">
-            <header>
-              <div>
-                {{ recipe.name }}
-                <a href="" ng-click="launch_recipe(recipe)">
-                  <div class="pull-right">
-                    <i class="material-icons">launch</i> Start
-                  </div>
-                </a>
-              </div>
-              <p class="subhead-1">{{ recipe.style }}</p>
-            </header>
-          </div>
-          <div class="panel-body">
-            <p ng-repeat="recipe_property in recipe_properties">
-              {{recipe_property.header}}: {{recipe[recipe_property.name]}}
-            </p>
-          </div>
-        </div>
-      </div>
+      <recipe-card
+          class="col-lg-6 col-xs-12"
+          ng-repeat="recipe in recipes"
+          recipe="recipe">
+      </recipe-card>
       <div class="col-lg-6 col-xs-12">
         <a href="" ng-click="addRecipe()">
           <div class="panel panel-default panel-divider">

@@ -1,0 +1,20 @@
+<div class="panel panel-default panel-divider">
+  <div class="panel-heading">
+    <header>
+      <div>
+        {{ recipe.name }}
+        <a href="" ng-click="launch()">
+          <div class="pull-right">
+            <i class="material-icons">launch</i> Start
+          </div>
+        </a>
+      </div>
+      <p class="subhead-1">{{ recipe.style }}</p>
+    </header>
+  </div>
+  <div class="panel-body">
+    <p ng-repeat="property in properties">
+      {{ property.header }}: {{ recipe[property.name] }}
+    </p>
+  </div>
+</div>

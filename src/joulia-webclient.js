@@ -18,22 +18,22 @@
       .when('/', {
         templateUrl: 'dashboard/dashboard.tpl.html',
         controller: 'DashboardController',
-        controllerAs: 'dashboard',
+        controllerAs: 'dashboardCtrl',
       })
       .when('/brewhouse/:brewhouseId', {
         templateUrl: 'dashboard/brewhouse.tpl.html',
         controller: 'BrewhouseController',
-        controllerAs: 'brewhouse',
+        controllerAs: 'brewhouseCtrl',
       })
       .when('/recipes/', {
         templateUrl: 'recipes/recipes.tpl.html',
         controller: 'RecipesController',
-        controllerAs: 'recipes',
+        controllerAs: 'recipesCtrl',
       })
       .when('/recipe/:recipeId', {
         templateUrl: 'recipes/recipes.tpl.html',
         controller: 'RecipesController',
-        controllerAs: 'recipes',
+        controllerAs: 'recipesCtrl',
       })
       .otherwise('/');
   }
