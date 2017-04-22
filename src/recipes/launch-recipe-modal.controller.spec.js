@@ -18,7 +18,7 @@ describe('app.recipes launch-recipe-modal.controller', function () {
   });
 
   describe('LaunchRecipeModalController', function () {
-    var controller;
+    var controller, scope;
     var brewhouseQuery;
     var $uibModalInstance;
     var brewhouse;
@@ -32,7 +32,9 @@ describe('app.recipes launch-recipe-modal.controller', function () {
         '$uibModalInstance', ['close', 'dismiss']);
 
       $httpBackend.expectGET('brewery/api/brewhouse');
+      scope = $rootScope.$new();
       controller = $controller('LaunchRecipeModalController', {
+        $scope: scope,
         $uibModalInstance: $uibModalInstance
       });
       $httpBackend.flush();
@@ -44,14 +46,14 @@ describe('app.recipes launch-recipe-modal.controller', function () {
 
     describe('ok', function () {
       it('should close modal', function () {
-        controller.ok();
+        scope.ok();
         expect($uibModalInstance.close).toHaveBeenCalled();
       });
 
       it('should close modal and send brewhouse', function () {
-        controller.selectedBrewhouse = brewhouse;
+        scope.selectedBrewhouse = brewhouse;
 
-        controller.ok();
+        scope.ok();
         expect($uibModalInstance.close).toHaveBeenCalled();
         expect($uibModalInstance.close.calls.argsFor(0)).toEqual([{
           brewhouse: brewhouse,
@@ -61,7 +63,7 @@ describe('app.recipes launch-recipe-modal.controller', function () {
 
     describe('cancel', function () {
       it('should dismiss modal', function () {
-        controller.cancel();
+        scope.cancel();
         expect($uibModalInstance.dismiss).toHaveBeenCalled();
       });
     });
