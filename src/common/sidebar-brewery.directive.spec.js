@@ -55,9 +55,11 @@ describe('app.common', function () {
 
       it('contains brewhouse badges', function () {
         isolatedScope.brewerys = [
-          { name: 'Foo', brewhouse: [{ name: 'Baz' }] },
-          { name: 'Bar', brewhouse: [] },
+          { id: 0, name: 'Foo' },
+          { id: 1, name: 'Bar' },
         ];
+        isolatedScope.brewhouseMap[0] = [{}];
+        isolatedScope.brewhouseMap[1] = [];
         scope.$digest();
 
         function getBadge(breweryLiElement) {
@@ -71,7 +73,7 @@ describe('app.common', function () {
 
       it('contains brewhouses', function() {
         isolatedScope.brewerys = [
-          { name: 'Foo', brewhouse: [{ name: 'Bar'}], id: 0 },
+          { name: 'Foo', id: 0 },
         ];
         isolatedScope.brewhouseMap = {
           0: [{ name: 'Baz', id: 0 }],
