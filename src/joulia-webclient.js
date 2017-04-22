@@ -21,7 +21,7 @@
         controllerAs: 'dashboardCtrl',
       })
       .when('/brewhouse/:brewhouseId', {
-        templateUrl: 'dashboard/brewhouse.tpl.html',
+        templateUrl: 'brewhouse/brewhouse.tpl.html',
         controller: 'BrewhouseController',
         controllerAs: 'brewhouseCtrl',
       })
