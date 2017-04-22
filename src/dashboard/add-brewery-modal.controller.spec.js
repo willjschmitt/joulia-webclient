@@ -18,7 +18,7 @@ describe('app.dashboard add-brewery-modal.controller', function () {
   });
 
   describe('AddBreweryModalController', function () {
-    var controller;
+    var controller, scope;
     var brewingCompanyQuery, brewerySave;
     var $uibModalInstance;
 
@@ -39,7 +39,9 @@ describe('app.dashboard add-brewery-modal.controller', function () {
         '$uibModalInstance', ['close', 'dismiss']);
 
       $httpBackend.expectGET('brewery/api/brewingCompany');
+      scope = $rootScope.$new();
       controller = $controller('AddBreweryModalController', {
+        $scope: scope,
         $uibModalInstance: $uibModalInstance
       });
       $httpBackend.flush();
@@ -52,7 +54,7 @@ describe('app.dashboard add-brewery-modal.controller', function () {
     describe('ok', function () {
       it('should save new brewery on server and close modal', function () {
         $httpBackend.expectPOST('brewery/api/brewery');
-        controller.ok();
+        scope.ok();
         $httpBackend.flush();
 
         expect($uibModalInstance.close).toHaveBeenCalled();
@@ -61,7 +63,7 @@ describe('app.dashboard add-brewery-modal.controller', function () {
 
     describe('cancel', function () {
       it('should dismiss modal', function () {
-        controller.cancel();
+        scope.cancel();
         expect($uibModalInstance.dismiss).toHaveBeenCalled();
       });
     });

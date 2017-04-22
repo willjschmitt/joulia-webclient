@@ -4,22 +4,21 @@
     .controller('AddBrewhouseModalController', AddBrewhouseModalController);
 
   AddBrewhouseModalController.$inject = [
-    '$uibModalInstance', 'breweryResources', 'brewery'];
+    '$scope', '$uibModalInstance', 'breweryResources', 'brewery'];
 
   function AddBrewhouseModalController(
-      $uibModalInstance, breweryResources, brewery) {
-    const vm = this;
-    vm.brewery = brewery;
-    vm.newBrewhouse = new breweryResources.Brewhouse({ brewery: brewery.id });
-    vm.ok = ok;
-    vm.cancel = cancel;
+      $scope, $uibModalInstance, breweryResources, brewery) {
+    $scope.brewery = brewery;
+    $scope.newBrewhouse = new breweryResources.Brewhouse({ brewery: brewery.id });
+    $scope.ok = ok;
+    $scope.cancel = cancel;
 
     function ok() {
-      vm.newBrewhouse.$save(close);
+      $scope.newBrewhouse.$save(close);
     }
 
     function close() {
-      $uibModalInstance.close(true);
+      $uibModalInstance.close($scope.newBrewhouse);
     }
 
     function cancel() {
