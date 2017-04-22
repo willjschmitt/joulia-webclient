@@ -3,6 +3,7 @@
     .module('app', [
       'ngRoute', 'ngResource', 'ui.bootstrap',
       'app.templates', 'app.dashboard', 'app.brewhouse', 'app.recipes',
+      'perfect_scrollbar',
     ])
     .config(routeConfig)
     .config(httpConfig)

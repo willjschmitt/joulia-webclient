@@ -11,8 +11,6 @@
     $scope.brewhouses = {};
     $scope.addBrewery = addBrewery;
     updateBrewerys();
-    // Initializes all the tooltips dynamically loaded, etc.
-    window.bematadmin.App.init();
 
     /**
      * Queries the server and updates the brewerys variable with the results.
