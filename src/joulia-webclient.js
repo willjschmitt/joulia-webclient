@@ -53,8 +53,19 @@
 
   getUser.$inject = ['$rootScope', '$resource'];
 
+  /**
+   * Retrieves user from server to check if logged in.
+   */
   function getUser($rootScope, $resource) {
     const userResource = $resource('auth/api/user');
-    $rootScope.user = userResource.get();
+    userResource.get(user => userLoggedIn($rootScope, user));
+  }
+
+  /**
+   * Sets user and welcomes user to Joulia when they arrive logged in.
+   */
+  function userLoggedIn($rootScope, user) {
+    $rootScope.user = user;
+    $.toasts('add', { msg: 'Welcome to Joulia!' });
   }
 }());
