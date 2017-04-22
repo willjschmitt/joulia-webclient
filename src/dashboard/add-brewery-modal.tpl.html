@@ -16,7 +16,7 @@
         name="brewingCompanySelector"
         id="brewingCompanySelector"
         class="form-control"
-        ng-options="brewingCompany as brewingCompany.name
+        ng-options="brewingCompany.id as brewingCompany.name
                     for brewingCompany in brewingCompanys
                     track by brewingCompany.id"
         ng-model="newBrewery.company">
