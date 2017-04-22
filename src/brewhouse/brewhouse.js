@@ -48,7 +48,5 @@
            should never happen.`);
       }
     }
-
-    $.toasts('add', { msg: 'Welcome to Joulia!' });
   }
 }());
