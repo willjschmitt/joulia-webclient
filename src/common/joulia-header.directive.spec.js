@@ -17,7 +17,7 @@ describe('app.common', function () {
   });
 
   describe('joulia-header directive', function () {
-    var element, scope;
+    var element, scope, isolatedScope;
 
     beforeEach(function () {
       const html = `
@@ -26,6 +26,9 @@ describe('app.common', function () {
         </joulia-header>`;
       scope = $rootScope.$new();
       element = $compile(html)(scope);
+      scope.user = {};
+      scope.$digest();
+      isolatedScope = element.isolateScope();
     });
 
 
@@ -34,6 +37,18 @@ describe('app.common', function () {
       scope.$digest();
 
       expect(element.html()).toContain('John Doe');
+    });
+
+    describe('toggleSidebar', function() {
+      it('broadcasts toggleSidebar', function(){
+        var called = false;
+        $rootScope.$on('toggleSidebar', function() {
+          called = true;
+        });
+
+        isolatedScope.toggleSidebar();
+        expect(called).toBeTruthy();
+      });
     });
 
   });

@@ -3,7 +3,10 @@
     <div id="header-toolbar">
       <ul class="toolbar toolbar-left">
         <li>
-          <a id="sidebar-toggle" href="javascript:void(0);" class="SidebarOpen">
+          <a
+              id="sidebar-toggle"
+              ng-click="toggleSidebar()"
+              ng-class="toggleSidebarClass">
             <i class="material-icons">menu</i>
           </a>
         </li>
