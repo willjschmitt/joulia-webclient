@@ -33,6 +33,7 @@ module.exports = function(config) {
       'bower_components/underscore/underscore.js',
       'bower_components/Modernizr/modernizr.custom.js',
       'bower_components/moment/moment.js',
+      'bower_components/screenfull/dist/screenfull.min.js',
 
       // Third-party open-source licensed libaries.
       'vendor/materialRipple/jquery.materialRipple.js',
@@ -78,7 +79,7 @@ module.exports = function(config) {
       'src/**/*.js': ['coverage', 'babel'],
       'src/**/*.html': ['ng-html2js']
     },
-    
+
     ngHtml2JsPreprocessor: {
       moduleName: 'joulia.templates',
       stripPrefix: 'src/',

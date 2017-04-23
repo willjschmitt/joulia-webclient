@@ -17,10 +17,18 @@
         $scope.fullName = fullName;
         $scope.toggleSidebarClass = 'SidebarOpen';
 
+        $scope.toggleFullscreen = toggleFullscreen;
         $scope.toggleSidebar = toggleSidebar;
 
         function fullName(user) {
           return `${user.first_name} ${user.last_name}`;
+        }
+
+        /**
+         * Toggles the window to full screen mode.
+         */
+        function toggleFullscreen() {
+          screenfull.toggle();
         }
 
         function toggleSidebar() {

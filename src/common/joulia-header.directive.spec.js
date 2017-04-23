@@ -39,6 +39,13 @@ describe('app.common', function () {
       expect(element.html()).toContain('John Doe');
     });
 
+    describe('toggleFullscreen', function() {
+      // TODO(willjschmitt): Better tests than just running it.
+      it('does not crash', function() {
+        isolatedScope.toggleFullscreen();
+      })
+    });
+
     describe('toggleSidebar', function() {
       it('broadcasts toggleSidebar', function(){
         var called = false;
