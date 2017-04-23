@@ -17,7 +17,7 @@ describe('app.common', function () {
   });
 
   describe('sidebar directive', function () {
-    var element, scope;
+    var element, scope, isolatedScope;
     var breweryQuery, brewhouseQuery;
 
     beforeEach(function () {
@@ -34,16 +34,30 @@ describe('app.common', function () {
             user="user">
         </sidebar>`;
       scope = $rootScope.$new();
+      scope.user = {};
       element = $compile(html)(scope);
       $httpBackend.expectGET('brewery/api/brewery');
       $httpBackend.expectGET('brewery/api/brewhouse');
       $httpBackend.flush();
+      isolatedScope = element.isolateScope();
     });
 
     describe('template', function () {
       it('contains some template', function () {
         expect(element.html()).toContain('aside');
       })
+    });
+
+    describe('toggleSidebar', function() {
+      it('broadcasts toggleSidebar', function(){
+        var called = false;
+        $rootScope.$on('toggleSidebar', function() {
+          called = true;
+        });
+
+        isolatedScope.toggleSidebar();
+        expect(called).toBeTruthy();
+      });
     });
 
   });
