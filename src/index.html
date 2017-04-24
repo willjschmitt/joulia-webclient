@@ -58,7 +58,11 @@
       <section ng-if="user" id="right-content">
         <joulia-header user="user"></joulia-header>
 
-        <div ng-view></div>
+        <section id="right-content-wrapper" perfect-scrollbar>
+          <div class="right-content-outter">
+            <div class="right-content-inner" ng-view></div>
+          </div>
+        </section>
       </section>
 
       <joulia-login style="width: 100%" ng-if="!user"></joulia-login>

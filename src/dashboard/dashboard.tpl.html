@@ -1,29 +1,27 @@
-<section id="right-content-wrapper" perfect-scrollbar>
-  <section class="page-header alternative-header">
-    <ol class="breadcrumb">
-      <li>Joulia</li>
-      <li>Dashboard</li>
-    </ol>
-    <div class="page-header_title">
-      <h1>Dashboard</h1>
-    </div>
+<section class="page-header alternative-header">
+  <ol class="breadcrumb">
+    <li>Joulia</li>
+    <li>Dashboard</li>
+  </ol>
+  <div class="page-header_title">
+    <h1>Dashboard</h1>
+  </div>
 
-    <div class="pull-right">
-      <a
-          ng-click="addBrewery()"
-          style="color:#ffffff;">
-        <i class="material-icons">add_circle</i> Add Brewery Facility
-      </a>
-    </div>
-  </section>
+  <div class="pull-right">
+    <a
+        ng-click="addBrewery()"
+        style="color:#ffffff;">
+      <i class="material-icons">add_circle</i> Add Brewery Facility
+    </a>
+  </div>
+</section>
 
-  <section class="page-content" >
-    <div class="row" ng-repeat="brewery in brewerys">
-      <dashboard-brewery
-          class="col-xs-12"
-          brewery="brewery"
-          brewhouses="brewhouses[brewery.id]">
-      </dashboard-brewery>
-    </div>
-  </section>
+<section class="page-content" >
+  <div class="row" ng-repeat="brewery in brewerys">
+    <dashboard-brewery
+        class="col-xs-12"
+        brewery="brewery"
+        brewhouses="brewhouses[brewery.id]">
+    </dashboard-brewery>
+  </div>
 </section>
