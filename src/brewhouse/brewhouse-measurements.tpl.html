@@ -1,0 +1,25 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <header>Gravity Measurements</header>
+  </div>
+  <div class="panel-body no-top-padding">
+    <div class="form-group">
+      <label>Original Gravity</label>
+      <input
+          class="form-control"
+          type="number"
+          step="0.001"
+          ng-model="recipeInstance.original_gravity"
+          ng-change="measurementChange()" />
+    </div>
+    <div class="form-group">
+      <label>Final Gravity</label>
+      <input
+          class="form-control"
+          type="number"
+          step="0.001"
+          ng-model="recipeInstance.final_gravity"
+          ng-change="measurementChange()" />
+    </div>
+  </div>
+</div>
