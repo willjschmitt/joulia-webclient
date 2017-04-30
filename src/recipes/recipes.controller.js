@@ -56,7 +56,8 @@
         templateUrl: 'recipes/edit-recipe-modal.tpl.html',
         controller: 'EditRecipeModalController',
         resolve: {
-          recipe: undefined,
+          recipe: function resolveRecipe() { return undefined; },
+          mashPoints: function resolveMashPoints() { return []; },
         },
       });
 

@@ -34,7 +34,10 @@
             templateUrl: 'recipes/edit-recipe-modal.tpl.html',
             controller: 'EditRecipeModalController',
             resolve: {
-              recipe: $scope.recipe,
+              recipe: function resolveRecipe() { return $scope.recipe; },
+              mashPoints: function resolveMashPoints() {
+                return $scope.mashPoints;
+              },
             },
           });
 

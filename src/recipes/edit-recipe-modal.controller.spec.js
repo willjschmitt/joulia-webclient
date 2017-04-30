@@ -50,6 +50,7 @@ describe('app.recipes edit-recipe-modal.controller', function () {
           $scope: scope,
           $uibModalInstance: $uibModalInstance,
           recipe: undefined,
+          mashPoints: [],
         });
         $httpBackend.flush();
       });
@@ -71,7 +72,7 @@ describe('app.recipes edit-recipe-modal.controller', function () {
 
     describe('editing existing recipe', function () {
       var recipeUpdate;
-      var existingRecipe;
+      var existingRecipe, existingMashPoints;
 
       beforeEach(function () {
         recipeUpdate = $httpBackend.when('PUT', 'brewery/api/recipe/10')
@@ -82,10 +83,12 @@ describe('app.recipes edit-recipe-modal.controller', function () {
         scope = $rootScope.$new();
         existingRecipe = new breweryResources.Recipe();
         existingRecipe.id = 10;
+        existingMashPoints = [];
         controller = $controller('EditRecipeModalController', {
           $scope: scope,
           $uibModalInstance: $uibModalInstance,
           recipe: existingRecipe,
+          mashPoints: existingMashPoints,
         });
         $httpBackend.flush();
       });
@@ -103,6 +106,34 @@ describe('app.recipes edit-recipe-modal.controller', function () {
           expect($uibModalInstance.close).toHaveBeenCalled();
         });
       });
+
+      describe('addMashPoint', function () {
+        it('adds new MashPoint', function () {
+          const mashPointSave = $httpBackend
+            .when('POST', 'brewery/api/mash_point')
+              .respond(function (method, url, data, headers, params) {
+                return [201, angular.extend({ id: 19}, data)];
+              });
+          $httpBackend.expectPOST('brewery/api/mash_point');
+          scope.addMashPoint();
+          $httpBackend.flush();
+          expect(scope.mashPoints[0].id).toEqual(19);
+        });
+      });
+
+      describe('updateMashPoint', function () {
+        it('updates mashPoint', function () {
+          const mashPointSave = $httpBackend
+            .when('PUT', 'brewery/api/mash_point/19')
+              .respond(function (method, url, data, headers, params) {
+                return [201, data];
+              });
+          const existingMashPoint = new breweryResources.MashPoint({ id: 19 });
+          $httpBackend.expectPUT('brewery/api/mash_point/19');
+          scope.updateMashPoint(existingMashPoint);
+          $httpBackend.flush();
+        });
+      })
     });
 
     describe('cancel', function () {
@@ -112,6 +143,7 @@ describe('app.recipes edit-recipe-modal.controller', function () {
           $scope: scope,
           $uibModalInstance: $uibModalInstance,
           recipe: undefined,
+          mashPoints: [],
         });
         $httpBackend.flush();
         scope.cancel();
