@@ -1,0 +1,7 @@
+<button
+    type="button"
+    class="btn btn-raised ju-btn-panel"
+    ng-class="emergencyStopStatus.latest ? 'btn-success' : 'btn-danger'"
+    ng-click="toggleEmergencyStop()">
+  {{ emergencyStopStatus.latest ? 'Release E-Stop' : 'Emergency Stop' }}
+</button>

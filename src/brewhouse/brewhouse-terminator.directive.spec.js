@@ -60,7 +60,7 @@ describe('app.brewhouse', function () {
           // clicked-through.
           scope.recipeInstance = 12;
           scope.$digest();
-          element[0].querySelector('.end-session-button').click();
+          element[0].querySelector('button').click();
         });
       });
     });

@@ -88,7 +88,7 @@ module.exports = function(grunt) {
         files: [
           {
             dest: '<%= distDir %>/static',
-            src: ['img/**'],
+            src: ['img/**', 'css/**'],
             cwd: 'src/',
             expand: true,
           },
