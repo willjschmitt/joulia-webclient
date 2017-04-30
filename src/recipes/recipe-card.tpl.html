@@ -3,11 +3,14 @@
     <header>
       <div>
         {{ recipe.name }}
-        <a href="" ng-click="launch()">
-          <div class="pull-right">
-            <i class="material-icons">launch</i> Start
-          </div>
-        </a>
+        <div class="pull-right">
+          <a href="" ng-click="edit()">
+            <i class="material-icons">pencil</i>
+          </a>
+          <a href="" ng-click="launch()">
+            <i class="material-icons">launch</i>
+          </a>
+        </div>
       </div>
       <p class="subhead-1">{{ recipe.style }}</p>
     </header>

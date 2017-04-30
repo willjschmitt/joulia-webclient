@@ -43,6 +43,24 @@ describe('app.recipes', function () {
       scope.$digest();
     });
 
+    describe('edit', function () {
+      var modalInstance;
+      var beerStyleQuery;
+
+      beforeEach(function () {
+        beerStyleQuery = $httpBackend.when('GET', 'brewery/api/beerStyle')
+          .respond();
+
+        $httpBackend.expectGET('brewery/api/beerStyle');
+        modalInstance = scope.edit();
+        $httpBackend.flush();
+      });
+
+      it('should create a modal', function () {
+        expect(modalInstance).toBeDefined();
+      });
+    });
+
     describe('launch', function () {
       var modalInstance;
       var launchRecipePost;

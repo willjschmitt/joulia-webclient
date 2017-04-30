@@ -1,14 +1,17 @@
 (function loadAddRecipeModalController() {
   angular
     .module('app.recipes')
-    .controller('AddRecipeModalController', AddRecipeModalController);
+    .controller('EditRecipeModalController', EditRecipeModalController);
 
-  AddRecipeModalController.$inject = [
-    '$scope', '$uibModalInstance', 'breweryResources'];
+  EditRecipeModalController.$inject = [
+    '$scope', '$uibModalInstance', 'breweryResources', 'recipe'];
 
-  function AddRecipeModalController(
-      $scope, $uibModalInstance, breweryResources) {
-    $scope.newRecipe = new breweryResources.Recipe();
+  function EditRecipeModalController(
+      $scope, $uibModalInstance, breweryResources, recipe) {
+    $scope.recipe = recipe;
+    if (!$scope.recipe) {
+      $scope.recipe = new breweryResources.Recipe();
+    }
     $scope.beerStyles = breweryResources.BeerStyle.query();
     $scope.ok = ok;
     $scope.cancel = cancel;
@@ -17,7 +20,11 @@
      * Handles successful "OK" button press for submitting user input.
      */
     function ok() {
-      $scope.newRecipe.$save(close);
+      if ($scope.recipe.hasOwnProperty('id')) {
+        $scope.recipe.$update(close);
+      } else {
+        $scope.recipe.$save(close);
+      }
     }
 
     /**

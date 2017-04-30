@@ -28,8 +28,11 @@
     function addRecipe() {
       const modalInstance = $uibModal.open({
         animation: true,
-        templateUrl: 'recipes/add-recipe-modal.tpl.html',
-        controller: 'AddRecipeModalController',
+        templateUrl: 'recipes/edit-recipe-modal.tpl.html',
+        controller: 'EditRecipeModalController',
+        resolve: {
+          recipe: undefined,
+        },
       });
 
       modalInstance.result.then(updateRecipes);

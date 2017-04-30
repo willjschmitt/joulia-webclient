@@ -1,5 +1,7 @@
 <div class="modal-header">
-  <h4 class="modal-title">Add recipe</h4>
+  <h4 class="modal-title">
+    {{ recipe.hasOwnProperty('id') ? 'Edit' : 'Add' }} recipe
+  </h4>
 </div>
 <div class="modal-body">
   <div class="form-group">
@@ -7,7 +9,7 @@
         name="name"
         id="name"
         class="form-control"
-        ng-model="newRecipe.name"
+        ng-model="recipe.name"
         type="text">
     <label>Name</label>
   </div>
@@ -19,7 +21,7 @@
         ng-options="beerStyle.id as beerStyle.name
                     for beerStyle in beerStyles
                     track by beerStyle.id"
-        ng-model="newRecipe.style">
+        ng-model="recipe.style">
     </select>
     <label>Style</label>
   </div>
@@ -36,6 +38,6 @@
       type="button"
       class="btn btn-primary btn-flat btn-ripple"
       ng-click="ok()">
-    Add
+    {{ recipe.hasOwnProperty('id') ? 'Save' : 'Add' }}
   </button>
 </div>
