@@ -11,6 +11,7 @@
       transclude: true,
       scope: {
         recipe: '=',
+        mashPoints: '=',
       },
       templateUrl: 'recipes/recipe-card.tpl.html',
       link: function recipeCardController($scope) {
