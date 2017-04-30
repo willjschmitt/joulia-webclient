@@ -11,7 +11,13 @@
 
 <section class="page-content" ng-if="recipeInstance.active">
   <div class="row">
-    <brewhouse-terminator recipe-instance="recipeInstance.id">
+    <brewhouse-emergency-stop
+        class="col-md-2 col-xs-6"
+        recipe-instance="recipeInstance.id">
+    </brewhouse-emergency-stop>
+    <brewhouse-terminator
+        class="col-md-2 col-xs-6"
+        recipe-instance="recipeInstance.id">
     </brewhouse-terminator>
 
     <brewhouse-status recipe-instance="recipeInstance.id">
