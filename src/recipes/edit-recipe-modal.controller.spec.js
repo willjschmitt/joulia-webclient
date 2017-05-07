@@ -73,12 +73,20 @@ describe('app.recipes edit-recipe-modal.controller', function () {
     describe('editing existing recipe', function () {
       var recipeUpdate;
       var existingRecipe, existingMashPoints;
+      var mashPointSave;
 
       beforeEach(function () {
         recipeUpdate = $httpBackend.when('PUT', 'brewery/api/recipe/10')
           .respond(function (method, url, data, headers, params) {
             return [201, data];
           });
+
+        mashPointSave = $httpBackend
+          .when('POST', 'brewery/api/mash_point')
+            .respond(function (method, url, data, headers, params) {
+              const id = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER);
+              return [201, angular.extend({ id: id }, data)];
+            });
 
         scope = $rootScope.$new();
         existingRecipe = new breweryResources.Recipe();
@@ -109,31 +117,50 @@ describe('app.recipes edit-recipe-modal.controller', function () {
 
       describe('addMashPoint', function () {
         it('adds new MashPoint', function () {
-          const mashPointSave = $httpBackend
-            .when('POST', 'brewery/api/mash_point')
-              .respond(function (method, url, data, headers, params) {
-                return [201, angular.extend({ id: 19}, data)];
-              });
           $httpBackend.expectPOST('brewery/api/mash_point');
           scope.addMashPoint();
           $httpBackend.flush();
-          expect(scope.mashPoints[0].id).toEqual(19);
+          expect(scope.mashPoints[0]).toBeDefined();
         });
       });
 
       describe('updateMashPoint', function () {
         it('updates mashPoint', function () {
-          const mashPointSave = $httpBackend
-            .when('PUT', 'brewery/api/mash_point/19')
-              .respond(function (method, url, data, headers, params) {
-                return [201, data];
-              });
+          $httpBackend.when('PUT', 'brewery/api/mash_point/19')
+            .respond(function (method, url, data, headers, params) {
+              return [200, data];
+            });
           const existingMashPoint = new breweryResources.MashPoint({ id: 19 });
           $httpBackend.expectPUT('brewery/api/mash_point/19');
           scope.updateMashPoint(existingMashPoint);
           $httpBackend.flush();
         });
-      })
+      });
+
+      describe('removeMashPoint', function () {
+        it('removes mashPoint', function () {
+          $httpBackend.expectPOST('brewery/api/mash_point');
+          $httpBackend.expectPOST('brewery/api/mash_point');
+          scope.addMashPoint();
+          scope.addMashPoint();
+          $httpBackend.flush();
+          expect(scope.mashPoints.length).toEqual(2);
+
+          const mashPoint1 = scope.mashPoints[0];
+          const mashPoint2 = scope.mashPoints[1];
+
+          $httpBackend.when('DELETE', 'brewery/api/mash_point/' + mashPoint1.id)
+            .respond(function (method, url, data, headers, params) {
+              return [200, {}];
+            });
+          $httpBackend.expectDELETE('brewery/api/mash_point/' + mashPoint1.id);
+          scope.removeMashPoint(mashPoint1);
+          $httpBackend.flush();
+          expect(scope.mashPoints.length).toBe(1);
+          expect(scope.mashPoints).not.toContain(mashPoint1);
+          expect(scope.mashPoints).toContain(mashPoint2);
+        });
+      });
     });
 
     describe('cancel', function () {

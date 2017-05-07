@@ -18,6 +18,7 @@
     $scope.cancel = cancel;
     $scope.addMashPoint = addMashPoint;
     $scope.updateMashPoint = updateMashPoint;
+    $scope.removeMashPoint = removeMashPoint;
 
     /**
      * Handles successful "OK" button press for submitting user input.
@@ -58,6 +59,14 @@
      */
     function updateMashPoint(mashPoint) {
       mashPoint.$update();
+    }
+
+    /**
+     * Removes provided MashPoint resource from server and local array.
+     */
+    function removeMashPoint(mashPoint) {
+      const index = $scope.mashPoints.indexOf(mashPoint);
+      mashPoint.$delete(() => $scope.mashPoints.splice(index, 1));
     }
   }
 }());

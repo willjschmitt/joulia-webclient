@@ -28,7 +28,7 @@
   <hr>
   <h3>Mash Profile</h3>
   <div class="row" ng-repeat="mashPoint in mashPoints">
-    <div class="col-xs-6">
+    <div class="col-xs-5">
       <div class="form-group">
         <input
             name="time"
@@ -39,7 +39,7 @@
         <label>Time (min)</label>
       </div>
     </div>
-    <div class="col-xs-6">
+    <div class="col-xs-5">
       <div class="form-group">
         <input
             name="time"
@@ -49,6 +49,11 @@
             ng-change="updateMashPoint(mashPoint)">
         <label>Temperature (&deg;F)</label>
       </div>
+    </div>
+    <div class="col-xs-2">
+      <a href="" ng-click="removeMashPoint(mashPoint)">
+        <i class="material-icons">delete</i>
+      </a>
     </div>
   </div>
   <a href="" ng-click="addMashPoint()">
