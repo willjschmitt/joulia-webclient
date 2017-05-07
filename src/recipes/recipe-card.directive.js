@@ -38,6 +38,7 @@
               mashPoints: function resolveMashPoints() {
                 return $scope.mashPoints;
               },
+              brewingCompany: function resolveBrewingCompany() { return null; },
             },
           });
 
