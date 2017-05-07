@@ -9,6 +9,8 @@
     return {
       Recipe: $resource('brewery/api/recipe/:id/', { id: '@id' },
           { update: { method: 'PUT' } }),
+      MashPoint: $resource('brewery/api/mash_point/:id/', { id: '@id' },
+          { update: { method: 'PUT' } }),
       RecipeInstance: $resource('brewery/api/recipeInstance/:id/', { id: '@id' },
           { update: { method: 'PUT' } }),
       Brewhouse: $resource('brewery/api/brewhouse/:id/', { id: '@id' },

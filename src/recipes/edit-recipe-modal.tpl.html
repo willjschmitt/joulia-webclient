@@ -1,0 +1,93 @@
+<div class="modal-header">
+  <h4 class="modal-title">
+    {{ recipe.hasOwnProperty('id') ? 'Edit' : 'Add' }} recipe
+  </h4>
+</div>
+<div class="modal-body">
+  <div class="form-group">
+    <input
+        name="name"
+        id="name"
+        class="form-control"
+        ng-model="recipe.name"
+        type="text">
+    <label>Name</label>
+  </div>
+  <div class="form-group">
+    <select
+        name="beerStyleSelector"
+        id="beerStyleSelector"
+        class="form-control"
+        ng-options="beerStyle.id as beerStyle.name
+                    for beerStyle in beerStyles
+                    track by beerStyle.id"
+        ng-model="recipe.style">
+    </select>
+    <label>Style</label>
+  </div>
+  <hr>
+  <h3>Mash Profile</h3>
+  <div class="row" ng-repeat="(idx, mashPoint) in mashPoints">
+    <div class="col-xs-5">
+      <div class="form-group">
+        <input
+            name="time"
+            class="form-control"
+            ng-model="mashPoint.time"
+            type="number"
+            ng-change="updateMashPoint(mashPoint)">
+        <label>Time (min)</label>
+      </div>
+    </div>
+    <div class="col-xs-5">
+      <div class="form-group">
+        <input
+            name="time"
+            class="form-control"
+            ng-model="mashPoint.temperature"
+            type="number"
+            ng-change="updateMashPoint(mashPoint)">
+        <label>Temperature (&deg;F)</label>
+      </div>
+    </div>
+    <div class="col-xs-1">
+      <a href="" ng-click="removeMashPoint(mashPoint)">
+        <i class="material-icons">delete</i>
+      </a>
+    </div>
+    <div class="col-xs-1">
+      <div>
+        <a
+            ng-click="promoteMashPoint(mashPoint)"
+            ng-if="idx !== 0">
+           <i class="material-icons">keyboard_arrow_up</i>
+        </a>
+      </div>
+      <div>
+        <a
+            ng-click="demoteMashPoint(mashPoint)"
+            ng-if="idx !== mashPoints.length - 1">
+          <i class="material-icons">keyboard_arrow_down</i>
+        </a>
+      </div>
+    </div>
+  </div>
+  <a href="" ng-click="addMashPoint()">
+    <i class="material-icons">add_circle</i> Add
+  </a>
+</div>
+<div class="modal-footer">
+  <button
+      type="button"
+      class="btn btn-primary btn-flat btn-ripple"
+      data-dismiss="modal"
+      ng-click="cancel()">
+    Cancel
+  </button>
+  <button
+      type="button"
+      class="btn btn-primary btn-flat btn-ripple"
+      ng-click="ok()">
+    {{ recipe.hasOwnProperty('id') ? 'Save' : 'Add' }}
+  </button>
+</div>
