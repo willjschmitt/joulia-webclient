@@ -1,0 +1,32 @@
+<div class="modal-header">
+  <h4 class="modal-title">Select Brewing Company</h4>
+</div>
+<div class="modal-body">
+  <div class="form-group">
+    <select
+        name="brewingCompanySelector"
+        id="brewingCompanySelector"
+        class="form-control"
+        ng-options="brewingCompany.id as brewingCompany.name
+                    for brewingCompany in brewingCompanys
+                    track by brewingCompany.id"
+        ng-model="selectedCompany">
+    </select>
+    <label>Brewing Company</label>
+  </div>
+</div>
+<div class="modal-footer">
+  <button
+      type="button"
+      class="btn btn-primary btn-flat btn-ripple"
+      data-dismiss="modal"
+      ng-click="cancel()">
+    Cancel
+  </button>
+  <button
+      type="button"
+      class="btn btn-primary btn-flat btn-ripple"
+      ng-click="ok()" ng-enabled="selectedCompany">
+    Add
+  </button>
+</div>

@@ -46,11 +46,33 @@
     /**
      * Launches modal to ask user for information about adding a new recipe to
      * be able to brew. Reloads recipes after successfully returning from the
-     * modal.
+     * modal. Will launch pre-modal asking which brewing company to add the
+     * recipe to, if the user is a member of more than one brewing company.
      *
      * @returns The created modal instance.
      */
     function addRecipe() {
+      // TODO(willjschmitt): This seems like an excessibe query. Consider
+      // alternatives with this already being queried in the page route, since
+      // it will be a very common piece of data.
+      const brewingCompanies = breweryResources.BrewingCompany.query(
+        function handleBrewingCompanies() {
+          if (brewingCompanies.length === 1) {
+            launchAddRecipeModal(brewingCompanies[0]);
+          } else {
+            const modalInstance = $uibModal.open({
+              animation: true,
+              templateUrl: 'common/select-brewing-company-modal.tpl.html',
+              controller: 'SelectBrewingCompanyController',
+            });
+
+            modalInstance.result.then(
+              brewingCompany => launchAddRecipeModal(brewingCompany));
+          }
+        });
+    }
+
+    function launchAddRecipeModal(brewingCompany) {
       const modalInstance = $uibModal.open({
         animation: true,
         templateUrl: 'recipes/edit-recipe-modal.tpl.html',
@@ -58,6 +80,9 @@
         resolve: {
           recipe: function resolveRecipe() { return undefined; },
           mashPoints: function resolveMashPoints() { return []; },
+          brewingCompany: function resolveBrewingCompany() {
+            return brewingCompany;
+          },
         },
       });
 

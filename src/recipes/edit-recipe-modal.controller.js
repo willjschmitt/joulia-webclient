@@ -4,15 +4,17 @@
     .controller('EditRecipeModalController', EditRecipeModalController);
 
   EditRecipeModalController.$inject = [
-    '$scope', '$uibModalInstance', 'breweryResources', 'recipe', 'mashPoints'];
+    '$scope', '$uibModalInstance', 'breweryResources', 'recipe', 'mashPoints',
+    'brewingCompany'];
 
   function EditRecipeModalController(
-      $scope, $uibModalInstance, breweryResources, recipe, mashPoints) {
+      $scope, $uibModalInstance, breweryResources, recipe, mashPoints,
+      brewingCompany) {
     $scope.recipe = recipe;
-    $scope.mashPoints = mashPoints;
     if (!$scope.recipe) {
-      $scope.recipe = new breweryResources.Recipe();
+      $scope.recipe = new breweryResources.Recipe({ company: brewingCompany });
     }
+    $scope.mashPoints = mashPoints;
     $scope.beerStyles = breweryResources.BeerStyle.query();
     $scope.ok = ok;
     $scope.cancel = cancel;

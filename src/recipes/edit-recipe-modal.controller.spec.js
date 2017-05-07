@@ -51,6 +51,7 @@ describe('app.recipes edit-recipe-modal.controller', function () {
           $uibModalInstance: $uibModalInstance,
           recipe: undefined,
           mashPoints: [],
+          brewingCompany: 1,
         });
         $httpBackend.flush();
       });
@@ -97,6 +98,7 @@ describe('app.recipes edit-recipe-modal.controller', function () {
           $uibModalInstance: $uibModalInstance,
           recipe: existingRecipe,
           mashPoints: existingMashPoints,
+          brewingCompany: null,
         });
         $httpBackend.flush();
       });
@@ -271,6 +273,7 @@ describe('app.recipes edit-recipe-modal.controller', function () {
           $uibModalInstance: $uibModalInstance,
           recipe: undefined,
           mashPoints: [],
+          brewingCompany: null,
         });
         $httpBackend.flush();
         scope.cancel();

@@ -60,19 +60,23 @@ describe('app.recipes', function () {
       beforeEach(function () {
         beerStyleQuery = $httpBackend.when('GET', 'brewery/api/beerStyle')
           .respond();
+      })
 
+      it('handles 1 brewing company', function () {
+        $httpBackend.when('GET', 'brewery/api/brewingCompany')
+          .respond([{ id: 0 }]);
+        $httpBackend.expectGET('brewery/api/brewingCompany');
         $httpBackend.expectGET('brewery/api/beerStyle');
         modalInstance = scope.addRecipe();
         $httpBackend.flush();
-      })
-
-      it('should create a modal', function () {
-        expect(modalInstance).toBeDefined();
       });
 
-      it('should call updateRecipes', function () {
-        $httpBackend.expectGET('brewery/api/recipe');
-        modalInstance.close();
+      it('handles multiple brewing companies', function () {
+        $httpBackend.when('GET', 'brewery/api/brewingCompany')
+          .respond([{ id: 0 }]);
+        $httpBackend.expectGET('brewery/api/brewingCompany');
+        $httpBackend.expectGET('brewery/api/beerStyle');
+        modalInstance = scope.addRecipe();
         $httpBackend.flush();
       });
     });
