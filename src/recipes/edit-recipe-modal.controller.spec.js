@@ -161,6 +161,106 @@ describe('app.recipes edit-recipe-modal.controller', function () {
           expect(scope.mashPoints).toContain(mashPoint2);
         });
       });
+
+      describe('promoteMashPoint', function () {
+        it('should promote', function () {
+          $httpBackend.expectPOST('brewery/api/mash_point');
+          $httpBackend.expectPOST('brewery/api/mash_point');
+          scope.addMashPoint();
+          scope.addMashPoint();
+          $httpBackend.flush();
+          expect(scope.mashPoints.length).toEqual(2);
+
+          const mashPoint1 = scope.mashPoints[0];
+          mashPoint1.index = 0;
+          mashPoint1.id = 10;
+          const mashPoint2 = scope.mashPoints[1];
+          mashPoint2.index = 1;
+          mashPoint2.id = 11;
+
+          // TODO(willjschmitt): Make these regexps for the urls. I can't for
+          // some silly reason get regexp recognition to work here.
+          $httpBackend.when('PUT', 'brewery/api/mash_point/10')
+            .respond(function (method, url, data, headers, params) {
+              return [200, data];
+            });
+          $httpBackend.when('PUT', 'brewery/api/mash_point/11')
+            .respond(function (method, url, data, headers, params) {
+              return [200, data];
+            });
+
+          $httpBackend.expectPUT('brewery/api/mash_point/' + mashPoint1.id);
+          $httpBackend.expectPUT('brewery/api/mash_point/' + mashPoint2.id);
+          $httpBackend.expectPUT('brewery/api/mash_point/' + mashPoint1.id);
+          scope.promoteMashPoint(mashPoint2);
+          $httpBackend.flush();
+
+          expect(mashPoint1.index).toBe(1);
+          expect(mashPoint2.index).toBe(0);
+          expect(scope.mashPoints[0].id).toBe(mashPoint2.id);
+          expect(scope.mashPoints[1].id).toBe(mashPoint1.id);
+        });
+
+        it('should throw error when promoting first point', function () {
+          $httpBackend.expectPOST('brewery/api/mash_point');
+          scope.addMashPoint();
+          $httpBackend.flush();
+          expect(scope.mashPoints.length).toEqual(1);
+          expect(function(){scope.promoteMashPoint(scope.mashPoints[0]);})
+            .toThrow(new Error('Cannot promote first mash point.'));
+        });
+      });
+
+
+
+      describe('demoteMashPoint', function () {
+        it('should demote', function () {
+          $httpBackend.expectPOST('brewery/api/mash_point');
+          $httpBackend.expectPOST('brewery/api/mash_point');
+          scope.addMashPoint();
+          scope.addMashPoint();
+          $httpBackend.flush();
+          expect(scope.mashPoints.length).toEqual(2);
+
+          const mashPoint1 = scope.mashPoints[0];
+          mashPoint1.index = 0;
+          mashPoint1.id = 10;
+          const mashPoint2 = scope.mashPoints[1];
+          mashPoint2.index = 1;
+          mashPoint2.id = 11;
+
+          // TODO(willjschmitt): Make these regexps for the urls. I can't for
+          // some silly reason get regexp recognition to work here.
+          $httpBackend.when('PUT', 'brewery/api/mash_point/10')
+            .respond(function (method, url, data, headers, params) {
+              return [200, data];
+            });
+          $httpBackend.when('PUT', 'brewery/api/mash_point/11')
+            .respond(function (method, url, data, headers, params) {
+              return [200, data];
+            });
+
+          $httpBackend.expectPUT('brewery/api/mash_point/' + mashPoint2.id);
+          $httpBackend.expectPUT('brewery/api/mash_point/' + mashPoint1.id);
+          $httpBackend.expectPUT('brewery/api/mash_point/' + mashPoint2.id);
+          scope.demoteMashPoint(mashPoint1);
+          $httpBackend.flush();
+
+          expect(mashPoint1.index).toBe(1);
+          expect(mashPoint2.index).toBe(0);
+          expect(scope.mashPoints[0].id).toBe(mashPoint2.id);
+          expect(scope.mashPoints[1].id).toBe(mashPoint1.id);
+        });
+      });
+
+      it('should throw error when demoting last point', function () {
+        $httpBackend.expectPOST('brewery/api/mash_point');
+        scope.addMashPoint();
+        $httpBackend.flush();
+        expect(scope.mashPoints.length).toEqual(1);
+        expect(function(){scope.demoteMashPoint(scope.mashPoints[0]);})
+          .toThrow(new Error('Cannot demote last mash point.'));
+      });
     });
 
     describe('cancel', function () {
