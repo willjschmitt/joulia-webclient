@@ -1,3 +1,6 @@
+<li class="nav-main-heading">
+  <span class="sidebar-mini-hide">Equipment</span>
+</li>
 <li ng-repeat="brewery in brewerys">
   <a href="">
     <span class="menu-item-ico">
@@ -11,7 +14,9 @@
     </span>
   </a>
   <ul>
-    <li ng-repeat="brewhouse in brewhouseMap[brewery.id]">
+    <li
+        ng-repeat="brewhouse in brewhouseMap[brewery.id]"
+        class="submenu-inner-wrapper open">
       <a href="#!/brewhouse/{{brewhouse.id}}">
         {{ brewhouse.name }}&nbsp;
         <span class="label label-warning" ng-if="brewhouse.active">

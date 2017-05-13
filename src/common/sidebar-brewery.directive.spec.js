@@ -49,8 +49,8 @@ describe('app.common', function () {
         ];
         scope.$digest();
 
-        expect(element.children()[0].innerHTML).toContain('Foo');
-        expect(element.children()[1].innerHTML).toContain('Bar');
+        expect(element.children()[1].innerHTML).toContain('Foo');
+        expect(element.children()[2].innerHTML).toContain('Bar');
       });
 
       it('contains brewhouse badges', function () {
@@ -67,8 +67,8 @@ describe('app.common', function () {
           const fooBreweryLink = fooBreweryLi.children[1];
           return fooBreweryLink.children[0];
         }
-        expect(getBadge(element.children()[0]).innerHTML).toContain('1');
-        expect(getBadge(element.children()[1]).innerHTML).toContain('0');
+        expect(getBadge(element.children()[1]).innerHTML).toContain('1');
+        expect(getBadge(element.children()[2]).innerHTML).toContain('0');
       });
 
       it('contains brewhouses', function() {
@@ -85,9 +85,9 @@ describe('app.common', function () {
           return fooBrewhousesUl.children[brewhouseIndex];
         }
 
-        expect(getBrewhouse(element.children()[0], 0).innerHTML).toContain('#!/brewhouse/0');
-        expect(getBrewhouse(element.children()[0], 0).innerHTML).toContain('Baz');
-        expect(getBrewhouse(element.children()[0], 0).innerHTML).not.toContain('Active');
+        expect(getBrewhouse(element.children()[1], 0).innerHTML).toContain('#!/brewhouse/0');
+        expect(getBrewhouse(element.children()[1], 0).innerHTML).toContain('Baz');
+        expect(getBrewhouse(element.children()[1], 0).innerHTML).not.toContain('Active');
       });
 
       it('has active label when active', function (){
@@ -104,7 +104,7 @@ describe('app.common', function () {
           return fooBrewhousesUl.children[brewhouseIndex];
         }
 
-        expect(getBrewhouse(element.children()[0], 0).innerHTML).toContain('Active');
+        expect(getBrewhouse(element.children()[1], 0).innerHTML).toContain('Active');
       })
 
     });
