@@ -4,6 +4,7 @@
       <ul class="toolbar toolbar-left">
         <li>
           <a
+              href="javascript:void(0);"
               id="sidebar-toggle"
               ng-click="toggleSidebar()"
               ng-class="toggleSidebarClass">
@@ -22,7 +23,7 @@
               data-i18n="[title]headerToolbar.fullscreenToggle"
               data-original-title="Toggle Fullscreen"
               ng-click="toggleFullscreen()">
-            <i class="material-icons">fullscreen</i>
+            <i class="material-icons">{{ fullscreenButton }}</i>
           </a>
         </li>
 
