@@ -9,33 +9,7 @@
 
   <div id="userinfo">
     <div class="btn-group">
-      <button
-          type="button"
-          class="btn btn-default-bright btn-flat dropdown-toggle"
-          data-toggle="dropdown"
-          aria-haspopup="true"
-          aria-expanded="false">
-        {{ fullName(user) }}&nbsp;
-        <i class="material-icons">arrow_drop_down</i>
-      </button>
-      <ul class="dropdown-menu">
-        <li>
-          <a href="#"><i class="material-icons">person</i>Your Profile</a>
-        </li>
-        <li>
-          <a href="#"><i class="material-icons">settings</i>Settings</a>
-        </li>
-        <li class="divider"></li>
-        <li>
-          <a href="#"><i class="material-icons">lock</i> Lock</a>
-        </li>
-        <li class="divider"></li>
-        <li>
-          <a href="{% url 'logout' %}">
-            <i class="material-icons">exit_to_app</i> Log Out
-          </a>
-        </li>
-      </ul>
+      {{ fullName(user) }}
     </div>
   </div>
 </div>
