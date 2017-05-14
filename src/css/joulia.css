@@ -10,3 +10,7 @@
 .hide-sub-menu {
   display: none !important;
 }
+
+[ng-click] {
+    cursor: pointer;
+}

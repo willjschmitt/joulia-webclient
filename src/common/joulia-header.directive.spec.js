@@ -44,6 +44,14 @@ describe('app.common', function () {
       it('does not crash', function() {
         isolatedScope.toggleFullscreen();
       })
+
+      it('toggles button value', function() {
+        expect(isolatedScope.fullscreenButton).toBe('fullscreen');
+        isolatedScope.toggleFullscreen();
+        expect(isolatedScope.fullscreenButton).toBe('fullscreen_exit');
+        isolatedScope.toggleFullscreen();
+        expect(isolatedScope.fullscreenButton).toBe('fullscreen');
+      });
     });
 
     describe('toggleSidebar', function() {

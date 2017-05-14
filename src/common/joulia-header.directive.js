@@ -15,6 +15,7 @@
       templateUrl: 'common/joulia-header.tpl.html',
       link: function jouliaHeaderController($scope) {
         $scope.fullName = fullName;
+        $scope.fullscreenButton = 'fullscreen';
         $scope.toggleSidebarClass = 'SidebarOpen';
 
         $scope.toggleFullscreen = toggleFullscreen;
@@ -29,6 +30,11 @@
          */
         function toggleFullscreen() {
           screenfull.toggle();
+          if ($scope.fullscreenButton === 'fullscreen') {
+            $scope.fullscreenButton = 'fullscreen_exit';
+          } else {
+            $scope.fullscreenButton = 'fullscreen';
+          }
         }
 
         function toggleSidebar() {
