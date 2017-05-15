@@ -17,3 +17,4 @@ deploy:
   bucket: "joulia-webclient"
   skip_cleanup: true
   local_dir: dist
+  acl: public_read
