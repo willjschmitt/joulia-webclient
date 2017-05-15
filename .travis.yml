@@ -5,6 +5,8 @@ before_script:
   - 'npm install -g bower'
   - 'npm install -g grunt-cli'
   - 'bower install'
+after_script:
+  - 'grunt travisbuild'
 notifications:
   email: false
   slack: SLACK_TOKEN
