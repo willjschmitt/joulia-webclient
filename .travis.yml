@@ -7,4 +7,4 @@ before_script:
   - 'bower install'
 notifications:
   email: false
-  slack: joulia:WNFyeuBeiJJAGjU6Gwj9rPnX
+  slack: SLACK_TOKEN
