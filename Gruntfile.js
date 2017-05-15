@@ -17,7 +17,9 @@ module.exports = function(grunt) {
   grunt.registerTask('build', [
     'eslint', 'html2js', 'karma:release', 'concat']);
 
-  grunt.registerTask('test', ['eslint', 'karma:travis', 'coveralls'])
+  grunt.registerTask('test', ['eslint', 'karma:travis', 'coveralls']);
+  grunt.registerTask('travisbuild', [
+    'html2js', 'concat', 'copy:assets', 'copy:vendor']);
 
   grunt.initConfig({
     distDir: 'dist',
