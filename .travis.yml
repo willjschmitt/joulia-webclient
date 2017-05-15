@@ -5,7 +5,7 @@ before_script:
   - 'npm install -g bower'
   - 'npm install -g grunt-cli'
   - 'bower install'
-after_script:
+before_deploy:
   - 'grunt travisbuild'
 notifications:
   email: false
