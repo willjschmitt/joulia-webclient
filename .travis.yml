@@ -8,3 +8,10 @@ before_script:
 notifications:
   email: false
   slack: SLACK_TOKEN
+deploy:
+  provider: s3
+  access_key_id: S3_ACCESS_KEY
+  secret_access_key: S3_SECRET_ACCESS_KEY
+  bucket: "joulia-webclient"
+  skip_cleanup: true
+  local_dir: dist
