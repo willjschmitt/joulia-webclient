@@ -58,7 +58,7 @@
       const brewingCompanies = breweryResources.BrewingCompany.query(
         function handleBrewingCompanies() {
           if (brewingCompanies.length === 1) {
-            launchAddRecipeModal(brewingCompanies[0]);
+            launchAddRecipeModal(brewingCompanies[0].id);
           } else {
             const modalInstance = $uibModal.open({
               animation: true,
