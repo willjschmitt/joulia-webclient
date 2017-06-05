@@ -42,6 +42,8 @@
     function loadRecipeInstance(result) {
       if (result.length === 1) {
         $scope.recipeInstance = result[0];
+      } else if (result.length === 0) {
+        $scope.recipeInstance = null;
       } else {
         throw new Error(
           `Multiple active recipe instance were found for this equipment, which
