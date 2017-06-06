@@ -3,9 +3,9 @@
     .module('app.recipes')
     .directive('recipeCard', recipeCard);
 
-  recipeCard.$inject = ['$uibModal', '$http', '$location'];
+  recipeCard.$inject = ['$uibModal', '$http', '$location', 'recipeInstances'];
 
-  function recipeCard($uibModal, $http, $location) {
+  function recipeCard($uibModal, $http, $location, recipeInstances) {
     return {
       restrict: 'E',
       transclude: true,
@@ -73,14 +73,8 @@
          * @param {object} launchRecipeResult Result from the launchRecipe modal.
          */
         function performLaunch(recipe, launchRecipeResult) {
-          $http({
-            method: 'POST',
-            url: 'brewery/brewhouse/launch',
-            data: {
-              recipe: recipe.id,
-              brewhouse: launchRecipeResult.brewhouse.id,
-            },
-          }).then(navigateToBrewhouse);
+          recipeInstances.launch(recipe.id, launchRecipeResult.brewhouse.id)
+            .then(navigateToBrewhouse);
 
           function navigateToBrewhouse() {
             $location

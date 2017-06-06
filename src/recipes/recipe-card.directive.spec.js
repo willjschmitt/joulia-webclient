@@ -66,7 +66,8 @@ describe('app.recipes', function () {
       var launchRecipePost;
 
       beforeEach(function () {
-        launchRecipePost = $httpBackend.when('POST', 'brewery/brewhouse/launch')
+        launchRecipePost = $httpBackend.when(
+            'POST', 'brewery/api/brewhouse/launch/')
           .respond();
 
         $httpBackend.expectGET('brewery/api/brewhouse');
@@ -79,14 +80,14 @@ describe('app.recipes', function () {
       });
 
       it('should call performLaunch', function () {
-        $httpBackend.expectPOST('brewery/brewhouse/launch');
+        $httpBackend.expectPOST('brewery/api/brewhouse/launch/');
         modalInstance.close({ brewhouse: { id: 0 } });
         $rootScope.$apply();
         $httpBackend.flush();
       });
 
       it('calling performLaunch should change the url', function () {
-        $httpBackend.expectPOST('brewery/brewhouse/launch');
+        $httpBackend.expectPOST('brewery/api/brewhouse/launch/');
         modalInstance.close({ brewhouse: { id: 0 } });
         $rootScope.$apply();
         $httpBackend.flush();

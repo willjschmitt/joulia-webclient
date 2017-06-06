@@ -3,9 +3,9 @@
     .module('app.brewhouse')
     .directive('brewhouseTerminator', brewhouseTerminator);
 
-  brewhouseTerminator.$inject = ['$http', '$uibModal'];
+  brewhouseTerminator.$inject = ['$http', '$uibModal', 'recipeInstances'];
 
-  function brewhouseTerminator($http, $uibModal) {
+  function brewhouseTerminator($http, $uibModal, recipeInstances) {
     return {
       restrict: 'E',
       transclude: true,
@@ -29,13 +29,7 @@
         }
 
         function endRecipeInstanceOnServer() {
-          $http({
-            method: 'POST',
-            url: '/brewery/brewhouse/end',
-            data: {
-              recipe_instance: $scope.recipeInstance,
-            },
-          }).then(unsetrecipeInstance);
+          recipeInstances.end($scope.recipeInstance).then(unsetrecipeInstance);
         }
 
         function unsetrecipeInstance() {
