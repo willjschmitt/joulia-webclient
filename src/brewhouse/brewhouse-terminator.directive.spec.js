@@ -31,7 +31,7 @@ describe('app.brewhouse', function () {
       scope.$digest();
       isolatedScope = element.isolateScope();
 
-      endSessionPost = $httpBackend.when('POST', '/brewery/brewhouse/end')
+      endSessionPost = $httpBackend.when('POST', 'brewery/api/brewhouse/end/')
           .respond();
     });
 
@@ -45,7 +45,7 @@ describe('app.brewhouse', function () {
         const modalInstance = isolatedScope.endSession();
         scope.recipeInstance = 12;
         scope.$digest();
-        $httpBackend.expectPOST('/brewery/brewhouse/end',
+        $httpBackend.expectPOST('brewery/api/brewhouse/end/',
             {recipe_instance: 12})
         modalInstance.close();
         $rootScope.$apply();
