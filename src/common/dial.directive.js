@@ -28,7 +28,8 @@
         function updateDial() {
           $element
             .find('.bemat-pie-chart')
-              .simplePieChart('set', ($scope.value * 100.0).toPrecision(2));
+              .simplePieChart('set',
+                  parseFloat(($scope.value * 100.0).toPrecision(2).toString()));
 
           // Maps a range to color for the dial.
           const colorClasses = {
