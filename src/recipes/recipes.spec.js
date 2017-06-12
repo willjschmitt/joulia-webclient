@@ -19,9 +19,12 @@ describe('app.recipes', function () {
 
   describe('RecipesController', function () {
     var controller, scope, isolatedScope;
-    var recipeQuery, brewhouseQuery, mashPointQuery;
+    var styleQuery, recipeQuery, brewhouseQuery, mashPointQuery;
 
     beforeEach(inject(function ($injector) {
+      styleQuery = $httpBackend.when('GET', 'brewery/api/beerStyle')
+        .respond([{ id: 0, name: "Foo" }, { id: 2, name: "Bar" }]);
+
       recipeQuery = $httpBackend.when('GET', 'brewery/api/recipe')
         .respond([{ id: 0 }, { id: 2 }]);
 
@@ -40,6 +43,14 @@ describe('app.recipes', function () {
 
     it('should be created successfully', function () {
       expect(controller).toBeDefined();
+    });
+
+    it('should have mapped style ids to styles', function () {
+      const want = {
+        0: new breweryResources.BeerStyle({ id: 0, name: "Foo" }),
+        2: new breweryResources.BeerStyle({ id: 2, name: "Bar" }),
+      };
+      expect(scope.styleIndex).toEqual(want);
     });
 
     it('should have mapped recipes to mashPoints', function () {

@@ -20,27 +20,44 @@ describe('app.recipes', function () {
 
   describe('recipeCard directive', function () {
     var element, scope, controller;
-    var recipeQuery, brewhouseQuery;
 
     beforeEach(inject(function ($injector) {
-      recipeQuery = $httpBackend.when('GET', 'brewery/api/recipe')
+      $httpBackend.when('GET', 'brewery/api/recipe')
         .respond([{ id: 0 }, { id: 2 }]);
 
-      brewhouseQuery = $httpBackend.when('GET', 'brewery/api/brewhouse')
+      $httpBackend.when('GET', 'brewery/api/brewhouse')
         .respond([{ id: 0 }, { id: 1 }]);
     }));
 
     beforeEach(function () {
       element = angular.element(
         `<recipe-card
-             recipe="recipe">
+             recipe="recipe"
+             style="style">
          </recipe-card>`);
       $compile(element)($rootScope.$new());
       $rootScope.$digest();
       scope = element.isolateScope() || element.scope();
 
       scope.recipe = {};
+      scope.style = {};
       scope.$digest();
+    });
+
+    describe('template', function () {
+      it("contains recipe", function() {
+        scope.recipe = { name: 'Foo' };
+        scope.$digest();
+
+        expect($(element).find('.recipe-name')[0].innerHTML).toBe('Foo');
+      })
+
+      it("contains style", function () {
+        scope.style = { name: 'Foo' };
+        scope.$digest();
+
+        expect($(element).find('.style-name')[0].innerHTML).toBe('Foo');
+      });
     });
 
     describe('edit', function () {

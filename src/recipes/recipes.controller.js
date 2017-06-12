@@ -9,8 +9,22 @@
       $scope, breweryResources, $uibModal) {
     $scope.recipes = [];
     $scope.mashPointsMap = {};
+    // Index mapping style id to style object.
+    $scope.styleIndex = {};
+    updateStyles();
     updateRecipes();
     $scope.addRecipe = addRecipe;
+
+    /**
+     * Queries the server for the list of styles.
+     */
+    function updateStyles() {
+      $scope.styleIndex = {};
+      breweryResources.BeerStyle.query(
+        styles => _.each(styles, function addStyleToIndex(style) {
+          $scope.styleIndex[style.id] = style;
+        }));
+    }
 
     /**
      * Queries the server for a new list of recipes available.
