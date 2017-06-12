@@ -2,7 +2,7 @@
   <div class="panel-heading">
     <header>
       <div>
-        {{ recipe.name }}
+        <spam class="recipe-name">{{ recipe.name }}</spam>
         <div class="pull-right">
           <a href="" ng-click="edit()">
             <i class="material-icons">create</i>
@@ -12,7 +12,7 @@
           </a>
         </div>
       </div>
-      <p class="subhead-1">{{ recipe.style }}</p>
+      <p class="subhead-1 style-name">{{ style.name }}</p>
     </header>
   </div>
   <div class="panel-body">

@@ -3,14 +3,17 @@
     .module('app.recipes')
     .directive('recipeCard', recipeCard);
 
-  recipeCard.$inject = ['$uibModal', '$http', '$location', 'recipeInstances'];
+  recipeCard.$inject = [
+    '$uibModal', '$http', '$location', 'breweryResources', 'recipeInstances'];
 
-  function recipeCard($uibModal, $http, $location, recipeInstances) {
+  function recipeCard(
+      $uibModal, $http, $location, breweryResources, recipeInstances) {
     return {
       restrict: 'E',
       transclude: true,
       scope: {
         recipe: '=',
+        style: '=',
         mashPoints: '=',
       },
       templateUrl: 'recipes/recipe-card.tpl.html',
