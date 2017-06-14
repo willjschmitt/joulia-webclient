@@ -9,7 +9,7 @@
   </div>
 </section>
 
-<section class="page-content" ng-if="recipeInstance">
+<section class="page-content" ng-if="recipeInstance.id">
   <div class="row">
     <brewhouse-emergency-stop
         class="col-md-2 col-xs-6"
@@ -56,4 +56,4 @@
 
 </section>
 
-<brewhouse-inactive ng-if="!recipeInstance"></brewhouse-inactive>
+<brewhouse-inactive ng-if="!recipeInstance.id"></brewhouse-inactive>
