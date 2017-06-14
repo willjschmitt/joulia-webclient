@@ -87,12 +87,13 @@
     }
 
     function launchAddRecipeModal(brewingCompany) {
+      const recipe = new breweryResources.Recipe({ company: brewingCompany });
       const modalInstance = $uibModal.open({
         animation: true,
         templateUrl: 'recipes/edit-recipe-modal.tpl.html',
         controller: 'EditRecipeModalController',
         resolve: {
-          recipe: function resolveRecipe() { return undefined; },
+          recipe: function resolveRecipe() { return recipe; },
           mashPoints: function resolveMashPoints() { return []; },
           brewingCompany: function resolveBrewingCompany() {
             return brewingCompany;
