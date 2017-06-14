@@ -88,6 +88,7 @@
 
     function launchAddRecipeModal(brewingCompany) {
       const recipe = new breweryResources.Recipe({ company: brewingCompany });
+      recipe.$save();
       const modalInstance = $uibModal.open({
         animation: true,
         templateUrl: 'recipes/edit-recipe-modal.tpl.html',
