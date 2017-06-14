@@ -66,17 +66,22 @@ describe('app.recipes', function () {
 
     describe('addRecipe', function () {
       var modalInstance;
-      var beerStyleQuery;
+      var beerStyleQuery, recipeSave;
 
       beforeEach(function () {
         beerStyleQuery = $httpBackend.when('GET', 'brewery/api/beerStyle')
           .respond();
+        recipeSave = $httpBackend.when('POST', 'brewery/api/recipe')
+          .respond(function(method, url, data) {
+            return [200, angular.extend(JSON.parse(data), { id: Math.random() })];
+          });
       })
 
       it('handles 1 brewing company', function () {
         $httpBackend.when('GET', 'brewery/api/brewingCompany')
           .respond([{ id: 0 }]);
         $httpBackend.expectGET('brewery/api/brewingCompany');
+        $httpBackend.expectPOST('brewery/api/recipe');
         $httpBackend.expectGET('brewery/api/beerStyle');
         modalInstance = scope.addRecipe();
         $httpBackend.flush();
@@ -86,6 +91,7 @@ describe('app.recipes', function () {
         $httpBackend.when('GET', 'brewery/api/brewingCompany')
           .respond([{ id: 0 }]);
         $httpBackend.expectGET('brewery/api/brewingCompany');
+        $httpBackend.expectPOST('brewery/api/recipe');
         $httpBackend.expectGET('brewery/api/beerStyle');
         modalInstance = scope.addRecipe();
         $httpBackend.flush();
