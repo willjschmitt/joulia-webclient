@@ -3,9 +3,13 @@
     .module('app.dashboard')
     .controller('DashboardController', DashboardController);
 
-  DashboardController.$inject = ['$scope', 'breweryResources', '$uibModal'];
+  DashboardController.$inject = [
+    '$scope', 'breweryResources', 'userService', '$uibModal'];
 
-  function DashboardController($scope, breweryResources, $uibModal) {
+  function DashboardController($scope, breweryResources, userService,
+      $uibModal) {
+    $scope.userService = userService;
+
     $scope.brewerys = [];
     // Map of brewery.id's to array of brewhouses in them.
     $scope.brewhouses = {};
