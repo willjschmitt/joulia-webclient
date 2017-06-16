@@ -1,0 +1,32 @@
+<section class="page-header alternative-header">
+  <ol class="breadcrumb">
+    <li>Joulia</li>
+    <li>User Profile</li>
+  </ol>
+  <div class="page-header_title">
+    <h1>User Profile</h1>
+  </div>
+</section>
+
+<section class="page-content">
+  <div class="row-fluid">
+    <div class="col-xs-12">
+      <div class="panel panel-default panel-divider">
+        <div class="panel-heading">
+          <header>User Preferences</header>
+        </div>
+        <div class="panel-body">
+          <div class="form-group">
+            <label>Energy Cost Rate ($/kWh)</label>
+            <input
+                class="form-control"
+                type="number"
+                step="0.01"
+                ng-model="userPreferences.energy_cost_rate"
+                ng-change="saveUserPreferences()" />
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
