@@ -26,6 +26,8 @@ describe('app.profile', function () {
       $httpBackend.when('GET', 'user/api/user_preferences')
         .respond({ id: 0, user: 0, energy_cost_rate: 0.10 });
 
+      $httpBackend.whenGET('brewery/api/brewingCompany').respond([]);
+
       $httpBackend.when('PUT', 'user/api/user_preferences')
         .respond(function (method, url, data, headers, params) {
           return [200, data];
@@ -33,6 +35,7 @@ describe('app.profile', function () {
 
       $httpBackend.expectGET('auth/api/user');
       $httpBackend.expectGET('user/api/user_preferences');
+      $httpBackend.expectGET('brewery/api/brewingCompany');
       scope = $rootScope.$new();
       controller = $controller('ProfileController', { $scope: scope });
       $httpBackend.flush();

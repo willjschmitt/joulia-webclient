@@ -3,7 +3,7 @@
     .module('app.common')
     .service('userService', userService);
 
-  userService.$inject = ['userResources', 'httpStatus'];
+  userService.$inject = ['userResources', 'breweryResources', 'httpStatus'];
 
   /**
    * Provides singleton-access to details around the logged in service. This
@@ -15,13 +15,10 @@
    * sometimes redundantly, to avoid naming collisions, since just "user" would
    * be too common of a name.
    */
-  function userService(userResources, httpStatus) {
+  function userService(userResources, breweryResources, httpStatus) {
     const self = this;
 
-    // Internal variables for tracking user data. Should be considered private.
     self.user = userResources.User.get(handleGetUser, handleFailToGetUser);
-    self.userPreferences = userResources.UserPreferences.get(
-        handleGetUser, handleFailToGetUser);
     self.loggedIn = null;
 
     /**
@@ -30,6 +27,9 @@
      */
     function handleGetUser() {
       self.loggedIn = true;
+
+      self.userPreferences = userResources.UserPreferences.get();
+      self.brewingCompanies = breweryResources.BrewingCompany.query();
     }
 
     /**

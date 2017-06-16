@@ -6,8 +6,7 @@
   ProfileController.$inject = ['$scope', 'userService'];
 
   function ProfileController($scope, userService) {
-    $scope.user = userService.user;
-    $scope.userPreferences = userService.userPreferences;
+    $scope.userService = userService;
 
     $scope.saveUserPreferences = saveUserPreferences;
 
@@ -15,7 +14,7 @@
      * Saves updated UserPreferences to server.
      */
     function saveUserPreferences() {
-      $scope.userPreferences.$update();
+      $scope.userService.userPreferences.$update();
     }
   }
 }());
