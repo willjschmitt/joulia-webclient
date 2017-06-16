@@ -33,6 +33,7 @@ describe('app.common', function () {
             title="title"
             value-name="valueName"
             value-alternate-name="valueAlternateName"
+            value-alternate-function="valueAlternateFunction"
             units="units"
             units-alternate="unitsAlternate"
             overridable="overridable"
@@ -83,6 +84,25 @@ describe('app.common', function () {
       expect(isolatedScope.value).toBeDefined();
       expect(isolatedScope.valueOverride).not.toBeDefined();
       expect(isolatedScope.valueAlternate).toBeDefined();
+    });
+
+    it('should define alternateValue with alternateValueFunction', function() {
+      scope = $rootScope.$new();
+      scope.recipeInstance = 0;
+      scope.valueName = "foo";
+      scope.valueAlternateFunction = function(value) {
+        return value * 2;
+      };
+      element = $compile(html)(scope);
+      scope.$digest();
+      const isolatedScope = element.isolateScope();
+      expect(isolatedScope.value).toBeDefined();
+      expect(isolatedScope.valueOverride).not.toBeDefined();
+      expect(isolatedScope.valueAlternate).toBeDefined();
+
+      isolatedScope.value.latest = 4;
+      scope.$digest();
+      expect(isolatedScope.valueAlternate.latest).toBe(8);
     });
 
     it('should define override with override', function() {
@@ -177,7 +197,7 @@ describe('app.common', function () {
         expect(isolatedScope.valueAlternate.latest).toEqual(21.0);
       });
 
-      it('sets valueAlternate with overridableAlternate set and override on', 
+      it('sets valueAlternate with overridableAlternate set and override on',
           function () {
         scope = $rootScope.$new();
         scope.recipeInstance = 0;
@@ -195,7 +215,7 @@ describe('app.common', function () {
         expect(isolatedScope.valueAlternate.latest).toEqual(12.0);
       });
 
-      it('sets valueAlternate with overridableAlternate set and override off', 
+      it('sets valueAlternate with overridableAlternate set and override off',
           function () {
         scope = $rootScope.$new();
         scope.recipeInstance = 0;

@@ -13,6 +13,7 @@
         title: '=',
         valueName: '=',
         valueAlternateName: '=?',
+        valueAlternateFunction: '=?',
         units: '=',
         unitsAlternate: '=?',
         overridable: '=?',
@@ -38,14 +39,29 @@
         // Subscribe to values and overrides.
         $scope.value = new TimeSeriesUpdater(
             $scope.recipeInstance, $scope.valueName);
+
         if ($scope.overridable) {
           $scope.valueOverride = new TimeSeriesUpdater(
               $scope.recipeInstance, `${$scope.valueName}Override`);
+        }
+
+        if ($scope.valueAlternateName && $scope.valueAlternateFunction) {
+          throw new Error(
+            'Only one of ("valueAlternatName", "valueAlternateFunction") may be'
+            + ' specified.');
         }
         if ($scope.valueAlternateName) {
           $scope.valueAlternate = new TimeSeriesUpdater(
               $scope.recipeInstance, $scope.valueAlternateName);
         }
+        if ($scope.valueAlternateFunction) {
+          $scope.valueAlternate = {};
+          $scope.$watch('value.latest', function updateAlternateValue() {
+            $scope.valueAlternate.latest = $scope.valueAlternateFunction(
+                $scope.value.latest);
+          });
+        }
+
         if ($scope.overridableAlternate) {
           $scope.valueOverride = new TimeSeriesUpdater(
               $scope.recipeInstance, `${$scope.valueAlternateName}Override`);
