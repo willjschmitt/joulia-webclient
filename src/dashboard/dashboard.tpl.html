@@ -16,12 +16,68 @@
   </div>
 </section>
 
-<section class="page-content" >
+<section class="page-content" ng-if="userService.brewingCompanies.length">
   <div class="row" ng-repeat="brewery in brewerys">
     <dashboard-brewery
         class="col-xs-12"
         brewery="brewery"
         brewhouses="brewhouses[brewery.id]">
     </dashboard-brewery>
+  </div>
+
+  <div class="row-fluid">
+    <div class="col-xs-12">
+      <div class="panel panel-default panel-divider">
+        <div class="panel-heading">
+          <header>
+            Welcome to Joulia
+            <p class="subhead-1 style-name">
+              Your Brewing Company doesn't look like it has any Breweries or
+              Equipment associated with it yet.
+            </p>
+          </header>
+        </div>
+        <div class="panel-body">
+          <p>
+            In Joulia, Breweries represent a physical location where you'll be
+            brewing! Once you add a Brewery, you can add the equipment located
+            there to it.
+          </p>
+          <a class="btn btn-large btn-success" ng-click="addBrewery()">
+            Add a Brewery
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<section class="page-content" ng-if="!userService.brewingCompanies.length">
+  <div class="row-fluid">
+    <div class="col-xs-12">
+      <div class="panel panel-default panel-divider">
+        <div class="panel-heading">
+          <header>
+            Welcome to Joulia
+            <p class="subhead-1 style-name">
+              Looks like you're not associated with any Brewing Company yet.
+              Let's fix that!
+            </p>
+          </header>
+        </div>
+        <div class="panel-body">
+          <p>
+            Association with a Brewing Company will allow you to manage and
+            create Breweries and equipment in those breweries. You'll gain
+            access to any equipment your Brewing Company owns in Joulia!
+          </p>
+          <a class="btn btn-large btn-success" href="mailto:will@joulia.io">
+            <i class="material-icons">envelope</i>&nbsp;
+            Request to be associated with a Brewing Company
+          </a>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
