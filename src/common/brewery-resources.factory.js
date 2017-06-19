@@ -1,4 +1,4 @@
-(function loadResourcesFactory() {
+(function loadBreweryResourcesFactory() {
   angular
     .module('app.common')
     .factory('breweryResources', breweryResources);

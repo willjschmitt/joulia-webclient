@@ -22,6 +22,17 @@ describe('app.brewhouse', function () {
     });
   }));
 
+  // Mocks the user service, so we can manipulate user preferences from here.
+  beforeEach(module(function($provide) {
+    $provide.service('userService', function () {
+      const self = this;
+
+      self.userPreferences = {
+        'energy_cost_rate': 0.10,  // $/kWh.
+      }
+    });
+  }));
+
   var $rootScope, $compile, $interval;
 
   beforeEach(inject(function($injector) {
@@ -52,6 +63,18 @@ describe('app.brewhouse', function () {
         expect(element.html()).toContain('Boil Kettle Temperature');
         expect(element.html()).toContain('Mash Tun Temperature');
       });
+    });
+
+    describe('energyUsageToEnergyCost function', function() {
+      it('should convert correctly', function () {
+        // The energy_cost_rate is 0.10 as defined in the userService mock at
+        // the top of this file.
+        const k1KilowattHourInWattHours = 1000.0;
+        const kCostOf1KilowattHour = 0.10;
+        const got = isolatedScope.energyUsageToEnergyCost(
+            k1KilowattHourInWattHours);
+        expect(got).toBe(kCostOf1KilowattHour);
+      })
     });
   });
 
