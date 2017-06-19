@@ -3,7 +3,7 @@
     .module('app', [
       'ngRoute', 'ngResource', 'ui.bootstrap',
       'app.templates', 'app.dashboard', 'app.brewhouse', 'app.recipes',
-      'perfect_scrollbar',
+      'app.profile', 'perfect_scrollbar',
     ])
     .config(routeConfig)
     .config(httpConfig)
@@ -35,6 +35,11 @@
         templateUrl: 'recipes/recipes.tpl.html',
         controller: 'RecipesController',
         controllerAs: 'recipesCtrl',
+      })
+      .when('/profile/', {
+        templateUrl: 'profile/profile.tpl.html',
+        controller: 'ProfileController',
+        controllerAs: 'profileCtrl',
       })
       .otherwise('/');
   }
