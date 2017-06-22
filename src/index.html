@@ -67,6 +67,6 @@
       </section>
     </div>
 
-    <div id="page-wrapper" ng-view></div>
+    <div id="page-wrapper" ng-if="!userService.user.id" ng-view></div>
   </body>
 </html>
