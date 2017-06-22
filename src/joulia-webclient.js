@@ -16,31 +16,6 @@
   function routeConfig($locationProvider, $routeProvider) {
     $locationProvider.hashPrefix('!');
     $routeProvider
-      .when('/', {
-        templateUrl: 'dashboard/dashboard.tpl.html',
-        controller: 'DashboardController',
-        controllerAs: 'dashboardCtrl',
-      })
-      .when('/brewhouse/:brewhouseId', {
-        templateUrl: 'brewhouse/brewhouse.tpl.html',
-        controller: 'BrewhouseController',
-        controllerAs: 'brewhouseCtrl',
-      })
-      .when('/recipes/', {
-        templateUrl: 'recipes/recipes.tpl.html',
-        controller: 'RecipesController',
-        controllerAs: 'recipesCtrl',
-      })
-      .when('/recipe/:recipeId', {
-        templateUrl: 'recipes/recipes.tpl.html',
-        controller: 'RecipesController',
-        controllerAs: 'recipesCtrl',
-      })
-      .when('/profile/', {
-        templateUrl: 'profile/profile.tpl.html',
-        controller: 'ProfileController',
-        controllerAs: 'profileCtrl',
-      })
       .otherwise('/');
   }
 
