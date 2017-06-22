@@ -52,11 +52,11 @@
   </head>
 
   <body class="dark-sidebar dark-header-brand container-fluid">
-    <div id="page-wrapper">
+    <div id="page-wrapper" ng-if="userService.user.id">
 
-      <sidebar ng-if="user" user="user"></sidebar>
+      <sidebar user="user"></sidebar>
 
-      <section ng-if="user" id="right-content">
+      <section id="right-content">
         <joulia-header user="user"></joulia-header>
 
         <section id="right-content-wrapper" perfect-scrollbar>
@@ -65,8 +65,8 @@
           </div>
         </section>
       </section>
-
-      <joulia-login style="width: 100%" ng-if="!user"></joulia-login>
     </div>
+
+    <div id="page-wrapper" ng-view></div>
   </body>
 </html>

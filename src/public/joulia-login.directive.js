@@ -1,6 +1,6 @@
 (function loadJouliaLoginDirective() {
   angular
-    .module('app.common')
+    .module('app.public')
     .directive('jouliaLogin', jouliaLogin);
 
   jouliaLogin.$inject = [];
@@ -12,7 +12,7 @@
       scope: {
         user: '=',
       },
-      templateUrl: 'common/joulia-login.tpl.html',
+      templateUrl: 'public/joulia-login.tpl.html',
       link: function jouliaLoginController() {},
     };
   }

@@ -56,6 +56,7 @@ module.exports = function(config) {
       // the module definitions.
       'src/joulia-webclient.js',
       'src/common/common.module.js',
+      'src/public/public.module.js',
       'src/dashboard/dashboard.module.js',
       'src/recipes/recipes.module.js',
       'src/brewhouse/brewhouse.module.js',

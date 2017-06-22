@@ -1,6 +1,6 @@
 /* eslint-disable */
-describe('app.common', function () {
-  beforeEach(module('app.common'));
+describe('app.public', function () {
+  beforeEach(module('app.public'));
   beforeEach(module('joulia.templates'));
 
   var $rootScope, $compile;

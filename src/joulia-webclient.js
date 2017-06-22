@@ -1,22 +1,21 @@
 (function loadJouliaWebserver() {
   angular
     .module('app', [
-      'ngRoute', 'ngResource', 'ui.bootstrap',
+      'ngRoute', 'ngResource', 'ui.bootstrap', 'app.common', 'app.public',
       'app.templates', 'app.dashboard', 'app.brewhouse', 'app.recipes',
       'app.profile', 'perfect_scrollbar',
     ])
     .config(routeConfig)
     .config(httpConfig)
     .config(resourceConfig)
-    .run(getUser);
+    .run(userConfig);
 
 
   routeConfig.$inject = ['$locationProvider', '$routeProvider'];
 
   function routeConfig($locationProvider, $routeProvider) {
     $locationProvider.hashPrefix('!');
-    $routeProvider
-      .otherwise('/');
+    $routeProvider.otherwise('/');
   }
 
   httpConfig.$inject = ['$httpProvider'];
@@ -32,21 +31,17 @@
     $resourceProvider.defaults.stripTrailingSlashes = false;
   }
 
-  getUser.$inject = ['$rootScope', '$resource'];
+  userConfig.$inject = ['$rootScope', 'userService', '$location'];
 
-  /**
-   * Retrieves user from server to check if logged in.
-   */
-  function getUser($rootScope, $resource) {
-    const userResource = $resource('auth/api/user');
-    userResource.get(user => userLoggedIn($rootScope, user));
-  }
+  function userConfig($rootScope, userService, $location) {
+    $rootScope.userService = userService;
 
-  /**
-   * Sets user and welcomes user to Joulia when they arrive logged in.
-   */
-  function userLoggedIn($rootScope, user) {
-    $rootScope.user = user;
-    $.toasts('add', { msg: 'Welcome to Joulia!' });
+    $rootScope.$watch('userService.user.id', function updateDefaultPath() {
+      if ($rootScope.userService.user.id) {
+        $location.url('/dashboard');
+      } else {
+        $location.url('/');
+      }
+    });
   }
 }());
