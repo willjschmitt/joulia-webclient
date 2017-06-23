@@ -11,6 +11,11 @@
         templateUrl: 'public/public.tpl.html',
         controller: 'PublicController',
         controllerAs: 'publicCtrl',
+      })
+      .when('/login', {
+        templateUrl: 'public/login.tpl.html',
+        controller: 'LoginController',
+        controllerAs: 'loginCtrl',
       });
   }
 }());
