@@ -7,7 +7,6 @@
   routeConfig.$inject = ['$routeProvider'];
 
   function routeConfig($routeProvider) {
-    console.log('in da brewhouse configurating');
     $routeProvider
       .when('/brewhouse/:brewhouseId', {
         templateUrl: 'brewhouse/brewhouse.tpl.html',
