@@ -3,6 +3,16 @@ describe('app.common', function () {
   beforeEach(module('app.common'));
   beforeEach(module('joulia.templates'));
 
+  // Mocks the user service, so we can manipulate user preferences from here.
+  var user = {};
+  beforeEach(module(function($provide) {
+    $provide.service('userService', function () {
+      const self = this;
+
+      self.user = user;
+    });
+  }));
+
   var $rootScope, $compile, $httpBackend;
 
   beforeEach(inject(function($injector) {
@@ -21,19 +31,18 @@ describe('app.common', function () {
 
     beforeEach(function () {
       const html = `
-        <joulia-header
-            user="user">
+        <joulia-header>
         </joulia-header>`;
       scope = $rootScope.$new();
       element = $compile(html)(scope);
-      scope.user = {};
       scope.$digest();
       isolatedScope = element.isolateScope();
     });
 
 
     it('contains full name', function () {
-      scope.user = { first_name: "John", last_name: "Doe" };
+      user.first_name = "John";
+      user.last_name = "Doe";
       scope.$digest();
 
       expect(element.html()).toContain('John Doe');

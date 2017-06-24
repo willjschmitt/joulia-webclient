@@ -3,17 +3,16 @@
     .module('app.common')
     .directive('jouliaHeader', jouliaHeader);
 
-  jouliaHeader.$inject = ['$rootScope'];
+  jouliaHeader.$inject = ['$rootScope', 'userService'];
 
-  function jouliaHeader($rootScope) {
+  function jouliaHeader($rootScope, userService) {
     return {
       restrict: 'E',
       transclude: true,
-      scope: {
-        user: '=',
-      },
+      scope: {},
       templateUrl: 'common/joulia-header.tpl.html',
       link: function jouliaHeaderController($scope) {
+        $scope.user = userService.user;
         $scope.fullName = fullName;
         $scope.fullscreenButton = 'fullscreen';
         $scope.toggleSidebarClass = 'SidebarOpen';
