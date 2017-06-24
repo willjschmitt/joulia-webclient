@@ -72,9 +72,9 @@
       { href: 'static/vendor/ultimate-flat/inc/css/bootstrap.min.css' },
       { href: 'static/vendor/ultimate-flat/style.css' },
       { href: 'static/vendor/ultimate-flat/inc/css/green.css' },
-      { href: 'static/vendor/ultimate-flat/inc/flexslider/flexslider.css' },
-      { href: 'static/vendor/ultimate-flat/inc/owl-carousel/owl.carousel.css' },
-      { href: 'static/vendor/ultimate-flat/inc/owl-carousel/owl.theme.css' },
+      { href: 'static/bower_components/flexslider/flexslider.css' },
+      { href: 'static/bower_components/owl.carousel/dist/assets/owl.carousel.css' },
+      { href: 'static/bower_components/owl.carousel/dist/assets/owl.theme.css' },
       { href: 'static/vendor/ultimate-flat/inc/magnific-popup/magnific-popup.css' },
     ];
 
