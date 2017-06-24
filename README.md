@@ -16,6 +16,8 @@ bower install
 
 Add the stylization from Bemat Admin. This project uses a purchased license of Bemat Admin from Wrap Bootstrap. Purchase a license of [Bemat](https://wrapbootstrap.com/theme/bemat-material-design-admin-template-WB042J880) for your use from WrapBootstrap. As of this writing, the licenses for single-use were $10. Unzip the Bemat package and place the `js`,`css`, and `vendor` directories into the `vendor/bemat-admin` directory.
 
+Add the stylization from Ultimate Flat. This project uses a purchased license of Ultimate Flat from Wrap Bootstrap. Purchase a license of [Ultimate Flat](https://wrapbootstrap.com/theme/ultimate-flat-onepage-template-WB0353FX3) for your use from WrapBootstrap. As of this writing, the licenses for single-use were $12. Unzip the Ultimate Flatpackage and place the directories into the `vendor/ultimate-flat` directory.
+
 
 ## Project Information
 This project is based on one web framework:
