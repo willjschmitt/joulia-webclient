@@ -34,6 +34,8 @@ module.exports = function(config) {
       'bower_components/Modernizr/modernizr.custom.js',
       'bower_components/moment/moment.js',
       'bower_components/screenfull/dist/screenfull.min.js',
+      'bower_components/flexslider/jquery.flexslider-min.js',
+      'bower_components/owl.carousel/dist/owl.carousel.js',
 
       // Third-party open-source licensed libaries.
       'vendor/materialRipple/jquery.materialRipple.js',
