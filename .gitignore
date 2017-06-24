@@ -110,6 +110,7 @@ bower_components/
 
 # Third Party Files
 vendor/bemat-admin/
+vendor/ultimate-flat/
 
 # NPM
 node_modules
