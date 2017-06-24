@@ -1,0 +1,31 @@
+<a
+    id="menu-toggle"
+    class="btn btn-links btn-lg toggle"
+    ng-click="toggleSidebar(); $event.stopPropagation();">
+  <i class="fa fa-bars fa-lg"></i>
+</a>
+<div id="sidebar-wrapper" ng-class="showSidebar ? 'active' : ''">
+  <div>
+    <a
+        id="menu-close"
+        class="btn btn-links btn-lg toggle"
+        ng-click="toggleSidebar(); $event.stopPropagation();">
+      <i class="fa fa-times fa-lg"></i>
+    </a>
+  </div>
+  <ul class="sidebar-nav">
+    <li class="spacer-25px"></li>
+    <li>
+      <a href="#header"><i class="fa fa-home fa-lg"></i> Home</a>
+    </li>
+    <li>
+      <a href="#feature"><i class="fa fa-bicycle fa-lg"></i> Features</a>
+    </li>
+    <li>
+      <a href="#about"><i class="fa fa-users fa-lg"></i> About</a>
+    </li>
+    <li>
+      <a href="#screenshots"><i class="fa fa-slideshare fa-lg"></i> Gallery</a>
+    </li>
+  </ul>
+</div>
