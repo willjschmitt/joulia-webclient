@@ -8,6 +8,7 @@
 
   function DashboardController($scope, breweryResources, userService,
       $uibModal) {
+    console.log('dashing');
     $scope.userService = userService;
 
     $scope.brewerys = [];

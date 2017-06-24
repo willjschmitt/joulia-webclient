@@ -34,10 +34,25 @@
   userConfig.$inject = ['$rootScope', 'userService', '$location'];
 
   function userConfig($rootScope, userService, $location) {
+    const self = this;
+    self.userNotYetResolved = true;
+
     $rootScope.userService = userService;
 
     // Watch for user change and send them to defaults.
     $rootScope.$watch('userService.user.id', function updateDefaultPath() {
+      // Nothing to do if the change of the user is just retrieving it.
+      if (!$rootScope.userService.user.$resolved) {
+        return;
+      }
+
+      // If this is the first time we see the user resolved, don't redirect.
+      if (self.userNotYetResolved) {
+        self.userNotYetResolved = false;
+        return;
+      }
+
+      // Redirect to the base page upon a login status change.
       if ($rootScope.userService.user.id) {
         $location.url('/dashboard');
       } else {
