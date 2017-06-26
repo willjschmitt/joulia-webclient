@@ -7,7 +7,9 @@
 
   function routeConfig($routeProvider) {
     $routeProvider
-      .when('/', {
+      // TODO(#87): Change public back to root ("/"), when a workaround is no
+      // longer needed to handle the private default landing page.
+      .when('/public', {
         templateUrl: 'public/public.tpl.html',
         controller: 'PublicController',
         controllerAs: 'publicCtrl',

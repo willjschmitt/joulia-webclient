@@ -15,7 +15,7 @@
 
   function routeConfig($locationProvider, $routeProvider) {
     $locationProvider.hashPrefix('!');
-    $routeProvider.otherwise('/');
+    $routeProvider.otherwise('/dashboard');
   }
 
   httpConfig.$inject = ['$httpProvider'];
@@ -46,7 +46,17 @@
         return;
       }
 
-      // If this is the first time we see the user resolved, don't redirect.
+      // If the user is not logged in, definitely redirect them to the index,
+      // regardless if we had checked them before or not.
+      // TODO(#87): This only works as a workaround while there is only one
+      // public page. Need to figure out a long-term solution when more are
+      // introduced.
+      if (!$rootScope.userService.user.id) {
+        $location.url('/public');
+      }
+
+      // Otherwise if this is the first time we see the user resolved, don't
+      // redirect.
       if (self.userNotYetResolved) {
         self.userNotYetResolved = false;
         return;
@@ -56,7 +66,7 @@
       if ($rootScope.userService.user.id) {
         $location.url('/dashboard');
       } else {
-        $location.url('/');
+        $location.url('/public');
       }
     });
 
