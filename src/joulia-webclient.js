@@ -15,7 +15,7 @@
 
   function routeConfig($locationProvider, $routeProvider) {
     $locationProvider.hashPrefix('!');
-    $routeProvider.otherwise('/dashboard');
+    $routeProvider.otherwise('/public');
   }
 
   httpConfig.$inject = ['$httpProvider'];
@@ -35,7 +35,6 @@
 
   function userConfig($rootScope, userService, $location) {
     const self = this;
-    self.userNotYetResolved = true;
 
     $rootScope.userService = userService;
 
@@ -46,26 +45,23 @@
         return;
       }
 
-      // If the user is not logged in, definitely redirect them to the index,
-      // regardless if we had checked them before or not.
-      // TODO(#87): This only works as a workaround while there is only one
-      // public page. Need to figure out a long-term solution when more are
-      // introduced.
-      if (!$rootScope.userService.user.id) {
-        $location.url('/public');
-      }
-
-      // Otherwise if this is the first time we see the user resolved, don't
-      // redirect.
-      if (self.userNotYetResolved) {
-        self.userNotYetResolved = false;
-        return;
-      }
+      // TODO(willjschmitt): This will always force a user to dashboard or
+      // public on the resolution of the user, which happens on the first page
+      // load. This is non-ideal, but until I figure a sustainable way to push
+      // users to the public pages if they are not logged in or to the dashboard
+      // once they log in, we will have to deal with the hassle of not being
+      // able to link directly to pages, which is better than not having either
+      // at all.
 
       // Redirect to the base page upon a login status change.
       if ($rootScope.userService.user.id) {
         $location.url('/dashboard');
       } else {
+        // If the user is not logged in, definitely redirect them to the index,
+        // regardless if we had checked them before or not.
+        // TODO(#87): This only works as a workaround while there is only one
+        // public page. Need to figure out a long-term solution when more are
+        // introduced.
         $location.url('/public');
       }
     });
