@@ -34,8 +34,6 @@
   userConfig.$inject = ['$rootScope', 'userService', '$location'];
 
   function userConfig($rootScope, userService, $location) {
-    const self = this;
-
     $rootScope.userService = userService;
 
     // Watch for user change and send them to defaults.
