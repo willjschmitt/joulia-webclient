@@ -40,7 +40,7 @@
     $rootScope.userService = userService;
 
     // Watch for user change and send them to defaults.
-    $rootScope.$watch('userService.user.id', function updateDefaultPath() {
+    $rootScope.$watch('userService.user.$resolved', function updateDefaultPath() {
       // Nothing to do if the change of the user is just retrieving it.
       if (!$rootScope.userService.user.$resolved) {
         return;
@@ -89,7 +89,7 @@
     ];
 
     // Watch for user change and change css based on part of app.
-    $rootScope.$watch('userService.user.id', function updateCss() {
+    $rootScope.$watch('userService.user.$resolved', function updateCss() {
       if ($rootScope.userService.user.id) {
         $rootScope.csss = bematCsss;
       } else {
