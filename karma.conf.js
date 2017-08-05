@@ -51,6 +51,8 @@ module.exports = function(config) {
       // Third-party proprietary licensed libaries.
       //'vendor/bemat-admin/js/bemat-admin-common.js',
 
+      // Load in test helper functions.
+      'src/test/input-checkers.js',
 
       // Need to manually load the modules for now to make sure they are
       // available for when adding the controllers, etc., to them.

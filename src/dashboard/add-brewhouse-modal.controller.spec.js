@@ -63,5 +63,27 @@ describe('app.dashboard add-brewhouse-modal.controller', function () {
         expect($uibModalInstance.dismiss).toHaveBeenCalled();
       });
     });
+
+    describe('selectTab', function () {
+      it('should disable the old tab and enable the new', function() {
+        expect(scope.tabSelected['boil_kettle']).toBeTruthy();
+        expect(scope.tabSelected['mash_tun']).toBeFalsy();
+        expect(scope.tabSelected['main_pump']).toBeFalsy();
+        scope.selectTab('mash_tun');
+        expect(scope.tabSelected['boil_kettle']).toBeFalsy();
+        expect(scope.tabSelected['mash_tun']).toBeTruthy();
+        expect(scope.tabSelected['main_pump']).toBeFalsy();
+      });
+
+      it('should leave selected tab enabled', function() {
+        expect(scope.tabSelected['boil_kettle']).toBeTruthy();
+        expect(scope.tabSelected['mash_tun']).toBeFalsy();
+        expect(scope.tabSelected['main_pump']).toBeFalsy();
+        scope.selectTab('boil_kettle');
+        expect(scope.tabSelected['boil_kettle']).toBeTruthy();
+        expect(scope.tabSelected['mash_tun']).toBeFalsy();
+        expect(scope.tabSelected['main_pump']).toBeFalsy();
+      });
+    });
   });
 });
