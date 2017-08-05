@@ -25,10 +25,11 @@
         function addBrewhouse() {
           const modalInstance = $uibModal.open({
             animation: true,
-            templateUrl: 'dashboard/add-brewhouse-modal.tpl.html',
-            controller: 'AddBrewhouseModalController',
+            templateUrl: 'dashboard/edit-brewhouse-modal.tpl.html',
+            controller: 'EditBrewhouseModalController',
             resolve: {
               brewery: $scope.brewery,
+              brewhouse: null,
             },
           });
 

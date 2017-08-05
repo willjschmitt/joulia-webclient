@@ -17,7 +17,7 @@ describe('app.dashboard add-brewhouse-modal.controller', function () {
     $httpBackend.verifyNoOutstandingRequest();
   });
 
-  describe('AddBrewhouseModalController', function () {
+  describe('EditBrewhouseModalController', function () {
     var controller, scope;
     var brewhouseSave;
     var $uibModalInstance;
@@ -36,10 +36,11 @@ describe('app.dashboard add-brewhouse-modal.controller', function () {
       brewery = { id: 0, name: "Downtown Brewery" };
 
       scope = $rootScope.$new();
-      controller = $controller('AddBrewhouseModalController', {
+      controller = $controller('EditBrewhouseModalController', {
         $scope: scope,
         $uibModalInstance: $uibModalInstance,
         brewery: brewery,
+        brewhouse: null,
       });
     });
 
@@ -66,23 +67,23 @@ describe('app.dashboard add-brewhouse-modal.controller', function () {
 
     describe('selectTab', function () {
       it('should disable the old tab and enable the new', function() {
-        expect(scope.tabSelected['boil_kettle']).toBeTruthy();
-        expect(scope.tabSelected['mash_tun']).toBeFalsy();
-        expect(scope.tabSelected['main_pump']).toBeFalsy();
+        expect(scope.tabSelected.boil_kettle).toBeTruthy();
+        expect(scope.tabSelected.mash_tun).toBeFalsy();
+        expect(scope.tabSelected.main_pump).toBeFalsy();
         scope.selectTab('mash_tun');
-        expect(scope.tabSelected['boil_kettle']).toBeFalsy();
-        expect(scope.tabSelected['mash_tun']).toBeTruthy();
-        expect(scope.tabSelected['main_pump']).toBeFalsy();
+        expect(scope.tabSelected.boil_kettle).toBeFalsy();
+        expect(scope.tabSelected.mash_tun).toBeTruthy();
+        expect(scope.tabSelected.main_pump).toBeFalsy();
       });
 
       it('should leave selected tab enabled', function() {
-        expect(scope.tabSelected['boil_kettle']).toBeTruthy();
-        expect(scope.tabSelected['mash_tun']).toBeFalsy();
-        expect(scope.tabSelected['main_pump']).toBeFalsy();
+        expect(scope.tabSelected.boil_kettle).toBeTruthy();
+        expect(scope.tabSelected.mash_tun).toBeFalsy();
+        expect(scope.tabSelected.main_pump).toBeFalsy();
         scope.selectTab('boil_kettle');
-        expect(scope.tabSelected['boil_kettle']).toBeTruthy();
-        expect(scope.tabSelected['mash_tun']).toBeFalsy();
-        expect(scope.tabSelected['main_pump']).toBeFalsy();
+        expect(scope.tabSelected.boil_kettle).toBeTruthy();
+        expect(scope.tabSelected.mash_tun).toBeFalsy();
+        expect(scope.tabSelected.main_pump).toBeFalsy();
       });
     });
   });
