@@ -111,5 +111,13 @@ describe('app.dashboard', function () {
         expect(scope.showToken).toBeFalsy();
       });
     });
+
+    describe('editBrewhouse', function () {
+      it('should create a modal', function () {
+        const modalInstance = scope.editBrewhouse();
+        $rootScope.$apply();
+        expect(modalInstance).toBeDefined();
+      });
+    });
   });
 });

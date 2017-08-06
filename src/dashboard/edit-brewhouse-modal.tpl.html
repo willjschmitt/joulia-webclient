@@ -1,0 +1,155 @@
+<div class="modal-header">
+  <h4 ng-if="!brewhouse.hasOwnProperty('id')" class="modal-title">
+    Add brewhouse to {{brewery.name}}
+  </h4>
+  <h4 ng-if="brewhouse.hasOwnProperty('id')" class="modal-title">
+    Edit {{brewhouse.name}} brewhouse
+  </h4>
+</div>
+<div class="modal-body">
+  <div class="form-group">
+    <input
+        name="name"
+        id="name"
+        class="form-control"
+        ng-model="brewhouse.name"
+        type="text">
+    <label>Name</label>
+  </div>
+
+  <div>
+
+    <ul class="nav nav-tabs">
+      <li ng-class="tabSelected['boil_kettle'] ? 'active' : ''">
+        <a href="" ng-click="selectTab('boil_kettle')">Boil Kettle</a>
+      </li>
+      <li ng-class="tabSelected['mash_tun'] ? 'active' : ''">
+        <a href="" ng-click="selectTab('mash_tun')">Mash Tun</a>
+      </li>
+      <li ng-class="tabSelected['main_pump'] ? 'active' : ''">
+        <a href="" ng-click="selectTab('main_pump')">Main Pump</a>
+      </li>
+    </ul>
+
+    <div class="tab-content">
+      <div
+          class="tab-pane"
+          id="boil_kettle"
+          ng-class="tabSelected['boil_kettle'] ? 'active' : ''">
+        <div class="form-group">
+          <input
+              name="boil_kettle__volume"
+              id="boil_kettle__volume"
+              class="form-control"
+              ng-model="brewhouse.boil_kettle.volume"
+              type="number"
+              step="0.1"
+              required>
+          <label>Volume (gal)</label>
+        </div>
+
+        <div>
+          <h4>Heating Element</h4>
+          <div class="form-group">
+            <input
+                name="boil_kettle__heating_element__rating"
+                id="boil_kettle__heating_element__rating"
+                class="form-control"
+                ng-model="brewhouse.boil_kettle.heating_element.rating"
+                type="number"
+                step="1"
+                required>
+            <label>Element Rating (Watts)</label>
+          </div>
+          <div class="form-group">
+            <input
+                name="boil_kettle__heating_element__pin"
+                id="boil_kettle__heating_element__pin"
+                class="form-control"
+                ng-model="brewhouse.boil_kettle.heating_element.pin"
+                type="number"
+                step="1"
+                required>
+            <label>Pin Number (RPi3 BCM)</label>
+          </div>
+        </div>
+
+        <div>
+          <h4>Temperature Sensor</h4>
+          <rtd-form
+              temperature-sensor="brewhouse.mash_tun.temperature_sensor">
+          </rtd-form>
+        </div>
+      </div>
+
+      <div
+          class="tab-pane"
+          id="mash_tun"
+          ng-class="tabSelected['mash_tun'] ? 'active' : ''">
+        <div class="form-group">
+          <input
+              name="mash_tun__volume"
+              id="boil_kettle__volume"
+              class="form-control"
+              ng-model="brewhouse.mash_tun.volume"
+              type="number"
+              step="0.1"
+              required>
+          <label>Volume (gal)</label>
+        </div>
+        <div class="form-group">
+          <input
+              name="mash_tun__heat_exchanger_conductivity"
+              id="boil_kettle__heat_exchanger_conductivity"
+              class="form-control"
+              ng-model="brewhouse.mash_tun.heat_exchanger_conductivity"
+              type="number"
+              step="0.1"
+              required>
+          <label>Heat Exchanger Conductivity (W/&Delta;&deg;F)</label>
+        </div>
+
+        <div>
+          <h4>Temperature Sensor</h4>
+          <rtd-form
+              temperature-sensor="brewhouse.boil_kettle.temperature_sensor">
+          </rtd-form>
+        </div>
+      </div>
+
+      <div class="tab-content">
+      <div
+          class="tab-pane"
+          id="main_pump"
+          ng-class="tabSelected['main_pump'] ? 'active' : ''">
+        <div class="form-group">
+          <input
+              name="boil_kettle__volume"
+              id="boil_kettle__volume"
+              class="form-control"
+              ng-model="brewhouse.main_pump.pin"
+              type="number"
+              step="1"
+              required>
+          <label>Pin Number (RPi3 BCM)</label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-footer">
+  <button
+      type="button"
+      class="btn btn-primary btn-flat btn-ripple"
+      data-dismiss="modal"
+      ng-click="cancel()">
+    Cancel
+  </button>
+  <button
+      type="button"
+      class="btn btn-primary btn-flat btn-ripple"
+      ng-click="ok()">
+    {{ !brewhouse.hasOwnProperty('id') ? 'Add' : 'Save' }}
+  </button>
+</div>

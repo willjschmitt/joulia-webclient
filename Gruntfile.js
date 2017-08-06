@@ -30,6 +30,7 @@ module.exports = function(grunt) {
         // Need to load module definitions, first.
         'src/**/*.module.js',
         'src/**/!(*.module|*.spec).js',
+        'src/!(test)/**.js',
       ],
       html2JsTemplates: ['<%= distDir %>/templates/**/*.js'],
       tpl: ['src/**/*.tpl.html'],

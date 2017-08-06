@@ -1,0 +1,110 @@
+<div class="form-group">
+  <input
+      name="analog_pin"
+      id="analog_pin"
+      class="form-control"
+      ng-model="temperatureSensor.analog_pin"
+      type="number"
+      step="1">
+  <label>RTD Analog Pin Number</label>
+</div>
+<div class="form-group">
+  <input
+      name="tau_filter"
+      id="tau_filter"
+      class="form-control"
+      ng-model="temperatureSensor.tau_filter"
+      type="number"
+      step="0.1">
+  <label>RTD Filtering Time Constant (seconds)</label>
+</div>
+<div class="form-group">
+  <input
+      name="analog_reference"
+      id="analog_reference"
+      class="form-control"
+      ng-model="temperatureSensor.analog_reference"
+      type="number"
+      step="0.01">
+  <label>RTD Analog Reference</label>
+</div>
+<div class="form-group">
+  <input
+      name="rtd__alpha"
+      id="rtd__alpha"
+      class="form-control"
+      ng-model="temperatureSensor.rtd.alpha"
+      type="number"
+      step="0.00001">
+  <label>RTD Alpha (&Omega;/&deg;C)</label>
+</div>
+<div class="form-group">
+  <input
+      name="rtd__zero_resistance"
+      id="rtd__zero_resistance"
+      class="form-control"
+      ng-model="temperatureSensor.rtd.zero_resistance"
+      type="number"
+      step="1">
+  <label>RTD Resistance at 0&deg;C (&Omega;)</label>
+</div>
+<div class="form-group">
+  <input
+      name="amplifier__vcc"
+      id="amplifier__vcc"
+      class="form-control"
+      ng-model="temperatureSensor.amplifier.vcc"
+      type="number"
+      step="0.01">
+  <label>RTD Amplifier Vcc (Volts)</label>
+</div>
+<div class="form-group">
+  <input
+      name="amplifier__vcc"
+      id="amplifier__vcc"
+      class="form-control"
+      ng-model="temperatureSensor.amplifier.rtd_top_resistance"
+      type="number"
+      step="0.01">
+  <label>RTD Amplifier Divider Top Resistance (&Omega;)</label>
+</div>
+<div class="form-group">
+  <input
+      name="amplifier__amplifier_resistance_a"
+      id="amplifier__amplifier_resistance_a"
+      class="form-control"
+      ng-model="temperatureSensor.amplifier.amplifier_resistance_a"
+      type="number"
+      step="10000">
+  <label>RTD Amplifier Resistance A (&Omega;)</label>
+</div>
+<div class="form-group">
+  <input
+      name="amplifier__amplifier_resistance_b"
+      id="amplifier__amplifier_resistance_b"
+      class="form-control"
+      ng-model="temperatureSensor.amplifier.amplifier_resistance_b"
+      type="number"
+      step="10000">
+  <label>RTD Amplifier Resistance B (&Omega;)</label>
+</div>
+<div class="form-group">
+  <input
+      name="amplifier__offset_resistance_top"
+      id="amplifier__offset_resistance_top"
+      class="form-control"
+      ng-model="temperatureSensor.amplifier.offset_resistance_top"
+      type="number"
+      step="1000">
+  <label>RTD Amplifier Offset Resistance Top (&Omega;)</label>
+</div>
+<div class="form-group">
+  <input
+      name="amplifier__offset_resistance_bottom"
+      id="amplifier__offset_resistance_bottom"
+      class="form-control"
+      ng-model="temperatureSensor.amplifier.offset_resistance_bottom"
+      type="number"
+      step="10000">
+  <label>RTD Amplifier Offset Resistance Bottom (&Omega;)</label>
+</div>
