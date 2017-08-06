@@ -18,7 +18,7 @@
 
     service.responseError = function redirectOn401(response) {
       if (response.status === 401) {
-        $window.location.href = getPublicUrl();
+        $window.location.href = getPublicUrl($location);
         return {};
       }
       return $q.reject(response);
@@ -61,13 +61,13 @@
 
       // Redirect to public if there is no user.
       if (!$rootScope.userService.user.id) {
-        $window.location.href = getPublicUrl();
+        $window.location.href = getPublicUrl($location);
       }
     });
   }
 
-  function getPublicUrl() {
+  function getPublicUrl($location) {
     const rootHost = $location.host().replace('brew.', '');
-    return '//' + rootHost;
+    return `//${rootHost}`;
   }
 }());
