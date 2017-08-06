@@ -3,13 +3,21 @@
     .module('app.common')
     .service('timeSeriesSocket', timeSeriesSocket);
 
-  timeSeriesSocket.$inject = ['$websocket', '$http'];
+  timeSeriesSocket.$inject = ['$websocket', '$http', '$location'];
 
-  function timeSeriesSocket($websocket, $http) {
+  function timeSeriesSocket($websocket, $http, $location) {
     const self = this;
 
+    let websocketProtocol;
+    if ($location.protocol() === 'https') {
+      websocketProtocol = 'wss';
+    } else {
+      websocketProtocol = 'ws';
+    }
+
+    const socketUrl = '/live/timeseries/socket/';
     self.socket = $websocket(
-        `ws://${window.location.host}/live/timeseries/socket/`,
+        `${websocketProtocol}://${window.location.host}${socketUrl}`,
         { reconnectIfNotNormalClose: true });
 
     self.socket.onMessage(onSocketMessage);
