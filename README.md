@@ -18,6 +18,7 @@ Add the stylization from Bemat Admin. This project uses a purchased license of B
 
 Add the stylization from Ultimate Flat. This project uses a purchased license of Ultimate Flat from Wrap Bootstrap. Purchase a license of [Ultimate Flat](https://wrapbootstrap.com/theme/ultimate-flat-onepage-template-WB0353FX3) for your use from WrapBootstrap. As of this writing, the licenses for single-use were $12. Unzip the Ultimate Flatpackage and place the directories into the `vendor/ultimate-flat` directory.
 
+Note: a few css files from licensed sources have http:// @imports for FontAwesome and Google fonts. They should be replaced with https:// if operating in SSL, since mixed content is not permitted to be loaded when loading an SSL page.
 
 ## Project Information
 This project is based on one web framework:
