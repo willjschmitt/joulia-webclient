@@ -21,11 +21,13 @@
 
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
 
-    <link href="static/vendor/bemat-admin/css/bootstrap.css" rel="stylesheet">
-    <link href="static/vendor/bemat-admin/css/themes/theme-default/bemat-admin.css" rel="stylesheet">
-    <link href="static/css/joulia.css" rel="stylesheet">
-    <link href="static/vendor/bemat-admin/vendor/google-code-prettify/prettify-tomorrow.css" rel="stylesheet">
-    <link href="static/vendor/bemat-admin/vendor/nvd3/nv.d3.css" rel="stylesheet">
+    <link href="static/vendor/ultimate-flat/inc/css/bootstrap.min.css" rel="stylesheet">
+    <link href="static/vendor/ultimate-flat/style.css" rel="stylesheet">
+    <link href="static/vendor/ultimate-flat/inc/css/green.css" rel="stylesheet">
+    <link href="static/bower_components/flexslider/flexslider.css" rel="stylesheet">
+    <link href="static/bower_components/owl.carousel/dist/assets/owl.carousel.css" rel="stylesheet">
+    <link href="static/bower_components/owl.carousel/dist/assets/owl.theme.default.css" rel="stylesheet">
+    <link href="static/vendor/ultimate-flat/inc/magnific-popup/magnific-popup.css" rel="stylesheet">
 
     <script type="text/javascript" src="static/bower_components/jquery/dist/jquery.js"></script>
     <script type="text/javascript" src="static/bower_components/jquery-ui/jquery-ui.js"></script>
@@ -75,24 +77,11 @@
     <!--<script src="inc/magnific-popup/jquery.magnific-popup.js"></script>
     <script src="inc/isotope/jquery.isotope.min.js"></script>-->
 
-    <script type="text/javascript" src="static/<%= pkg.name %>.js"></script>
+    <script type="text/javascript" src="static/public.js"></script>
 
   </head>
 
   <body class="dark-sidebar dark-header-brand container-fluid">
-    <div id="page-wrapper">
-
-      <sidebar user="user"></sidebar>
-
-      <section id="right-content">
-        <joulia-header user="user"></joulia-header>
-
-        <section id="right-content-wrapper" perfect-scrollbar>
-          <div class="right-content-outter">
-            <div class="right-content-inner" ng-view></div>
-          </div>
-        </section>
-      </section>
-    </div>
+    <span ng-view></span>
   </body>
 </html>
