@@ -7,7 +7,7 @@
 
   function routeConfig($routeProvider) {
     $routeProvider
-      .when('/dashboard', {
+      .when('/', {
         templateUrl: 'dashboard/dashboard.tpl.html',
         controller: 'DashboardController',
         controllerAs: 'dashboardCtrl',

@@ -29,8 +29,13 @@ module.exports = function(grunt) {
         'src/joulia-webclient.js',
         // Need to load module definitions, first.
         'src/**/*.module.js',
-        'src/**/!(*.module|*.spec).js',
-        'src/!(test)/**.js',
+        'src/**/!(*.module|*.spec|public).js',
+      ],
+      publicJs: [
+        'src/public.js',
+        // Need to load module definitions, first.
+        'src/**/*.module.js',
+        'src/**/!(*.module|*.spec|joulia-webclient).js',
       ],
       html2JsTemplates: ['<%= distDir %>/templates/**/*.js'],
       tpl: ['src/**/*.tpl.html'],
@@ -61,7 +66,7 @@ module.exports = function(grunt) {
       },
     },
     eslint: {
-      target: ['<%= src.js %>'],
+      target: ['<%= src.js %>', '<%= src.publicJs %>'],
     },
     html2js: {
       joulia: {
@@ -81,6 +86,17 @@ module.exports = function(grunt) {
       index: {
         src: ['src/index.html'],
         dest: '<%= distDir %>/static/index.html',
+        options: {
+          process: true,
+        },
+      },
+      publicDist: {
+        src: ['<%= src.html2JsTemplates %>', '<%= src.publicJs %>'],
+        dest: '<%= distDir %>/static/public.js',
+      },
+      publicIndex: {
+        src: ['src/public_index.html'],
+        dest: '<%= distDir %>/static/public_index.html',
         options: {
           process: true,
         },
@@ -110,10 +126,12 @@ module.exports = function(grunt) {
     watch: {
       scripts: {
         files: [
+          '<%= src.publicJs %>',
           '<%= src.js %>',
           '<%= src.tests %>',
           '<%= src.tpl %>',
           'src/index.html',
+          'src/public_index.html',
         ],
         tasks: ['build'],
         options: {
