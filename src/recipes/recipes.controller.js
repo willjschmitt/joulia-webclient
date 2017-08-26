@@ -88,23 +88,22 @@
 
     function launchAddRecipeModal(brewingCompany) {
       const recipe = new breweryResources.Recipe({ company: brewingCompany });
-      recipe.$save();
-      const modalInstance = $uibModal.open({
-        animation: true,
-        templateUrl: 'recipes/edit-recipe-modal.tpl.html',
-        controller: 'EditRecipeModalController',
-        resolve: {
-          recipe: function resolveRecipe() { return recipe; },
-          mashPoints: function resolveMashPoints() { return []; },
-          brewingCompany: function resolveBrewingCompany() {
-            return brewingCompany;
+      recipe.$save(function openModal() {
+        const modalInstance = $uibModal.open({
+          animation: true,
+          templateUrl: 'recipes/edit-recipe-modal.tpl.html',
+          controller: 'EditRecipeModalController',
+          resolve: {
+            recipe: function resolveRecipe() { return recipe; },
+            mashPoints: function resolveMashPoints() { return []; },
+            brewingCompany: function resolveBrewingCompany() {
+              return brewingCompany;
+            },
           },
-        },
+        });
+
+        modalInstance.result.then(updateRecipes);
       });
-
-      modalInstance.result.then(updateRecipes);
-
-      return modalInstance;
     }
   }
 }());

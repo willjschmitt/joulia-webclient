@@ -66,14 +66,35 @@ describe('app.recipes', function () {
 
     describe('addRecipe', function () {
       var modalInstance;
-      var beerStyleQuery, recipeSave;
+      var beerStyleQuery, maltIngredientQuery, bitteringIngredientQuery;
+      var maltIngredientAdditionQuery, bitteringIngredientAdditionQuery;
+      var recipeSave;
 
       beforeEach(function () {
         beerStyleQuery = $httpBackend.when('GET', 'brewery/api/beerStyle')
           .respond();
+        maltIngredientQuery = $httpBackend.when(
+            'GET', 'brewery/api/malt_ingredient')
+          .respond();
+        bitteringIngredientQuery = $httpBackend.when(
+            'GET', 'brewery/api/bittering_ingredient')
+          .respond();
+
+        maltIngredientAdditionQuery = $httpBackend.when(
+            'GET', /brewery\/api\/malt_ingredient_addition\?recipe=\d+/)
+          .respond([]);
+
+        bitteringIngredientAdditionQuery = $httpBackend.when(
+            'GET', /brewery\/api\/bittering_ingredient_addition\?recipe=\d+/)
+          .respond([]);
+
         recipeSave = $httpBackend.when('POST', 'brewery/api/recipe')
           .respond(function(method, url, data) {
-            return [200, angular.extend(JSON.parse(data), { id: Math.random() })];
+            return [
+              200, angular.extend(
+                  JSON.parse(data),
+                  { id: Math.floor(Math.random() * Number.MAX_SAFE_INTEGER) }),
+            ];
           });
       })
 
@@ -83,6 +104,12 @@ describe('app.recipes', function () {
         $httpBackend.expectGET('brewery/api/brewingCompany');
         $httpBackend.expectPOST('brewery/api/recipe');
         $httpBackend.expectGET('brewery/api/beerStyle');
+        $httpBackend.expectGET('brewery/api/malt_ingredient');
+        $httpBackend.expectGET('brewery/api/bittering_ingredient');
+        $httpBackend.expectGET(
+            /brewery\/api\/malt_ingredient_addition\?recipe=\d+/);
+        $httpBackend.expectGET(
+            /brewery\/api\/bittering_ingredient_addition\?recipe=\d+/);
         modalInstance = scope.addRecipe();
         $httpBackend.flush();
       });
@@ -93,6 +120,12 @@ describe('app.recipes', function () {
         $httpBackend.expectGET('brewery/api/brewingCompany');
         $httpBackend.expectPOST('brewery/api/recipe');
         $httpBackend.expectGET('brewery/api/beerStyle');
+        $httpBackend.expectGET('brewery/api/malt_ingredient');
+        $httpBackend.expectGET('brewery/api/bittering_ingredient');
+        $httpBackend.expectGET(
+            /brewery\/api\/malt_ingredient_addition\?recipe=\d+/);
+        $httpBackend.expectGET(
+            /brewery\/api\/bittering_ingredient_addition\?recipe=\d+/);
         modalInstance = scope.addRecipe();
         $httpBackend.flush();
       });

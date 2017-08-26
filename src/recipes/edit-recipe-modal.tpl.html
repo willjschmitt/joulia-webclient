@@ -13,76 +13,129 @@
         type="text">
     <label>Name</label>
   </div>
-  <div class="form-group">
-    <select
-        name="beerStyleSelector"
-        id="beerStyleSelector"
-        class="form-control"
-        ng-options="beerStyle.id as beerStyle.name
-                    for beerStyle in beerStyles
-                    track by beerStyle.id"
-        ng-model="recipe.style">
-    </select>
-    <label>Style</label>
-  </div>
-  <div class="form-group">
-    <input
-        name="strike_temperature"
-        id="strike_temperature"
-        class="form-control"
-        ng-model="recipe.strike_temperature"
-        step="0.5"
-        type="number">
-    <label>Strike Temperature (&deg;F)</label>
-  </div>
-  <div class="form-group">
-    <input
-        name="mashout_temperature"
-        id="mashout_temperature"
-        class="form-control"
-        ng-model="recipe.mashout_temperature"
-        step="0.5"
-        type="number">
-    <label>Mashout Temperature (&deg;F)</label>
-  </div>
-  <div class="form-group">
-    <input
-        name="mashout_time"
-        id="mashout_time"
-        class="form-control"
-        ng-model="recipe.mashout_time"
-        step="1"
-        type="number">
-    <label>Mashout Length (minutes)</label>
-  </div>
-  <div class="form-group">
-    <input
-        name="boil_time"
-        id="boil_time"
-        class="form-control"
-        ng-model="recipe.boil_time"
-        step="1"
-        type="number">
-    <label>Boil Length (minutes)</label>
-  </div>
-  <div class="form-group">
-    <input
-        name="cool_temperature"
-        id="cool_temperature"
-        class="form-control"
-        ng-model="recipe.cool_temperature"
-        step="0.5"
-        type="number">
-    <label>Cooldown Temperature (&deg;F)</label>
-  </div>
 
-  <hr>
+  <div>
+    <ul class="nav nav-tabs">
+      <li ng-class="tabSelected['recipe_properties'] ? 'active' : ''">
+        <a href="" ng-click="selectTab('recipe_properties')">
+          Recipe Properties
+        </a>
+      </li>
+      <li ng-class="tabSelected['malt_ingredients'] ? 'active' : ''">
+        <a href="" ng-click="selectTab('malt_ingredients')">
+          Malt Ingredients
+        </a>
+      </li>
+      <li ng-class="tabSelected['bittering_ingredients'] ? 'active' : ''">
+        <a href="" ng-click="selectTab('bittering_ingredients')">
+          Bittering Ingredients
+        </a>
+      </li>
+    </ul>
 
-  <mash-profile
-      ng-if="recipe.id"
-      mash-points="mashPoints"
-      recipe="recipe">
-  </mash-profile>
+    <div class="tab-content">
+      <div
+          class="tab-pane"
+          id="recipe_properties"
+          ng-class="tabSelected['recipe_properties'] ? 'active' : ''">
+        <div class="form-group">
+          <select
+              name="beerStyleSelector"
+              id="beerStyleSelector"
+              class="form-control"
+              ng-options="beerStyle.id as beerStyle.name
+                          for beerStyle in beerStyles
+                          track by beerStyle.id"
+              ng-model="recipe.style">
+          </select>
+          <label>Style</label>
+        </div>
+        <div class="form-group">
+          <input
+              name="strike_temperature"
+              id="strike_temperature"
+              class="form-control"
+              ng-model="recipe.strike_temperature"
+              step="0.5"
+              type="number">
+          <label>Strike Temperature (&deg;F)</label>
+        </div>
+        <div class="form-group">
+          <input
+              name="mashout_temperature"
+              id="mashout_temperature"
+              class="form-control"
+              ng-model="recipe.mashout_temperature"
+              step="0.5"
+              type="number">
+          <label>Mashout Temperature (&deg;F)</label>
+        </div>
+        <div class="form-group">
+          <input
+              name="mashout_time"
+              id="mashout_time"
+              class="form-control"
+              ng-model="recipe.mashout_time"
+              step="1"
+              type="number">
+          <label>Mashout Length (minutes)</label>
+        </div>
+        <div class="form-group">
+          <input
+              name="boil_time"
+              id="boil_time"
+              class="form-control"
+              ng-model="recipe.boil_time"
+              step="1"
+              type="number">
+          <label>Boil Length (minutes)</label>
+        </div>
+        <div class="form-group">
+          <input
+              name="cool_temperature"
+              id="cool_temperature"
+              class="form-control"
+              ng-model="recipe.cool_temperature"
+              step="0.5"
+              type="number">
+          <label>Cooldown Temperature (&deg;F)</label>
+        </div>
+
+        <hr>
+
+        <mash-profile
+            mash-points="mashPoints"
+            recipe="recipe">
+        </mash-profile>
+      </div>
+
+      <div
+          class="tab-pane"
+          id="malt_ingredients"
+          ng-class="tabSelected['malt_ingredients'] ? 'active' : ''">
+        <ingredient-additions
+            ingredient-additions="maltIngredientAdditions"
+            recipe="recipe"
+            ingredients="maltIngredients"
+            resource="breweryResources.MaltIngredientAddition"
+            default-step="breweryResources.BREWING_STEP_CHOICES.MASH">
+        </ingredient-additions>
+      </div>
+
+      <div
+          class="tab-pane"
+          id="bittering_ingredients"
+          ng-class="tabSelected['bittering_ingredients'] ? 'active' : ''">
+        <ingredient-additions
+            ingredient-additions="bitteringIngredientAdditions"
+            recipe="recipe"
+            ingredients="bitteringIngredients"
+            resource="breweryResources.BitteringIngredientAddition"
+            default-step="breweryResources.BREWING_STEP_CHOICES.BOIL">
+        </ingredient-additions>
+      </div>
+    </div>
+  </div>
 </div>
 <div class="modal-footer">
   <button
