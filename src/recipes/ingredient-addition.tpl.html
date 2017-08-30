@@ -17,10 +17,9 @@
     <input
         name="time"
         class="form-control"
-        ng-model="amountUserUnits"
-        step="1"
-        type="number"
-        ng-change="updateIngredientAddition()" />
+        ng-model="userAmount"
+        step="0.01"
+        type="number"/>
     <label>Amount</label>
   </div>
 </div>
@@ -31,8 +30,7 @@
         id="stepAddedSelector"
         class="form-control"
         ng-options="unit.value as unit.name for unit in units"
-        ng-model="ingredientAddition.units"
-        ng-change="updateIngredientAddition()">
+        ng-model="ingredientAddition.units">
     </select>
     <label>Units</label>
   </div>
