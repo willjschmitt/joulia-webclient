@@ -3,7 +3,8 @@ describe('app.recipes', function () {
   beforeEach(module('app.recipes'));
   beforeEach(module('joulia.templates'));
 
-  var $controller, $httpBackend, $rootScope, $compile, $location;
+  var $controller, $httpBackend, $rootScope, $compile, $location,
+      breweryResources;
 
   beforeEach(inject(function($injector) {
     $controller = $injector.get('$controller');
@@ -11,6 +12,7 @@ describe('app.recipes', function () {
     $rootScope = $injector.get('$rootScope');
     $compile = $injector.get('$compile');
     $location = $injector.get('$location');
+    breweryResources = $injector.get('breweryResources');
   }));
 
   afterEach(function() {
@@ -33,13 +35,16 @@ describe('app.recipes', function () {
       element = angular.element(
         `<recipe-card
              recipe="recipe"
+             recipes="recipes"
              style="style">
          </recipe-card>`);
       $compile(element)($rootScope.$new());
       $rootScope.$digest();
       scope = element.isolateScope() || element.scope();
 
-      scope.recipe = {};
+      var recipe = new breweryResources.Recipe({ id: 10 });
+      scope.recipe = recipe;
+      scope.recipes = [recipe];
       scope.style = {};
       scope.$digest();
     });
@@ -110,6 +115,29 @@ describe('app.recipes', function () {
         $httpBackend.flush();
 
         expect($location.url()).toEqual('/brewhouse/0');
+      });
+    });
+
+    describe('remove', function() {
+      var deleteRecipe;
+
+      beforeEach(function () {
+        deleteRecipe = $httpBackend.whenDELETE(
+            'brewery/api/recipe/10').respond();
+      });
+
+      it('calls delete on server', function() {
+        $httpBackend.expectDELETE('brewery/api/recipe/10');
+        scope.remove();
+        $httpBackend.flush();
+      });
+
+      it('removes the recipe from the array', function() {
+        expect(scope.recipes.length).toBe(1);
+        $httpBackend.expectDELETE('brewery/api/recipe/10');
+        scope.remove();
+        $httpBackend.flush();
+        expect(scope.recipes.length).toBe(0);
       });
     });
   });
