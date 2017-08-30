@@ -13,6 +13,7 @@
       transclude: true,
       scope: {
         recipe: '=',
+        recipes: '=',
         style: '=',
         mashPoints: '=',
       },
@@ -20,6 +21,7 @@
       link: function recipeCardController($scope) {
         $scope.edit = edit;
         $scope.launch = launch;
+        $scope.remove = remove;
 
         $scope.properties = [
           { header: 'Number of Batches', name: 'number_of_batches' },
@@ -66,6 +68,14 @@
             .then(result => performLaunch($scope.recipe, result));
 
           return modalInstance;
+        }
+
+        /**
+         * Deletes the recipe and removes it from the parent array.
+         */
+        function remove() {
+          const index = $scope.recipes.indexOf($scope.recipe);
+          $scope.recipe.$delete(() => $scope.recipes.splice(index, 1));
         }
 
         /**
