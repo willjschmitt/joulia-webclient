@@ -13,13 +13,10 @@
                     | filter: $select.search"
             refresh="refreshIngredients($select.search)"
             refresh-delay="500">
-          <div ng-bind-html="ingredient.name | highlight: $select.search"></div>
-          <small>
-              SG Contribution
-              <span ng-bind-html="ingredient.potential_sg_contribution
-                                  | highlight: $select.search">
-              </span>
-          </small>
+            <div
+                ng-bind-html="ingredientHTMLCompiled(ingredient)
+                              | highlight: $select.search">
+            </div>
         </ui-select-choices>
       </ui-select>
     </div>

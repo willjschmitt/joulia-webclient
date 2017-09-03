@@ -13,6 +13,7 @@
         ingredientAdditions: '=',
         recipe: '=',
         ingredientResource: '=',
+        ingredientHtml: '=',
         Resource: '=resource',
         defaultStep: '=',
       },

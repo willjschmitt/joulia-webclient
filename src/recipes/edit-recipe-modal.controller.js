@@ -36,6 +36,18 @@
     };
     $scope.selectTab = selectTab;
 
+    $scope.mashIngredientHTML = `
+      <div>{{ name }}</div>
+      <small>
+        SG Contribution: {{ potential_sg_contribution }}
+      </small>`;
+
+    $scope.bitteringIngredientHTML = `
+      <div>{{ name }}</div>
+      <small>
+        Alpha Acid: {{ alpha_acid_weight * 100 | number : 2 }}%
+      </small>`;
+
     /**
      * Handles successful "OK" button press for submitting user input.
      */

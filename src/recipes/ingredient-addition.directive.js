@@ -3,9 +3,9 @@
     .module('app.recipes')
     .directive('ingredientAddition', ingredientAddition);
 
-  ingredientAddition.$inject = ['breweryResources'];
+  ingredientAddition.$inject = ['$interpolate', '$compile', 'breweryResources'];
 
-  function ingredientAddition(breweryResources) {
+  function ingredientAddition($interpolate, $compile, breweryResources) {
     return {
       restrict: 'E',
       transclude: true,
@@ -13,8 +13,12 @@
         // The IngredientAddition to edit.
         ingredientAddition: '=addition',
 
-        // The ingredients to select from for the addition.
+        // The $resource that can be searched against with a 'search' generic
+        // parameter and an 'id' parameter.
         ingredientResource: '=',
+
+        // HTML to render for each ingredient in the search dropdown.
+        ingredientHtml: '=',
 
         // The array of all additions. Used, so when an ingredientAddition is
         // removed, it is removed from the parent array.
@@ -32,6 +36,17 @@
 
         $scope.userAmount = 0.0;
         $scope.unitsToGrams = 0.0;
+
+        /**
+         * Compiles the provided ingredientHtml into a function which can be
+         * called with the ingredient to produce a formatted ingredient entry in
+         * the search dropdown.
+         */
+        function compileIngredientHTML() {
+          $scope.ingredientHTMLCompiled
+              = $interpolate($scope.ingredientHtml || '');
+        }
+        $scope.$watch('ingredientHtml', compileIngredientHTML);
 
         /**
          * Refresh ingredients with a search query performed against the server.

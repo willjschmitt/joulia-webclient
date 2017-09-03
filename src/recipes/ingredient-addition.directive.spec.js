@@ -24,6 +24,7 @@ describe('app.recipes ingredient-addition.directive', function () {
         <ingredient-addition
             addition="addition"
             ingredient-resource="resource"
+            ingredient-html="ingredientHtml"
             additions="additions">
         </ingredient-addition>`;
 
@@ -51,6 +52,16 @@ describe('app.recipes ingredient-addition.directive', function () {
 
       scope.$digest();
       isolatedScope = element.isolateScope();
+    });
+
+    describe('compileIngredientHTML', function() {
+      it('compiles html', function() {
+        scope.ingredientHtml = '<div>{{foo}}</div>';
+        scope.$digest();
+        const ingredient = { foo: 'bar' };
+        expect(isolatedScope.ingredientHTMLCompiled(ingredient))
+          .toBe('<div>bar</div>');
+      })
     });
 
     describe('updateIngredientAddition', function() {
