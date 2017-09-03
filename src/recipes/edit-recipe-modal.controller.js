@@ -16,8 +16,6 @@
     }
     $scope.mashPoints = mashPoints;
     $scope.beerStyles = breweryResources.BeerStyle.query();
-    $scope.maltIngredients = breweryResources.MaltIngredient.query();
-    $scope.bitteringIngredients = breweryResources.BitteringIngredient.query();
     $scope.maltIngredientAdditions
         = breweryResources.MaltIngredientAddition.query(
             { recipe: $scope.recipe.id });

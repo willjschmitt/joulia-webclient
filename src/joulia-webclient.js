@@ -1,7 +1,7 @@
 (function loadJouliaWebserver() {
   angular
     .module('app', [
-      'ngRoute', 'ngResource', 'ui.bootstrap', 'app.common',
+      'ngRoute', 'ngResource', 'ngSanitize', 'ui.bootstrap', 'app.common',
       'app.templates', 'app.dashboard', 'app.brewhouse', 'app.recipes',
       'app.profile', 'perfect_scrollbar',
     ])

@@ -23,7 +23,7 @@ describe('app.recipes ingredient-addition.directive', function () {
     const html = `
         <ingredient-addition
             addition="addition"
-            ingredients="ingredients"
+            ingredient-resource="resource"
             additions="additions">
         </ingredient-addition>`;
 
@@ -45,7 +45,7 @@ describe('app.recipes ingredient-addition.directive', function () {
         amount: 0.0,
       });
       scope.addition = addition;
-      scope.ingredients = [];
+      scope.resource = breweryResources.MaltIngredientSearch;
       scope.additions = [addition];
       element = $compile(html)(scope);
 
@@ -75,6 +75,50 @@ describe('app.recipes ingredient-addition.directive', function () {
         $httpBackend.flush();
 
         expect(scope.additions.length).toBe(0);
+      });
+    });
+
+    describe('refreshIngredients', function() {
+      var maltIngredientQuery;
+
+      beforeEach(function(){
+        maltIngredientQuery = $httpBackend.whenGET(
+          /brewery\/api\/malt_ingredient\?.*/).respond([]);
+      });
+
+      it('searches when id is only present', function() {
+        scope.addition.ingredient = 10;
+        $httpBackend.expectGET('brewery/api/malt_ingredient?id=10');
+        isolatedScope.refreshIngredients();
+        $httpBackend.flush();
+      });
+
+      it('searches when search is only present and ingredient null',
+        function() {
+        scope.addition.ingredient = null;
+        $httpBackend.expectGET('brewery/api/malt_ingredient?search=foo');
+        isolatedScope.refreshIngredients("foo");
+        $httpBackend.flush();
+      });
+
+      it('searches when search is only present and ingredient undefined',
+        function() {
+        scope.addition.ingredient = undefined;
+        $httpBackend.expectGET('brewery/api/malt_ingredient?search=foo');
+        isolatedScope.refreshIngredients("foo");
+        $httpBackend.flush();
+      });
+
+      it('searches when search and ingredient are defined', function() {
+        scope.addition.ingredient = 10;
+        $httpBackend.expectGET('brewery/api/malt_ingredient?search=foo&id=10');
+        isolatedScope.refreshIngredients("foo");
+        $httpBackend.flush();
+      });
+
+      it('searches when search and ingredient aren\'t present', function() {
+        scope.addition.ingredient = null;
+        isolatedScope.refreshIngredients();
       });
     });
 

@@ -1,6 +1,7 @@
 (function loadRecipesModule() {
   angular
-    .module('app.recipes', ['ngRoute', 'app.common', 'ui.bootstrap'])
+    .module('app.recipes', [
+      'ngRoute', 'ngSanitize', 'app.common', 'ui.bootstrap', 'ui.select'])
     .config(routeConfig);
 
   routeConfig.$inject = ['$routeProvider'];

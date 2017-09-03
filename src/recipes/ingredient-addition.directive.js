@@ -14,7 +14,7 @@
         ingredientAddition: '=addition',
 
         // The ingredients to select from for the addition.
-        ingredients: '=',
+        ingredientResource: '=',
 
         // The array of all additions. Used, so when an ingredientAddition is
         // removed, it is removed from the parent array.
@@ -24,6 +24,7 @@
       },
       templateUrl: 'recipes/ingredient-addition.tpl.html',
       link: function ingredientAdditionsController($scope) {
+        $scope.refreshIngredients = refreshIngredients;
         $scope.updateIngredientAddition = updateIngredientAddition;
         $scope.removeIngredientAddition = removeIngredientAddition;
         $scope.steps = breweryResources.BREWING_STEP_CHOICES_ordered;
@@ -31,6 +32,27 @@
 
         $scope.userAmount = 0.0;
         $scope.unitsToGrams = 0.0;
+
+        /**
+         * Refresh ingredients with a search query performed against the server.
+         */
+        function refreshIngredients(searchParameter) {
+          const searchTerms = {};
+          if ($scope.ingredientAddition.ingredient !== null
+              && $scope.ingredientAddition.ingredient !== undefined) {
+            searchTerms.id = $scope.ingredientAddition.ingredient;
+          }
+          if (searchParameter) {
+            searchTerms.search = searchParameter;
+          }
+          if (angular.equals(searchTerms, {})) {
+            return;
+          }
+          $scope.ingredients = $scope.ingredientResource.query(searchTerms);
+        }
+
+        $scope.$watch('ingredientAddition.ingredient',
+          () => refreshIngredients());
 
         /**
          * Updates provided resource.
