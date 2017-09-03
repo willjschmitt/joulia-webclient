@@ -16,8 +16,6 @@
     }
     $scope.mashPoints = mashPoints;
     $scope.beerStyles = breweryResources.BeerStyle.query();
-    $scope.maltIngredients = breweryResources.MaltIngredient.query();
-    $scope.bitteringIngredients = breweryResources.BitteringIngredient.query();
     $scope.maltIngredientAdditions
         = breweryResources.MaltIngredientAddition.query(
             { recipe: $scope.recipe.id });
@@ -37,6 +35,18 @@
       bittering_ingredients: false,
     };
     $scope.selectTab = selectTab;
+
+    $scope.mashIngredientHTML = `
+      <div>{{ name }}</div>
+      <small>
+        SG Contribution: {{ potential_sg_contribution }}
+      </small>`;
+
+    $scope.bitteringIngredientHTML = `
+      <div>{{ name }}</div>
+      <small>
+        Alpha Acid: {{ alpha_acid_weight * 100 | number : 2 }}%
+      </small>`;
 
     /**
      * Handles successful "OK" button press for submitting user input.

@@ -12,7 +12,8 @@
       scope: {
         ingredientAdditions: '=',
         recipe: '=',
-        ingredients: '=',
+        ingredientResource: '=',
+        ingredientHtml: '=',
         Resource: '=resource',
         defaultStep: '=',
       },

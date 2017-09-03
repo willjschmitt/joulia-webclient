@@ -51,8 +51,6 @@ describe('app.recipes edit-recipe-modal.controller', function () {
           { id: 3, name: "Galaxy" }]);
 
       $httpBackend.expectGET('brewery/api/beerStyle');
-      $httpBackend.expectGET('brewery/api/malt_ingredient');
-      $httpBackend.expectGET('brewery/api/bittering_ingredient');
     });
 
     // Define responses for queries for foreign items attached to the recipe.
