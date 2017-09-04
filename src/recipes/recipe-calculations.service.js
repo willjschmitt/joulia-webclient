@@ -1,4 +1,4 @@
-(function loadRecipeCalculationsService(_) {
+(function loadRecipeCalculationsService() {
   angular
     .module('app.common')
     .service('recipeCalculations', recipeCalculations);
@@ -25,4 +25,4 @@
       return `rgb(${red}, ${green}, ${blue})`;
     }
   }
-}(window._));
+}());
