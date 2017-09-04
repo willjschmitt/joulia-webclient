@@ -25,6 +25,10 @@
         // TODO(willjschmitt): Reconsider passing the array, and rather
         // broadcast an event.
         ingredientAdditions: '=additions',
+
+        // The recipe the ingredient addition is attached to, so it can be
+        // updated when ingredient additions are updated.
+        recipe: '=recipe',
       },
       templateUrl: 'recipes/ingredient-addition.tpl.html',
       link: function ingredientAdditionsController($scope) {
@@ -73,7 +77,7 @@
          * Updates provided resource.
          */
         function updateIngredientAddition() {
-          $scope.ingredientAddition.$update();
+          $scope.ingredientAddition.$update(() => $scope.recipe.$update());
         }
 
         /**

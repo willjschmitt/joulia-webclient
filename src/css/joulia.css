@@ -14,3 +14,22 @@
 [ng-click] {
     cursor: pointer;
 }
+
+p.recipe-property {
+    margin-bottom: 5px;
+}
+
+.srm-circle {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    vertical-align: middle;
+    -moz-border-radius: 7px;
+    -webkit-border-radius: 7px;
+    border-radius: 7px;
+}
+
+.recipe-card {
+    border-left-width: 6px;
+    border-left-style: solid;
+}

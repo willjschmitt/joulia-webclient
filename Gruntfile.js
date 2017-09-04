@@ -13,9 +13,9 @@ module.exports = function(grunt) {
   grunt.registerTask('default', ['cleanbuild', 'watch']);
   grunt.registerTask('release', ['build']);
   grunt.registerTask('cleanbuild', [
-    'clean', 'build', 'copy:assets', 'copy:vendor']);
+    'clean', 'build', 'copy:vendor']);
   grunt.registerTask('build', [
-    'eslint', 'html2js', 'karma:release', 'concat']);
+    'eslint', 'html2js', 'karma:release', 'concat', 'copy:assets']);
 
   grunt.registerTask('test', ['eslint', 'karma:travis', 'coveralls']);
   grunt.registerTask('travisbuild', [
@@ -30,6 +30,9 @@ module.exports = function(grunt) {
         // Need to load module definitions, first.
         'src/**/*.module.js',
         'src/**/!(*.module|*.spec|public).js',
+      ],
+      css: [
+        'src/css/**/*.css',
       ],
       publicJs: [
         'src/public.js',
@@ -128,6 +131,7 @@ module.exports = function(grunt) {
         files: [
           '<%= src.publicJs %>',
           '<%= src.js %>',
+          '<%= src.css %>',
           '<%= src.tests %>',
           '<%= src.tpl %>',
           'src/index.html',

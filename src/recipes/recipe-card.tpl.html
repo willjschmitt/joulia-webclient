@@ -1,4 +1,6 @@
-<div class="panel panel-default panel-divider">
+<div
+    class="panel panel-default panel-divider recipe-card"
+    ng-style="{ 'border-left-color': srmToRGBString(recipe.srm) }">
   <div class="panel-heading">
     <header>
       <div>
@@ -19,8 +21,25 @@
     </header>
   </div>
   <div class="panel-body">
-    <p ng-repeat="property in properties">
-      {{ property.header }}: {{ recipe[property.name] }}
+    <p class="recipe-property">
+      Number of Batches: {{ recipe.number_of_batches }}
+    </p>
+    <p class="recipe-property">
+      Last Brewed: {{ recipe.last_brewed || "never" }}
+    </p>
+    <p class="recipe-property">
+      Original Gravity: {{ recipe.original_gravity | number : 3 }}
+    </p>
+    <p class="recipe-property">
+      Bitterness (IBUs): {{ recipe.ibu | number : 0 }}
+    </p>
+    <p class="recipe-property">
+      Color (SRM):
+      <i
+          class="srm-circle"
+          ng-style="{ 'background-color': srmToRGBString(recipe.srm) }">
+      </i>
+      &nbsp;{{ recipe.srm | number : 1 }}
     </p>
   </div>
 </div>

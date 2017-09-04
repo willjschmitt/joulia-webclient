@@ -25,12 +25,18 @@ describe('app.recipes ingredient-addition.directive', function () {
             addition="addition"
             ingredient-resource="resource"
             ingredient-html="ingredientHtml"
-            additions="additions">
+            additions="additions"
+            recipe="recipe">
         </ingredient-addition>`;
 
     beforeEach(function () {
       additionUpdate = $httpBackend
         .when('PUT', /brewery\/api\/malt_ingredient_addition\/\d+/)
+          .respond(function (method, url, data, headers, params) {
+            return [200, data];
+          });
+      $httpBackend
+        .when('PUT', /brewery\/api\/recipe\/\d+/)
           .respond(function (method, url, data, headers, params) {
             return [200, data];
           });
@@ -48,6 +54,7 @@ describe('app.recipes ingredient-addition.directive', function () {
       scope.addition = addition;
       scope.resource = breweryResources.MaltIngredientSearch;
       scope.additions = [addition];
+      scope.recipe = new breweryResources.Recipe({ id: 5 });
       element = $compile(html)(scope);
 
       scope.$digest();
@@ -67,6 +74,7 @@ describe('app.recipes ingredient-addition.directive', function () {
     describe('updateIngredientAddition', function() {
       it('calls update endpoint', function() {
         $httpBackend.expectPUT('brewery/api/malt_ingredient_addition/3');
+        $httpBackend.expectPUT(/brewery\/api\/recipe\/\d+/);
         isolatedScope.updateIngredientAddition();
         $httpBackend.flush();
       });

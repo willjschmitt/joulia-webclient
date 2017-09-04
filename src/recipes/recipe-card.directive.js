@@ -4,10 +4,12 @@
     .directive('recipeCard', recipeCard);
 
   recipeCard.$inject = [
-    '$uibModal', '$http', '$location', 'breweryResources', 'recipeInstances'];
+    '$uibModal', '$http', '$location', 'breweryResources', 'recipeInstances',
+    'recipeCalculations'];
 
   function recipeCard(
-      $uibModal, $http, $location, breweryResources, recipeInstances) {
+      $uibModal, $http, $location, breweryResources, recipeInstances,
+      recipeCalculations) {
     return {
       restrict: 'E',
       transclude: true,
@@ -22,11 +24,7 @@
         $scope.edit = edit;
         $scope.launch = launch;
         $scope.remove = remove;
-
-        $scope.properties = [
-          { header: 'Number of Batches', name: 'number_of_batches' },
-          { header: 'Last Brewed', name: 'last_brewed' },
-        ];
+        $scope.srmToRGBString = recipeCalculations.srmToRGBString;
 
         /**
          * Laucnhes edit modal for this current recipe.
