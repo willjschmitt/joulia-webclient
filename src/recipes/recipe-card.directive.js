@@ -4,10 +4,12 @@
     .directive('recipeCard', recipeCard);
 
   recipeCard.$inject = [
-    '$uibModal', '$http', '$location', 'breweryResources', 'recipeInstances'];
+    '$uibModal', '$http', '$location', 'breweryResources', 'recipeInstances',
+    'recipeCalculations'];
 
   function recipeCard(
-      $uibModal, $http, $location, breweryResources, recipeInstances) {
+      $uibModal, $http, $location, breweryResources, recipeInstances,
+      recipeCalculations) {
     return {
       restrict: 'E',
       transclude: true,
@@ -91,8 +93,9 @@
           }
         }
 
+        $scope.srmColorStyle = srmColorStyle;
         function srmColorStyle(srm) {
-          return `background: red`;
+          return recipeCalculations.srmToRGBString(srm);
         }
       },
     };

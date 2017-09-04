@@ -15,14 +15,21 @@
     cursor: pointer;
 }
 
-p .recipe-property {
-    line-height: 90%;
+p.recipe-property {
+    margin-bottom: 5px;
 }
 
 .srm-circle {
-    width: 16px;
-    height: 16px;
-    -moz-border-radius: 8px;
-    -webkit-border-radius: 8px;
-    border-radius: 8px;
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    vertical-align: middle;
+    -moz-border-radius: 7px;
+    -webkit-border-radius: 7px;
+    border-radius: 7px;
+}
+
+.recipe-card {
+    border-left-width: 6px;
+    border-left-style: solid;
 }

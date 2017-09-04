@@ -1,4 +1,6 @@
-<div class="panel panel-default panel-divider">
+<div
+    class="panel panel-default panel-divider recipe-card"
+    ng-style="{ 'border-left-color': srmColorStyle(recipe.srm) }">
   <div class="panel-heading">
     <header>
       <div>
@@ -33,11 +35,10 @@
     </p>
     <p class="recipe-property">
       Color (SRM):
-      &nbsp;
-      <span
+      <i
           class="srm-circle"
-          ng-style="srmColorStyle(recipe.srm)">
-      </span>
+          ng-style="{ 'background-color': srmColorStyle(recipe.srm) }">
+      </i>
       &nbsp;{{ recipe.srm | number : 1 }}
     </p>
   </div>
