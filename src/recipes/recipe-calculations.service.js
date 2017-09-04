@@ -8,19 +8,7 @@
   function recipeCalculations() {
     const self = this;
 
-    self.originalGravity = originalGravity;
     self.srmToRGBString = srmToRGBString;
-
-    function originalGravity(maltIngredientAdditions, volume) {
-      const gravityGallons = _.reduce(maltIngredientAdditions,
-        function addGravity(memo, iter) {
-          const poundsToGrams = 0.00220462;
-          const amountPounds = iter.amount * poundsToGrams;
-          gravity = iter.ingredient.potential_sg_contribution * amountPounds;
-          return memo + gravity;
-        }, 0.0);
-      return gravityGallons / volume;
-    }
 
     function limit0To255(value) {
       return Math.round(Math.max(Math.min(value, 255), 0));
