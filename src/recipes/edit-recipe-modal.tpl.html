@@ -15,6 +15,23 @@
   </div>
 
   <div>
+    <p class="recipe-property">
+      Original Gravity: {{ recipe.original_gravity | number : 3 }}
+    </p>
+    <p class="recipe-property">
+      Bitterness (IBUs): {{ recipe.ibu | number : 0 }}
+    </p>
+    <p class="recipe-property">
+      Color (SRM):
+      <i
+          class="srm-circle"
+          ng-style="{ 'background-color': srmToRGBString(recipe.srm) }">
+      </i>
+      &nbsp;{{ recipe.srm | number : 1 }}
+    </p>
+  </div>
+
+  <div>
     <ul class="nav nav-tabs">
       <li ng-class="tabSelected['recipe_properties'] ? 'active' : ''">
         <a href="" ng-click="selectTab('recipe_properties')">

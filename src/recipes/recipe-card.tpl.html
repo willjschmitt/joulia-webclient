@@ -1,6 +1,6 @@
 <div
     class="panel panel-default panel-divider recipe-card"
-    ng-style="{ 'border-left-color': srmColorStyle(recipe.srm) }">
+    ng-style="{ 'border-left-color': srmToRGBString(recipe.srm) }">
   <div class="panel-heading">
     <header>
       <div>
@@ -37,7 +37,7 @@
       Color (SRM):
       <i
           class="srm-circle"
-          ng-style="{ 'background-color': srmColorStyle(recipe.srm) }">
+          ng-style="{ 'background-color': srmToRGBString(recipe.srm) }">
       </i>
       &nbsp;{{ recipe.srm | number : 1 }}
     </p>

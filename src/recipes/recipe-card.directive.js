@@ -24,6 +24,7 @@
         $scope.edit = edit;
         $scope.launch = launch;
         $scope.remove = remove;
+        $scope.srmToRGBString = recipeCalculations.srmToRGBString;
 
         /**
          * Laucnhes edit modal for this current recipe.
@@ -91,11 +92,6 @@
               .path(`/brewhouse/${launchRecipeResult.brewhouse.id}`)
               .replace();
           }
-        }
-
-        $scope.srmColorStyle = srmColorStyle;
-        function srmColorStyle(srm) {
-          return recipeCalculations.srmToRGBString(srm);
         }
       },
     };

@@ -4,10 +4,12 @@
     .controller('EditRecipeModalController', EditRecipeModalController);
 
   EditRecipeModalController.$inject = [
-    '$scope', '$uibModalInstance', 'breweryResources', 'recipe', 'mashPoints'];
+    '$scope', '$uibModalInstance', 'breweryResources', 'recipe', 'mashPoints',
+    'recipeCalculations'];
 
   function EditRecipeModalController(
-      $scope, $uibModalInstance, breweryResources, recipe, mashPoints) {
+      $scope, $uibModalInstance, breweryResources, recipe, mashPoints,
+      recipeCalculations) {
     $scope.recipe = recipe;
     if (!$scope.recipe || !$scope.recipe.id) {
       throw new Error(
@@ -22,6 +24,8 @@
     $scope.bitteringIngredientAdditions
         = breweryResources.BitteringIngredientAddition.query(
             { recipe: $scope.recipe.id });
+
+    $scope.srmToRGBString = recipeCalculations.srmToRGBString;
 
     // Makes the resources available to pass into child elements for
     // ingredient-additions.
