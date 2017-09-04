@@ -23,11 +23,6 @@
         $scope.launch = launch;
         $scope.remove = remove;
 
-        $scope.properties = [
-          { header: 'Number of Batches', name: 'number_of_batches' },
-          { header: 'Last Brewed', name: 'last_brewed' },
-        ];
-
         /**
          * Laucnhes edit modal for this current recipe.
          *
@@ -94,6 +89,10 @@
               .path(`/brewhouse/${launchRecipeResult.brewhouse.id}`)
               .replace();
           }
+        }
+
+        function srmColorStyle(srm) {
+          return `background: red`;
         }
       },
     };

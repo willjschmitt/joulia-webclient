@@ -19,8 +19,26 @@
     </header>
   </div>
   <div class="panel-body">
-    <p ng-repeat="property in properties">
-      {{ property.header }}: {{ recipe[property.name] }}
+    <p class="recipe-property">
+      Number of Batches: {{ recipe.number_of_batches }}
+    </p>
+    <p class="recipe-property">
+      Last Brewed: {{ recipe.last_brewed || "never" }}
+    </p>
+    <p class="recipe-property">
+      Original Gravity: {{ recipe.original_gravity | number : 3 }}
+    </p>
+    <p class="recipe-property">
+      Bitterness (IBUs): {{ recipe.ibu | number : 0 }}
+    </p>
+    <p class="recipe-property">
+      Color (SRM):
+      &nbsp;
+      <span
+          class="srm-circle"
+          ng-style="srmColorStyle(recipe.srm)">
+      </span>
+      &nbsp;{{ recipe.srm | number : 1 }}
     </p>
   </div>
 </div>

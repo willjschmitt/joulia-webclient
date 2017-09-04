@@ -14,3 +14,15 @@
 [ng-click] {
     cursor: pointer;
 }
+
+p .recipe-property {
+    line-height: 90%;
+}
+
+.srm-circle {
+    width: 16px;
+    height: 16px;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    border-radius: 8px;
+}
