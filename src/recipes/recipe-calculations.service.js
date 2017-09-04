@@ -20,6 +20,7 @@
      */
     function srmToRGBString(srm) {
       const red = limit0To255(275.0 - (5.75 * srm));
+      // eslint-disable-next-line no-restricted-properties
       const green = limit0To255(275.0 - (50.0 * Math.pow(srm, 0.5)));
       const blue = limit0To255(Math.max(180.0 - (31.0 * srm), -29.0 + srm));
       return `rgb(${red}, ${green}, ${blue})`;
