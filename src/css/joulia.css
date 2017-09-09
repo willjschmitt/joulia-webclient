@@ -33,3 +33,7 @@ p.recipe-property {
     border-left-width: 6px;
     border-left-style: solid;
 }
+
+.delete-item:hover {
+    color: #F44336
+}
