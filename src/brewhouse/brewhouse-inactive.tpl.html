@@ -14,6 +14,29 @@
           <a href="#!/recipes" class="btn btn-default btn-flat">Recipes</a>
         </div>
       </div>
-    </div>  
+    </div>
+  </div>
+  <div class="row" ng-if="recipeInstances">
+    <div class="col-xs-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <header>Past Brewing Sessions</header>
+        </div>
+        <div class="panel-body no-top-padding">
+          <ul class="list">
+            <a
+                ng-href="#!/recipeInstance/{{ recipeInstance.id }}"
+                ng-repeat="recipeInstance in recipeInstances">
+              <li class="list-item list-2-line">
+                <div class="list-item-text layout-column">
+                  <h3>{{ recipeIndex[recipeInstance.recipe].name }}</3>
+                  <p>{{ recipeInstance.date | date : "mediumDate" }}</p>
+                </div>
+              </li>
+            </a>
+          </ul>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
