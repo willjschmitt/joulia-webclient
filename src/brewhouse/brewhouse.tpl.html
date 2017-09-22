@@ -52,8 +52,9 @@
         class="col-lg-6 col-xs-12">
     </brewhouse-measurements>
   </div>
-
-
 </section>
 
-<brewhouse-inactive ng-if="!recipeInstance.id"></brewhouse-inactive>
+<brewhouse-inactive
+    ng-if="brewhouse.id && !recipeInstance.id"
+    brewhouse="brewhouse">
+</brewhouse-inactive>
