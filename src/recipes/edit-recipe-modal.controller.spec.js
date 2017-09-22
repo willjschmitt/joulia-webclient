@@ -20,7 +20,9 @@ describe('app.recipes edit-recipe-modal.controller', function () {
 
   describe('EditRecipeModalController', function () {
     var controller, scope;
-    var beerStyleQuery, maltIngredientQuery, bitteringIngredientQuery;
+    var beerStyleQuery;
+    var maltIngredientQuery, bitteringIngredientQuery;
+    var mashPointQuery;
     var maltIngredientAdditionQuery, bitteringIngredientAdditionQuery;
     var $uibModalInstance;
 
@@ -55,6 +57,9 @@ describe('app.recipes edit-recipe-modal.controller', function () {
 
     // Define responses for queries for foreign items attached to the recipe.
     beforeEach(function () {
+      mashPointQuery = $httpBackend.whenGET(
+          /brewery\/api\/mash_point\?recipe=\d+/).respond([]);
+
       maltIngredientAdditionQuery = $httpBackend.when(
           'GET', /brewery\/api\/malt_ingredient_addition\?recipe=\d+/)
         .respond(function(method, url, data, headers, params) {
@@ -98,6 +103,7 @@ describe('app.recipes edit-recipe-modal.controller', function () {
           ];
         });
 
+      $httpBackend.expectGET(/brewery\/api\/mash_point\?recipe=\d+/);
       $httpBackend.expectGET(
           /brewery\/api\/malt_ingredient_addition\?recipe=\d+/);
       $httpBackend.expectGET(

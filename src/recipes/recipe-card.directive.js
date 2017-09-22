@@ -14,10 +14,22 @@
       restrict: 'E',
       transclude: true,
       scope: {
+        /**
+         * The brewery.Recipe object that this card will display in the card.
+         */
         recipe: '=',
+
+        /**
+         * The array of recipes $scope.recipe is a part of. Used for removing
+         * the recipe from the array if the card deletes it.
+         */
         recipes: '=',
+
+        /**
+         * The style used for this recipe, so the parent controller can query
+         * all styles rather than every card querying them.
+         */
         style: '=',
-        mashPoints: '=',
       },
       templateUrl: 'recipes/recipe-card.tpl.html',
       link: function recipeCardController($scope) {
@@ -27,7 +39,7 @@
         $scope.srmToRGBString = recipeCalculations.srmToRGBString;
 
         /**
-         * Laucnhes edit modal for this current recipe.
+         * Launches edit modal for this current recipe.
          *
          * @returns The created modal instance.
          */
@@ -38,9 +50,6 @@
             controller: 'EditRecipeModalController',
             resolve: {
               recipe: function resolveRecipe() { return $scope.recipe; },
-              mashPoints: function resolveMashPoints() {
-                return $scope.mashPoints;
-              },
               brewingCompany: function resolveBrewingCompany() { return null; },
             },
           });

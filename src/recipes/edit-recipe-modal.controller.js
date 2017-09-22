@@ -16,8 +16,9 @@
           'not supporting creation of recipe in this modal anymore');
       // $scope.recipe = new breweryResources.Recipe({ company: brewingCompany });
     }
-    $scope.mashPoints = mashPoints;
     $scope.beerStyles = breweryResources.BeerStyle.query();
+    $scope.mashPoints = breweryResources.MashPoint.query(
+        { recipe: $scope.recipe.id });
     $scope.maltIngredientAdditions
         = breweryResources.MaltIngredientAddition.query(
             { recipe: $scope.recipe.id });

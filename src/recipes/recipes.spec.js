@@ -31,11 +31,10 @@ describe('app.recipes', function () {
       brewhouseQuery = $httpBackend.when('GET', 'brewery/api/brewhouse')
         .respond([{ id: 0 }, { id: 1 }]);
 
-      mashPointQuery = $httpBackend.when('GET', 'brewery/api/mash_point')
-        .respond([{ id: 0 , recipe: 0 }, { id: 1, recipe: 0 }]);
+      mashPointQuery = $httpBackend.whenGET(
+          /brewery\/api\/mash_point\?recipe=\d+/).respond([]);
 
       $httpBackend.expectGET('brewery/api/recipe');
-      $httpBackend.expectGET('brewery/api/mash_point');
       scope = $rootScope.$new();
       controller = $controller('RecipesController', { $scope: scope });
       $httpBackend.flush();
@@ -51,17 +50,6 @@ describe('app.recipes', function () {
         2: new breweryResources.BeerStyle({ id: 2, name: "Bar" }),
       };
       expect(scope.styleIndex).toEqual(want);
-    });
-
-    it('should have mapped recipes to mashPoints', function () {
-      const want = {
-        0: [
-          new breweryResources.MashPoint({ id: 0, recipe: 0 }),
-          new breweryResources.MashPoint({ id: 1, recipe: 0 }),
-        ],
-        2: [],
-      };
-      expect(scope.mashPointsMap).toEqual(want);
     });
 
     describe('addRecipe', function () {
@@ -98,6 +86,7 @@ describe('app.recipes', function () {
         $httpBackend.expectGET('brewery/api/brewingCompany');
         $httpBackend.expectPOST('brewery/api/recipe');
         $httpBackend.expectGET('brewery/api/beerStyle');
+        $httpBackend.expectGET(/brewery\/api\/mash_point\?recipe=\d+/);
         $httpBackend.expectGET(
             /brewery\/api\/malt_ingredient_addition\?recipe=\d+/);
         $httpBackend.expectGET(
@@ -112,6 +101,7 @@ describe('app.recipes', function () {
         $httpBackend.expectGET('brewery/api/brewingCompany');
         $httpBackend.expectPOST('brewery/api/recipe');
         $httpBackend.expectGET('brewery/api/beerStyle');
+        $httpBackend.expectGET(/brewery\/api\/mash_point\?recipe=\d+/);
         $httpBackend.expectGET(
             /brewery\/api\/malt_ingredient_addition\?recipe=\d+/);
         $httpBackend.expectGET(
