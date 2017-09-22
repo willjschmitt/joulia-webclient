@@ -135,7 +135,6 @@ describe('app.recipes edit-recipe-modal.controller', function () {
         $scope: scope,
         $uibModalInstance: $uibModalInstance,
         recipe: existingRecipe,
-        mashPoints: existingMashPoints,
         brewingCompany: null,
       });
       $httpBackend.flush();
@@ -162,7 +161,6 @@ describe('app.recipes edit-recipe-modal.controller', function () {
           $scope: scope,
           $uibModalInstance: $uibModalInstance,
           recipe: { id: 50 },
-          mashPoints: [],
           brewingCompany: null,
         });
         $httpBackend.flush();
