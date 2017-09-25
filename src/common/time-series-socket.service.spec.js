@@ -162,6 +162,19 @@ describe('app.common time-series-socket.service', function () {
           timeSeriesSocket.subscribe(subscriber);
           $httpBackend.flush();
         });
+
+        it('should send subscription request with time filter', function () {
+          $httpBackend.expectPOST('live/timeseries/identify/');
+          $websocketBackend.expectSend(JSON.stringify({
+            recipe_instance: 0,
+            sensor: 12,
+            subscribe: true,
+            history_time: -15,
+          }));
+          const subscriber = new Subscriber(0, 'foo');
+          timeSeriesSocket.subscribe(subscriber, null, -15);
+          $httpBackend.flush();
+        });
       });
     });
 

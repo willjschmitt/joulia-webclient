@@ -70,17 +70,23 @@
      * provided, registers it to be called when the subscriber receives updates.
      * The sensor id from the server will be set on the subscriber when it is
      * received.
-     * @param {object}   subscriber Details about the sensor to subscribe to
-     *                              updates on the server. Contains recipe
-     *                              instance and sensor name.
-     * @param {function} callback   Function to call when the subscriber
-     *                              recieves updates.
+     * @param {object}   subscriber  Details about the sensor to subscribe to
+     *                               updates on the server. Contains recipe
+     *                               instance and sensor name.
+     * @param {function} callback    Function to call when the subscriber
+     *                               recieves updates.
+     * @param {Number}   historyTime Amount of time, which should be queried for
+     *                               historical data points. Negative indicates
+     *                               past data points. Units: seconds.
      */
-    function subscribe(subscriber, callback) {
+    function subscribe(subscriber, callback, historyTime) {
       const data = {
         recipe_instance: subscriber.recipeInstance,
         name: subscriber.name,
       };
+      if (historyTime !== null && historyTime !== undefined) {
+        data.history_time = historyTime;
+      }
 
       $http.post('live/timeseries/identify/', data)
         .then(response => handleIdentification(subscriber, callback, response));
