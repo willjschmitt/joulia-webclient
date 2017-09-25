@@ -11,18 +11,29 @@
      *
      * @constructor
      * @this {TimeSeriesUpdater}
+     *
+     * @param {Number} recipeInstance The identifier for the RecipeInstance this
+     *                                time series is related to.
+     * @param {String} name           The programmatic sensor/variable name for
+     *                                the brewing equipment to monitor.
+     * @param {Number} historicalTime The amount of historical data desired to
+     *                                be queried on subscription and then
+     *                                trimmed to as new data is made available.
+     *                                Units: seconds. Negative values indicate
+     *                                time in the past.
      */
-    function TimeSeriesUpdater(recipeInstance, name) {
+    function TimeSeriesUpdater(recipeInstance, name, historicalTime) {
       const self = this;
 
       self.recipeInstance = recipeInstance;
       self.name = name;
+      self.historicalTime = historicalTime;
 
       self.dataPoints = [];
       self.latest = null;
 
       self.timeSeriesSocket = timeSeriesSocket;
-      self.timeSeriesSocket.subscribe(self);
+      self.timeSeriesSocket.subscribe(self, null, self.historicalTime);
     }
 
     TimeSeriesUpdater.prototype.newData = newData;
@@ -37,11 +48,11 @@
      */
     function newData(samples) {
       const self = this;
-      const kStaleDataMinutes = 20.0;
+
 
       // Ignore datapoints received older than kStaleDataMinutes.
       while (samples.length &&
-          diffMinutesFromNow(samples[0].time) > kStaleDataMinutes) {
+          diffSecondsFromNow(samples[0].time) > self.historicalTime) {
         samples.shift();
       }
 
@@ -57,7 +68,7 @@
 
       // Remove any internal data older than kStaleDataMinutes.
       while (self.dataPoints.length &&
-          diffMinutesFromNow(self.dataPoints[0][0]) > kStaleDataMinutes) {
+          diffSecondsFromNow(self.dataPoints[0][0]) > self.historicalTime) {
         self.dataPoints.shift();
       }
     }
@@ -97,18 +108,18 @@
 
     /**
      * Calculates the time difference of the provided date time from now in
-     * minutes.
+     * seconds.
      *
      * @param {Object} dateTime A moment() date time to compare to now.
      * @returns {Number} The difference in time from dateTime until now in
-     *                   minutes. Larger, more positive numbers represent a
+     *                   seconds. Larger, more positive numbers represent a
      *                   dateTime further in the past.
      */
      // TODO(will): Separate this out into an independent service.
-    function diffMinutesFromNow(dateTime) {
+    function diffSecondsFromNow(dateTime) {
       const timeDiff = moment().diff(moment(dateTime));
-      const timeDiffMinutes = moment.duration(timeDiff).asMinutes();
-      return timeDiffMinutes;
+      const timeDiffSeconds = moment.duration(timeDiff).asSeconds();
+      return timeDiffSeconds;
     }
 
     return TimeSeriesUpdater;
