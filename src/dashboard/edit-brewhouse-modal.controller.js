@@ -34,7 +34,11 @@
     $scope.selectTab = selectTab;
 
     function ok() {
-      $scope.brewhouse.$save(close);
+      if ($scope.brewhouse.id) {
+        $scope.brewhouse.$update(close);
+      } else {
+        $scope.brewhouse.$save(close);
+      }
     }
 
     function close() {

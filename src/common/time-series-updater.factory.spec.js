@@ -22,6 +22,10 @@ describe('app.common time-series-socket.service', function () {
   describe('TimeSeriesUpdater factory', function () {
     var TimeSeriesUpdater;
 
+    const recipeInstance = 0;
+    const sensorName = '';
+    const twentyMinutesAgo = 20;
+
     beforeEach(inject(function (_TimeSeriesUpdater_) {
       TimeSeriesUpdater = _TimeSeriesUpdater_;
     }));
@@ -69,7 +73,8 @@ describe('app.common time-series-socket.service', function () {
           {sensor: 12, time: time1.toISOString(), value: 10.0},
           {sensor: 12, time: time2.toISOString(), value: 11.0},
         ];
-        const timeSeriesUpdater = new TimeSeriesUpdater();
+        const timeSeriesUpdater = new TimeSeriesUpdater(
+          recipeInstance, sensorName, twentyMinutesAgo);
         timeSeriesUpdater.newData(samples);
         const want = [
           [time2, 11.0],
@@ -78,7 +83,8 @@ describe('app.common time-series-socket.service', function () {
       });
 
       it('removes existing old samples', function () {
-        const timeSeriesUpdater = new TimeSeriesUpdater();
+        const timeSeriesUpdater = new TimeSeriesUpdater(
+          recipeInstance, sensorName, twentyMinutesAgo);
         const time1 = new moment().subtract(21, 'minutes');
         const time2 = new moment();
         timeSeriesUpdater.dataPoints = [
@@ -93,6 +99,31 @@ describe('app.common time-series-socket.service', function () {
         ];
         timeSeriesUpdater.newData(samples);
         const want = [
+          [time2, 11.0],
+          [time3, 12.0],
+          [time4, 13.0],
+        ];
+        expect(compareSamples(timeSeriesUpdater.dataPoints, want)).toBeTruthy();
+      });
+
+      it('leaves data without time', function () {
+        const timeSeriesUpdater = new TimeSeriesUpdater(
+          recipeInstance, sensorName);
+        const time1 = new moment().subtract(21, 'minutes');
+        const time2 = new moment();
+        timeSeriesUpdater.dataPoints = [
+          [time1, 10.0],
+          [time2, 11.0],
+        ]
+        const time3 = new moment();
+        const time4 = new moment();
+        const samples = [
+          {sensor: 12, time: time3.toISOString(), value: 12.0},
+          {sensor: 12, time: time4.toISOString(), value: 13.0},
+        ];
+        timeSeriesUpdater.newData(samples);
+        const want = [
+          [time1, 10.0],
           [time2, 11.0],
           [time3, 12.0],
           [time4, 13.0],
@@ -119,7 +150,7 @@ describe('app.common time-series-socket.service', function () {
           value: 12.0,
           time: time,
         });
-        
+
         timeSeriesUpdater.set(12.0);
         $httpBackend.flush();
       });

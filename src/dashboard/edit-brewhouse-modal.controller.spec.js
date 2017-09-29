@@ -19,7 +19,7 @@ describe('app.dashboard add-brewhouse-modal.controller', function () {
 
   describe('EditBrewhouseModalController', function () {
     var controller, scope;
-    var brewhouseSave;
+    var brewhouseSave, brewhouseUpdate;
     var $uibModalInstance;
     var brewery;
 
@@ -28,6 +28,11 @@ describe('app.dashboard add-brewhouse-modal.controller', function () {
         .respond(function (method, url, data, headers, params) {
           const id = Math.floor(Math.random());
           return [201, angular.extend({ id: id }, data)];
+        });
+
+      brewhouseUpdate = $httpBackend.whenPUT(/brewery\/api\/brewhouse\/\d+/)
+        .respond(function (method, url, data, headers, params) {
+          return [201, data];
         });
 
       $uibModalInstance = jasmine.createSpyObj(
@@ -51,6 +56,15 @@ describe('app.dashboard add-brewhouse-modal.controller', function () {
     describe('ok', function () {
       it('should save new brewhouse on server and close modal', function () {
         $httpBackend.expectPOST('brewery/api/brewhouse');
+        scope.ok();
+        $httpBackend.flush();
+
+        expect($uibModalInstance.close).toHaveBeenCalled();
+      });
+
+      it('should update existing brewhouse on server and close modal', function () {
+        scope.brewhouse.id = 1;
+        $httpBackend.expectPUT('brewery/api/brewhouse/1');
         scope.ok();
         $httpBackend.flush();
 

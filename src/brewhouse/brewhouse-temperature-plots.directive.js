@@ -46,13 +46,17 @@
 
         // Create and maintain chart.
         $scope.chart = null;
-        $scope.chart = nv.models.lineChart()
+        $scope.chart = nv.models.lineWithFocusChart()
           .x(function xValue(d) { return d[0]; })
           .y(function yValue(d) { return d[1]; })
           .color(d3.scale.category10().range())
           .useInteractiveGuideline(true);
         $scope.chart.xAxis
           .tickFormat(function xAxisFormatter(d) {
+            return d3.time.format('%H:%M')(new Date(d));
+          });
+        $scope.chart.x2Axis
+          .tickFormat(function x2AxisFormatter(d) {
             return d3.time.format('%H:%M')(new Date(d));
           });
         $scope.chart.yAxis
@@ -70,27 +74,12 @@
           // TODO(will): Figure out a good way to do this automatically.
           nv.utils.windowResize($scope.chart.update);
 
-          // Clculate min/max in current dataset.
-          // TODO(will): I don't know why nvd3 messes up sometimes, but we had to
-          // force calculate this.
-          let min = arrayUtilities.minimumInArrays($scope.dataPoints);
-          let max = arrayUtilities.maximumInArrays($scope.dataPoints);
-
-          // Make sure we have a spread.
-          const minSpread = 10.0;
-          const extremes = arrayUtilities.minMaxWithSpread(min, max, minSpread);
-          min = extremes.min;
-          max = extremes.max;
-
-          // Update min/max.
-          $scope.chart.forceY([min, max]);
-
           return $scope.chart;
         }
         nv.addGraph(updateChart);
         // Replot every second rather than everytime we get new data so we aren't
         // plotting all the time.
-        $interval(updateChart, 5000.0);
+        $interval(updateChart, 10000.0);
       },
     };
   }
