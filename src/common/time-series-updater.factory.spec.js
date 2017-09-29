@@ -105,6 +105,31 @@ describe('app.common time-series-socket.service', function () {
         ];
         expect(compareSamples(timeSeriesUpdater.dataPoints, want)).toBeTruthy();
       });
+
+      it('leaves data without time', function () {
+        const timeSeriesUpdater = new TimeSeriesUpdater(
+          recipeInstance, sensorName);
+        const time1 = new moment().subtract(21, 'minutes');
+        const time2 = new moment();
+        timeSeriesUpdater.dataPoints = [
+          [time1, 10.0],
+          [time2, 11.0],
+        ]
+        const time3 = new moment();
+        const time4 = new moment();
+        const samples = [
+          {sensor: 12, time: time3.toISOString(), value: 12.0},
+          {sensor: 12, time: time4.toISOString(), value: 13.0},
+        ];
+        timeSeriesUpdater.newData(samples);
+        const want = [
+          [time1, 10.0],
+          [time2, 11.0],
+          [time3, 12.0],
+          [time4, 13.0],
+        ];
+        expect(compareSamples(timeSeriesUpdater.dataPoints, want)).toBeTruthy();
+      });
     });
 
     describe('set', function () {

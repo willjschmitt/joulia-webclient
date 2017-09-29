@@ -51,7 +51,7 @@
 
 
       // Ignore datapoints received older than kStaleDataMinutes.
-      while (samples.length &&
+      while (samples.length && self.historicalTime &&
           diffSecondsFromNow(samples[0].time) > self.historicalTime) {
         samples.shift();
       }
@@ -67,7 +67,7 @@
       });
 
       // Remove any internal data older than kStaleDataMinutes.
-      while (self.dataPoints.length &&
+      while (self.dataPoints.length && self.historicalTime &&
           diffSecondsFromNow(self.dataPoints[0][0]) > self.historicalTime) {
         self.dataPoints.shift();
       }
