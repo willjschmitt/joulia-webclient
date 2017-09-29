@@ -84,6 +84,34 @@ describe('app.common time-series-socket.service', function () {
       });
     });
 
+    describe('onSocketOpen', function () {
+      beforeEach(function () {
+        $httpBackend.when('POST', 'live/timeseries/identify/')
+          .respond({ sensor: 12 });
+      });
+
+      it('should resubscribe to already subscribed', function () {
+        // Original subscription.
+        $httpBackend.expectPOST('live/timeseries/identify/');
+        $websocketBackend.expectSend(JSON.stringify({
+          recipe_instance: 0,
+          sensor: 12,
+          subscribe: true,
+        }));
+        const subscriber = new Subscriber(0, 'foo');
+        timeSeriesSocket.subscribe(subscriber);
+        $httpBackend.flush();
+
+        // Simulate reconnection.
+        $websocketBackend.expectSend(JSON.stringify({
+          recipe_instance: 0,
+          sensor: 12,
+          subscribe: true,
+        }));
+        timeSeriesSocket.onSocketOpen();
+      });
+    });
+
     describe('onSocketClose', function () {
       // TODO(will): Add tests that actually check for snackbars added.
 

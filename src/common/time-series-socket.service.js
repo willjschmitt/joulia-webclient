@@ -21,6 +21,7 @@
         { reconnectIfNotNormalClose: true });
 
     self.socket.onMessage(onSocketMessage);
+    self.socket.onOpen(onSocketOpen);
     self.socket.onClose(onSocketClose);
     self.sensorToSubscribers = {};
     self.subscribe = subscribe;
@@ -31,6 +32,7 @@
     // TODO(will): These should not be set once the websocket-mock library
     // supports sending data to consumers and closing the socket.
     self.onSocketMessage = onSocketMessage;
+    self.onSocketOpen = onSocketOpen;
     self.onSocketClose = onSocketClose;
 
     /**
@@ -47,6 +49,18 @@
         if (subscriber.callback) {
           subscriber.callback();
         }
+      });
+    }
+
+    /**
+     * Callback handling the opening of a websocket. Resubscribes to previously
+     * subscribed sensors.
+     */
+    function onSocketOpen() {
+      _.each(self.sensorToSubscribers, function subscribeSensor(subscribers) {
+        _.each(subscribers, function subscribeSubscriber(subscriber) {
+          performWebsocketSubscribe(subscriber);
+        });
       });
     }
 
@@ -115,7 +129,16 @@
       }
       self.sensorToSubscribers[subscriber.sensor].push(subscriber);
 
-      // Send subscription request to server.
+      performWebsocketSubscribe(subscriber);
+    }
+
+    /**
+     * Sends subscription request to server.
+     * @param {Object} subscriber Details about the sensor to subscribe to
+     *                            updates on the server. Contains recipe
+     *                            instance, and sensor id.
+     */
+    function performWebsocketSubscribe(subscriber) {
       const message = JSON.stringify({
         recipe_instance: subscriber.recipeInstance,
         sensor: subscriber.sensor,
