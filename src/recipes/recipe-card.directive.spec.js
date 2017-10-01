@@ -65,28 +65,6 @@ describe('app.recipes', function () {
       });
     });
 
-    describe('edit', function () {
-      var modalInstance;
-      var beerStyleQuery, maltIngredientQuery, bitteringIngredientQuery;
-
-      beforeEach(function () {
-        beerStyleQuery = $httpBackend.when('GET', 'brewery/api/beerStyle')
-          .respond();
-        maltIngredientQuery = $httpBackend.when(
-            'GET', 'brewery/api/malt_ingredient')
-          .respond();
-        bitteringIngredientQuery = $httpBackend.when(
-            'GET', 'brewery/api/bittering_ingredient')
-          .respond();
-
-        $httpBackend.expectGET('brewery/api/beerStyle');
-        $httpBackend.expectGET('brewery/api/malt_ingredient');
-        $httpBackend.expectGET('brewery/api/bittering_ingredient');
-        modalInstance = scope.edit();
-        $httpBackend.flush();
-      });
-    });
-
     describe('launch', function () {
       var modalInstance;
       var launchRecipePost;

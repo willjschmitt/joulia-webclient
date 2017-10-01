@@ -33,29 +33,9 @@
       },
       templateUrl: 'recipes/recipe-card.tpl.html',
       link: function recipeCardController($scope) {
-        $scope.edit = edit;
         $scope.launch = launch;
         $scope.remove = remove;
         $scope.srmToRGBString = recipeCalculations.srmToRGBString;
-
-        /**
-         * Launches edit modal for this current recipe.
-         *
-         * @returns The created modal instance.
-         */
-        function edit() {
-          const modalInstance = $uibModal.open({
-            animation: true,
-            templateUrl: 'recipes/edit-recipe-modal.tpl.html',
-            controller: 'EditRecipeModalController',
-            resolve: {
-              recipe: function resolveRecipe() { return $scope.recipe; },
-              brewingCompany: function resolveBrewingCompany() { return null; },
-            },
-          });
-
-          return modalInstance;
-        }
 
         /**
          * Launches modal to ask user for input to select a brewing system to launch

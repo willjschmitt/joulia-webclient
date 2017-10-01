@@ -1,0 +1,166 @@
+<section
+    class="page-header alternative-header"
+    ng-style="{ 'background-color': srmToRGBString(recipe.srm) }">
+  <ol class="breadcrumb">
+    <li>Joulia</li>
+    <li>Recipes</li>
+    <li>{{ recipe.name }}</li>
+  </ol>
+  <div class="page-header_title">
+    <h1>{{ recipe.name }}</h1>
+  </div>
+</section>
+
+<section class="page-content">
+  <div class="row">
+    <div class="col-lg-6 col-xs-12">
+      <div class="panel panel-default panel-divider">
+        <div class="panel-heading">
+          <header>Attributes</header>
+        </div>
+
+        <div class="panel-body">
+          <div class="form-group">
+            <input
+                name="name"
+                id="name"
+                class="form-control"
+                ng-model="recipe.name"
+                type="text">
+            <label>Name</label>
+          </div>
+
+          <div>
+            <p class="recipe-property">
+              Original Gravity: {{ recipe.original_gravity | number : 3 }}
+            </p>
+            <p class="recipe-property">
+              Bitterness (IBUs): {{ recipe.ibu | number : 0 }}
+            </p>
+            <p class="recipe-property">
+              Color (SRM):
+              <i
+                  class="srm-circle"
+                  ng-style="{ 'background-color': srmToRGBString(recipe.srm) }">
+              </i>
+              &nbsp;{{ recipe.srm | number : 1 }}
+            </p>
+          </div>
+
+          <div id="recipe_properties">
+            <div class="form-group">
+              <select
+                  name="beerStyleSelector"
+                  id="beerStyleSelector"
+                  class="form-control"
+                  ng-options="beerStyle.id as beerStyle.name
+                              for beerStyle in beerStyles
+                              track by beerStyle.id"
+                  ng-model="recipe.style"
+                  ng-change="save()">
+              </select>
+              <label>Style</label>
+            </div>
+            <div class="form-group">
+              <input
+                  name="volume"
+                  id="volume"
+                  class="form-control"
+                  ng-model="recipe.volume"
+                  step="0.1"
+                  type="number"
+                  ng-change="save()">
+              <label>Volume (gallons)</label>
+            </div>
+            <div class="form-group">
+              <input
+                  name="strike_temperature"
+                  id="strike_temperature"
+                  class="form-control"
+                  ng-model="recipe.strike_temperature"
+                  step="0.5"
+                  type="number"
+                  ng-change="save()">
+              <label>Strike Temperature (&deg;F)</label>
+            </div>
+            <div class="form-group">
+              <input
+                  name="mashout_temperature"
+                  id="mashout_temperature"
+                  class="form-control"
+                  ng-model="recipe.mashout_temperature"
+                  step="0.5"
+                  type="number"
+                  ng-change="save()">
+              <label>Mashout Temperature (&deg;F)</label>
+            </div>
+            <div class="form-group">
+              <input
+                  name="mashout_time"
+                  id="mashout_time"
+                  class="form-control"
+                  ng-model="recipe.mashout_time"
+                  step="1"
+                  type="number"
+                  ng-change="save()">
+              <label>Mashout Length (minutes)</label>
+            </div>
+            <div class="form-group">
+              <input
+                  name="boil_time"
+                  id="boil_time"
+                  class="form-control"
+                  ng-model="recipe.boil_time"
+                  step="1"
+                  type="number"
+                  ng-change="save()">
+              <label>Boil Length (minutes)</label>
+            </div>
+            <div class="form-group">
+              <input
+                  name="cool_temperature"
+                  id="cool_temperature"
+                  class="form-control"
+                  ng-model="recipe.cool_temperature"
+                  step="0.5"
+                  type="number"
+                  ng-change="save()">
+              <label>Cooldown Temperature (&deg;F)</label>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <mash-profile
+        class="col-lg-6 col-xs-12"
+        mash-points="mashPoints"
+        recipe="recipe">
+    </mash-profile>
+  </div>
+
+  <div class="row">
+    <ingredient-additions
+        class="col-lg-6 col-xs-12"
+        title="'Malt Ingredients'"
+        ingredient-additions="maltIngredientAdditions"
+        recipe="recipe"
+        ingredient-resource="breweryResources.MaltIngredientSearch"
+        ingredient-html="mashIngredientHTML"
+        resource="breweryResources.MaltIngredientAddition"
+        default-step="breweryResources.BREWING_STEP_CHOICES.MASH">
+    </ingredient-additions>
+
+    <ingredient-additions
+        class="col-lg-6 col-xs-12"
+        title="'Bittering Ingredients'"
+        ingredient-additions="bitteringIngredientAdditions"
+        recipe="recipe"
+        ingredient-resource="breweryResources.BitteringIngredientSearch"
+        ingredient-html="bitteringIngredientHTML"
+        resource="breweryResources.BitteringIngredientAddition"
+        default-step="breweryResources.BREWING_STEP_CHOICES.BOIL">
+    </ingredient-additions>
+  </div>
+</section>

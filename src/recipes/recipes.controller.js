@@ -3,10 +3,11 @@
     .module('app.recipes')
     .controller('RecipesController', RecipesController);
 
-  RecipesController.$inject = ['$scope', 'breweryResources', '$uibModal'];
+  RecipesController.$inject = [
+    '$scope', '$location', 'breweryResources', '$uibModal'];
 
   function RecipesController(
-      $scope, breweryResources, $uibModal) {
+      $scope, $location, breweryResources, $uibModal) {
     $scope.recipes = [];
     // Index mapping style id to style object.
     $scope.styleIndex = {};
@@ -63,21 +64,8 @@
 
     function launchAddRecipeModal(brewingCompany) {
       const recipe = new breweryResources.Recipe({ company: brewingCompany });
-      recipe.$save(function openModal() {
-        const modalInstance = $uibModal.open({
-          animation: true,
-          templateUrl: 'recipes/edit-recipe-modal.tpl.html',
-          controller: 'EditRecipeModalController',
-          resolve: {
-            recipe: function resolveRecipe() { return recipe; },
-            mashPoints: function resolveMashPoints() { return []; },
-            brewingCompany: function resolveBrewingCompany() {
-              return brewingCompany;
-            },
-          },
-        });
-
-        modalInstance.result.then(updateRecipes);
+      recipe.$save(function navigateToRecipe() {
+        $location.url(`recipes/${recipe.id}`);
       });
     }
   }
