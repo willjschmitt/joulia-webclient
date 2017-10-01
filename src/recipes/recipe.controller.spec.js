@@ -1,5 +1,5 @@
 /* eslint-disable */
-describe('app.recipes edit-recipe-modal.controller', function () {
+describe('app.recipes recipe.controller', function () {
   beforeEach(module('app.recipes'));
   beforeEach(module('joulia.templates'));
 
@@ -18,18 +18,19 @@ describe('app.recipes edit-recipe-modal.controller', function () {
     $httpBackend.verifyNoOutstandingRequest();
   });
 
-  describe('EditRecipeModalController', function () {
+  describe('RecipeController', function () {
     var controller, scope;
+    var recipeGet;
     var beerStyleQuery;
     var maltIngredientQuery, bitteringIngredientQuery;
     var mashPointQuery;
     var maltIngredientAdditionQuery, bitteringIngredientAdditionQuery;
-    var $uibModalInstance;
 
-    // Define spy objects for the $uibModalInstance.
     beforeEach(function () {
-      $uibModalInstance = jasmine.createSpyObj(
-          '$uibModalInstance', ['close', 'dismiss']);
+      recipeGet = $httpBackend.when('GET', 'brewery/api/recipe/12')
+        .respond({ id: 12 });
+
+      $httpBackend.expectGET('brewery/api/recipe/12');
     });
 
     // Define responses for the non-recipe-specific items (e.g: beer style, and
@@ -111,11 +112,10 @@ describe('app.recipes edit-recipe-modal.controller', function () {
     });
 
     var recipeUpdate;
-    var existingRecipe, existingMashPoints;
     var mashPointSave;
 
     beforeEach(function () {
-      recipeUpdate = $httpBackend.when('PUT', 'brewery/api/recipe/10')
+      recipeUpdate = $httpBackend.when('PUT', 'brewery/api/recipe/12')
         .respond(function (method, url, data, headers, params) {
           return [201, data];
         });
@@ -128,14 +128,9 @@ describe('app.recipes edit-recipe-modal.controller', function () {
           });
 
       scope = $rootScope.$new();
-      existingRecipe = new breweryResources.Recipe();
-      existingRecipe.id = 10;
-      existingMashPoints = [];
-      controller = $controller('EditRecipeModalController', {
+      controller = $controller('RecipeController', {
         $scope: scope,
-        $uibModalInstance: $uibModalInstance,
-        recipe: existingRecipe,
-        brewingCompany: null,
+        $routeParams: { recipeId: 12 },
       });
       $httpBackend.flush();
     });
@@ -144,28 +139,11 @@ describe('app.recipes edit-recipe-modal.controller', function () {
       expect(controller).toBeDefined();
     });
 
-    describe('ok', function () {
+    describe('save', function () {
       it('should update existing recipe on server and close modal', function () {
-        $httpBackend.expectPUT('brewery/api/recipe/10');
-        scope.ok();
+        $httpBackend.expectPUT('brewery/api/recipe/12');
+        scope.save();
         $httpBackend.flush();
-
-        expect($uibModalInstance.close).toHaveBeenCalled();
-      });
-    });
-
-    describe('cancel', function () {
-      it('should dismiss modal', function () {
-        scope = $rootScope.$new();
-        controller = $controller('EditRecipeModalController', {
-          $scope: scope,
-          $uibModalInstance: $uibModalInstance,
-          recipe: { id: 50 },
-          brewingCompany: null,
-        });
-        $httpBackend.flush();
-        scope.cancel();
-        expect($uibModalInstance.dismiss).toHaveBeenCalled();
       });
     });
   });
