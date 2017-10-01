@@ -50,6 +50,10 @@ a {
   color: #4CAF50;
 }
 
+a:hover, a a:active, a:focus {
+  color: #1B5E20;
+}
+
 .label-primary {
   background-color: #4CAF50;
 }
@@ -69,4 +73,19 @@ a {
 body.dark-header-brand .header-container .header-wrapper #header-brand .logo .logo-image,
 body.dark-header .header-container .header-wrapper #header-brand .logo .logo-image {
   color: #4CAF50;
+}
+
+.btn-primary {
+  background-color: #4CAF50;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary.focus,
+.btn-primary:active,
+.btn-primary.active,
+.open
+.dropdown-toggle.btn-primary {
+  background-color: #1B5E20;
+  border-color: #1B5E20;
 }

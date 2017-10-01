@@ -10,6 +10,9 @@
       restrict: 'E',
       transclude: true,
       scope: {
+        // Human readable title used for the header for the panel.
+        title: '=',
+
         ingredientAdditions: '=',
         recipe: '=',
         ingredientResource: '=',
