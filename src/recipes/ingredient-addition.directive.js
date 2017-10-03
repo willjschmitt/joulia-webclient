@@ -31,7 +31,7 @@
         recipe: '=recipe',
       },
       templateUrl: 'recipes/ingredient-addition.tpl.html',
-      link: function ingredientAdditionsController($scope) {
+      link: function ingredientAdditionsController($scope, $element) {
         $scope.refreshIngredients = refreshIngredients;
         $scope.updateIngredientAddition = updateIngredientAddition;
         $scope.removeIngredientAddition = removeIngredientAddition;
@@ -40,6 +40,8 @@
 
         $scope.userAmount = 0.0;
         $scope.unitsToGrams = 0.0;
+
+        loadingElement().circularProgress();
 
         /**
          * Compiles the provided ingredientHtml into a function which can be
@@ -77,17 +79,64 @@
          * Updates provided resource.
          */
         function updateIngredientAddition() {
-          $scope.ingredientAddition.$update(() => $scope.recipe.$update());
+          showLoadingElement();
+          $scope.ingredientAddition.$update(
+            doneUpdating, hideLoadingElement);
+        }
+
+        /**
+         * Handles a successful update of a ingredient addition. Hides the
+         * loading icon. Updates the recipe so server-side calculations can be
+         * retrieved.
+         */
+        function doneUpdating() {
+          hideLoadingElement();
+          $scope.recipe.$update();
         }
 
         /**
          * Removes provided resource from server and local array.
          */
         function removeIngredientAddition() {
+          showLoadingElement();
           const index = $scope.ingredientAdditions.indexOf(
               $scope.ingredientAddition);
           $scope.ingredientAddition.$delete(
-              () => $scope.ingredientAdditions.splice(index, 1));
+              () => doneDeleting(index));
+        }
+
+        /**
+         * Handles a successful removal of a ingredient addition. Hides the
+         * loading icon and removes the old ingredient to the
+         * ingredientAdditions array.
+         *
+         * @param {Number} index The array index the ingredientAddition had in
+         *                       ingredientAdditions.
+         */
+        function doneDeleting(index) {
+          hideLoadingElement();
+          $scope.ingredientAdditions.splice(index, 1);
+        }
+
+        /**
+         * Retrieves the loading element in this panel.
+         */
+        function loadingElement() {
+          return angular.element($element).find('#addition-loading');
+        }
+
+        /**
+         * Shows the loading icon. That is, starts the icon spinning.
+         */
+        function showLoadingElement() {
+          loadingElement().circularProgress('show');
+        }
+
+        /**
+         * Hides the loading icon. That is, stops the icon spinning.
+         */
+        function hideLoadingElement() {
+          loadingElement().circularProgress('hide');
         }
 
         function calculateUnitsToGrams() {

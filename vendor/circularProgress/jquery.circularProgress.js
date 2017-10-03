@@ -6,7 +6,7 @@
  *
  * Licensed under the MIT license.
  * http://www.opensource.org/licenses/mit-license.php
- * 
+ *
  * Copyright (c) 2015 Paulo Mendez,
  * http://www.cerocreativo.cl
  * http://www.rockandthemes.com
@@ -15,7 +15,7 @@
 
 ;(function ($) {
 	"use strict";
-	
+
 	var pluginName	= "circularProgress",
 		obj 		= "";
 
@@ -109,7 +109,7 @@
 			});
 
 		},
-		set: function(value){ 
+		set: function(value){
 			return this.each(function(){
 				functions.setProgress(this,value);
 			});
@@ -203,7 +203,7 @@
 			return methods.init.apply( this, arguments );
 		} else {
 			$.error( 'Method ' +  methodOrOptions + ' does not exist on '+pluginName );
-		}    
+		}
 	};
 
 })(jQuery);

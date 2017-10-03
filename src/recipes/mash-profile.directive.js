@@ -14,7 +14,7 @@
         recipe: '=',
       },
       templateUrl: 'recipes/mash-profile.tpl.html',
-      link: function mashProfileController($scope) {
+      link: function mashProfileController($scope, $element) {
         $scope.addMashPoint = addMashPoint;
         $scope.updateMashPoint = updateMashPoint;
         $scope.removeMashPoint = removeMashPoint;
@@ -34,15 +34,26 @@
          * Updates provided MashPoint resource.
          */
         function updateMashPoint(mashPoint) {
-          mashPoint.$update();
+          showLoadingElement();
+          mashPoint.$update(doneUpdating, hideLoadingElement);
+        }
+
+        function doneUpdating() {
+          hideLoadingElement();
         }
 
         /**
          * Removes provided MashPoint resource from server and local array.
          */
         function removeMashPoint(mashPoint) {
+          showLoadingElement();
           const index = $scope.mashPoints.indexOf(mashPoint);
-          mashPoint.$delete(() => $scope.mashPoints.splice(index, 1));
+          mashPoint.$delete(() => doneRemoving(index), hideLoadingElement);
+        }
+
+        function doneRemoving(index) {
+          hideLoadingElement();
+          $scope.mashPoints.splice(index, 1);
         }
 
         /**
@@ -83,6 +94,7 @@
          *                           the $scope.mashPoints array will be searched.
          */
         function swapMashPoints(mashPoint1, mashPoint2, index1, index2) {
+          showLoadingElement();
           // Store the index for the first point, then assign it the second point's
           // index. Give the second point an index higher than any other index
           // temporarily. This is because two points cannot have the same index on
@@ -97,9 +109,31 @@
               mashPoint2.$update(function swapPointsInArray() {
                 $scope.mashPoints[index2] = mashPoint1;
                 $scope.mashPoints[index1] = mashPoint2;
-              });
-            });
-          });
+                hideLoadingElement();
+              }, hideLoadingElement);
+            }, hideLoadingElement);
+          }, hideLoadingElement);
+        }
+
+        /**
+         * Retrieves the loading element in this panel.
+         */
+        function loadingElement() {
+          return angular.element($element).find('#loading');
+        }
+
+        /**
+         * Shows the loading icon. That is, starts the icon spinning.
+         */
+        function showLoadingElement() {
+          loadingElement().circularProgress('show');
+        }
+
+        /**
+         * Hides the loading icon. That is, stops the icon spinning.
+         */
+        function hideLoadingElement() {
+          loadingElement().circularProgress('hide');
         }
       },
     };
