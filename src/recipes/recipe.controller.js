@@ -14,6 +14,7 @@
     $scope.beerStyles = breweryResources.BeerStyle.query();
 
     function recipeUpdated() {
+      doneLoading();
       $scope.mashPoints = breweryResources.MashPoint.query(
           { recipe: $scope.recipe.id });
       $scope.maltIngredientAdditions
@@ -22,6 +23,10 @@
       $scope.bitteringIngredientAdditions
           = breweryResources.BitteringIngredientAddition.query(
               { recipe: $scope.recipe.id });
+    }
+
+    function doneLoading() {
+      $('#attributes-loading').circularProgress('hide');
     }
 
     $scope.srmToRGBString = recipeCalculations.srmToRGBString;
@@ -54,7 +59,8 @@
      * Saves recipe to server.
      */
     function save() {
-      $scope.recipe.$update();
+      $('#attributes-loading').circularProgress('show');
+      $scope.recipe.$update(doneLoading, doneLoading);
     }
 
     /* Sets the key `tabToSelect` to true in `$scope.tabSelected`, and sets all

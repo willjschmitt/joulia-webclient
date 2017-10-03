@@ -89,3 +89,34 @@ body.dark-header .header-container .header-wrapper #header-brand .logo .logo-ima
   background-color: #1B5E20;
   border-color: #1B5E20;
 }
+
+
+.panel-loading-icon {
+  display: inline-block;
+}
+
+.panel-loading-icon .md-progress-circular {
+  width: 40px;
+  height: 40px;
+}
+.panel-loading-icon .md-progress-circular .md-spinner-wrapper .md-inner {
+  width: 40px;
+  height: 40px;
+  position: relative;
+}
+.panel-loading-icon .md-progress-circular .md-spinner-wrapper .md-inner .md-gap {
+  left: 19px;
+  right: 19px;
+  border-top-width: 4px;
+}
+.panel-loading-icon .md-progress-circular .md-spinner-wrapper .md-inner .md-left,
+.panel-loading-icon .md-progress-circular .md-spinner-wrapper .md-inner .md-right {
+  height: 40px;
+  width: 20px;
+}
+.panel-loading-icon .md-progress-circular .md-spinner-wrapper .md-inner .md-left .md-half-circle,
+.panel-loading-icon .md-progress-circular .md-spinner-wrapper .md-inner .md-right .md-half-circle {
+  width: 40px;
+  height: 40px;
+  border-width: 4px;
+}

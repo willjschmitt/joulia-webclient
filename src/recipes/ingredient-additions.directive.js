@@ -21,10 +21,8 @@
         defaultStep: '=',
       },
       templateUrl: 'recipes/ingredient-additions.tpl.html',
-      link: function ingredientAdditionsController($scope) {
+      link: function ingredientAdditionsController($scope, $element) {
         $scope.addIngredientAddition = addIngredientAddition;
-        $scope.updateIngredientAddition = updateIngredientAddition;
-        $scope.removeIngredientAddition = removeIngredientAddition;
         $scope.steps = breweryResources.BREWING_STEP_CHOICES_ordered;
         $scope.units = breweryResources.UNITS_CHOICES_ordered;
 
@@ -36,25 +34,41 @@
             recipe: $scope.recipe.id,
             step_added: $scope.defaultStep.value,
           });
+          showLoadingElement();
           newIngredientAddition.$save(
-              ingredientAddition => $scope.ingredientAdditions.push(
-                  ingredientAddition));
+              ingredientAddition => doneAdding(ingredientAddition),
+              hideLoadingElement);
         }
 
         /**
-         * Updates provided resource.
+         * Handles a successful addition of a new ingredient addition. Hides
+         * the loading icon and adds the new ingredient to the
+         * ingredientAdditions array.
          */
-        function updateIngredientAddition(ingredientAddition) {
-          ingredientAddition.$update();
+        function doneAdding(ingredientAddition) {
+          hideLoadingElement();
+          $scope.ingredientAdditions.push(ingredientAddition);
         }
 
         /**
-         * Removes provided resource from server and local array.
+         * Retrieves the loading element in this panel.
          */
-        function removeIngredientAddition(ingredientAddition) {
-          const index = $scope.ingredientAdditions.indexOf(ingredientAddition);
-          ingredientAddition.$delete(
-              () => $scope.ingredientAdditions.splice(index, 1));
+        function loadingElement() {
+          return angular.element($element).find('#additions-loading');
+        }
+
+        /**
+         * Shows the loading icon. That is, starts the icon spinning.
+         */
+        function showLoadingElement() {
+          loadingElement().circularProgress('show');
+        }
+
+        /**
+         * Hides the loading icon. That is, stops the icon spinning.
+         */
+        function hideLoadingElement() {
+          loadingElement().circularProgress('hide');
         }
       },
     };
