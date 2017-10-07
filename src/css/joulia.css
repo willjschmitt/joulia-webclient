@@ -90,6 +90,21 @@ body.dark-header .header-container .header-wrapper #header-brand .logo .logo-ima
   border-color: #1B5E20;
 }
 
+.mini-card.mini-card-primary:before {
+  background-color: #4CAF50;
+}
+
+.bemat-mini-chart.bemat-mini-chart-primary svg.peity polyline {
+  stroke: #4CAF50;
+}
+
+.bemat-mini-chart.bemat-mini-chart-primary svg.peity polygon {
+  fill: #C8E6C9;
+}
+
+.cc-spc-primary .cc-spc-wrapper .cc-spc-bar {
+  stroke: #4CAF50;
+}
 
 .panel-loading-icon {
   display: inline-block;
