@@ -3,11 +3,11 @@
     .module('app.brewhouse')
     .controller('BrewhouseController', BrewhouseController);
 
-  BrewhouseController.$inject = ['$scope', 'breweryResources', '$routeParams'];
+  BrewhouseController.$inject = ['$scope', 'breweryResources', '$stateParams'];
 
-  function BrewhouseController($scope, breweryResources, $routeParams) {
+  function BrewhouseController($scope, breweryResources, $stateParams) {
     $scope.brewhouse = breweryResources.Brewhouse.get(
-        { id: $routeParams.brewhouseId }, updateBrewery);
+        { id: $stateParams.brewhouseId }, updateBrewery);
 
     /**
      * Gets the brewery this brewhouse is a part of.
