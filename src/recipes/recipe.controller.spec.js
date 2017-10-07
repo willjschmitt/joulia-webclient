@@ -130,7 +130,7 @@ describe('app.recipes recipe.controller', function () {
       scope = $rootScope.$new();
       controller = $controller('RecipeController', {
         $scope: scope,
-        $routeParams: { recipeId: 12 },
+        $stateParams: { recipeId: 12 },
       });
       $httpBackend.flush();
     });

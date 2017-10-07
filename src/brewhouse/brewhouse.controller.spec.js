@@ -46,7 +46,7 @@ describe('app.brewhouse', function () {
           'brewery/api/recipeInstance?active=true&brewhouse=12');
       const controller = $controller('BrewhouseController', {
         $scope: scope,
-        $routeParams: { brewhouseId: 12 },
+        $stateParams: { brewhouseId: 12 },
       });
       $httpBackend.flush();
       expect(controller).toBeDefined();
@@ -75,7 +75,7 @@ describe('app.brewhouse', function () {
       const scope = $rootScope.$new();
       const controller = $controller('BrewhouseController', {
         $scope: scope,
-        $routeParams: { brewhouseId: 12 },
+        $stateParams: { brewhouseId: 12 },
       });
       expect($httpBackend.flush).toThrow(new Error(
           `Multiple active recipe instance were found for this equipment, which
@@ -96,7 +96,7 @@ describe('app.brewhouse', function () {
       const scope = $rootScope.$new();
       const controller = $controller('BrewhouseController', {
         $scope: scope,
-        $routeParams: { brewhouseId: 12 },
+        $stateParams: { brewhouseId: 12 },
       });
       $httpBackend.flush();
 
