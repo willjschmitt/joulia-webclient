@@ -10,48 +10,7 @@
 </section>
 
 <section class="page-content" ng-if="recipeInstance.id">
-  <div class="row">
-    <brewhouse-emergency-stop
-        class="col-md-2 col-xs-6"
-        recipe-instance="recipeInstance.id">
-    </brewhouse-emergency-stop>
-    <brewhouse-terminator
-        class="col-md-2 col-xs-6"
-        recipe-instance="recipeInstance.id">
-    </brewhouse-terminator>
-
-    <brewhouse-status
-        class="col-md-8 col-xs-12"
-        recipe-instance="recipeInstance.id">
-    </brewhouse-status>
-  </div>
-  <div class="row">
-    <brewhouse-temperature-plots
-        class="col-lg-6 col-sm-12"
-        recipe-instance="recipeInstance.id">
-    </brewhouse-temperature-plots>
-
-    <brewhouse-monitoring-cards
-        class="col-lg-3 col-sm-6"
-        recipe-instance="recipeInstance.id">
-    </brewhouse-monitoring-cards>
-
-    <brewhouse-dials
-        class="col-lg-3 col-sm-6"
-        recipe-instance="recipeInstance.id">
-    </brewhouse-dials>
-  </div>
-  <div class="row">
-    <brewhouse-overrides
-        class="col-lg-6 col-sm-12"
-        recipe-instance="recipeInstance.id">
-    </brewhouse-overrides>
-
-    <brewhouse-measurements
-        recipe-instance="recipeInstance"
-        class="col-lg-6 col-xs-12">
-    </brewhouse-measurements>
-  </div>
+  <brewhouse-analysis recipe-instance="recipeInstance"></brewhouse-analysis>
 </section>
 
 <brewhouse-inactive
