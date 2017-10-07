@@ -50,6 +50,14 @@ a {
   color: #4CAF50;
 }
 
+#page-wrapper #right-content-wrapper a {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+#page-wrapper #right-content-wrapper a.btn-primary {
+  color: rgba(255, 255, 255, 1.0);
+}
+
 a:hover, a a:active, a:focus {
   color: #1B5E20;
 }
@@ -77,6 +85,7 @@ body.dark-header .header-container .header-wrapper #header-brand .logo .logo-ima
 
 .btn-primary {
   background-color: #4CAF50;
+  border-color: #4CAF50;
 }
 
 .btn-primary:hover,
@@ -86,6 +95,16 @@ body.dark-header .header-container .header-wrapper #header-brand .logo .logo-ima
 .btn-primary.active,
 .open
 .dropdown-toggle.btn-primary {
+  background-color: #1B5E20;
+  border-color: #1B5E20;
+}
+
+.btn-primary:active:focus:not(.disabled),
+.btn-primary.active:focus:not(.disabled),
+.open > .dropdown-toggle.btn-primary:focus:not(.disabled),
+.btn-primary:active:hover:not(.disabled),
+.btn-primary.active:hover:not(.disabled),
+.open > .dropdown-toggle.btn-primary:hover:not(.disabled) {
   background-color: #1B5E20;
   border-color: #1B5E20;
 }
