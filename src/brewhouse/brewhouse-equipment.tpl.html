@@ -6,51 +6,23 @@
       </div>
       <div class="panel-body no-top-padding">
         <div class="row">
-          <div class="col-xs-4">
-            <h3>Boil Kettle/Hot Liquor Tun</h3>
-            <img src="static/img/kettle.svg" width="100%" />
-            <div class="equipment-measurements">
-              <brewhouse-equipment-measurement
-                  recipe-instance="recipeInstance"
-                  label="'Temperature'"
-                  units="'&deg;F'"
-                  value-name="'boil_kettle__temperature'">
-              </brewhouse-equipment-measurement>
-              <brewhouse-equipment-measurement
-                  recipe-instance="recipeInstance"
-                  label="'Set Point'"
-                  units="'&deg;F'"
-                  value-name="'boil_kettle__temperature_set_point'">
-              </brewhouse-equipment-measurement>
-              <brewhouse-equipment-measurement
-                  recipe-instance="recipeInstance"
-                  label="'Heating Element Power'"
-                  units="'W'"
-                  value-name="'boil_kettle__power'">
-              </brewhouse-equipment-measurement>
-            </div>
-          </div>
+          <kettle
+              class="col-xs-4"
+              label="'Boil Kettle/Hot Liquor Tun'"
+              name="'boil_kettle'"
+              has-heating-element="true"
+              recipe-instance="recipeInstance">
+          </kettle>
 
           <div class="col-xs-4"></div>
 
-          <div class="col-xs-4">
-            <h3>Mash Tun</h3>
-            <img src="static/img/kettle.svg" class="equipment-image"/>
-            <div class="equipment-measurements">
-              <brewhouse-equipment-measurement
-                  recipe-instance="recipeInstance"
-                  label="'Temperature'"
-                  units="'&deg;F'"
-                  value-name="'mash_tun__temperature'">
-              </brewhouse-equipment-measurement>
-              <brewhouse-equipment-measurement
-                  recipe-instance="recipeInstance"
-                  label="'Set Point'"
-                  units="'&deg;F'"
-                  value-name="'mash_tun__temperature_set_point'">
-              </brewhouse-equipment-measurement>
-            </div>
-          </div>
+          <kettle
+              class="col-xs-4"
+              label="'Mash Tun'"
+              name="'mash_tun'"
+              has-heating-element="false"
+              recipe-instance="recipeInstance">
+          </kettle>
         </div>
       </div>
     </div>
