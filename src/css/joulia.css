@@ -189,3 +189,28 @@ body.dark-header .header-container .header-wrapper #header-brand .logo .logo-ima
   font-size: 18px;
   font-weight: 500;
 }
+
+.heating-element {
+  width: 50%;
+  margin-left: 20%;
+  position: absolute;
+  top: 80%;
+  stroke: #2196F3;
+}
+
+.heating-element.on {
+  stroke: #F44336;
+  animation: glow 3s infinite;
+}
+
+@keyframes glow {
+  0% {
+    stroke: rgba(244, 67, 54, 0.25);
+  }
+  50% {
+    stroke: rgba(244, 67, 54, 1.0);
+  }
+  100% {
+    stroke: rgba(244, 67, 54, 0.25);
+  }
+}

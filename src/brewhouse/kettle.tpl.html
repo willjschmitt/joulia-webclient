@@ -1,0 +1,41 @@
+<h3 class='kettle-label'>{{ label }}</h3>
+<img src="static/img/kettle.svg" width="100%" />
+<div
+    ng-if="hasHeatingElement"
+    class="heating-element"
+    ng-class="{on: heatingElementStatus.latest}">
+  <svg
+      xmlns:svg="http://www.w3.org/2000/svg"
+      xmlns="http://www.w3.org/2000/svg"
+      version="1.1"
+      height="100%" width="100%"
+      viewBox="0 -3 20 6">
+    <polyline
+        stroke-width="0.7"
+        fill="none"
+        points="
+            0,0 1,0 2,-3 4,3 6,-3 8,3 10,-3 12,3 14,-3 16,3 18,-3,
+            19,0 20,0" />
+  </svg>
+</div>
+<div class="equipment-measurements">
+  <brewhouse-equipment-measurement
+      recipe-instance="recipeInstance"
+      label="'Temperature'"
+      units="'&deg;F'"
+      value-name="name + '__temperature'">
+  </brewhouse-equipment-measurement>
+  <brewhouse-equipment-measurement
+      recipe-instance="recipeInstance"
+      label="'Set Point'"
+      units="'&deg;F'"
+      value-name="name + '__temperature_set_point'">
+  </brewhouse-equipment-measurement>
+  <brewhouse-equipment-measurement
+      ng-if="hasHeatingElement"
+      recipe-instance="recipeInstance"
+      label="'Heating Element Power'"
+      units="'W'"
+      value-name="name + '__power'">
+  </brewhouse-equipment-measurement>
+</div>
