@@ -215,6 +215,15 @@ body.dark-header .header-container .header-wrapper #header-brand .logo .logo-ima
   }
 }
 
+.hlt-coil {
+  width: 100%;
+  position: absolute;
+  top: 60%;
+  stroke: #2196F3;
+  stroke-linecap: round;
+  stroke-width: 1.2;
+}
+
 .pump {
   stroke-width: 2px;
   stroke: #9E9E9E;
