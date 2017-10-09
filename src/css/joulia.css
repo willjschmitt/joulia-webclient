@@ -217,7 +217,7 @@ body.dark-header .header-container .header-wrapper #header-brand .logo .logo-ima
 
 .pump {
   stroke-width: 2px;
-  stroke: #424242;
+  stroke: #9E9E9E;
   stroke-linecap: butt;
   width: 50%;
   margin-left: auto;
@@ -225,12 +225,9 @@ body.dark-header .header-container .header-wrapper #header-brand .logo .logo-ima
 }
 
 .pump rect,
-.pump circle {
-  fill: rgba(255, 255, 255, 255);
-}
-
+.pump circle,
 .pump path {
-  fill: none;
+  fill: #EEEEEE;
 }
 
 .pump .impeller {
@@ -239,8 +236,9 @@ body.dark-header .header-container .header-wrapper #header-brand .logo .logo-ima
 }
 
 .pump .impeller.on {
+  stroke: #F44336;
   animation-name: rotate;
-  animation-duration: 1s;
+  animation-duration: 1.5s;
   animation-iteration-count: infinite;
   animation-timing-function: linear;
 }
