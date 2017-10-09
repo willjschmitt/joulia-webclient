@@ -155,6 +155,41 @@ body.dark-header .header-container .header-wrapper #header-brand .logo .logo-ima
   border-width: 4px;
 }
 
+.hoses {
+  position: absolute;
+  width: 100%;
+  stroke-width: 2;
+  stroke: rgba(255, 235, 59, 0.5);
+  fill: none;
+  z-index: 999;
+}
+
+.hose-animation {
+  stroke-width: 2;
+  stroke: rgba(255, 152, 0, 1.0);
+  animation: hose-flow 10s linear infinite;
+  stroke-dasharray: 1, 2;
+}
+
+@keyframes hose-flow {
+  0% {
+    stroke-dashoffset: 100%;
+  }
+  100% {
+    stroke-dashoffset: 0%;
+
+  }
+}
+
+.equipment {
+  width: 33.3333%;
+  float: left;
+  position: relative;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
 .equipment-image {
   width: 100%;
 }
