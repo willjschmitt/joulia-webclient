@@ -214,3 +214,38 @@ body.dark-header .header-container .header-wrapper #header-brand .logo .logo-ima
     stroke: rgba(244, 67, 54, 0.25);
   }
 }
+
+.pump {
+  stroke-width: 2px;
+  stroke: #424242;
+  stroke-linecap: butt;
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.pump rect,
+.pump circle {
+  fill: rgba(255, 255, 255, 255);
+}
+
+.pump path {
+  fill: none;
+}
+
+.pump .impeller {
+  stroke: #9E9E9E;
+  transform-origin: center;
+}
+
+.pump .impeller.on {
+  animation-name: rotate;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+@keyframes rotate {
+  from {transform: rotate(0deg);}
+  to {transform: rotate(360deg);}
+}
