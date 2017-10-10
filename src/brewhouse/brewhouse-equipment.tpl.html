@@ -6,28 +6,101 @@
       </div>
       <div class="panel-body no-top-padding">
         <div class="row">
-          <kettle
-              class="col-xs-4"
-              label="'Boil Kettle/Hot Liquor Tun'"
-              name="'boil_kettle'"
-              has-heating-element="true"
-              recipe-instance="recipeInstance">
-          </kettle>
+          <div class="col-xs-12">
+            <div class="hoses">
+              <svg
+                  xmlns:svg="http://www.w3.org/2000/svg"
+                  xmlns="http://www.w3.org/2000/svg"
+                  version="1.1"
+                  width="100%" height="100%"
+                  viewBox="0 0 100 100">
+                <g
+                    id="pump-out-to-hlt-exchanger-in"
+                    ng-class="{ on: hoseStatus.pumpOutToHltExchangerIn }">
+                  <path d="M56 8 C 50 20, 40 30, 32 24" />
+                  <path class="hose-animation" d="M56 8 C 50 20, 40 30, 32 24" />
+                </g>
+                <g
+                    id="hlt-exchanger-out-to-mash-tun-in"
+                    ng-class="{ on: hoseStatus.hltExchangerOutToMashTunIn }">
+                  <path d="M32 30 C 40 35, 80 20, 98 10" />
+                  <path class="hose-animation" d="M32 30 C 40 35, 80 20, 98 10" />
+                </g>
+                <g
+                    id="mash-tun-out-to-pump-in"
+                    ng-class="{ on: hoseStatus.mashTunOutToPumpIn }">
+                  <path d="M98 35 C 90 40, 50 40, 41 10" />
+                  <path class="hose-animation" d="M98 35 C 90 40, 50 40, 41 10" />
+                </g>
+                <g
+                    id="hlt-out-to-pump-in"
+                    ng-class="{ on: hoseStatus.hltOutToPumpIn }">
+                  <path d="M32 35 C 40 35, 50 40, 41 10" />
+                  <path class="hose-animation" d="M32 35 C 40 35, 50 40, 41 10" />
+                </g>
+                <g
+                    id="pump-out-to-mash-tun-in"
+                    ng-class="{ on: hoseStatus.pumpOutToMashTunIn }">
+                  <path d="M56 8 C 60 10, 80 20, 98 10" />
+                  <path class="hose-animation" d="M56 8 C 60 10, 80 20, 98 10" />
+                </g>
+                <g
+                    id="mash-tun-out-to-ground"
+                    ng-class="{ on: hoseStatus.mashTunOutToGround }">
+                  <path d="M95 35 C 100 35, 100 30, 100 40" />
+                  <path class="hose-animation" d="M95 35 C 100 35, 100 30, 100 40" />
+                </g>
+                <g
+                    id="pump-out-to-hlt-in"
+                    ng-class="{ on: hoseStatus.pumpOutToHltIn }">
+                  <path d="M56 8 C 50 20, 40 12, 32 11" />
+                  <path class="hose-animation" d="M56 8 C 50 20, 40 12, 32 11" />
+                </g>
+                <g
+                    id="water-in-to-pump-in"
+                    ng-class="{ on: hoseStatus.waterInToPumpIn }">
+                  <path d="M32 0 C 33 10, 36 10, 41 10" />
+                  <path class="hose-animation" d="M32 0 C 33 10, 36 10, 41 10" />
+                </g>
+                <g
+                    id="hlt-exchanger-out-to-ground"
+                    ng-class="{ on: hoseStatus.hltExchangerOutToGround }">
+                  <path d="M32 30 C 40 31, 40 30, 40 40" />
+                  <path class="hose-animation" d="M32 30 C 40 31, 40 30, 40 40" />
+                </g>
+                <g
+                    id="hlt-out-to-pump-in"
+                    ng-class="{ on: hoseStatus.hltOutToGround }">
+                  <path d="M32 35 C 40 35, 40 38, 40 40" />
+                  <path class="hose-animation" d="M32 35 C 40 35, 40 38, 40 40" />
+                </g>
+              </svg>
+            </div>
+            <kettle
+                class="equipment"
+                label="'Boil Kettle/Hot Liquor Tun'"
+                name="'boil_kettle'"
+                has-heating-element="true"
+                has-heat-exchanger="true"
+                recipe-instance="recipeInstance">
+            </kettle>
 
-          <pump
-              class="col-xs-4"
-              label="'Main Pump'"
-              name="'main_pump'"
-              recipe-instance="recipeInstance">
-          </pump>
+            <pump
+                class="equipment"
+                label="'Main Pump'"
+                name="'main_pump'"
+                recipe-instance="recipeInstance">
+            </pump>
 
-          <kettle
-              class="col-xs-4"
-              label="'Mash Tun'"
-              name="'mash_tun'"
-              has-heating-element="false"
-              recipe-instance="recipeInstance">
-          </kettle>
+            <kettle
+                class="equipment"
+                label="'Mash Tun'"
+                name="'mash_tun'"
+                has-heating-element="false"
+                has-heat-exchanger="false"
+                recipe-instance="recipeInstance">
+            </kettle>
+          </div>
         </div>
       </div>
     </div>

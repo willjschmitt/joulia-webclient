@@ -23,6 +23,11 @@
         // display the power and status of the heating element.
         hasHeatingElement: '=',
 
+        // Boolean if the kettle has a heat exchanger built in, like a hot
+        // liquor tun. Might be changed from false to true when a discrete coil
+        // is added like during cooling.
+        hasHeatExchanger: '=',
+
         // The recipe instance object, which has the id for the active recipe
         // instance, which will be queried against for the measurement data.
         recipeInstance: '=',

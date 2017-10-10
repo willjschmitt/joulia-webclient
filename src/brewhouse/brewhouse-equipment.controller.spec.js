@@ -14,8 +14,10 @@ describe('app.brewhouse', function () {
     var controller;
 
     beforeEach(function() {
+      const scope = $rootScope.$new();
+      scope.recipeInstance = { id: 10 };
       controller = $controller('BrewhouseEquipmentController', {
-        $scope: $rootScope.$new(),
+        $scope: scope,
       });
     })
 
