@@ -164,6 +164,14 @@ body.dark-header .header-container .header-wrapper #header-brand .logo .logo-ima
   z-index: 999;
 }
 
+.hoses path {
+  opacity: 0.0;
+}
+
+.hoses .on path {
+  opacity: 1.0;
+}
+
 .hose-animation {
   stroke-width: 2;
   stroke: rgba(255, 152, 0, 1.0);
