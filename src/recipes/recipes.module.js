@@ -10,6 +10,12 @@
     const recipesState = {
       name: 'recipes',
       url: '/recipes',
+      abstract: true,
+      template: '<ui-view></ui-view>',
+    };
+    const recipesListState = {
+      name: 'recipes.list',
+      url: '',
       templateUrl: 'recipes/recipes.tpl.html',
       controller: 'RecipesController',
       controllerAs: 'recipesCtrl',
@@ -30,6 +36,7 @@
     };
 
     $stateProvider.state(recipesState);
+    $stateProvider.state(recipesListState);
     $stateProvider.state(recipeState);
     $stateProvider.state(recipeInstanceState);
   }
