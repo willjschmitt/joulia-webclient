@@ -4,12 +4,12 @@
     .controller('RecipeController', RecipeController);
 
   RecipeController.$inject = [
-    '$scope', '$routeParams', 'breweryResources', 'recipeCalculations'];
+    '$scope', '$stateParams', 'breweryResources', 'recipeCalculations'];
 
   function RecipeController(
-      $scope, $routeParams, breweryResources, recipeCalculations) {
+      $scope, $stateParams, breweryResources, recipeCalculations) {
     $scope.recipe = breweryResources.Recipe.get(
-      { id: $routeParams.recipeId }, recipeUpdated);
+      { id: $stateParams.recipeId }, recipeUpdated);
 
     $scope.beerStyles = breweryResources.BeerStyle.query();
 

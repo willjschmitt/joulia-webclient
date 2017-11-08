@@ -1,16 +1,19 @@
 (function loadDashboardModule() {
   angular
-    .module('app.dashboard', ['ngRoute', 'app.common', 'ui.bootstrap'])
-    .config(routeConfig);
+    .module('app.dashboard', ['ui.router', 'app.common', 'ui.bootstrap'])
+    .config(stateConfig);
 
-  routeConfig.$inject = ['$routeProvider'];
+  stateConfig.$inject = ['$stateProvider'];
 
-  function routeConfig($routeProvider) {
-    $routeProvider
-      .when('/', {
-        templateUrl: 'dashboard/dashboard.tpl.html',
-        controller: 'DashboardController',
-        controllerAs: 'dashboardCtrl',
-      });
+  function stateConfig($stateProvider) {
+    const dashboardState = {
+      name: 'dashboard',
+      url: '/dashboard',
+      templateUrl: 'dashboard/dashboard.tpl.html',
+      controller: 'DashboardController',
+      controllerAs: 'dashboardCtrl',
+    };
+
+    $stateProvider.state(dashboardState);
   }
 }());

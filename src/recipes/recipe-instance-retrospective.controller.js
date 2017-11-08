@@ -5,12 +5,12 @@
                 RecipeInstanceRetrospectiveController);
 
   RecipeInstanceRetrospectiveController.$inject = [
-    '$scope', 'breweryResources', '$routeParams'];
+    '$scope', 'breweryResources', '$stateParams'];
 
   function RecipeInstanceRetrospectiveController(
-      $scope, breweryResources, $routeParams) {
+      $scope, breweryResources, $stateParams) {
     $scope.recipeInstance = breweryResources.RecipeInstance.get(
-        { id: $routeParams.recipeInstanceId }, handleRecipeInstance);
+        { id: $stateParams.recipeInstanceId }, handleRecipeInstance);
 
     /**
      * Requests the recipe and brewhouse for this recipe instance.

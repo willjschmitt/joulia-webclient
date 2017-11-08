@@ -53,7 +53,7 @@ describe('app.recipes', function () {
 
       const controller = $controller('RecipeInstanceRetrospectiveController', {
         $scope: scope,
-        $routeParams: { recipeInstanceId: 3 },
+        $stateParams: { recipeInstanceId: 3 },
       });
       $httpBackend.flush();
 

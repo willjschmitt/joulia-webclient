@@ -10,16 +10,30 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-watch');
 
-  grunt.registerTask('default', ['cleanbuild', 'watch']);
+  grunt.registerTask(
+    'default',
+    `Cleans build directory, copies vendor files, runs build. Continues to watch
+     to re-build.`,
+    ['cleanbuild', 'watch:build']);
+  grunt.registerTask(
+    'liverefresh',
+    `Cleans build directory, copies vendor files, runs build. Continues to watch
+     to re-buildlite. Does not run tests except for on first build.`,
+    ['cleanbuild', 'watch:refresh']);
+
   grunt.registerTask('release', ['build']);
   grunt.registerTask('cleanbuild', [
     'clean', 'build', 'copy:vendor']);
   grunt.registerTask('build', [
     'eslint', 'html2js', 'karma:release', 'concat', 'copy:assets']);
+  grunt.registerTask('buildlite', [
+    'eslint', 'html2js', 'concat', 'copy:assets']);
 
   grunt.registerTask('test', ['eslint', 'karma:travis', 'coveralls']);
   grunt.registerTask('travisbuild', [
     'html2js', 'concat', 'copy:assets', 'copy:vendor']);
+
+
 
   grunt.initConfig({
     distDir: 'dist',
@@ -127,7 +141,7 @@ module.exports = function(grunt) {
       },
     },
     watch: {
-      scripts: {
+      build: {
         files: [
           '<%= src.publicJs %>',
           '<%= src.js %>',
@@ -138,6 +152,21 @@ module.exports = function(grunt) {
           'src/public_index.html',
         ],
         tasks: ['build'],
+        options: {
+          spawn: false,
+        },
+      },
+      refresh: {
+        files: [
+          '<%= src.publicJs %>',
+          '<%= src.js %>',
+          '<%= src.css %>',
+          '<%= src.tests %>',
+          '<%= src.tpl %>',
+          'src/index.html',
+          'src/public_index.html',
+        ],
+        tasks: ['buildlite'],
         options: {
           spawn: false,
         },

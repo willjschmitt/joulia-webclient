@@ -1,7 +1,7 @@
 (function loadJouliaWebserver() {
   angular
     .module('app', [
-      'ngRoute', 'ngResource', 'ui.bootstrap', 'app.common', 'app.public',
+      'ui.router', 'ngResource', 'ui.bootstrap', 'app.common', 'app.public',
       'app.templates', 'perfect_scrollbar',
     ])
     .config(routeConfig)
@@ -9,11 +9,11 @@
     .config(resourceConfig);
 
 
-  routeConfig.$inject = ['$locationProvider', '$routeProvider'];
+  routeConfig.$inject = ['$locationProvider', '$urlRouterProvider'];
 
-  function routeConfig($locationProvider, $routeProvider) {
+  function routeConfig($locationProvider, $urlRouterProvider) {
     $locationProvider.hashPrefix('!');
-    $routeProvider.otherwise('/');
+    $urlRouterProvider.otherwise('/');
   }
 
   httpConfig.$inject = ['$httpProvider'];

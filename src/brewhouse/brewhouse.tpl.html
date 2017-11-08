@@ -1,11 +1,29 @@
 <section class="page-header alternative-header">
-  <ol class="breadcrumb">
-    <li>Joulia</li>
-    <li>{{ brewery.name }}</li>
-    <li>{{ brewhouse.name }}</li>
-  </ol>
-  <div class="page-header_title">
-    <h1>Brewhouse Management</h1>
+  <div class="col-xs-8">
+    <ol class="breadcrumb">
+      <li><a ui-sref="dashboard">Joulia</a></li>
+      <li>{{ brewery.name }}</li>
+      <li>{{ brewhouse.name }}</li>
+    </ol>
+    <div class="page-header_title">
+      <h1>Brewhouse Management</h1>
+    </div>
+  </div>
+  <div class="col-xs-4 pull-right">
+    <span class="pull-right">
+      <a
+          class="btn btn-primary btn-raised"
+          ui-sref="brewhouse.equipment({ brewhouseId: brewhouse.id })"
+          ui-sref-active="active">
+        Equipment
+      </a>
+      <a
+          class="btn btn-primary btn-raised"
+          ui-sref="brewhouse.analysis({ brewhouseId: brewhouse.id })"
+          ui-sref-active="active">
+        Analysis
+      </a>
+    </span>
   </div>
 </section>
 
@@ -25,33 +43,7 @@
         recipe-instance="recipeInstance.id">
     </brewhouse-status>
   </div>
-  <div class="row">
-    <brewhouse-temperature-plots
-        class="col-lg-6 col-sm-12"
-        recipe-instance="recipeInstance.id">
-    </brewhouse-temperature-plots>
-
-    <brewhouse-monitoring-cards
-        class="col-lg-3 col-sm-6"
-        recipe-instance="recipeInstance.id">
-    </brewhouse-monitoring-cards>
-
-    <brewhouse-dials
-        class="col-lg-3 col-sm-6"
-        recipe-instance="recipeInstance.id">
-    </brewhouse-dials>
-  </div>
-  <div class="row">
-    <brewhouse-overrides
-        class="col-lg-6 col-sm-12"
-        recipe-instance="recipeInstance.id">
-    </brewhouse-overrides>
-
-    <brewhouse-measurements
-        recipe-instance="recipeInstance"
-        class="col-lg-6 col-xs-12">
-    </brewhouse-measurements>
-  </div>
+  <ui-view></ui-view>
 </section>
 
 <brewhouse-inactive

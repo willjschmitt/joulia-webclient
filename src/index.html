@@ -35,7 +35,7 @@
     <script type="text/javascript" src="static/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <script type="text/javascript" src="static/bower_components/angular-resource/angular-resource.js"></script>
     <script type="text/javascript" src="static/bower_components/angular-sanitize/angular-sanitize.js"></script>
-    <script type="text/javascript" src="static/bower_components/angular-route/angular-route.js"></script>
+    <script type="text/javascript" src="static/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <script type="text/javascript" src="static/bower_components/angular-websocket/dist/angular-websocket.js"></script>
 
     <script type="text/javascript" src="static/bower_components/perfect-scrollbar/js/perfect-scrollbar.min.js"></script>
@@ -92,7 +92,7 @@
 
         <section id="right-content-wrapper" perfect-scrollbar>
           <div class="right-content-outter">
-            <div class="right-content-inner" ng-view></div>
+            <ui-view class="right-content-inner"></ui-view>
           </div>
         </section>
       </section>
