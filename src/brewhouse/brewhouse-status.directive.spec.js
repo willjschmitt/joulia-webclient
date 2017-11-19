@@ -4,7 +4,7 @@ describe('app.brewhouse', function () {
   beforeEach(module('joulia.templates'));
   beforeEach(module(function($provide) {
     $provide.factory('TimeSeriesUpdater', function () {
-      function TimeSeriesUpdater(recipeInstance, name) {
+      function TimeSeriesUpdater(recipeInstance, name, variableType) {
         this.latest = 0;
       }
 
@@ -124,7 +124,7 @@ describe('app.brewhouse', function () {
       it('shows current status text', function () {
         isolatedScope.currentStatus.latest = 0;
         scope.$digest();
-        
+
         expect(element.find('header').html()).toContain(
           'System is currently offline.');
         expect(element.find('header').html()).toContain('(Status #0)');

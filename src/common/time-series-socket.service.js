@@ -86,7 +86,7 @@
      * received.
      * @param {object}   subscriber  Details about the sensor to subscribe to
      *                               updates on the server. Contains recipe
-     *                               instance and sensor name.
+     *                               instance, sensor name, and variable type.
      * @param {function} callback    Function to call when the subscriber
      *                               recieves updates.
      * @param {Number}   historyTime Amount of time, which should be queried for
@@ -97,6 +97,7 @@
       const data = {
         recipe_instance: subscriber.recipeInstance,
         name: subscriber.name,
+        variable_type: subscriber.variableType,
       };
       if (historyTime !== null && historyTime !== undefined) {
         data.history_time = historyTime;

@@ -4,7 +4,7 @@ describe('app.brewhouse', function () {
   beforeEach(module('joulia.templates'));
   beforeEach(module(function($provide) {
     $provide.factory('TimeSeriesUpdater', function () {
-      function TimeSeriesUpdater(recipeInstance, name) {
+      function TimeSeriesUpdater(recipeInstance, name, variableType) {
         this.latest = 0;
       }
 

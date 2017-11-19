@@ -9,7 +9,7 @@
   function BrewhouseEquipmentController(
       $scope, TimeSeriesUpdater, brewhouseStates) {
     $scope.currentStatus = new TimeSeriesUpdater(
-        $scope.recipeInstance.id, 'state');
+        $scope.recipeInstance.id, 'state', 'value');
 
     const states = brewhouseStates.getStates($scope.brewhouse.software_version);
 

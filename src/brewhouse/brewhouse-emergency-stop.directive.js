@@ -15,7 +15,7 @@
       templateUrl: 'brewhouse/brewhouse-emergency-stop.tpl.html',
       link: function brewhouseTerminatorController($scope) {
         $scope.emergencyStopStatus = new TimeSeriesUpdater(
-            $scope.recipeInstance, 'emergency_stop');
+            $scope.recipeInstance, 'emergency_stop', 'value');
 
         $scope.toggleEmergencyStop = toggleEmergencyStop;
 

@@ -18,9 +18,9 @@
       link: function toggleableElementController($scope) {
         // Subscribe to value and override.
         $scope.elementStatus = new TimeSeriesUpdater(
-            $scope.recipeInstance, $scope.sensorName);
+            $scope.recipeInstance, $scope.sensorName, 'value');
         $scope.elementOverride = new TimeSeriesUpdater(
-            $scope.recipeInstance, `${$scope.sensorName}Override`);
+            $scope.recipeInstance, $scope.sensorName, 'override');
 
         // Status setters.
         $scope.toggleElementStatus = toggleElementStatus;
