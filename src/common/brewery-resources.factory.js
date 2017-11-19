@@ -56,6 +56,7 @@
       BitteringIngredientAddition: $resource(
           'brewery/api/bittering_ingredient_addition/:id/', { id: '@id' },
           { update: { method: 'PUT' } }),
+      BrewingState: $resource('brewery/api/brewing_state/'),
       BREWING_STEP_CHOICES: brewingStepChoices,
       BREWING_STEP_CHOICES_ordered: [
         brewingStepChoices.MASH,

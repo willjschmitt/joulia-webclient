@@ -11,49 +11,51 @@
     $scope.currentStatus = new TimeSeriesUpdater(
         $scope.recipeInstance.id, 'state');
 
+    const states = brewhouseStates.getStates($scope.brewhouse.software_version);
+
     $scope.hoseStatus = {};
     $scope.$watch('currentStatus.latest', function updateHoseStatus() {
       switch ($scope.currentStatus.latest) {
-      case brewhouseStates.statesEnum.statePremash:
-      case brewhouseStates.statesEnum.stateStrike:
+      case states.statesEnum.statePremash:
+      case states.statesEnum.stateStrike:
         $scope.hoseStatus = {
           hltOutToPumpIn: true,
           pumpOutToMashTunIn: true,
         };
         break;
-      case brewhouseStates.statesEnum.statePostStrike:
-      case brewhouseStates.statesEnum.stateMash:
-      case brewhouseStates.statesEnum.stateMashoutRamp:
-      case brewhouseStates.statesEnum.stateMashoutRecirculation:
+      case states.statesEnum.PostStrike:
+      case states.statesEnum.Mash:
+      case states.statesEnum.MashoutRamp:
+      case states.statesEnum.MashoutRecirculation:
         $scope.hoseStatus = {
           pumpOutToHltExchangerIn: true,
           hltExchangerOutToMashTunIn: true,
           mashTunOutToPumpIn: true,
         };
         break;
-      case brewhouseStates.statesEnum.stateSpargePrep:
-      case brewhouseStates.statesEnum.stateSparge:
+      case states.statesEnum.SpargePrep:
+      case states.statesEnum.Sparge:
         $scope.hoseStatus = {
           hltOutToPumpIn: true,
           pumpOutToMashTunIn: true,
           mashTunOutToGround: true,
         };
         break;
-      case brewhouseStates.statesEnum.statePreBoil:
-      case brewhouseStates.statesEnum.stateMashToBoil:
+      case states.statesEnum.PreBoil:
+      case states.statesEnum.MashToBoil:
         $scope.hoseStatus = {
           mashTunOutToPumpIn: true,
           pumpOutToHltIn: true,
         };
         break;
-      case brewhouseStates.statesEnum.stateCool:
+      case states.statesEnum.Cool:
         $scope.hoseStatus = {
           waterInToPumpIn: true,
           pumpOutToHltExchangerIn: true,
           hltExchangerOutToGround: true,
         };
         break;
-      case brewhouseStates.statesEnum.statePumpOut:
+      case states.statesEnum.PumpOut:
         $scope.hoseStatus = {
           hltOutToGround: true,
         };
