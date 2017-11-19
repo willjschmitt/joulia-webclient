@@ -30,43 +30,21 @@
         $scope.currentStatusText = currentStatusText;
         $scope.nextStatusText = nextStatusText;
 
-        // Text version of the states, which matches the order and index of
-        // the numerical status.
-        const states = brewhouseStates.getStates(
+        $scope.states = brewhouseStates.getStates(
           $scope.brewhouse.software_version);
 
         /**
-         * Calculates the text for the current state.
-         *
-         * @param {Number} currentStatus The numerical status the system
-         *     is currently in.
-         */
-        function currentStatusText(currentStatus) {
-          return getStatusText(currentStatus);
-        }
-
-        /**
-         * Calculates the text for the next state.
+         * Calculates the text for the next state. If the index is out of
+         * bounds, returns an empty string.
          *
          * @param {Number} currentStatus The numerical status the system
          *     is currently in.
          */
         function nextStatusText(currentStatus) {
-          return getStatusText(currentStatus + 1);
-        }
-
-        /**
-         * Get's the status text for the given status index. If the index is out
-         * of bounds, returns an empty string.
-         *
-         * @param {Number} statusId The status index to retreive the text for.
-         * @returns Status text.
-         */
-        function getStatusText(statusId) {
           if (statusId < 0 || statusId >= states.length) {
             return '';
           }
-          return states[statusId].description;
+          return states[currentStatus + 1].description;
         }
 
         /**
