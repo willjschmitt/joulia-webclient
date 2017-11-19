@@ -168,8 +168,13 @@ body.dark-header .header-container .header-wrapper #header-brand .logo .logo-ima
   opacity: 0.0;
 }
 
-.hoses .on path {
+.hoses .on path,
+.hoses .connected path {
   opacity: 1.0;
+}
+
+.hoses .connected .hose-animation {
+  opacity: 0.0;
 }
 
 .hose-animation {
