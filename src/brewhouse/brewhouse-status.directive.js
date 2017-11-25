@@ -41,10 +41,10 @@
          *     is currently in.
          */
         function nextStatusText(currentStatus) {
-          if (statusId < 0 || statusId >= states.length) {
+          if (statusId < 0 || statusId >= states.statesOrdered.length) {
             return '';
           }
-          return states[currentStatus + 1].description;
+          return states.statesOrdered[statusId + 1].description;
         }
 
         /**
