@@ -27,7 +27,6 @@
 
         $scope.adjustState = adjustState;
 
-        $scope.currentStatusText = currentStatusText;
         $scope.nextStatusText = nextStatusText;
 
         $scope.states = brewhouseStates.getStates(
@@ -37,14 +36,14 @@
          * Calculates the text for the next state. If the index is out of
          * bounds, returns an empty string.
          *
-         * @param {Number} currentStatus The numerical status the system
+         * @param {Number} statusId The numerical status the system
          *     is currently in.
          */
-        function nextStatusText(currentStatus) {
-          if (statusId < 0 || statusId >= states.length) {
+        function nextStatusText(statusId) {
+          if (statusId < 0 || statusId >= $scope.states.statesOrdered.length) {
             return '';
           }
-          return states[currentStatus + 1].description;
+          return $scope.states.statesOrdered[statusId + 1].description;
         }
 
         /**

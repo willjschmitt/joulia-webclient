@@ -16,16 +16,16 @@
     "tests"
   ],
   "dependencies": {
-    "angular": "^1.6.5",
-    "angular-route": "^1.6.5",
-    "angular-resource": "^1.6.5",
-    "angular-sanitize": "^1.6.5",
-    "angular-mocks": "^1.6.5",
+    "angular": "1.6.6",
+    "angular-route": "1.6.6",
+    "angular-resource": "1.6.6",
+    "angular-sanitize": "1.6.6",
+    "angular-mocks": "1.6.6",
     "angular-bootstrap": "^2.0.1",
     "jquery": "^1.12.3",
     "jquery-ui": "^1.12.1",
     "bootstrap": "^3.3.7",
-    "moment": "^2.14.1",
+    "moment": "2.19.1",
     "underscore": "^1.8.3",
     "perfect-scrollbar": "^0.6.16",
     "iCheck": "^1.0.2",
@@ -38,7 +38,7 @@
     "flexslider": "^2.6.3",
     "owl.carousel": "^2.2.1",
     "angular-ui-select": "^0.19.8",
-    "angular-ui-router": "^1.0.8"
+    "angular-ui-router": "1.0.10"
   },
   "resolutions": {
     "angular": "1.6.3"
