@@ -63,10 +63,10 @@
          * @returns Status text.
          */
         function getStatusText(statusId) {
-          if (statusId < 0 || statusId >= states.length) {
+          if (statusId < 0 || statusId >= states.statesOrdered.length) {
             return '';
           }
-          return states[statusId].description;
+          return states.statesOrdered[statusId].description;
         }
 
         /**

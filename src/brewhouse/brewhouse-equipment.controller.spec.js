@@ -16,6 +16,7 @@ describe('app.brewhouse', function () {
     beforeEach(function() {
       const scope = $rootScope.$new();
       scope.recipeInstance = { id: 10 };
+      scope.brewhouse = { software_version: 11 };
       controller = $controller('BrewhouseEquipmentController', {
         $scope: scope,
       });
