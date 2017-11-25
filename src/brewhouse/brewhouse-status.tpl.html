@@ -1,21 +1,23 @@
 <div class="panel panel-default">
   <div class="panel-heading">
     <header>
-      {{ currentStatusText(currentStatus.latest) }}&nbsp;
-      (Status #{{currentStatus.latest}})
+      {{ states[currentStatus.latest].name }}
     </header>
   </div>
   <div class="panel-body no-top-padding">
     <div class="row">
-      <div class="col-xs-4 next-status-text">
+      <div class="col-xs-12 current-status-text">
+        <p>
+          {{ states[currentStatus.latest].description }}
+        </p>
+        <p ng-if="timer" class="timer pull-right">
+          Time Left: {{timer.latest | secondsToTimer}}
+        </p>
+      </div>
+      <div class="col-xs-12 next-status-text">
         <p>Next: {{ nextStatusText(currentStatus.latest) }}</p>
       </div>
-      <div class="col-xs-4">
-        <span ng-if="timer" class="timer">
-          Time Left: {{timer.latest | secondsToTimer}}
-        </span>
-      </div>
-      <div class="col-xs-4">
+      <div class="col-xs-12 pull-right">
         <button
             class="btn btn-lg btn-info previous-state-button"
             ng-click="adjustState(-1)">
