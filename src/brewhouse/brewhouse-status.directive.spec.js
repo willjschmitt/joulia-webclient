@@ -19,40 +19,40 @@ describe('app.brewhouse', function () {
     });
   }));
 
-  var $rootScope, $compile, $interval;
+  var $rootScope, $compile, $interval, $httpBackend;
 
   beforeEach(inject(function($injector) {
     $rootScope = $injector.get('$rootScope');
     $compile = $injector.get('$compile');
     $interval = $injector.get('$interval');
+    $httpBackend = $injector.get('$httpBackend');
   }));
 
   describe('brewhouse-status directive', function () {
     var element, scope, isolatedScope;
-    const html = `<brewhouse-status></brewhouse-status>`;
+    const html = `
+      <brewhouse-status
+          brewhouse="brewhouse">
+      </brewhouse-status>`;
 
     beforeEach(function () {
+      $httpBackend.whenGET(/brewery\/api\/brewing_state\?software_release=\d+/)
+        .respond([]);
+    });
+
+    beforeEach(function () {
+      $httpBackend.expectGET(
+        /brewery\/api\/brewing_state\?software_release=\d+/);
+
       scope = $rootScope.$new();
+      scope.brewhouse = { software_version: 11 };
       element = $compile(html)(scope);
+      $httpBackend.flush();
       scope.$digest();
       isolatedScope = element.isolateScope();
     })
 
-    describe('currentStatusText', function () {
-      it('is offline at 0', function () {
-        const want = 'System is currently offline.';
-        const got = isolatedScope.currentStatusText(0);
-        expect(got).toBe(want);
-      });
-    });
-
     describe('nextStatusText', function() {
-      it('is heating water at 0', function() {
-        const want = 'Heating water for strike.';
-        const got = isolatedScope.nextStatusText(0);
-        expect(got).toBe(want);
-      });
-
       it('is nothing at max', function() {
         const want = '';
         const got = isolatedScope.nextStatusText(13);
@@ -121,23 +121,6 @@ describe('app.brewhouse', function () {
     });
 
     describe('template binding', function () {
-      it('shows current status text', function () {
-        isolatedScope.currentStatus.latest = 0;
-        scope.$digest();
-        
-        expect(element.find('header').html()).toContain(
-          'System is currently offline.');
-        expect(element.find('header').html()).toContain('(Status #0)');
-      });
-
-      it('shows next status text', function() {
-        isolatedScope.currentStatus.latest = 0;
-        scope.$digest();
-
-        expect(element[0].querySelector('.next-status-text p').innerHTML)
-            .toBe('Next: Heating water for strike.');
-      });
-
       it('shows timer', function () {
         isolatedScope.timer.latest = 30.0;
         scope.$digest();

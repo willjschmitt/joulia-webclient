@@ -1,14 +1,14 @@
 <div class="panel panel-default">
   <div class="panel-heading">
     <header>
-      {{ states[currentStatus.latest].name }}
+      {{ states.statesOrdered[currentStatus.latest].name }}
     </header>
   </div>
   <div class="panel-body no-top-padding">
     <div class="row">
       <div class="col-xs-12 current-status-text">
         <p>
-          {{ states[currentStatus.latest].description }}
+          {{ states.statesOrdered[currentStatus.latest].description }}
         </p>
         <p ng-if="timer" class="timer pull-right">
           Time Left: {{timer.latest | secondsToTimer}}
