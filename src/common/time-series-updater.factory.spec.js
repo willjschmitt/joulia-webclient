@@ -75,7 +75,7 @@ describe('app.common time-series-socket.service', function () {
           {sensor: 12, time: time2.toISOString(), value: 11.0},
         ];
         const timeSeriesUpdater = new TimeSeriesUpdater(
-          recipeInstance, sensorName, 'value' twentyMinutesAgo);
+          recipeInstance, sensorName, 'value', twentyMinutesAgo);
         timeSeriesUpdater.newData(samples);
         const want = [
           [time2, 11.0],

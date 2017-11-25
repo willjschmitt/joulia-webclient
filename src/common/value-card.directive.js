@@ -42,7 +42,7 @@
 
         if ($scope.overridable) {
           $scope.valueOverride = new TimeSeriesUpdater(
-              $scope.recipeInstance, scope.valueName, 'override');
+              $scope.recipeInstance, $scope.valueName, 'override');
         }
 
         if ($scope.valueAlternateName && $scope.valueAlternateFunction) {
