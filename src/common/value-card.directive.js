@@ -38,11 +38,11 @@
 
         // Subscribe to values and overrides.
         $scope.value = new TimeSeriesUpdater(
-            $scope.recipeInstance, $scope.valueName);
+            $scope.recipeInstance, $scope.valueName, 'value');
 
         if ($scope.overridable) {
           $scope.valueOverride = new TimeSeriesUpdater(
-              $scope.recipeInstance, `${$scope.valueName}Override`);
+              $scope.recipeInstance, $scope.valueName, 'override');
         }
 
         if ($scope.valueAlternateName && $scope.valueAlternateFunction) {
@@ -52,7 +52,7 @@
         }
         if ($scope.valueAlternateName) {
           $scope.valueAlternate = new TimeSeriesUpdater(
-              $scope.recipeInstance, $scope.valueAlternateName);
+              $scope.recipeInstance, $scope.valueAlternateName, 'value');
         }
         if ($scope.valueAlternateFunction) {
           $scope.valueAlternate = {};
@@ -64,7 +64,7 @@
 
         if ($scope.overridableAlternate) {
           $scope.valueOverride = new TimeSeriesUpdater(
-              $scope.recipeInstance, `${$scope.valueAlternateName}Override`);
+              $scope.recipeInstance, $scope.valueAlternateName, 'override');
         }
 
         if ($scope.overridable || $scope.overridableAlternate) {

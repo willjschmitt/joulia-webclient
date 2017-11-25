@@ -26,7 +26,7 @@
       templateUrl: 'brewhouse/pump.tpl.html',
       link: function pumpController($scope) {
         $scope.pumpStatus = new TimeSeriesUpdater(
-          $scope.recipeInstance.id, 'pumpStatus');
+          $scope.recipeInstance.id, 'pumpStatus', 'value');
       },
     };
   }

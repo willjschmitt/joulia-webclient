@@ -17,13 +17,13 @@
       templateUrl: 'brewhouse/brewhouse-status.tpl.html',
       link: function brewhouseStatusController($scope) {
         $scope.currentStatus = new TimeSeriesUpdater(
-            $scope.recipeInstance, 'state');
+            $scope.recipeInstance, 'state', 'value');
         $scope.timer = new TimeSeriesUpdater(
-            $scope.recipeInstance, 'timer');
+            $scope.recipeInstance, 'timer', 'value');
         $scope.requestPermission = new TimeSeriesUpdater(
-            $scope.recipeInstance, 'request_permission');
+            $scope.recipeInstance, 'request_permission', 'value');
         $scope.grantPermission = new TimeSeriesUpdater(
-            $scope.recipeInstance, 'grant_permission');
+            $scope.recipeInstance, 'grant_permission', 'value');
 
         $scope.adjustState = adjustState;
 

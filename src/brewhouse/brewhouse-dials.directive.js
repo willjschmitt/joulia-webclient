@@ -15,7 +15,7 @@
       templateUrl: 'brewhouse/brewhouse-dials.tpl.html',
       link: function brewhouseDialsController($scope) {
         $scope.boilKettleDutyCycle = new TimeSeriesUpdater(
-            $scope.recipeInstance, 'boil_kettle__duty_cycle');
+            $scope.recipeInstance, 'boil_kettle__duty_cycle', 'value');
       },
     };
   }

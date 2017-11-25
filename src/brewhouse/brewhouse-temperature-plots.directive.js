@@ -17,13 +17,14 @@
       templateUrl: 'brewhouse/brewhouse-temperature-plots.tpl.html',
       link: function brewhouseTemperaturePlotsController($scope) {
         $scope.boilTemperatureActual = new TimeSeriesUpdater(
-            $scope.recipeInstance, 'boil_kettle__temperature');
+            $scope.recipeInstance, 'boil_kettle__temperature', 'value');
         $scope.boilTemperatureSetPoint = new TimeSeriesUpdater(
-            $scope.recipeInstance, 'boil_kettle__temperature_set_point');
+            $scope.recipeInstance, 'boil_kettle__temperature_set_point',
+            'value');
         $scope.mashTemperatureActual = new TimeSeriesUpdater(
-            $scope.recipeInstance, 'mash_tun__temperature');
+            $scope.recipeInstance, 'mash_tun__temperature', 'value');
         $scope.mashTemperatureSetPoint = new TimeSeriesUpdater(
-            $scope.recipeInstance, 'mash_tun__temperature_set_point');
+            $scope.recipeInstance, 'mash_tun__temperature_set_point', 'value');
 
         // Add all the relevant time series to the chart data.
         $scope.dataPoints = [];

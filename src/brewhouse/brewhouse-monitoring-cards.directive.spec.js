@@ -7,7 +7,7 @@ describe('app.brewhouse', function () {
   // server.
   beforeEach(module(function($provide) {
     $provide.factory('TimeSeriesUpdater', function () {
-      function TimeSeriesUpdater(recipeInstance, name) {
+      function TimeSeriesUpdater(recipeInstance, name, variableType) {
         this.latest = 0;
       }
 

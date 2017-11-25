@@ -36,7 +36,7 @@
       link: function kettleController($scope) {
         if ($scope.hasHeatingElement) {
           $scope.heatingElementStatus = new TimeSeriesUpdater(
-            $scope.recipeInstance.id, `${$scope.name}__elementStatus`);
+            $scope.recipeInstance.id, `${$scope.name}__elementStatus`, 'value');
         }
       },
     };

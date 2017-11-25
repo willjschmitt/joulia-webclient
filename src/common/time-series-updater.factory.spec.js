@@ -33,7 +33,8 @@ describe('app.common time-series-socket.service', function () {
     it('should construct a new defined updater', function () {
       const recipeInstance = 1;
       const name = "foo";
-      const timeSeriesUpdater = new TimeSeriesUpdater(recipeInstance, name);
+      const timeSeriesUpdater = new TimeSeriesUpdater(
+        recipeInstance, name, 'value');
       expect(timeSeriesUpdater).toBeDefined();
     });
 
@@ -74,7 +75,7 @@ describe('app.common time-series-socket.service', function () {
           {sensor: 12, time: time2.toISOString(), value: 11.0},
         ];
         const timeSeriesUpdater = new TimeSeriesUpdater(
-          recipeInstance, sensorName, twentyMinutesAgo);
+          recipeInstance, sensorName, 'value', twentyMinutesAgo);
         timeSeriesUpdater.newData(samples);
         const want = [
           [time2, 11.0],
@@ -84,7 +85,7 @@ describe('app.common time-series-socket.service', function () {
 
       it('removes existing old samples', function () {
         const timeSeriesUpdater = new TimeSeriesUpdater(
-          recipeInstance, sensorName, twentyMinutesAgo);
+          recipeInstance, sensorName, 'value', twentyMinutesAgo);
         const time1 = new moment().subtract(21, 'minutes');
         const time2 = new moment();
         timeSeriesUpdater.dataPoints = [
@@ -108,7 +109,7 @@ describe('app.common time-series-socket.service', function () {
 
       it('leaves data without time', function () {
         const timeSeriesUpdater = new TimeSeriesUpdater(
-          recipeInstance, sensorName);
+          recipeInstance, sensorName, 'value');
         const time1 = new moment().subtract(21, 'minutes');
         const time2 = new moment();
         timeSeriesUpdater.dataPoints = [
@@ -136,7 +137,7 @@ describe('app.common time-series-socket.service', function () {
       it('sends a new data point to the server', function () {
         $httpBackend.when('POST', '/live/timeseries/new')
             .respond();
-        const timeSeriesUpdater = new TimeSeriesUpdater(1, "foo");
+        const timeSeriesUpdater = new TimeSeriesUpdater(1, "foo", 'value');
         timeSeriesUpdater.sensor = 2;
 
         const time = moment().toISOString();

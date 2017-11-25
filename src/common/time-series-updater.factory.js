@@ -16,17 +16,21 @@
      *                                time series is related to.
      * @param {String} name           The programmatic sensor/variable name for
      *                                the brewing equipment to monitor.
+     * @param {String} variableType   The sub-sensor variable type for name.
+     *                                E.g. 'value' or 'override'.
      * @param {Number} historicalTime The amount of historical data desired to
      *                                be queried on subscription and then
      *                                trimmed to as new data is made available.
      *                                Units: seconds. Negative values indicate
      *                                time in the past.
      */
-    function TimeSeriesUpdater(recipeInstance, name, historicalTime) {
+    function TimeSeriesUpdater(
+        recipeInstance, name, variableType, historicalTime) {
       const self = this;
 
       self.recipeInstance = recipeInstance;
       self.name = name;
+      self.variableType = variableType;
       self.historicalTime = historicalTime;
 
       self.dataPoints = [];

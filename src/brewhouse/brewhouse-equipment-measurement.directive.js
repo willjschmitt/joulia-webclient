@@ -26,7 +26,7 @@
       templateUrl: 'brewhouse/brewhouse-equipment-measurement.tpl.html',
       link: function brewhouseEquipmentMeasurementController($scope) {
         $scope.value = new TimeSeriesUpdater(
-            $scope.recipeInstance.id, $scope.valueName);
+            $scope.recipeInstance.id, $scope.valueName, 'value');
       },
     };
   }
