@@ -1,0 +1,32 @@
+#header,
+#image,
+#video,
+#newsletter,
+#download {
+    background-color: #4CAF50;
+}
+
+.btn-lead,
+.btn-lead-b {
+    background-color: #388E3C;
+    border-color: #388E3C;
+}
+
+.btn-lead:hover,
+.btn-lead:focus,
+.btn-lead:active,
+.btn-lead.active,
+.open .dropdown-toggle.btn-lead,
+.btn-lead-b:hover,
+.btn-lead-b:focus,
+.btn-lead-b:active,
+.btn-lead-b.active,
+.open
+.dropdown-toggle.btn-lead-b {
+    background-color: #1B5E20;
+    border-color: #1B5E20;
+}
+
+.toggle {
+    color: #1B5E20;
+}
