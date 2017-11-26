@@ -125,6 +125,10 @@ body.dark-header .header-container .header-wrapper #header-brand .logo .logo-ima
   stroke: #4CAF50;
 }
 
+#page-wrapper #right-content-wrapper .panel-heading a {
+  color: rgba(0, 0, 0, 1.0);
+}
+
 .panel-loading-icon {
   display: inline-block;
 }

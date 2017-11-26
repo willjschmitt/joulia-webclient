@@ -65,7 +65,7 @@ describe('app.dashboard', function () {
           it('says currently brewing when active', function () {
             scope.brewhouse = { active: true };
             scope.$digest();
-            const panelBody = element.children()[0].children[1];
+            const panelBody = element[0].querySelector('.panel-body');
             expect(panelBody.innerHTML).toContain("is currently brewing");
             expect(panelBody.innerHTML).not.toContain(
               "is not currently brewing");
@@ -74,7 +74,7 @@ describe('app.dashboard', function () {
           it('says not currently brewing when inactive', function () {
             scope.brewhouse = { active: false };
             scope.$digest();
-            const panelBody = element.children()[0].children[1];
+            const panelBody = element[0].querySelector('.panel-body');
             expect(panelBody.innerHTML).toContain("is not currently brewing");
             expect(panelBody.innerHTML).not.toContain("is currently brewing");
           });
