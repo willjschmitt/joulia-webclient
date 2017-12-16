@@ -22,4 +22,6 @@ deploy:
     access_key_id: $GCS_ACCESS_KEY
     secret_access_key: $GCS_SECRET_ACCESS_KEY
     bucket: "joulia-webclient"
+    skip_cleanup: true
+    local_dir: dist
     acl: public-read
