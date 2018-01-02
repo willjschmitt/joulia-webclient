@@ -83,6 +83,15 @@ body.dark-header .header-container .header-wrapper #header-brand .logo .logo-ima
   color: #4CAF50;
 }
 
+.form-group .form-control:focus ~ label {
+  color: #4CAF50;
+}
+
+.form-group .form-control ~ label:after,
+.form-group .form-control ~ .form-control-line:after {
+  background-color: #4CAF50;
+}
+
 .btn-primary {
   background-color: #4CAF50;
   border-color: #4CAF50;
