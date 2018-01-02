@@ -118,6 +118,23 @@ body.dark-header .header-container .header-wrapper #header-brand .logo .logo-ima
   border-color: #1B5E20;
 }
 
+.btn-primary.btn-flat,
+.btn-primary.btn-icon-toggle,
+.btn-primary.btn-flat:hover:not(.disabled),
+.btn-primary.btn-icon-toggle:hover:not(.disabled),
+.btn-primary.btn-flat:focus:not(.disabled),
+.btn-primary.btn-icon-toggle:focus:not(.disabled),
+.btn-primary.btn-flat.focus:not(.disabled),
+.btn-primary.btn-icon-toggle.focus:not(.disabled),
+.btn-primary.btn-flat:active:not(.disabled),
+.btn-primary.btn-icon-toggle:active:not(.disabled),
+.btn-primary.btn-flat.active:not(.disabled),
+.btn-primary.btn-icon-toggle.active:not(.disabled),
+.open .dropdown-toggle.btn-primary.btn-flat:not(.disabled),
+.open .dropdown-toggle.btn-primary.btn-icon-toggle:not(.disabled) {
+    color: #FFFFFF;
+}
+
 .mini-card.mini-card-primary:before {
   background-color: #4CAF50;
 }
@@ -132,6 +149,16 @@ body.dark-header .header-container .header-wrapper #header-brand .logo .logo-ima
 
 .cc-spc-primary .cc-spc-wrapper .cc-spc-bar {
   stroke: #4CAF50;
+}
+
+.switch.switch-primary.checked {
+  background-color: rgba(76, 175, 80, 0.5);
+}
+.switch.switch-primary.checked:after {
+  background-color: rgba(76, 175, 80, 0.26);
+}
+.switch.switch-primary.checked:before {
+  background-color: #4CAF50;
 }
 
 #page-wrapper #right-content-wrapper .panel-heading a {

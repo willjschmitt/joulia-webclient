@@ -3,7 +3,14 @@
     <ol class="breadcrumb">
       <li><a ui-sref="dashboard">Joulia</a></li>
       <li>{{ brewery.name }}</li>
-      <li>{{ brewhouse.name }}</li>
+      <li>
+        {{ brewhouse.name }}
+        <span
+            ng-if="brewhouse.simulated"
+            class="label label-warning">
+          Simulated
+        </span>
+      </li>
     </ol>
     <div class="page-header_title">
       <h1>Brewhouse Management</h1>

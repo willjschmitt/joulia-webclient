@@ -17,6 +17,20 @@
     <label>Name</label>
   </div>
 
+  <div class="form-group">
+    <label>
+      <input
+          icheck
+          name="simulated"
+          id="simulated"
+          class="switch switch-primary"
+          type="checkbox"
+          ng-model="brewhouse.simulated"
+          ng-disabled="brewhouse.hasOwnProperty('id')" />
+      <span>Simulated</span>
+    </label>
+  </div>
+
   <div>
 
     <ul class="nav nav-tabs">
