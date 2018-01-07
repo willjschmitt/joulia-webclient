@@ -1,0 +1,21 @@
+<div class="modal-header">
+  <h4 class="modal-title">Confirm Delete</h4>
+</div>
+<div class="modal-body">
+  <p>Are you sure you want to delete {{ name }}?</p>
+</div>
+<div class="modal-footer">
+  <button
+      type="button"
+      class="btn btn-primary btn-flat btn-ripple"
+      data-dismiss="modal"
+      ng-click="cancel()">
+    Cancel
+  </button>
+  <button
+      type="button"
+      class="btn btn-error btn-flat btn-ripple"
+      ng-click="ok()">
+    Delete
+  </button>
+</div>
