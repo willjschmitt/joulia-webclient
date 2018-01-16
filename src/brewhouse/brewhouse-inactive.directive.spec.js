@@ -22,7 +22,7 @@ describe('app.brewhouse', function () {
 
     beforeEach(function () {
       recipeInstanceQuery = $httpBackend.whenGET(
-          'brewery/api/recipeInstance?brewhouse=5')
+          /brewery\/api\/recipeInstance\?brewhouse=5.*/)
         .respond([]);
 
       recipeQuery = $httpBackend.whenGET('brewery/api/recipe')
@@ -35,7 +35,7 @@ describe('app.brewhouse', function () {
         id: 5,
       };
 
-      $httpBackend.expectGET('brewery/api/recipeInstance?brewhouse=5');
+      $httpBackend.expectGET(/brewery\/api\/recipeInstance\?brewhouse=5.*/);
       $httpBackend.expectGET('brewery/api/recipe');
 
       element = $compile(html)(scope);

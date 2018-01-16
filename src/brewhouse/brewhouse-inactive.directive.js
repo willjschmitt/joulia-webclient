@@ -14,9 +14,9 @@
       },
       templateUrl: 'brewhouse/brewhouse-inactive.tpl.html',
       link: function brewhouseInactiveController($scope) {
-        console.log($scope.brewhouse.id);
         $scope.recipeInstances = breweryResources.RecipeInstance.query({
           brewhouse: $scope.brewhouse.id,
+          ordering: '-date',
         });
 
         $scope.recipes = breweryResources.Recipe.query(
