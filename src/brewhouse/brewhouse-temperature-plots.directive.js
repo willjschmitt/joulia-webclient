@@ -47,21 +47,18 @@
 
         // Create and maintain chart.
         $scope.chart = null;
+        $scope.xAxisFormatter = function xAxisFormatter(d) {
+          return d3.time.format('%H:%M:%S')(new Date(d));
+        };
+        $scope.yAxisFormater = d3.format(',.1f');
         $scope.chart = nv.models.lineWithFocusChart()
           .x(function xValue(d) { return d[0]; })
           .y(function yValue(d) { return d[1]; })
           .color(d3.scale.category10().range())
           .useInteractiveGuideline(true);
-        $scope.chart.xAxis
-          .tickFormat(function xAxisFormatter(d) {
-            return d3.time.format('%H:%M')(new Date(d));
-          });
-        $scope.chart.x2Axis
-          .tickFormat(function x2AxisFormatter(d) {
-            return d3.time.format('%H:%M')(new Date(d));
-          });
-        $scope.chart.yAxis
-          .tickFormat(d3.format(',.1f'));
+        $scope.chart.xAxis.tickFormat($scope.xAxisFormatter);
+        $scope.chart.x2Axis.tickFormat($scope.xAxisFormatter);
+        $scope.chart.yAxis.tickFormat($scope.yAxisFormater);
 
         function updateChart() {
           d3.select('#chart svg')
@@ -80,7 +77,7 @@
         nv.addGraph(updateChart);
         // Replot every second rather than everytime we get new data so we aren't
         // plotting all the time.
-        $interval(updateChart, 10000.0);
+        $interval(updateChart, 1000.0);
       },
     };
   }
