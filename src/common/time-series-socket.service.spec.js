@@ -164,11 +164,6 @@ describe('app.common time-series-socket.service', function () {
           $httpBackend.flush();
 
           $httpBackend.expectPOST('live/timeseries/identify/');
-          $websocketBackend.expectSend(JSON.stringify({
-            recipe_instance: 0,
-            sensor: 12,
-            subscribe: true,
-          }));
           const subscriber2 = new Subscriber(0, 'foo');
           timeSeriesSocket.subscribe(subscriber2);
           $httpBackend.flush();

@@ -127,10 +127,9 @@
       // Register subscriber with tracking arrays and maps.
       if (!self.sensorToSubscribers.hasOwnProperty(subscriber.sensor)) {
         self.sensorToSubscribers[subscriber.sensor] = [];
+        performWebsocketSubscribe(subscriber);
       }
       self.sensorToSubscribers[subscriber.sensor].push(subscriber);
-
-      performWebsocketSubscribe(subscriber);
     }
 
     /**
