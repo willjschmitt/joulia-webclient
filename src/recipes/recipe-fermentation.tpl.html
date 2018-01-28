@@ -1,0 +1,30 @@
+<div class="panel panel-default panel-divider">
+  <div class="panel-heading">
+    <header>
+      Fermentation
+      <div
+          id="yeast-loading"
+          class="
+              panel-loading-icon
+              circular-preloader-demo
+              circular-preloader-demo-indeterminate
+              pull-right"
+          data-state="hide"
+          data-toggle="circular-progress"
+          data-mode="indeterminate"
+          data-type="info"></div>
+    </header>
+  </div>
+
+  <div class="panel-body">
+    <label>Yeast</label>
+    <div class="form-group">
+      <searchable-select
+          parent="recipe"
+          attribute="'yeast'"
+          search-resource="yeastResource"
+          item-html="yeastIngredientHTML"
+          change="updateRecipe">
+      </searchable-select>
+  </div>
+</div>
