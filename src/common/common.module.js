@@ -1,4 +1,5 @@
 (function loadCommonModule() {
   angular
-    .module('app.common', ['ngResource', 'ngWebSocket', 'ui.bootstrap']);
+    .module('app.common',
+        ['ngResource', 'ngWebSocket', 'ui.bootstrap', 'ui.select']);
 }());

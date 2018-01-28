@@ -1,24 +1,13 @@
 <div class="col-xs-12">
   <div class="row">
     <div class="col-xs-12 form-group">
-      <ui-select
-          ng-model="ingredientAddition.ingredient"
-          ng-change="updateIngredientAddition()"
-          theme="bootstrap">
-        <ui-select-match placeholder="Ingredient Search">
-          {{ $select.selected.name }}
-        </ui-select-match>
-        <ui-select-choices
-            repeat="ingredient.id as ingredient in ingredients
-                    | filter: $select.search"
-            refresh="refreshIngredients($select.search)"
-            refresh-delay="500">
-            <div
-                ng-bind-html="ingredientHTMLCompiled(ingredient)
-                              | highlight: $select.search">
-            </div>
-        </ui-select-choices>
-      </ui-select>
+      <searchable-select
+          parent="ingredientAddition"
+          attribute="'ingredient'"
+          search-resource="ingredientResource"
+          item-html="ingredientHtml"
+          change="updateIngredientAddition">
+      </searchable-select>
       <div
           id="addition-loading"
           class="
