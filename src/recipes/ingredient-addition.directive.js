@@ -3,9 +3,9 @@
     .module('app.recipes')
     .directive('ingredientAddition', ingredientAddition);
 
-  ingredientAddition.$inject = ['$interpolate', '$compile', 'breweryResources'];
+  ingredientAddition.$inject = ['$interpolate', 'breweryResources'];
 
-  function ingredientAddition($interpolate, $compile, breweryResources) {
+  function ingredientAddition($interpolate, breweryResources) {
     return {
       restrict: 'E',
       transclude: true,
@@ -32,7 +32,6 @@
       },
       templateUrl: 'recipes/ingredient-addition.tpl.html',
       link: function ingredientAdditionsController($scope, $element) {
-        $scope.refreshIngredients = refreshIngredients;
         $scope.updateIngredientAddition = updateIngredientAddition;
         $scope.removeIngredientAddition = removeIngredientAddition;
         $scope.steps = breweryResources.BREWING_STEP_CHOICES_ordered;
@@ -42,38 +41,6 @@
         $scope.unitsToGrams = 0.0;
 
         loadingElement().circularProgress();
-
-        /**
-         * Compiles the provided ingredientHtml into a function which can be
-         * called with the ingredient to produce a formatted ingredient entry in
-         * the search dropdown.
-         */
-        function compileIngredientHTML() {
-          $scope.ingredientHTMLCompiled
-              = $interpolate($scope.ingredientHtml || '');
-        }
-        $scope.$watch('ingredientHtml', compileIngredientHTML);
-
-        /**
-         * Refresh ingredients with a search query performed against the server.
-         */
-        function refreshIngredients(searchParameter) {
-          const searchTerms = {};
-          if ($scope.ingredientAddition.ingredient !== null
-              && $scope.ingredientAddition.ingredient !== undefined) {
-            searchTerms.id = $scope.ingredientAddition.ingredient;
-          }
-          if (searchParameter) {
-            searchTerms.search = searchParameter;
-          }
-          if (angular.equals(searchTerms, {})) {
-            return;
-          }
-          $scope.ingredients = $scope.ingredientResource.query(searchTerms);
-        }
-
-        $scope.$watch('ingredientAddition.ingredient',
-          () => refreshIngredients());
 
         /**
          * Updates provided resource.

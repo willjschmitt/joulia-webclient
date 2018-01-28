@@ -44,12 +44,17 @@
       BeerStyle: $resource('brewery/api/beerStyle/:id/', { id: '@id' },
           { update: { method: 'PUT' } }),
       TimeSeriesDataPoint: $resource('/live/timeseries/new/', {}),
+
+      YeastIngredient: $resource('brewery/api/yeast_ingredient/:id/',
+          { id: '@id' }, { update: { method: 'PUT' } }),
+      YeastIngredientSearch: $resource('brewery/api/yeast_ingredient/'),
       MaltIngredient: $resource('brewery/api/malt_ingredient/:id/',
           { id: '@id' }, { update: { method: 'PUT' } }),
       MaltIngredientSearch: $resource('brewery/api/malt_ingredient/'),
       BitteringIngredient: $resource('brewery/api/bittering_ingredient/:id/',
           { id: '@id' }, { update: { method: 'PUT' } }),
       BitteringIngredientSearch: $resource('brewery/api/bittering_ingredient/'),
+
       MaltIngredientAddition: $resource(
           'brewery/api/malt_ingredient_addition/:id/', { id: '@id' },
           { update: { method: 'PUT' } }),
