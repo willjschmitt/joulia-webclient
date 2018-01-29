@@ -56,15 +56,18 @@
       <div class="col-xs-12">
         <div ng-if="!showToken">
           <a href="" ng-click="toggleShowToken()">
-            <i class="material-icons">lock</i> Show Keys
+            <i class="material-icons">lock</i> Show Authentication Token
           </a>
         </div>
         <div ng-if="showToken">
-          <a href="" ng-click="toggleShowToken()">
-            <i class="material-icons">unlock</i> Hide Authentication Token
-          </a>
-          <p>{{ brewhouse.token }}</p>
+          <div>
+            <a href="" ng-click="toggleShowToken()">
+              <i class="material-icons">lock</i> Hide Authentication Token
+            </a>
+          </div>
+          <div>{{ brewhouse.token }}</div>
         </div>
+
       </div>
     </div>
   </div>
