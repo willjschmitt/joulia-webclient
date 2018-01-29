@@ -15,10 +15,6 @@
     cursor: pointer;
 }
 
-p.recipe-property {
-    margin-bottom: 5px;
-}
-
 .srm-circle {
     display: inline-block;
     width: 14px;
@@ -343,4 +339,50 @@ body.dark-header .header-container .header-wrapper #header-brand .logo .logo-ima
 @keyframes rotate {
   from {transform: rotate(0deg);}
   to {transform: rotate(360deg);}
+}
+
+
+.recipe-property {
+  position: relative;
+  width: 100%;
+  margin-bottom: 5px;
+
+  height: 20px;
+}
+
+.recipe-property .data {
+  position: absolute;
+  left: 0px;
+  width: 150px;
+}
+
+.recipe-property .bar {
+  position: absolute;
+
+  top: 5px;
+  height: 10px;
+
+  left: 160px;
+  right: 0;
+
+  margin: 0;
+  padding: 0;
+
+  background-color: #EEEEEE;
+  border: 1px solid #EEEEEE;
+  border-radius: 2px;
+}
+
+.recipe-property .range {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  background-color: #66BB6A;
+}
+
+.recipe-property .indicator {
+  position: absolute;
+  width: 3px;
+  height: 100%;
+  background-color: #1B5E20;
 }

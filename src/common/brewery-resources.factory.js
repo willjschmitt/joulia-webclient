@@ -41,8 +41,11 @@
           { update: { method: 'PUT' } }),
       BrewingCompany: $resource('brewery/api/brewingCompany/:id/', { id: '@id' },
           { update: { method: 'PUT' } }),
+
       BeerStyle: $resource('brewery/api/beerStyle/:id/', { id: '@id' },
           { update: { method: 'PUT' } }),
+      BeerStyleSearch: $resource('brewery/api/beerStyle/'),
+
       TimeSeriesDataPoint: $resource('/live/timeseries/new/', {}),
 
       YeastIngredient: $resource('brewery/api/yeast_ingredient/:id/',

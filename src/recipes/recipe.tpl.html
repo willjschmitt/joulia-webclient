@@ -44,20 +44,55 @@
           </div>
 
           <div>
-            <p class="recipe-property">
-              Original Gravity: {{ recipe.original_gravity | number : 3 }}
-            </p>
-            <p class="recipe-property">
-              Bitterness (IBUs): {{ recipe.ibu | number : 0 }}
-            </p>
-            <p class="recipe-property">
-              Color (SRM):
+            <recipe-property
+                min-appropriate="style.low_original_gravity"
+                max-appropriate="style.high_original_gravity"
+                min-absolute="1.0"
+                max-absolute="1.1"
+                value="recipe.original_gravity">
+              OG: {{ recipe.original_gravity | number : 3 }}
+            </recipe-property>
+
+            <recipe-property
+                min-appropriate="style.low_final_gravity"
+                max-appropriate="style.high_final_gravity"
+                min-absolute="1.0"
+                max-absolute="1.1"
+                value="recipe.final_gravity">
+              FG: {{ recipe.final_gravity | number : 3 }}
+            </recipe-property>
+
+            <recipe-property
+                min-appropriate="style.low_abv"
+                max-appropriate="style.high_abv"
+                min-absolute="0.0"
+                max-absolute="0.2"
+                value="recipe.abv">
+              ABV: {{ recipe.abv * 100 | number : 1 }}%
+            </recipe-property>
+
+            <recipe-property
+                min-appropriate="style.low_ibu"
+                max-appropriate="style.high_ibu"
+                min-absolute="0"
+                max-absolute="150"
+                value="recipe.ibu">
+              IBU: {{ recipe.ibu | number : 0 }}
+            </recipe-property>
+
+            <recipe-property
+                min-appropriate="style.low_srm"
+                max-appropriate="style.high_srm"
+                min-absolute="0"
+                max-absolute="50"
+                value="recipe.srm">
+              SRM:
               <i
                   class="srm-circle"
                   ng-style="{ 'background-color': srmToRGBString(recipe.srm) }">
               </i>
               &nbsp;{{ recipe.srm | number : 1 }}
-            </p>
+            </recipe-property>
           </div>
 
           <div id="recipe_properties">

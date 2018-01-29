@@ -16,6 +16,10 @@
 
     function recipeUpdated() {
       doneLoading();
+      if ($scope.recipe.style) {
+        $scope.style = breweryResources.BeerStyle.get(
+            { id: $scope.recipe.style });
+      }
       $scope.mashPoints = breweryResources.MashPoint.query(
           { recipe: $scope.recipe.id });
       $scope.maltIngredientAdditions
