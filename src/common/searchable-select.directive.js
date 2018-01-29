@@ -27,6 +27,9 @@
 
         // Function to callback when the select changes values.
         change: '=',
+
+        // Label to use as a placeholder in the select dropdown.
+        label: '=',
       },
       templateUrl: 'common/searchable-select.tpl.html',
       link: function searchableSelectController($scope) {

@@ -36,11 +36,6 @@ describe('app.recipes recipe.controller', function () {
     // Define responses for the non-recipe-specific items (e.g: beer style, and
     // ingredients.
     beforeEach(function () {
-      beerStyleQuery = $httpBackend.when('GET', 'brewery/api/beerStyle')
-        .respond([
-          { id: 0, name: "American IPA" },
-          { id: 2, name: "Russian Imperial Stout" }]);
-
       maltIngredientQuery = $httpBackend.when(
           'GET', 'brewery/api/malt_ingredient')
         .respond([
@@ -52,8 +47,6 @@ describe('app.recipes recipe.controller', function () {
         .respond([
           { id: 1, name: "Mosaic" },
           { id: 3, name: "Galaxy" }]);
-
-      $httpBackend.expectGET('brewery/api/beerStyle');
     });
 
     // Define responses for queries for foreign items attached to the recipe.

@@ -11,7 +11,8 @@
     $scope.recipe = breweryResources.Recipe.get(
       { id: $stateParams.recipeId }, recipeUpdated);
 
-    $scope.beerStyles = breweryResources.BeerStyle.query();
+    $scope.beerStyleSearch = breweryResources.BeerStyleSearch;
+    $scope.beerStyleHTML = '<div>{{ name }}</div>';
 
     function recipeUpdated() {
       doneLoading();

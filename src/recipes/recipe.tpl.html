@@ -62,17 +62,15 @@
 
           <div id="recipe_properties">
             <div class="form-group">
-              <select
-                  name="beerStyleSelector"
-                  id="beerStyleSelector"
-                  class="form-control"
-                  ng-options="beerStyle.id as beerStyle.name
-                              for beerStyle in beerStyles
-                              track by beerStyle.id"
-                  ng-model="recipe.style"
-                  ng-change="save()">
-              </select>
               <label>Style</label>
+              <searchable-select
+                  parent="recipe"
+                  attribute="'style'"
+                  search-resource="beerStyleSearch"
+                  item-html="beerStyleHTML"
+                  change="save"
+                  label="'Style'">
+              </searchable-select>
             </div>
             <div class="form-group">
               <input

@@ -1,14 +1,14 @@
-<ui-select
+{{label}}<ui-select
     ng-model="parent[attribute]"
     ng-change="change()"
     theme="bootstrap">
-  <ui-select-match placeholder="Ingredient Search">
+  <ui-select-match placeholder="{{ label }}">
     {{ $select.selected.name }}
   </ui-select-match>
   <ui-select-choices
       repeat="item.id as item in items | filter: $select.search"
       refresh="refreshItems($select.search)"
-      refresh-delay="500">
+      refresh-delay="250">
       <div ng-bind-html="itemHTMLCompiled(item) | highlight: $select.search">
       </div>
   </ui-select-choices>
