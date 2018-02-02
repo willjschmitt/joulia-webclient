@@ -48,13 +48,6 @@ describe('app.dashboard', function () {
             expect(element.find('header').html()).toContain('Active');
             expect(element.find('header').html()).not.toContain('Ready');
           });
-
-          it('shows ready and not active when inactive', function () {
-            scope.brewhouse = { active: false };
-            scope.$digest();
-            expect(element.find('header').html()).toContain('Ready');
-            expect(element.find('header').html()).not.toContain('Active');
-          });
         });
 
         // TODO(willjschmitt): Add tests for clicking lock/unlock buttons.
