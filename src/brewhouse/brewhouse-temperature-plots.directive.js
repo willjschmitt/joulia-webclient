@@ -13,18 +13,25 @@
       transclude: true,
       scope: {
         recipeInstance: '=',
+
+        // The number of seconds to filter on (negative indicating the past) for
+        // requesting historical data.
+        historyTime: '=',
       },
       templateUrl: 'brewhouse/brewhouse-temperature-plots.tpl.html',
       link: function brewhouseTemperaturePlotsController($scope) {
         $scope.boilTemperatureActual = new TimeSeriesUpdater(
-            $scope.recipeInstance, 'boil_kettle__temperature', 'value');
+            $scope.recipeInstance, 'boil_kettle__temperature', 'value',
+            $scope.historyTime);
         $scope.boilTemperatureSetPoint = new TimeSeriesUpdater(
             $scope.recipeInstance, 'boil_kettle__temperature_set_point',
-            'value');
+            'value', $scope.historyTime);
         $scope.mashTemperatureActual = new TimeSeriesUpdater(
-            $scope.recipeInstance, 'mash_tun__temperature', 'value');
+            $scope.recipeInstance, 'mash_tun__temperature', 'value',
+            $scope.historyTime);
         $scope.mashTemperatureSetPoint = new TimeSeriesUpdater(
-            $scope.recipeInstance, 'mash_tun__temperature_set_point', 'value');
+            $scope.recipeInstance, 'mash_tun__temperature_set_point', 'value',
+            $scope.historyTime);
 
         // Add all the relevant time series to the chart data.
         $scope.dataPoints = [];

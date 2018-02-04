@@ -31,12 +31,17 @@
         // The recipe instance object, which has the id for the active recipe
         // instance, which will be queried against for the measurement data.
         recipeInstance: '=',
+
+        // The number of seconds to filter on (negative indicating the past) for
+        // requesting historical data.
+        historyTime: '=',
       },
       templateUrl: 'brewhouse/kettle.tpl.html',
       link: function kettleController($scope) {
         if ($scope.hasHeatingElement) {
           $scope.heatingElementStatus = new TimeSeriesUpdater(
-            $scope.recipeInstance.id, `${$scope.name}__elementStatus`, 'value');
+            $scope.recipeInstance.id, `${$scope.name}__elementStatus`, 'value',
+            $scope.historyTime);
         }
       },
     };

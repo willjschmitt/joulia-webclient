@@ -22,11 +22,15 @@
         // The recipe instance object, which has the id for the active recipe
         // instance, which will be queried against for the measurement data.
         recipeInstance: '=',
+
+        // The number of seconds to filter on (negative indicating the past) for
+        // requesting historical data.
+        historyTime: '=',
       },
       templateUrl: 'brewhouse/pump.tpl.html',
       link: function pumpController($scope) {
         $scope.pumpStatus = new TimeSeriesUpdater(
-          $scope.recipeInstance.id, 'pumpStatus', 'value');
+          $scope.recipeInstance.id, 'pumpStatus', 'value', $scope.historyTime);
       },
     };
   }

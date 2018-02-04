@@ -22,11 +22,16 @@
 
         // The variable name to query and display the value for.
         valueName: '=',
+
+        // The number of seconds to filter on (negative indicating the past) for
+        // requesting historical data.
+        historyTime: '=',
       },
       templateUrl: 'brewhouse/brewhouse-equipment-measurement.tpl.html',
       link: function brewhouseEquipmentMeasurementController($scope) {
         $scope.value = new TimeSeriesUpdater(
-            $scope.recipeInstance.id, $scope.valueName, 'value');
+            $scope.recipeInstance.id, $scope.valueName, 'value',
+            $scope.historyTime);
       },
     };
   }

@@ -44,19 +44,22 @@
       recipe-instance="recipeInstance"
       label="'Temperature'"
       units="'&deg;F'"
-      value-name="name + '__temperature'">
+      value-name="name + '__temperature'"
+      history-time="historyTime">
   </brewhouse-equipment-measurement>
   <brewhouse-equipment-measurement
       recipe-instance="recipeInstance"
       label="'Set Point'"
       units="'&deg;F'"
-      value-name="name + '__temperature_set_point'">
+      value-name="name + '__temperature_set_point'"
+      history-time="historyTime">
   </brewhouse-equipment-measurement>
   <brewhouse-equipment-measurement
       ng-if="hasHeatingElement"
       recipe-instance="recipeInstance"
       label="'Heating Element Power'"
       units="'W'"
-      value-name="name + '__power'">
+      value-name="name + '__power'"
+      history-time="historyTime">
   </brewhouse-equipment-measurement>
 </div>

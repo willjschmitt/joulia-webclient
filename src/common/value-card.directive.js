@@ -19,6 +19,10 @@
         overridable: '=?',
         overridableAlternate: '=?',
         recipeInstance: '=',
+
+        // The number of seconds to filter on (negative indicating the past) for
+        // requesting historical data.
+        historyTime: '=',
       },
       templateUrl: 'common/value-card.tpl.html',
       link: function valueCardController($scope) {
@@ -38,11 +42,13 @@
 
         // Subscribe to values and overrides.
         $scope.value = new TimeSeriesUpdater(
-            $scope.recipeInstance, $scope.valueName, 'value');
+            $scope.recipeInstance, $scope.valueName, 'value',
+            $scope.historyTime);
 
         if ($scope.overridable) {
           $scope.valueOverride = new TimeSeriesUpdater(
-              $scope.recipeInstance, $scope.valueName, 'override');
+              $scope.recipeInstance, $scope.valueName, 'override',
+              $scope.historyTime);
         }
 
         if ($scope.valueAlternateName && $scope.valueAlternateFunction) {
