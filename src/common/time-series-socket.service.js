@@ -42,19 +42,28 @@
      * @param {string} msg Unparsed message from received from websocket.
      */
     function onSocketMessage(msg) {
-      let parsed = JSON.parse(msg.data);
-      if (!Array.isArray(parsed)) {
-        parsed = [parsed];
-      }
+      const parsed = JSON.parse(msg.data);
 
+      // First deserialize data.
+      const data = [];
+      _.each(parsed.data, function deserializeDatum(serialized) {
+        const datum = {};
+        _.each(parsed.headers, function deserializeField(header, i) {
+          datum[header] = serialized[i];
+        });
+        data.push(datum);
+      });
+
+      // Separate data by sensor.
       const parsedBySensor = {};
-      _.each(parsed, function addToSensor(sample) {
+      _.each(data, function addToSensor(sample) {
         if (!parsedBySensor.hasOwnProperty(sample.sensor)) {
           parsedBySensor[sample.sensor] = [];
         }
         parsedBySensor[sample.sensor].push(sample);
       });
 
+      // Push data to subscribers.
       _.each(parsedBySensor, function updateSensorSubscribers(samples, sensor) {
         const subscribers = self.sensorToSubscribers[sensor];
         _.each(subscribers, function updateSubscriber(subscriber) {

@@ -57,21 +57,7 @@ describe('app.common time-series-socket.service', function () {
         const subscriber = new Subscriber(0, "foo");
         timeSeriesSocket.sensorToSubscribers[12] = [subscriber];
         timeSeriesSocket.onSocketMessage({
-          data: '{"sensor":12,"time":1000,"value":123.0}'
-        });
-
-        expect(subscriber.recievedData).toEqual([{
-          sensor: 12,
-          time: 1000,
-          value: 123.0,
-        }]);
-      });
-
-      it('should add new array data to subscriber', function () {
-        const subscriber = new Subscriber(0, "foo");
-        timeSeriesSocket.sensorToSubscribers[12] = [subscriber];
-        timeSeriesSocket.onSocketMessage({
-          data: '[{"sensor":12,"time":1000,"value":123.0}]'
+          data: '{"headers":["sensor","time","value"],"data":[[12,1000,123.0]]}'
         });
 
         expect(subscriber.recievedData).toEqual([{
@@ -91,7 +77,7 @@ describe('app.common time-series-socket.service', function () {
         const subscriber = new Subscriber(0, "foo", callback);
         timeSeriesSocket.sensorToSubscribers[12] = [subscriber];
         timeSeriesSocket.onSocketMessage({
-          data: '{"sensor":12,"time":1000,"value":123.0}'
+          data: '{"headers":["sensor","time","value"],"data":[[12,1000,123.0]]}'
         });
 
         expect(self.calls).toBe(1);
