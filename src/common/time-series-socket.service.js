@@ -122,27 +122,27 @@
         name: subscriber.name,
         variable_type: subscriber.variableType,
       };
-      if (historyTime !== null && historyTime !== undefined) {
-        data.history_time = historyTime;
-      }
-
       $http.post('live/timeseries/identify/', data)
-        .then(response => handleIdentification(subscriber, callback, response));
+        .then(response => handleIdentification(
+                  subscriber, callback, response, historyTime));
     }
 
     /**
      * Handles response from identification endpoint, by registering the
      * subscription internally, and sending the subscription request over the
      * websocket.
-     * @param {object}   subscriber Details about the sensor to subscribe to
-     *                              updates on the server. Contains recipe
-     *                              instance and sensor name.
-     * @param {function} callback   Function to call when the subscriber
-     *                              recieves updates.
-     * @param {object}   response   The response from the http request to
-     *                              identify the sensor.
+     * @param {object}   subscriber  Details about the sensor to subscribe to
+     *                               updates on the server. Contains recipe
+     *                               instance and sensor name.
+     * @param {function} callback    Function to call when the subscriber
+     *                               recieves updates.
+     * @param {object}   response    The response from the http request to
+     *                               identify the sensor.
+     * @param {Number}   historyTime Amount of time, which should be queried for
+     *                               historical data points. Negative indicates
+     *                               past data points. Units: seconds.
      */
-    function handleIdentification(subscriber, callback, response) {
+    function handleIdentification(subscriber, callback, response, historyTime) {
       // Extend the provided subscriber with extra information.
       subscriber.sensor = response.data.sensor;
       subscriber.callback = callback;
@@ -150,23 +150,30 @@
       // Register subscriber with tracking arrays and maps.
       if (!self.sensorToSubscribers.hasOwnProperty(subscriber.sensor)) {
         self.sensorToSubscribers[subscriber.sensor] = [];
-        performWebsocketSubscribe(subscriber);
+        performWebsocketSubscribe(subscriber, historyTime);
       }
       self.sensorToSubscribers[subscriber.sensor].push(subscriber);
     }
 
     /**
      * Sends subscription request to server.
-     * @param {Object} subscriber Details about the sensor to subscribe to
-     *                            updates on the server. Contains recipe
-     *                            instance, and sensor id.
+     * @param {Object} subscriber    Details about the sensor to subscribe to
+     *                               updates on the server. Contains recipe
+     *                               instance, and sensor id.
+     * @param {Number}   historyTime Amount of time, which should be queried for
+     *                               historical data points. Negative indicates
+     *                               past data points. Units: seconds.
      */
-    function performWebsocketSubscribe(subscriber) {
-      const message = JSON.stringify({
+    function performWebsocketSubscribe(subscriber, historyTime) {
+      const data = {
         recipe_instance: subscriber.recipeInstance,
         sensor: subscriber.sensor,
         subscribe: true,
-      });
+      };
+      if (historyTime !== null && historyTime !== undefined) {
+        data.history_time = historyTime;
+      }
+      const message = JSON.stringify(data);
       self.socket.send(message);
     }
   }
