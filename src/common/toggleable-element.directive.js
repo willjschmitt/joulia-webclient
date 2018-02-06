@@ -13,14 +13,20 @@
         name: '=',
         recipeInstance: '=',
         sensorName: '=',
+
+        // The number of seconds to filter on (negative indicating the past) for
+        // requesting historical data.
+        historyTime: '=',
       },
       templateUrl: 'common/toggleable-element.tpl.html',
       link: function toggleableElementController($scope) {
         // Subscribe to value and override.
         $scope.elementStatus = new TimeSeriesUpdater(
-            $scope.recipeInstance, $scope.sensorName, 'value');
+            $scope.recipeInstance, $scope.sensorName, 'value',
+            $scope.historyTime);
         $scope.elementOverride = new TimeSeriesUpdater(
-            $scope.recipeInstance, $scope.sensorName, 'override');
+            $scope.recipeInstance, $scope.sensorName, 'override',
+            $scope.historyTime);
 
         // Status setters.
         $scope.toggleElementStatus = toggleElementStatus;

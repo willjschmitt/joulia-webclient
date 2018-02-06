@@ -9,6 +9,9 @@
     $scope.brewhouse = breweryResources.Brewhouse.get(
         { id: $stateParams.brewhouseId }, updateBrewery);
 
+    // TODO(willjschmitt): Make this configurable via url params, etc.
+    $scope.historyTime = -60.0 * 60.0 * 2.0;  // 2 Hours.
+
     /**
      * Gets the brewery this brewhouse is a part of.
      */

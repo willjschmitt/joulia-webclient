@@ -13,17 +13,23 @@
       scope: {
         brewhouse: '=',
         recipeInstance: '=',
+
+        // The number of seconds to filter on (negative indicating the past) for
+        // requesting historical data.
+        historyTime: '=',
       },
       templateUrl: 'brewhouse/brewhouse-status.tpl.html',
       link: function brewhouseStatusController($scope) {
         $scope.currentStatus = new TimeSeriesUpdater(
-            $scope.recipeInstance, 'state', 'value');
+            $scope.recipeInstance, 'state', 'value', $scope.historyTime);
         $scope.timer = new TimeSeriesUpdater(
-            $scope.recipeInstance, 'timer', 'value');
+            $scope.recipeInstance, 'timer', 'value', $scope.historyTime);
         $scope.requestPermission = new TimeSeriesUpdater(
-            $scope.recipeInstance, 'request_permission', 'value');
+            $scope.recipeInstance, 'request_permission', 'value',
+            $scope.historyTime);
         $scope.grantPermission = new TimeSeriesUpdater(
-            $scope.recipeInstance, 'grant_permission', 'value');
+            $scope.recipeInstance, 'grant_permission', 'value',
+            $scope.historyTime);
 
         $scope.adjustState = adjustState;
 
