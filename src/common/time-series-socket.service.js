@@ -147,13 +147,13 @@
       subscriber.sensor = response.data.sensor;
       subscriber.callback = callback;
       if (historyTime !== null && historyTime !== undefined) {
-        subscriber.history_time = historyTime;
+        subscriber.historyTime = historyTime;
       }
 
       // Register subscriber with tracking arrays and maps.
       if (!self.sensorToSubscribers.hasOwnProperty(subscriber.sensor)) {
         self.sensorToSubscribers[subscriber.sensor] = [];
-        performWebsocketSubscribe(subscriber, historyTime);
+        performWebsocketSubscribe(subscriber);
       }
       self.sensorToSubscribers[subscriber.sensor].push(subscriber);
     }
