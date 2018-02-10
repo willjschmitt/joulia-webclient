@@ -9,7 +9,7 @@
   function BrewhouseEquipmentController(
       $scope, TimeSeriesUpdater, brewhouseStates) {
     // TODO(willjschmitt): Make this configurable via url params, etc.
-    $scope.historyTime = -60.0 * 60.0 * 2.0;  // 2 Hours.
+    $scope.historyTime = -60.0 * 15.0;  // 15 Minutes.
 
     $scope.currentStatus = new TimeSeriesUpdater(
         $scope.recipeInstance.id, 'state', 'value', $scope.historyTime);
