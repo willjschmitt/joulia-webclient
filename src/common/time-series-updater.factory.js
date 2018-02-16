@@ -53,10 +53,9 @@
     function newData(samples) {
       const self = this;
 
-
       // Ignore datapoints received older than kStaleDataMinutes.
       while (samples.length && self.historicalTime &&
-          diffSecondsFromNow(samples[0].time) > self.historicalTime) {
+          diffSecondsFromNow(samples[0].time) < self.historicalTime) {
         samples.shift();
       }
 
@@ -72,7 +71,7 @@
 
       // Remove any internal data older than kStaleDataMinutes.
       while (self.dataPoints.length && self.historicalTime &&
-          diffSecondsFromNow(self.dataPoints[0][0]) > self.historicalTime) {
+          diffSecondsFromNow(self.dataPoints[0][0]) < self.historicalTime) {
         self.dataPoints.shift();
       }
     }
@@ -117,11 +116,11 @@
      * @param {Object} dateTime A moment() date time to compare to now.
      * @returns {Number} The difference in time from dateTime until now in
      *                   seconds. Larger, more positive numbers represent a
-     *                   dateTime further in the past.
+     *                   dateTime further in the future.
      */
      // TODO(will): Separate this out into an independent service.
     function diffSecondsFromNow(dateTime) {
-      const timeDiff = moment().diff(moment(dateTime));
+      const timeDiff = moment(dateTime).diff(moment());
       const timeDiffSeconds = moment.duration(timeDiff).asSeconds();
       return timeDiffSeconds;
     }

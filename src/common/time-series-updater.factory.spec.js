@@ -24,7 +24,7 @@ describe('app.common time-series-socket.service', function () {
 
     const recipeInstance = 0;
     const sensorName = '';
-    const twentyMinutesAgo = 20;
+    const twentyMinutesAgo = -20 * 60;
 
     beforeEach(inject(function (_TimeSeriesUpdater_) {
       TimeSeriesUpdater = _TimeSeriesUpdater_;
@@ -69,7 +69,7 @@ describe('app.common time-series-socket.service', function () {
 
       it('ignores old samples provided', function () {
         const time1 = new moment().subtract(21, 'minutes');
-        const time2 = new moment();
+        const time2 = new moment().subtract(19, 'minutes');
         const samples = [
           {sensor: 12, time: time1.toISOString(), value: 10.0},
           {sensor: 12, time: time2.toISOString(), value: 11.0},
@@ -87,7 +87,7 @@ describe('app.common time-series-socket.service', function () {
         const timeSeriesUpdater = new TimeSeriesUpdater(
           recipeInstance, sensorName, 'value', twentyMinutesAgo);
         const time1 = new moment().subtract(21, 'minutes');
-        const time2 = new moment();
+        const time2 = new moment().subtract(19, 'minutes');
         timeSeriesUpdater.dataPoints = [
           [time1, 10.0],
           [time2, 11.0],

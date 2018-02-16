@@ -146,11 +146,14 @@
       // Extend the provided subscriber with extra information.
       subscriber.sensor = response.data.sensor;
       subscriber.callback = callback;
+      if (historyTime !== null && historyTime !== undefined) {
+        subscriber.historyTime = historyTime;
+      }
 
       // Register subscriber with tracking arrays and maps.
       if (!self.sensorToSubscribers.hasOwnProperty(subscriber.sensor)) {
         self.sensorToSubscribers[subscriber.sensor] = [];
-        performWebsocketSubscribe(subscriber, historyTime);
+        performWebsocketSubscribe(subscriber);
       }
       self.sensorToSubscribers[subscriber.sensor].push(subscriber);
     }
@@ -160,18 +163,16 @@
      * @param {Object} subscriber    Details about the sensor to subscribe to
      *                               updates on the server. Contains recipe
      *                               instance, and sensor id.
-     * @param {Number}   historyTime Amount of time, which should be queried for
-     *                               historical data points. Negative indicates
-     *                               past data points. Units: seconds.
      */
-    function performWebsocketSubscribe(subscriber, historyTime) {
+    function performWebsocketSubscribe(subscriber) {
       const data = {
         recipe_instance: subscriber.recipeInstance,
         sensor: subscriber.sensor,
         subscribe: true,
       };
-      if (historyTime !== null && historyTime !== undefined) {
-        data.history_time = historyTime;
+      if (subscriber.historyTime !== null
+          && subscriber.historyTime !== undefined) {
+        data.history_time = subscriber.historyTime;
       }
       const message = JSON.stringify(data);
       self.socket.send(message);

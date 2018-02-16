@@ -7,6 +7,6 @@
 
   function BrewhouseAnalysisController($scope) {
     // TODO(willjschmitt): Make this configurable based on URL parameters, etc.
-    $scope.historyTime = -60.0 * 60.0 * 2.0;  // 2 Hours.
+    $scope.historyTime = -60.0 * 15.0;  // 15 Minutes.
   }
 }());

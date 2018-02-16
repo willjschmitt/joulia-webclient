@@ -82,9 +82,9 @@
           return $scope.chart;
         }
         nv.addGraph(updateChart);
-        // Replot every second rather than everytime we get new data so we aren't
-        // plotting all the time.
-        $interval(updateChart, 1000.0);
+        // Replot every 10 seconds rather than everytime we get new data so we
+        // aren't plotting all the time.
+        $interval(updateChart, 10000.0);
       },
     };
   }
