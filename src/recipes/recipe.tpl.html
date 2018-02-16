@@ -120,6 +120,17 @@
             </div>
             <div class="form-group">
               <input
+                  name="brewhouse_efficiency"
+                  id="brewhouse_efficiency"
+                  class="form-control"
+                  ng-model="recipe.brewhouse_efficiency"
+                  step="0.01"
+                  type="number"
+                  ng-change="save()">
+              <label>Brewhouse Efficiency (per-unit)</label>
+            </div>
+            <div class="form-group">
+              <input
                   name="strike_temperature"
                   id="strike_temperature"
                   class="form-control"
