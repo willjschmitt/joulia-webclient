@@ -29,6 +29,7 @@
             name="time"
             class="form-control"
             ng-model="userAmount"
+            ng-model-options="{ debounce: 1000 }"
             step="0.01"
             type="number"/>
         <label>Amount</label>
@@ -52,6 +53,7 @@
             name="time"
             class="form-control"
             ng-model="ingredientAddition.time_added"
+            ng-model-options="{ debounce: 1000 }"
             step="1"
             type="number"
             ng-change="updateIngredientAddition()" />

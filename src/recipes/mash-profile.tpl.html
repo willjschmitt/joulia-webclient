@@ -24,6 +24,7 @@
               name="time"
               class="form-control"
               ng-model="mashPoint.time"
+              ng-model-options="{ debounce: 1000 }"
               step="1"
               type="number"
               ng-change="updateMashPoint(mashPoint)">
@@ -36,6 +37,7 @@
               name="time"
               class="form-control"
               ng-model="mashPoint.temperature"
+              ng-model-options="{ debounce: 1000 }"
               step="0.5"
               type="number"
               ng-change="updateMashPoint(mashPoint)">

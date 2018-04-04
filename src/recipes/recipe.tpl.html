@@ -113,6 +113,7 @@
                   id="volume"
                   class="form-control"
                   ng-model="recipe.volume"
+                  ng-model-options="{ debounce: 1000 }"
                   step="0.1"
                   type="number"
                   ng-change="save()">
@@ -124,6 +125,7 @@
                   id="brewhouse_efficiency"
                   class="form-control"
                   ng-model="recipe.brewhouse_efficiency"
+                  ng-model-options="{ debounce: 1000 }"
                   step="0.01"
                   type="number"
                   ng-change="save()">
@@ -135,6 +137,7 @@
                   id="strike_temperature"
                   class="form-control"
                   ng-model="recipe.strike_temperature"
+                  ng-model-options="{ debounce: 1000 }"
                   step="0.5"
                   type="number"
                   ng-change="save()">
@@ -146,6 +149,7 @@
                   id="mashout_temperature"
                   class="form-control"
                   ng-model="recipe.mashout_temperature"
+                  ng-model-options="{ debounce: 1000 }"
                   step="0.5"
                   type="number"
                   ng-change="save()">
@@ -157,6 +161,7 @@
                   id="mashout_time"
                   class="form-control"
                   ng-model="recipe.mashout_time"
+                  ng-model-options="{ debounce: 1000 }"
                   step="1"
                   type="number"
                   ng-change="save()">
@@ -168,6 +173,7 @@
                   id="boil_time"
                   class="form-control"
                   ng-model="recipe.boil_time"
+                  ng-model-options="{ debounce: 1000 }"
                   step="1"
                   type="number"
                   ng-change="save()">
@@ -179,6 +185,7 @@
                   id="cool_temperature"
                   class="form-control"
                   ng-model="recipe.cool_temperature"
+                  ng-model-options="{ debounce: 1000 }"
                   step="0.5"
                   type="number"
                   ng-change="save()">
