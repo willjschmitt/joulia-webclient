@@ -1,7 +1,7 @@
 /* eslint-disable */
 describe('app.recipes recipe.controller', function () {
-  beforeEach(module('app.recipes'));
-  beforeEach(module('joulia.templates'));
+  beforeEach(angular.mock.module('app.recipes'));
+  beforeEach(angular.mock.module('joulia.templates'));
 
   var $controller, $httpBackend, $rootScope, $location, breweryResources;
 

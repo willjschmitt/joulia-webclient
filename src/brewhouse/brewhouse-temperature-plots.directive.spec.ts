@@ -1,8 +1,8 @@
 /* eslint-disable */
 describe('app.brewhouse', function () {
-  beforeEach(module('app.brewhouse'));
-  beforeEach(module('joulia.templates'));
-  beforeEach(module(function($provide) {
+  beforeEach(angular.mock.module('app.brewhouse'));
+  beforeEach(angular.mock.module('joulia.templates'));
+  beforeEach(angular.mock.module(function($provide) {
     $provide.factory('TimeSeriesUpdater', function () {
       function TimeSeriesUpdater(recipeInstance, name, variableType) {
         this.latest = 0;

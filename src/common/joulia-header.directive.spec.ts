@@ -1,11 +1,11 @@
 /* eslint-disable */
 describe('app.common', function () {
-  beforeEach(module('app.common'));
-  beforeEach(module('joulia.templates'));
+  beforeEach(angular.mock.module('app.common'));
+  beforeEach(angular.mock.module('joulia.templates'));
 
   // Mocks the user service, so we can manipulate user preferences from here.
   var user = {};
-  beforeEach(module(function($provide) {
+  beforeEach(angular.mock.module(function($provide) {
     $provide.service('userService', function () {
       const self = this;
 

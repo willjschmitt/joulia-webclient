@@ -1,7 +1,7 @@
 /* eslint-disable */
 describe('app.common confirm-delete.controller', function () {
-  beforeEach(module('app.common'));
-  beforeEach(module('joulia.templates'));
+  beforeEach(angular.mock.module('app.common'));
+  beforeEach(angular.mock.module('joulia.templates'));
 
   var $controller, $rootScope;
 

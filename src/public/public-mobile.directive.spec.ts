@@ -1,7 +1,7 @@
 /* eslint-disable */
 describe('app.public', function () {
-  beforeEach(module('app.public'));
-  beforeEach(module('joulia.templates'));
+  beforeEach(angular.mock.module('app.public'));
+  beforeEach(angular.mock.module('joulia.templates'));
 
   var $rootScope, $compile;
 

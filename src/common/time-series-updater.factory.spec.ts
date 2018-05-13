@@ -1,8 +1,8 @@
 /* eslint-disable */
 describe('app.common time-series-socket.service', function () {
-  beforeEach(module('app.common'));
-  beforeEach(module('joulia.templates'));
-  beforeEach(module(function($provide) {
+  beforeEach(angular.mock.module('app.common'));
+  beforeEach(angular.mock.module('joulia.templates'));
+  beforeEach(angular.mock.module(function($provide) {
     $provide.service('timeSeriesSocket', function () {
       this.subscribe = jasmine.createSpy('subscribe');
     });

@@ -1,7 +1,7 @@
 /* eslint-disable */
 describe('app.brewhouse', function () {
-  beforeEach(module('app.brewhouse'));
-  beforeEach(module('joulia.templates'));
+  beforeEach(angular.mock.module('app.brewhouse'));
+  beforeEach(angular.mock.module('joulia.templates'));
 
   var $controller, $httpBackend, $rootScope;
 

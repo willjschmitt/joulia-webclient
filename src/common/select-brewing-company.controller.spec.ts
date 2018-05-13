@@ -1,7 +1,7 @@
 /* eslint-disable */
 describe('app.common select-brewing-company.controller', function () {
-  beforeEach(module('app.dashboard'));
-  beforeEach(module('joulia.templates'));
+  beforeEach(angular.mock.module('app.dashboard'));
+  beforeEach(angular.mock.module('joulia.templates'));
 
   var $controller, $httpBackend, $rootScope, $location;
 

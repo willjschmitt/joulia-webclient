@@ -1,6 +1,6 @@
 /* eslint-disable */
 describe('app.common', function () {
-  beforeEach(module('app.common'));
+  beforeEach(angular.mock.module('app.common'));
 
   var $controller, $httpBackend, $rootScope, $compile, $location;
 

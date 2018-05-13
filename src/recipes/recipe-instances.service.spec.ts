@@ -1,6 +1,6 @@
 /* eslint-disable */
 describe('app.common recipe-instances.service', function () {
-  beforeEach(module('app.common'));
+  beforeEach(angular.mock.module('app.common'));
 
   var $httpBackend;
 

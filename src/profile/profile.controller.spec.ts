@@ -1,7 +1,7 @@
 /* eslint-disable */
 describe('app.profile', function () {
-  beforeEach(module('app.profile'));
-  beforeEach(module('joulia.templates'));
+  beforeEach(angular.mock.module('app.profile'));
+  beforeEach(angular.mock.module('joulia.templates'));
 
   var $controller, $httpBackend, $rootScope;
 

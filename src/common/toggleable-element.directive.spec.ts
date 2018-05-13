@@ -1,11 +1,11 @@
 /* eslint-disable */
 describe('app.common', function () {
-  beforeEach(module('app.common'));
-  beforeEach(module('joulia.templates'));
+  beforeEach(angular.mock.module('app.common'));
+  beforeEach(angular.mock.module('joulia.templates'));
 
   var $controller, $httpBackend, $rootScope, $compile;
 
-  beforeEach(module(function($provide) {
+  beforeEach(angular.mock.module(function($provide) {
     $provide.value('TimeSeriesUpdater', function () { 
       const self = this;
       self.latest = null;

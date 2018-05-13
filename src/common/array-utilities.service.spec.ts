@@ -1,7 +1,7 @@
 /* eslint-disable */
 describe('app.common array-utilities.service', function () {
-  beforeEach(module('app.common'));
-  beforeEach(module('joulia.templates'));
+  beforeEach(angular.mock.module('app.common'));
+  beforeEach(angular.mock.module('joulia.templates'));
 
   var $rootScope;
 
