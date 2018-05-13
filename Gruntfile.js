@@ -1,6 +1,5 @@
 module.exports = function(grunt) {
 
-  grunt.loadNpmTasks('grunt-eslint');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-karma');
@@ -25,11 +24,11 @@ module.exports = function(grunt) {
   grunt.registerTask('cleanbuild', [
     'clean', 'build', 'copy:vendor']);
   grunt.registerTask('build', [
-    'eslint', 'html2js', 'karma:release', 'concat', 'copy:assets']);
+    'html2js', 'karma:release', 'concat', 'copy:assets']);
   grunt.registerTask('buildlite', [
-    'eslint', 'html2js', 'concat', 'copy:assets']);
+    'html2js', 'concat', 'copy:assets']);
 
-  grunt.registerTask('test', ['eslint', 'karma:travis', 'coveralls']);
+  grunt.registerTask('test', ['karma:travis', 'coveralls']);
   grunt.registerTask('travisbuild', [
     'html2js', 'concat', 'copy:assets', 'copy:vendor']);
 
@@ -81,9 +80,6 @@ module.exports = function(grunt) {
         singleRun: true,
         browsers: ['PhantomJS2'],
       },
-    },
-    eslint: {
-      target: ['<%= src.js %>', '<%= src.publicJs %>'],
     },
     html2js: {
       joulia: {
