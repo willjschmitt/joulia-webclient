@@ -10,7 +10,7 @@ module.exports = function(config) {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['jasmine', 'es6-shim'],
+    frameworks: ['browserify', 'jasmine'/*, 'es6-shim'*/],
 
 
     // list of files / patterns to load in the browser
@@ -54,22 +54,22 @@ module.exports = function(config) {
       //'vendor/bemat-admin/js/bemat-admin-common.js',
 
       // Load in test helper functions.
-      'dist/js/test/input-checkers.js',
+      'temp/js/test/input-checkers.js',
 
       // Need to manually load the modules for now to make sure they are
       // available for when adding the controllers, etc., to them.
       // TODO(will): Figure out a better way to not have to manually include
       // the module definitions.
-      'dist/js/joulia-webclient.js',
-      'dist/js/common/common.module.js',
-      'dist/js/public/public.module.js',
-      'dist/js/dashboard/dashboard.module.js',
-      'dist/js/recipes/recipes.module.js',
-      'dist/js/brewhouse/brewhouse.module.js',
-      'dist/js/profile/profile.module.js',
+      'temp/js/joulia-webclient.js',
+      'temp/js/common/common.module.js',
+      'temp/js/public/public.module.js',
+      'temp/js/dashboard/dashboard.module.js',
+      'temp/js/recipes/recipes.module.js',
+      'temp/js/brewhouse/brewhouse.module.js',
+      'temp/js/profile/profile.module.js',
 
       // The main source files.
-      'dist/**/*.js',
+      'temp/**/*.js',
     ],
 
 
@@ -80,15 +80,24 @@ module.exports = function(config) {
 
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
+    // preprocessors: {
+    //   'dist/**/*.js': ['coverage'],
+    //   'src/**/*.html': ['ng-html2js']
+    // },
+
     preprocessors: {
-      'dist/**/*.js': ['coverage'],
-      'src/**/*.html': ['ng-html2js']
+      'temp/**/*.js': [ 'browserify' ]
     },
 
-    ngHtml2JsPreprocessor: {
+    browserify: {
+      debug: true,
+      //transform: [ 'brfs' ]
+    },
+
+    /*ngHtml2JsPreprocessor: {
       moduleName: 'joulia.templates',
       stripPrefix: 'src/',
-    },
+    },*/
 
     // babelPreprocessor: {
     //   options: {

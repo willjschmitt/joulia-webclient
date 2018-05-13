@@ -1,4 +1,7 @@
 /* eslint-disable */
+
+import inputCheckers = require('./input-checkers');
+
 describe('app.common', function () {
   beforeEach(angular.mock.module('app.common'));
   beforeEach(angular.mock.module('joulia.templates'));

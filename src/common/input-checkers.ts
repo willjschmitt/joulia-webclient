@@ -1,5 +1,8 @@
 /* eslint-disable */
 
+// TODO(willjschmitt): Move this back to src/test once imports are figured out
+// in the build chain.
+
 /**
  * Helper for tests to find an input element with the id htmlId in element, an
  * angular element. Sets the value, on scopeObj at attributeName, refreshes the

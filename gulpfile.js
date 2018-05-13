@@ -8,8 +8,8 @@ var gulp       = require('gulp'),
     del        = require('del'),
     karma      = require('karma'),
     html2js    = require('gulp-html2js'),
-    browserify = require("gulp-browserify"),
-    //source     = require('vinyl-source-stream'),
+    browserify = require("browserify"),
+    source     = require('vinyl-source-stream'),
     //transform   = require('vinyl-transform'),
     tsify      = require("tsify");
 
@@ -87,27 +87,24 @@ gulp.task('tsc', ['lint'], function () {
 gulp.task('build', ['tsc', 'html2js'], function() {});
 
 gulp.task('bundle', ['build'], function () {
-  return gulp.src(tmpJsDir + '**/**.js')
-             .pipe(browserify({
-                insertGlobals : true,
-                debug: true,
-              }))
-             //.pipe(sourcemaps.init({ loadMaps: true }))
-             //.pipe(uglify())
-             //.pipe(sourcemaps.write('./'))
-             .pipe(gulp.dest(distJsDir));
+  // return gulp.src(tmpJsDir + '**/**.js')
+  //            .pipe(browserify({
+  //               insertGlobals : true,
+  //               debug: true,
+  //             }))
+  //            //.pipe(sourcemaps.init({ loadMaps: true }))
+  //            //.pipe(uglify())
+  //            //.pipe(sourcemaps.write('./'))
+  //            .pipe(gulp.dest(distJsDir));
 
-  // return browserify({
-  //       basedir: '.',
-  //       debug: true,
-  //       entries: ['./src/common/rtd-form.directive.spec.ts'],
-  //       cache: {},
-  //       packageCache: {}
-  //   })
-  //   .plugin(tsify)
-  //   .bundle()
-  //   .pipe(source('bundle.js'))
-  //   .pipe(gulp.dest(distJsDir));
+  return browserify({
+        debug: true,
+        entries: ['./temp/js/common/rtd-form.directive.spec.js'],
+    })
+    //.plugin(tsify)
+    .bundle()
+    .pipe(source('bundle.js'))
+    .pipe(gulp.dest(distJsDir));
 
   // transform regular node stream to gulp (buffered vinyl) stream
   // var browserified = transform(function(filename) {
@@ -120,7 +117,7 @@ gulp.task('bundle', ['build'], function () {
   //            .pipe(gulp.dest('./dist/js'));
 });
 
-gulp.task('test', ['bundle'], function(cb) {
+gulp.task('test', ['build'], function(cb) {
   new karma.Server({
     configFile: __dirname + '/karma.conf.js',
     singleRun: true
