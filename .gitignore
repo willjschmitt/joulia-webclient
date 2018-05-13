@@ -117,4 +117,4 @@ vendor/ultimate-flat/
 # NPM
 node_modules
 
-src/**/*.js
+temp/

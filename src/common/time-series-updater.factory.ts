@@ -1,3 +1,5 @@
+import * as moment from "moment/moment.js"
+
 (function loadTimeSeriesUpdaterFactory() {
   angular
     .module('app.common')

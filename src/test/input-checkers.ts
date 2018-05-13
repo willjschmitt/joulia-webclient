@@ -6,7 +6,7 @@
  * digest on scope, and checks the applied value is found in the input element.
  * Handles checking the value satisfies integer conversions correctly.
  */
-function checkIntegerInputIsSetCorrectly(
+export function checkIntegerInputIsSetCorrectly(
     element, scope, scopeObj, attributeName, value, htmlId) {
   scopeObj[attributeName] = value;
   scope.$digest();
@@ -21,7 +21,7 @@ function checkIntegerInputIsSetCorrectly(
  * digest on scope, and checks the applied value is found in the input element.
  * Handles checking the value satisfies float conversions correctly.
  */
-function checkFloatInputIsSetCorrectly(
+export function checkFloatInputIsSetCorrectly(
     element, scope, scopeObj, attributeName, value, htmlId) {
   scopeObj[attributeName] = value;
   scope.$digest();

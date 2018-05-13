@@ -54,25 +54,22 @@ module.exports = function(config) {
       //'vendor/bemat-admin/js/bemat-admin-common.js',
 
       // Load in test helper functions.
-      'src/test/input-checkers.js',
+      'dist/js/test/input-checkers.js',
 
       // Need to manually load the modules for now to make sure they are
       // available for when adding the controllers, etc., to them.
       // TODO(will): Figure out a better way to not have to manually include
       // the module definitions.
-      'src/joulia-webclient.js',
-      'src/common/common.module.js',
-      'src/public/public.module.js',
-      'src/dashboard/dashboard.module.js',
-      'src/recipes/recipes.module.js',
-      'src/brewhouse/brewhouse.module.js',
-      'src/profile/profile.module.js',
+      'dist/js/joulia-webclient.js',
+      'dist/js/common/common.module.js',
+      'dist/js/public/public.module.js',
+      'dist/js/dashboard/dashboard.module.js',
+      'dist/js/recipes/recipes.module.js',
+      'dist/js/brewhouse/brewhouse.module.js',
+      'dist/js/profile/profile.module.js',
 
       // The main source files.
-      'src/**/*.js',
-
-      // Template files.
-      'src/**/*.html',
+      'dist/**/*.js',
     ],
 
 
@@ -84,7 +81,7 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      'src/**/*.js': ['coverage', 'babel'],
+      'dist/**/*.js': ['coverage'],
       'src/**/*.html': ['ng-html2js']
     },
 
@@ -93,18 +90,18 @@ module.exports = function(config) {
       stripPrefix: 'src/',
     },
 
-    babelPreprocessor: {
-      options: {
-        presets: ['es2015'],
-        sourceMap: 'inline'
-      },
-      filename: function (file) {
-        return file.originalPath.replace(/\.js$/, '.es5.js');
-      },
-      sourceFileName: function (file) {
-        return file.originalPath;
-      }
-    },
+    // babelPreprocessor: {
+    //   options: {
+    //     presets: ['es2015'],
+    //     sourceMap: 'inline'
+    //   },
+    //   filename: function (file) {
+    //     return file.originalPath.replace(/\.js$/, '.es5.js');
+    //   },
+    //   sourceFileName: function (file) {
+    //     return file.originalPath;
+    //   }
+    // },
 
     // test results reporter to use
     // possible values: 'dots', 'progress'
@@ -128,7 +125,7 @@ module.exports = function(config) {
     logLevel: config.LOG_INFO,
 
     // enable / disable watching file and executing tests whenever any file changes
-    autoWatch: true,
+    autoWatch: false,
 
 
     // start these browsers
