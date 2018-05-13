@@ -1,7 +1,7 @@
 /* eslint-disable */
 describe('app.common time-series-socket.service', function () {
   beforeEach(angular.mock.module('app.common'));
-  beforeEach(angular.mock.angular.mock.module('ngWebSocket', 'ngWebSocketMock'));
+  beforeEach(angular.mock.module('ngWebSocket', 'ngWebSocketMock'));
   beforeEach(angular.mock.module('joulia.templates'));
 
   var $window, $controller, $httpBackend, $websocketBackend, $rootScope,

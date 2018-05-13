@@ -11,7 +11,7 @@ function checkIntegerInputIsSetCorrectly(
   scopeObj[attributeName] = value;
   scope.$digest();
 
-  const got = $(element).find(htmlId).val();
+  const got = $(element).find(htmlId).val().toString();
   expect(parseInt(got)).toEqual(value);
 }
 
@@ -26,6 +26,6 @@ function checkFloatInputIsSetCorrectly(
   scopeObj[attributeName] = value;
   scope.$digest();
 
-  const got = $(element).find(htmlId).val();
+  const got = $(element).find(htmlId).val().toString();
   expect(parseFloat(got)).toEqual(value);
 }

@@ -50,7 +50,7 @@
         /**
          * Refresh items with a search query performed against the server.
          */
-        function refreshItems(searchParameter) {
+        function refreshItems(searchParameter?) {
           const searchTerms = {};
           if ($scope.parent !== null && $scope.parent !== undefined
               && $scope.parent[$scope.attribute] !== null
