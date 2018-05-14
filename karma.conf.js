@@ -10,34 +10,38 @@ module.exports = function(config) {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['browserify', 'jasmine'/*, 'es6-shim'*/],
+    frameworks: ['browserify', 'jasmine'],
 
 
     // list of files / patterns to load in the browser
     files: [
       // Third-party libraries loaded by bower.
-      'bower_components/jquery/dist/jquery.js',
-      'bower_components/jquery-ui/jquery-ui.js',
-      'bower_components/angular/angular.js',
-      'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
-      'bower_components/angular-ui-select/dist/select.min.js',
-      'bower_components/angular-mocks/angular-mocks.js',
-      'bower_components/angular-resource/angular-resource.js',
-      'bower_components/angular-sanitize/angular-sanitize.js',
-      'bower_components/angular-ui-router/release/angular-ui-router.js',
-      'bower_components/angular-websocket/dist/angular-websocket.js',
-      'bower_components/angular-websocket/dist/angular-websocket-mock.js',
-      'bower_components/perfect-scrollbar/js/perfect-scrollbar.jquery.js',
-      'bower_components/iCheck/icheck.js',
-      'bower_components/bootstrap-select/dist/js/bootstrap-select.js',
-      'bower_components/d3/d3.js',
-      'bower_components/nvd3/build/nv.d3.js',
-      'bower_components/underscore/underscore.js',
+      'node_modules/jquery/dist/jquery.js',
+      'node_modules/jquery-ui-dist/jquery-ui.js',
+      'node_modules/angular/angular.js',
+      'node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js',
+      'node_modules/ui-select/dist/select.min.js',
+      'node_modules/angular-mocks/angular-mocks.js',
+      'node_modules/angular-resource/angular-resource.js',
+      'node_modules/angular-sanitize/angular-sanitize.js',
+      'node_modules/@uirouter/angularjs/release/angular-ui-router.js',
+      'node_modules/angular-websocket/dist/angular-websocket.js',
+      'node_modules/angular-websocket/dist/angular-websocket-mock.js',
+      'node_modules/perfect-scrollbar/dist/perfect-scrollbar.js',
+      'node_modules/ui-select/dist/select.js',
+      'node_modules/d3/d3.js',
+      'node_modules/nvd3/build/nv.d3.js',
+      'node_modules/underscore/underscore.js',
+      'node_modules/moment/moment.js',
+      'node_modules/screenfull/dist/screenfull.js',
+      'node_modules/flexslider/jquery.flexslider-min.js',
+      'node_modules/owl.carousel/dist/owl.carousel.js',
+
+      // Bower components.
+      // TODO(willjschmitt): Remove these as soon as posible moving to a
+      // browserified bundle.
       'bower_components/Modernizr/modernizr.custom.js',
-      'bower_components/moment/moment.js',
-      'bower_components/screenfull/dist/screenfull.min.js',
-      'bower_components/flexslider/jquery.flexslider-min.js',
-      'bower_components/owl.carousel/dist/owl.carousel.js',
+      'bower_components/iCheck/icheck.js',
 
       // Third-party open-source licensed libaries.
       'vendor/materialRipple/jquery.materialRipple.js',
@@ -74,15 +78,13 @@ module.exports = function(config) {
 
 
     // list of files to exclude
-    exclude: [
-    ],
+    exclude: [],
 
 
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     // preprocessors: {
     //   'dist/**/*.js': ['coverage'],
-    //   'src/**/*.html': ['ng-html2js']
     // },
 
     preprocessors: {
@@ -93,24 +95,6 @@ module.exports = function(config) {
       debug: true,
       //transform: [ 'brfs' ]
     },
-
-    /*ngHtml2JsPreprocessor: {
-      moduleName: 'joulia.templates',
-      stripPrefix: 'src/',
-    },*/
-
-    // babelPreprocessor: {
-    //   options: {
-    //     presets: ['es2015'],
-    //     sourceMap: 'inline'
-    //   },
-    //   filename: function (file) {
-    //     return file.originalPath.replace(/\.js$/, '.es5.js');
-    //   },
-    //   sourceFileName: function (file) {
-    //     return file.originalPath;
-    //   }
-    // },
 
     // test results reporter to use
     // possible values: 'dots', 'progress'

@@ -16,31 +16,7 @@
     "tests"
   ],
   "dependencies": {
-    "angular": "1.6.6",
-    "angular-route": "1.6.6",
-    "angular-resource": "1.6.6",
-    "angular-sanitize": "1.6.6",
-    "angular-mocks": "1.6.6",
-    "angular-bootstrap": "^2.0.1",
-    "jquery": "^1.12.3",
-    "jquery-ui": "^1.12.1",
-    "bootstrap": "^3.3.7",
-    "moment": "2.19.1",
-    "underscore": "^1.8.3",
-    "perfect-scrollbar": "^0.6.16",
     "iCheck": "^1.0.2",
-    "bootstrap-select": "^1.12.2",
-    "nvd3": "^1.8.5",
-    "Modernizr": "http://modernizr.com/download?fontface-backgroundsize-borderimage-borderradius-boxshadow-flexbox-hsla-multiplebgs-opacity-rgba-textshadow-cssanimations-csscolumns-generatedcontent-cssgradients-cssreflections-csstransforms-csstransforms3d-csstransitions-applicationcache-canvas-canvastext-draganddrop-hashchange-history-audio-video-indexeddb-input-inputtypes-localstorage-postmessage-sessionstorage-websockets-websqldatabase-webworkers-geolocation-inlinesvg-smil-svg-svgclippaths-touch-webgl-shiv-mq-cssclasses-addtest-prefixed-teststyles-testprop-testallprops-hasevent-prefixes-domprefixes-load.zip",
-    "angular-websocket": "willjschmitt/angular-websocket#master",
-    "angular-perfect-scrollbar": "BonzoBonzo/angular-perfect-scrollbar#^1.1.4",
-    "screenfull": "^3.2.0",
-    "flexslider": "^2.6.3",
-    "owl.carousel": "^2.2.1",
-    "angular-ui-select": "^0.19.8",
-    "angular-ui-router": "1.0.10"
-  },
-  "resolutions": {
-    "angular": "1.6.3"
+    "Modernizr": "http://modernizr.com/download?fontface-backgroundsize-borderimage-borderradius-boxshadow-flexbox-hsla-multiplebgs-opacity-rgba-textshadow-cssanimations-csscolumns-generatedcontent-cssgradients-cssreflections-csstransforms-csstransforms3d-csstransitions-applicationcache-canvas-canvastext-draganddrop-hashchange-history-audio-video-indexeddb-input-inputtypes-localstorage-postmessage-sessionstorage-websockets-websqldatabase-webworkers-geolocation-inlinesvg-smil-svg-svgclippaths-touch-webgl-shiv-mq-cssclasses-addtest-prefixed-teststyles-testprop-testallprops-hasevent-prefixes-domprefixes-load.zip"
   }
 }

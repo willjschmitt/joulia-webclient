@@ -1,73 +1,85 @@
-(function loadJouliaWebserver() {
-  angular
-    .module('app', [
-      'ui.router', 'ngResource', 'ngSanitize', 'ui.bootstrap', 'app.common',
-      'app.templates', 'app.dashboard', 'app.brewhouse', 'app.recipes',
-      'app.profile', 'perfect_scrollbar',
-    ])
-    .service('unauthorizedInterceptor', unauthorizedInterceptor)
-    .config(routeConfig)
-    .config(httpConfig)
-    .config(resourceConfig)
-    .run(userConfig);
+import angular = require('angular');
 
-  unauthorizedInterceptor.$inject = ['$q', '$location', '$window'];
+import '@uirouter/angularjs';
+import 'angular-route';
+import 'angular-sanitize';
+import 'angular-ui-bootstrap';
+import 'perfect-scrollbar';
 
-  function unauthorizedInterceptor($q, $location, $window) {
-    const service = this;
+import './brewhouse/brewhouse.module';
+import './common/common.module';
+import './dashboard/dashboard.module';
+import './profile/profile.module';
+import './recipes/recipes.module';
 
-    service.responseError = function redirectOn401(response) {
-      if (response.status === 401) {
-        $window.location.href = getPublicUrl($location);
-        return {};
-      }
-      return $q.reject(response);
-    };
-  }
+angular
+  .module('app', [
+    'ui.router', 'ngResource', 'ngSanitize', 'ui.bootstrap', 'app.common',
+    'app.templates', 'app.dashboard', 'app.brewhouse', 'app.recipes',
+    'app.profile', 'perfect_scrollbar',
+  ])
+  .service('unauthorizedInterceptor', unauthorizedInterceptor)
+  .config(routeConfig)
+  .config(httpConfig)
+  .config(resourceConfig)
+  .run(userConfig);
 
-  routeConfig.$inject = ['$locationProvider', '$urlRouterProvider'];
+unauthorizedInterceptor.$inject = ['$q', '$location', '$window'];
 
-  function routeConfig($locationProvider, $urlRouterProvider) {
-    $locationProvider.hashPrefix('!');
-    $urlRouterProvider.otherwise('/dashboard');
-  }
+function unauthorizedInterceptor($q, $location, $window) {
+  const service = this;
 
-  httpConfig.$inject = ['$httpProvider'];
+  service.responseError = function redirectOn401(response) {
+    if (response.status === 401) {
+      $window.location.href = getPublicUrl($location);
+      return {};
+    }
+    return $q.reject(response);
+  };
+}
 
-  function httpConfig($httpProvider) {
-    $httpProvider.defaults.xsrfCookieName = 'csrftoken';
-    $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
+routeConfig.$inject = ['$locationProvider', '$urlRouterProvider'];
 
-    $httpProvider.interceptors.push('unauthorizedInterceptor');
-  }
+function routeConfig($locationProvider, $urlRouterProvider) {
+  $locationProvider.hashPrefix('!');
+  $urlRouterProvider.otherwise('/dashboard');
+}
 
-  resourceConfig.$inject = ['$resourceProvider'];
+httpConfig.$inject = ['$httpProvider'];
 
-  function resourceConfig($resourceProvider) {
-    $resourceProvider.defaults.stripTrailingSlashes = false;
-  }
+function httpConfig($httpProvider) {
+  $httpProvider.defaults.xsrfCookieName = 'csrftoken';
+  $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
 
-  userConfig.$inject = ['$rootScope', 'userService', '$location', '$window'];
+  $httpProvider.interceptors.push('unauthorizedInterceptor');
+}
 
-  function userConfig($rootScope, userService, $location, $window) {
-    $rootScope.userService = userService;
+resourceConfig.$inject = ['$resourceProvider'];
 
-    // Watch for user change and send them to defaults.
-    $rootScope.$watch('userService.user.$resolved', function updateDefaultPath() {
-      // Nothing to do if the change of the user is just retrieving it.
-      if (!$rootScope.userService.user.$resolved) {
-        return;
-      }
+function resourceConfig($resourceProvider) {
+  $resourceProvider.defaults.stripTrailingSlashes = false;
+}
 
-      // Redirect to public if there is no user.
-      if (!$rootScope.userService.user.id) {
-        $window.location.href = getPublicUrl($location);
-      }
-    });
-  }
+userConfig.$inject = ['$rootScope', 'userService', '$location', '$window'];
 
-  function getPublicUrl($location) {
-    const rootHost = $location.host().replace('brew.', '');
-    return `//${rootHost}`;
-  }
-}());
+function userConfig($rootScope, userService, $location, $window) {
+  $rootScope.userService = userService;
+
+  // Watch for user change and send them to defaults.
+  $rootScope.$watch('userService.user.$resolved', function updateDefaultPath() {
+    // Nothing to do if the change of the user is just retrieving it.
+    if (!$rootScope.userService.user.$resolved) {
+      return;
+    }
+
+    // Redirect to public if there is no user.
+    if (!$rootScope.userService.user.id) {
+      $window.location.href = getPublicUrl($location);
+    }
+  });
+}
+
+function getPublicUrl($location) {
+  const rootHost = $location.host().replace('brew.', '');
+  return `//${rootHost}`;
+}
