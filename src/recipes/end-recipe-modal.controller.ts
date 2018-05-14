@@ -1,20 +1,14 @@
-(function loadEndRecipeModalController() {
-  angular
-    .module('app.recipes')
-    .controller('EndRecipeModalController', EndRecipeModalController);
+EndRecipeModalController.$inject = ['$scope', '$uibModalInstance'];
 
-  EndRecipeModalController.$inject = ['$scope', '$uibModalInstance'];
+export function EndRecipeModalController($scope, $uibModalInstance) {
+  $scope.ok = ok;
+  $scope.cancel = cancel;
 
-  function EndRecipeModalController($scope, $uibModalInstance) {
-    $scope.ok = ok;
-    $scope.cancel = cancel;
-
-    function ok() {
-      $uibModalInstance.close(true);
-    }
-
-    function cancel() {
-      $uibModalInstance.dismiss('cancel');
-    }
+  function ok() {
+    $uibModalInstance.close(true);
   }
-}());
+
+  function cancel() {
+    $uibModalInstance.dismiss('cancel');
+  }
+}

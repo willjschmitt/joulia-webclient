@@ -1,19 +1,28 @@
-(function loadProfileModule() {
-  angular
-    .module('app.profile', ['ui.router', 'app.common', 'ui.bootstrap'])
-    .config(stateConfig);
+import angular = require('angular');
 
-  stateConfig.$inject = ['$stateProvider'];
+import '@uirouter/angularjs';
+import 'angular-ui-bootstrap';
 
-  function stateConfig($stateProvider) {
-    const profileState = {
-      name: 'profile',
-      url: '/profile',
-      templateUrl: 'profile/profile.tpl.html',
-      controller: 'ProfileController',
-      controllerAs: 'profileCtrl',
-    };
+import '../common/common.module';
 
-    $stateProvider.state(profileState);
-  }
-}());
+import {ProfileController} from './profile.controller';
+
+angular
+  .module('app.profile', ['ui.router', 'app.common', 'ui.bootstrap'])
+  .config(stateConfig)
+
+  .controller('ProfileController', ProfileController);
+
+stateConfig.$inject = ['$stateProvider'];
+
+function stateConfig($stateProvider) {
+  const profileState = {
+    name: 'profile',
+    url: '/profile',
+    templateUrl: 'profile/profile.tpl.html',
+    controller: 'ProfileController',
+    controllerAs: 'profileCtrl',
+  };
+
+  $stateProvider.state(profileState);
+}

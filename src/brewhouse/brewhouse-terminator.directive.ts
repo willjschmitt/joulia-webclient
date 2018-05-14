@@ -1,41 +1,35 @@
-(function loadBrewhouseTerminatorDirective() {
-  angular
-    .module('app.brewhouse')
-    .directive('brewhouseTerminator', brewhouseTerminator);
+brewhouseTerminator.$inject = ['$http', '$uibModal', 'recipeInstances'];
 
-  brewhouseTerminator.$inject = ['$http', '$uibModal', 'recipeInstances'];
+export function brewhouseTerminator($http, $uibModal, recipeInstances) {
+  return {
+    restrict: 'E',
+    transclude: true,
+    scope: {
+      recipeInstance: '=',
+    },
+    templateUrl: 'brewhouse/brewhouse-terminator.tpl.html',
+    link: function brewhouseTerminatorController($scope) {
+      $scope.endSession = endSession;
 
-  function brewhouseTerminator($http, $uibModal, recipeInstances) {
-    return {
-      restrict: 'E',
-      transclude: true,
-      scope: {
-        recipeInstance: '=',
-      },
-      templateUrl: 'brewhouse/brewhouse-terminator.tpl.html',
-      link: function brewhouseTerminatorController($scope) {
-        $scope.endSession = endSession;
+      function endSession() {
+        const modalInstance = $uibModal.open({
+          animation: true,
+          templateUrl: 'recipes/end-recipe-modal.tpl.html',
+          controller: 'EndRecipeModalController',
+        });
 
-        function endSession() {
-          const modalInstance = $uibModal.open({
-            animation: true,
-            templateUrl: 'recipes/end-recipe-modal.tpl.html',
-            controller: 'EndRecipeModalController',
-          });
+        modalInstance.result.then(endRecipeInstanceOnServer);
 
-          modalInstance.result.then(endRecipeInstanceOnServer);
+        return modalInstance;
+      }
 
-          return modalInstance;
-        }
+      function endRecipeInstanceOnServer() {
+        recipeInstances.end($scope.recipeInstance).then(unsetrecipeInstance);
+      }
 
-        function endRecipeInstanceOnServer() {
-          recipeInstances.end($scope.recipeInstance).then(unsetrecipeInstance);
-        }
-
-        function unsetrecipeInstance() {
-          $scope.recipeInstance = null;
-        }
-      },
-    };
-  }
-}());
+      function unsetrecipeInstance() {
+        $scope.recipeInstance = null;
+      }
+    },
+  };
+}
