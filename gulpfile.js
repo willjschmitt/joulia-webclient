@@ -33,7 +33,8 @@ const tmpTestGlob = tmpDir + '**/**.spec.js';
 
 const srcGlob = srcDir + '**/**.ts';
 const htmlGlob = srcDir + '*.html';
-const cssGlob = srcDir + '*.css';
+const cssGlob = srcDir + '**/**.css';
+const imgGlob = srcDir + 'img/**/*.*';
 const srcTestGlob = srcDir + '**/**.spec.ts';
 
 // Removes temp and dist directories.
@@ -111,6 +112,11 @@ gulp.task('copy-html', function () {
 gulp.task('copy-css', function () {
   return gulp.src(cssGlob)
              .pipe(gulp.dest(staticDir));
+})
+
+gulp.task('copy-css', function () {
+  return gulp.src(imgGlob)
+             .pipe(gulp.dest(staticDir + 'img/'));
 })
 
 gulp.task('copy-node-modules', function () {

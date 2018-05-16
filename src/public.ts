@@ -3,7 +3,7 @@ import angular = require('angular');
 import '@uirouter/angularjs';
 import 'angular-resource';
 import 'angular-ui-bootstrap';
-import 'perfect-scrollbar';
+import 'angular-perfect-scrollbar';
 
 import './public/public.module';
 

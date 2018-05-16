@@ -4,7 +4,7 @@ import '@uirouter/angularjs';
 import 'angular-route';
 import 'angular-sanitize';
 import 'angular-ui-bootstrap';
-import 'perfect-scrollbar';
+import 'angular-perfect-scrollbar';
 
 import './brewhouse/brewhouse.module';
 import './common/common.module';
