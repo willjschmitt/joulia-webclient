@@ -1,9 +1,3 @@
-(function loadPublicController() {
-  angular
-    .module('app.public')
-    .controller('PublicController', PublicController);
+PublicController.$inject = [];
 
-  PublicController.$inject = [];
-
-  function PublicController() {}
-}());
+export function PublicController() {}

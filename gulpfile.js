@@ -10,6 +10,7 @@ var gulp       = require('gulp'),
     html2js    = require('gulp-html2js'),
     browserify = require("browserify"),
     source     = require('vinyl-source-stream'),
+    buffer     = require('vinyl-buffer'),
     tsify      = require("tsify");
 
 var tsProject = ts.createProject({
@@ -23,14 +24,16 @@ var tsProject = ts.createProject({
 const srcDir = './src/';
 const tmpDir = './temp/';
 const distDir = './dist/';
+const staticDir = './dist/static/';
 
-const tmpJsDir = tmpDir + 'js/',
-      distJsDir = distDir +'js/';
+const tmpJsDir = tmpDir + 'js/';
 
 const tmpJsGlob = tmpDir + '**/**.js';
 const tmpTestGlob = tmpDir + '**/**.spec.js';
 
 const srcGlob = srcDir + '**/**.ts';
+const htmlGlob = srcDir + '*.html';
+const cssGlob = srcDir + '*.css';
 const srcTestGlob = srcDir + '**/**.spec.ts';
 
 // Removes temp and dist directories.
@@ -53,10 +56,10 @@ gulp.task('lint', function() {
 // temp/joulia.js.
 gulp.task('html2js', function () {
   return gulp.src('src/**/**.tpl.html')
-             .pipe(html2js('joulia.js', {
+             .pipe(html2js('templates.js', {
                  adapter: 'angular',
                  base: 'src',
-                 name: 'joulia.templates'
+                 name: 'app.templates'
              }))
              .pipe(gulp.dest(tmpJsDir));
 });
@@ -74,15 +77,63 @@ gulp.task('build', ['tsc', 'html2js'], function() {});
 
 // Browersifies TypeScript compiled files and HTML templates into a single JS
 // bundle.js file.
-gulp.task('bundle', ['build'], function () {
+gulp.task('bundle-internal', ['build'], function () {
   return browserify({
         debug: true,
         entries: ['./temp/js/joulia-webclient.js'],
     })
     .bundle()
-    .pipe(source('bundle.js'))
-    .pipe(gulp.dest(distJsDir));
+    .pipe(source('joulia-webclient.js'))
+    .pipe(buffer())
+    .pipe(uglify())
+    .pipe(gulp.dest(staticDir));
 });
+
+gulp.task('bundle-public', ['build'], function () {
+  return browserify({
+        debug: true,
+        entries: ['./temp/js/public.js'],
+    })
+    .bundle()
+    .pipe(source('public.js'))
+    .pipe(buffer())
+    .pipe(uglify())
+    .pipe(gulp.dest(staticDir));
+});
+
+gulp.task('bundle', ['bundle-internal', 'bundle-public', 'copy']);
+
+gulp.task('copy-html', function () {
+  return gulp.src(htmlGlob)
+             .pipe(gulp.dest(staticDir));
+})
+
+gulp.task('copy-css', function () {
+  return gulp.src(cssGlob)
+             .pipe(gulp.dest(staticDir));
+})
+
+gulp.task('copy-node-modules', function () {
+  const nodeGlob = './node_modules/**/**';
+  return gulp.src(nodeGlob)
+             .pipe(gulp.dest(staticDir + 'node_modules/'));
+})
+
+gulp.task('copy-bower-components', function () {
+  const bowerGlob = './bower_components/**/**';
+  return gulp.src(bowerGlob)
+             .pipe(gulp.dest(staticDir + 'bower_components/'));
+})
+
+gulp.task('copy-vendor', function () {
+  const vendorGlob = './vendor/**/**';
+  return gulp.src(vendorGlob)
+             .pipe(gulp.dest(staticDir + 'vendor/'));
+})
+
+gulp.task('copy',
+  ['copy-html', 'copy-css', 'copy-node-modules', 'copy-bower-components',
+   'copy-vendor']);
 
 // Builds intermediate JS source and passes it to Karma for unit testing.
 gulp.task('test', ['build'], function(cb) {
