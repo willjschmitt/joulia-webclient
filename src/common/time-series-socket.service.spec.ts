@@ -1,4 +1,11 @@
 /* eslint-disable */
+import angular = require('angular');
+import 'angular-mocks';
+import 'angular-websocket';
+import 'angular-websocket/dist/angular-websocket-mock';
+
+import _ = require('underscore');
+
 describe('app.common time-series-socket.service', function () {
   beforeEach(angular.mock.module('app.common'));
   beforeEach(angular.mock.module('ngWebSocket', 'ngWebSocketMock'));

@@ -1,4 +1,7 @@
 /* eslint-disable */
+import angular = require('angular');
+import 'angular-mocks';
+
 describe('app.brewhouse', function () {
   beforeEach(angular.mock.module('app.brewhouse'));
   beforeEach(angular.mock.module('joulia.templates'));

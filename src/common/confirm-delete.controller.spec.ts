@@ -1,4 +1,7 @@
 /* eslint-disable */
+import angular = require('angular');
+import 'angular-mocks';
+
 describe('app.common confirm-delete.controller', function () {
   beforeEach(angular.mock.module('app.common'));
   beforeEach(angular.mock.module('joulia.templates'));

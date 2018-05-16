@@ -1,3 +1,5 @@
+import _ = require('underscore');
+
 export function arrayUtilities() {
   const self = this;
 

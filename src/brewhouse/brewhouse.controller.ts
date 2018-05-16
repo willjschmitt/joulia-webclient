@@ -43,9 +43,10 @@ export function BrewhouseController($scope, breweryResources, $stateParams) {
     } else if (result.length === 0) {
       $scope.recipeInstance = null;
     } else {
+      console.log('throwing error');
       throw new Error(
-        `Multiple active recipe instance were found for this equipment, which
-         should never happen.`);
+        'Multiple active recipe instance were found for this equipment, which'
+        + ' should never happen.');
     }
   }
 }

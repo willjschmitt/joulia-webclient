@@ -1,3 +1,5 @@
+import _ = require('underscore');
+
 RecipesController.$inject = [
   '$scope', '$location', 'breweryResources', '$uibModal'];
 

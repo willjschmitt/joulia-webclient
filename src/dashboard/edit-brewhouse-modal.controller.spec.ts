@@ -1,4 +1,7 @@
 /* eslint-disable */
+import angular = require('angular');
+import 'angular-mocks';
+
 describe('app.dashboard add-brewhouse-modal.controller', function () {
   beforeEach(angular.mock.module('app.dashboard'));
   beforeEach(angular.mock.module('joulia.templates'));

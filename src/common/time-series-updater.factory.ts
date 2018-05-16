@@ -1,3 +1,4 @@
+import _ = require('underscore');
 import moment = require('moment');
 
 TimeSeriesUpdaterFactory.$inject = ['timeSeriesSocket', 'breweryResources'];

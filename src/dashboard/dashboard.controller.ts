@@ -1,3 +1,5 @@
+import _ = require('underscore');
+
 DashboardController.$inject = [
   '$scope', 'breweryResources', 'userService', '$uibModal'];
 

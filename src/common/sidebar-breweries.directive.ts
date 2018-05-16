@@ -1,3 +1,5 @@
+import _ = require('underscore');
+
 sidebarBreweries.$inject = ['breweryResources'];
 
 export function sidebarBreweries(breweryResources) {

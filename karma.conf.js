@@ -25,8 +25,8 @@ module.exports = function(config) {
       // 'node_modules/angular-resource/angular-resource.js',
       // 'node_modules/angular-sanitize/angular-sanitize.js',
       // 'node_modules/@uirouter/angularjs/release/angular-ui-router.js',
-      // 'node_modules/angular-websocket/dist/angular-websocket.js',
-      // 'node_modules/angular-websocket/dist/angular-websocket-mock.js',
+      //'node_modules/angular-websocket/dist/angular-websocket.js',
+      //'node_modules/angular-websocket/dist/angular-websocket-mock.js',
       // 'node_modules/perfect-scrollbar/dist/perfect-scrollbar.js',
       // 'node_modules/ui-select/dist/select.js',
       // 'node_modules/d3/d3.js',
@@ -34,8 +34,11 @@ module.exports = function(config) {
       // 'node_modules/underscore/underscore.js',
       // 'node_modules/moment/moment.js',
       // 'node_modules/screenfull/dist/screenfull.js',
-      // 'node_modules/flexslider/jquery.flexslider-min.js',
-      // 'node_modules/owl.carousel/dist/owl.carousel.js',
+
+      // TODO(willjschmitt): Remove these when figuring out how to import them
+      // correctly.
+      'node_modules/flexslider/jquery.flexslider-min.js',
+      'node_modules/owl.carousel/dist/owl.carousel.js',
 
       // Bower components.
       // TODO(willjschmitt): Remove these as soon as posible moving to a

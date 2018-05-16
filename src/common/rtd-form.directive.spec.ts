@@ -1,4 +1,6 @@
 /* eslint-disable */
+import angular = require('angular');
+import 'angular-mocks';
 
 import inputCheckers = require('./input-checkers');
 

@@ -1,4 +1,7 @@
 /* eslint-disable */
+import angular = require('angular');
+import 'angular-mocks';
+
 describe('app.common recipe-calculations.service', function () {
   beforeEach(angular.mock.module('app.recipes'));
 

@@ -1,3 +1,5 @@
+import _ = require('underscore');
+
 RecipeController.$inject = [
   '$scope', '$stateParams', 'breweryResources', 'recipeCalculations'];
 

@@ -1,4 +1,9 @@
 /* eslint-disable */
+import angular = require('angular');
+import 'angular-mocks';
+
+import moment = require('moment');
+
 describe('app.brewhouse', function () {
   beforeEach(angular.mock.module('app.brewhouse'));
   beforeEach(angular.mock.module('joulia.templates'));
@@ -78,8 +83,8 @@ describe('app.brewhouse', function () {
         $stateParams: { brewhouseId: 12 },
       });
       expect($httpBackend.flush).toThrow(new Error(
-          `Multiple active recipe instance were found for this equipment, which
-           should never happen.`));
+          'Multiple active recipe instance were found for this equipment, which'
+           + ' should never happen.'));
 
       // Not checking outstanding requests/expectations, here, since, the
       // expect().toThrow() causes $digest already in progress errors.

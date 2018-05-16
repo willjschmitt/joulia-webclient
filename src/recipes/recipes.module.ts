@@ -16,6 +16,7 @@ import {RecipeController} from './recipe.controller';
 import {RecipeInstanceRetrospectiveController} from './recipe-instance-retrospective.controller';
 import {RecipesController} from './recipes.controller';
 
+import {ingredientAddition} from './ingredient-addition.directive';
 import {ingredientAdditions} from './ingredient-additions.directive';
 import {mashProfile} from './mash-profile.directive';
 import {recipeCard} from './recipe-card.directive';
@@ -37,6 +38,7 @@ angular
               RecipeInstanceRetrospectiveController)
   .controller('RecipesController', RecipesController)
 
+  .directive('ingredientAddition', ingredientAddition)
   .directive('ingredientAdditions', ingredientAdditions)
   .directive('mashProfile', mashProfile)
   .directive('recipeCard', recipeCard)

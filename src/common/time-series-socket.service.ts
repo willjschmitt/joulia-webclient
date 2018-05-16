@@ -1,3 +1,5 @@
+import _ = require('underscore');
+
 timeSeriesSocket.$inject = ['$websocket', '$http', '$location'];
 
 export function timeSeriesSocket($websocket, $http, $location) {

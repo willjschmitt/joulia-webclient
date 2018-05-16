@@ -1,4 +1,7 @@
 /* eslint-disable */
+import angular = require('angular');
+import 'angular-mocks';
+
 describe('app.common', function () {
   beforeEach(angular.mock.module('app.common'));
   beforeEach(angular.mock.module('joulia.templates'));
@@ -6,7 +9,7 @@ describe('app.common', function () {
   var $controller, $httpBackend, $rootScope, $compile;
 
   beforeEach(angular.mock.module(function($provide) {
-    $provide.value('TimeSeriesUpdater', function () { 
+    $provide.value('TimeSeriesUpdater', function () {
       const self = this;
       self.latest = null;
       self.set = function(value, callback) {
@@ -24,7 +27,7 @@ describe('app.common', function () {
     $httpBackend = $injector.get('$httpBackend');
     $rootScope = $injector.get('$rootScope');
     $compile = $injector.get('$compile');
-    
+
   }));
 
   afterEach(function() {
@@ -36,7 +39,7 @@ describe('app.common', function () {
     var element, scope, controller;
 
     beforeEach(function () {
-      
+
       element = angular.element(
         `<toggleable-element
              name="name"

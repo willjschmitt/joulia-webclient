@@ -1,6 +1,9 @@
 /* eslint-disable */
-describe('app.common recipe-instances.service', function () {
-  beforeEach(angular.mock.module('app.common'));
+import angular = require('angular');
+import 'angular-mocks';
+
+describe('app.recipes recipe-instances.service', function () {
+  beforeEach(angular.mock.module('app.recipes'));
 
   var $httpBackend;
 

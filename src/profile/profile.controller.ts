@@ -1,3 +1,5 @@
+import angular = require('angular');
+
 ProfileController.$inject = ['$scope', 'userService'];
 
 export function ProfileController($scope, userService) {

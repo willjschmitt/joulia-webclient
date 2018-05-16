@@ -1,4 +1,7 @@
 /* eslint-disable */
+import angular = require('angular');
+import 'angular-mocks';
+
 describe('app.recipes', function () {
   beforeEach(angular.mock.module('app.recipes'));
   beforeEach(angular.mock.module('joulia.templates'));
