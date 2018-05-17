@@ -31,6 +31,12 @@
     <link href="static/css/public.css" rel="stylesheet">
 
     <script type="text/javascript" src="static/node_modules/jquery/dist/jquery.js"></script>
+    <script type="text/javascript">
+      jQuery.fn.load = function(callback){ $(window).on("load", callback) };
+      jQuery.fn.perfectScrollbar = function(){};
+      jQuery.fn.selectpicker = function(){};
+      jQuery.fn.tooltip = function(){};
+    </script>
 
     <script type="text/javascript" src="static/bower_components/iCheck/icheck.js"></script>
     <script type="text/javascript" src="static/bower_components/Modernizr/modernizr.custom.js"></script>
