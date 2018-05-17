@@ -12,6 +12,8 @@ import './dashboard/dashboard.module';
 import './profile/profile.module';
 import './recipes/recipes.module';
 
+import './templates';
+
 angular
   .module('app', [
     'ui.router', 'ngResource', 'ngSanitize', 'ui.bootstrap', 'app.common',

@@ -7,6 +7,8 @@ import 'angular-perfect-scrollbar';
 
 import './public/public.module';
 
+import './templates';
+
 angular
   .module('app', [
     'ui.router', 'ngResource', 'ui.bootstrap', 'app.common', 'app.public',

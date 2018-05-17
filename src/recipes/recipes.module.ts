@@ -7,6 +7,8 @@ import 'ui-select';
 
 import '../common/common.module';
 
+import '../templates';
+
 import {recipeCalculations} from './recipe-calculations.service';
 import {recipeInstances} from './recipe-instances.service';
 

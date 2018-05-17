@@ -5,6 +5,8 @@ import 'angular-ui-bootstrap';
 
 import '../common/common.module';
 
+import '../templates';
+
 import {AddBreweryModalController} from './add-brewery-modal.controller';
 import {DashboardController} from './dashboard.controller';
 import {EditBrewhouseModalController} from './edit-brewhouse-modal.controller';

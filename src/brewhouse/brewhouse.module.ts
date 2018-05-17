@@ -6,6 +6,8 @@ import 'angular-ui-bootstrap';
 import '../common/common.module';
 import '../recipes/recipes.module';
 
+import '../templates';
+
 import {BrewhouseController} from './brewhouse.controller';
 import {BrewhouseAnalysisController} from './brewhouse-analysis.controller';
 import {BrewhouseEquipmentController} from './brewhouse-equipment.controller';

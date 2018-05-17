@@ -5,6 +5,8 @@ import 'angular-ui-bootstrap';
 
 import '../common/common.module';
 
+import '../templates';
+
 import {ProfileController} from './profile.controller';
 
 angular

@@ -5,6 +5,8 @@ import 'angular-websocket';
 import 'angular-ui-bootstrap';
 import 'ui-select';
 
+import '../templates';
+
 import {ConfirmDeleteController} from './confirm-delete.controller';
 import {SelectBrewingCompanyController} from './select-brewing-company.controller';
 
