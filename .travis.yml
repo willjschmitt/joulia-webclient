@@ -3,10 +3,10 @@ node_js:
   - '4'
 before_script:
   - 'npm install -g bower'
-  - 'npm install -g grunt-cli'
+  - 'npm install -g gulp'
   - 'bower install'
 before_deploy:
-  - 'grunt travisbuild'
+  - 'gulp'
 notifications:
   email: false
   slack: $SLACK_TOKEN
