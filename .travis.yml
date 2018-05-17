@@ -5,7 +5,8 @@ before_script:
   - 'npm install -g bower'
   - 'npm install -g gulp'
   - 'bower install'
-before_deploy:
+  - 'npm install'
+script:
   - 'gulp'
 notifications:
   email: false
