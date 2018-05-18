@@ -7,7 +7,7 @@ import moment = require('moment');
 
 describe('app.common time-series-socket.service', function () {
   beforeEach(angular.mock.module('app.common'));
-  beforeEach(angular.mock.module('joulia.templates'));
+  beforeEach(angular.mock.module('app.templates'));
   beforeEach(angular.mock.module(function($provide) {
     $provide.service('timeSeriesSocket', function () {
       this.subscribe = jasmine.createSpy('subscribe');

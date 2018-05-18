@@ -4,7 +4,7 @@ import 'angular-mocks';
 
 describe('app.common', function () {
   beforeEach(angular.mock.module('app.common'));
-  beforeEach(angular.mock.module('joulia.templates'));
+  beforeEach(angular.mock.module('app.templates'));
   beforeEach(angular.mock.module(function($provide) {
     $provide.factory('TimeSeriesUpdater', function () {
       function TimeSeriesUpdater(recipeInstance, name, variableType) {

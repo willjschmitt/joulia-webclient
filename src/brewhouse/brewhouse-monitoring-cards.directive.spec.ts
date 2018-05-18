@@ -4,7 +4,7 @@ import 'angular-mocks';
 
 describe('app.brewhouse', function () {
   beforeEach(angular.mock.module('app.brewhouse'));
-  beforeEach(angular.mock.module('joulia.templates'));
+  beforeEach(angular.mock.module('app.templates'));
 
   // Mocks the backend for valueCard, which needs to make streaming calls to the
   // server.

@@ -4,7 +4,7 @@ import 'angular-mocks';
 
 describe('app.recipes recipe-property.directive', function () {
   beforeEach(angular.mock.module('app.recipes'));
-  beforeEach(angular.mock.module('joulia.templates'));
+  beforeEach(angular.mock.module('app.templates'));
 
   var $compile, $rootScope;
 

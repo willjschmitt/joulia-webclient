@@ -9,7 +9,7 @@ import _ = require('underscore');
 describe('app.common time-series-socket.service', function () {
   beforeEach(angular.mock.module('app.common'));
   beforeEach(angular.mock.module('ngWebSocket', 'ngWebSocketMock'));
-  beforeEach(angular.mock.module('joulia.templates'));
+  beforeEach(angular.mock.module('app.templates'));
 
   var $window, $controller, $httpBackend, $websocketBackend, $rootScope,
       $location;

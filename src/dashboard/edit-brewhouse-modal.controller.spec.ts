@@ -4,7 +4,7 @@ import 'angular-mocks';
 
 describe('app.dashboard add-brewhouse-modal.controller', function () {
   beforeEach(angular.mock.module('app.dashboard'));
-  beforeEach(angular.mock.module('joulia.templates'));
+  beforeEach(angular.mock.module('app.templates'));
 
   var $controller, $httpBackend, $rootScope, $location;
 

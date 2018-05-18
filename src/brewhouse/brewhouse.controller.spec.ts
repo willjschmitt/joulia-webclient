@@ -6,7 +6,7 @@ import moment = require('moment');
 
 describe('app.brewhouse', function () {
   beforeEach(angular.mock.module('app.brewhouse'));
-  beforeEach(angular.mock.module('joulia.templates'));
+  beforeEach(angular.mock.module('app.templates'));
 
   var $controller, $httpBackend, $rootScope;
 

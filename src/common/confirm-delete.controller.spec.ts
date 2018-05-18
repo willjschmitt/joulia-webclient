@@ -4,7 +4,7 @@ import 'angular-mocks';
 
 describe('app.common confirm-delete.controller', function () {
   beforeEach(angular.mock.module('app.common'));
-  beforeEach(angular.mock.module('joulia.templates'));
+  beforeEach(angular.mock.module('app.templates'));
 
   var $controller, $rootScope;
 

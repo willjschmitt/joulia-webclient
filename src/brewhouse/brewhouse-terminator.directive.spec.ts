@@ -4,7 +4,7 @@ import 'angular-mocks';
 
 describe('app.brewhouse', function () {
   beforeEach(angular.mock.module('app.brewhouse'));
-  beforeEach(angular.mock.module('joulia.templates'));
+  beforeEach(angular.mock.module('app.templates'));
 
   var $rootScope, $compile, $interval, $httpBackend;
 
