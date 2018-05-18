@@ -6,7 +6,7 @@
  *
  * Licensed under the MIT license.
  * http://www.opensource.org/licenses/mit-license.php
- * 
+ *
  * Copyright (c) 2015 Paulo Mendez,
  * http://www.cerocreativo.cl
  * http://www.rockandthemes.com
@@ -15,7 +15,22 @@
 
 ;(function ($) {
 	"use strict";
-	
+
+	if (!String.prototype.includes) {
+	  String.prototype.includes = function(search, start) {
+	    'use strict';
+	    if (typeof start !== 'number') {
+	      start = 0;
+	    }
+
+	    if (start + search.length > this.length) {
+	      return false;
+	    } else {
+	      return this.indexOf(search, start) !== -1;
+	    }
+	  };
+	}
+
 	var pluginName	= "toasts",
 		obj 		= "",
 		queueList 	= 0,
@@ -42,7 +57,7 @@
 
 			if (position.includes("top")) {
 				posClass += "toast-align-top ";
-			} 
+			}
 			if (position.includes("bottom")) {
 				posClass += "toast-align-bottom ";
 			}
@@ -90,7 +105,7 @@
 			//Not this time, cause we are calling the plugin without an element
 			//return this;
 		},
-		add: function(options){ 
+		add: function(options){
 			var defaults = {
 				msg: 			'',
 				permanent: 		false,
@@ -133,7 +148,7 @@
 			var posClass = "";
 			if (position.includes("top")) {
 				posClass += "toast-align-top ";
-			} 
+			}
 			if (position.includes("bottom")) {
 				posClass += "toast-align-bottom ";
 			}
@@ -228,7 +243,7 @@
 			return methods.init.apply( this, arguments );
 		} else {
 			$.error( 'Method ' +  methodOrOptions + ' does not exist on '+pluginName );
-		}    
+		}
 	};
 
 })(jQuery);
