@@ -115,7 +115,7 @@ gulp.task('copy-css', function () {
              .pipe(gulp.dest(staticDir));
 })
 
-gulp.task('copy-css', function () {
+gulp.task('copy-img', function () {
   return gulp.src(imgGlob)
              .pipe(gulp.dest(staticDir + 'img/'));
 })
@@ -139,7 +139,7 @@ gulp.task('copy-vendor', function () {
 })
 
 gulp.task('copy-app',
-  ['copy-html', 'copy-css']);
+  ['copy-html', 'copy-css', 'copy-img']);
 
 gulp.task('copy-third-party',
   ['copy-node-modules', 'copy-bower-components', 'copy-vendor']);
