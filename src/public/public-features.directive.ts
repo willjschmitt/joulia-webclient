@@ -1,6 +1,12 @@
+import angular = require('angular');
+
+angular
+  .module('app.public.features', ['app.templates',])
+  .directive('publicFeatures', publicFeatures);
+
 publicFeatures.$inject = [];
 
-export function publicFeatures() {
+function publicFeatures() {
   return {
     restrict: 'E',
     transclude: true,

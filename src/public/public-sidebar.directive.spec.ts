@@ -3,9 +3,8 @@ import angular = require('angular');
 import * as $ from 'jquery';
 import 'angular-mocks';
 
-describe('app.public', function () {
-  beforeEach(angular.mock.module('app.public'));
-  beforeEach(angular.mock.module('app.templates'));
+describe('app.public.sidebar', function () {
+  beforeEach(angular.mock.module('app.public.sidebar'));
 
   var $rootScope, $compile, $document;
 

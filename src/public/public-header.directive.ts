@@ -1,8 +1,14 @@
+import angular = require('angular');
+
 import 'flexslider';
+
+angular
+  .module('app.public.header', ['app.templates',])
+  .directive('publicHeader', publicHeader);
 
 publicHeader.$inject = [];
 
-export function publicHeader() {
+function publicHeader() {
   return {
     restrict: 'E',
     transclude: true,

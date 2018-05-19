@@ -3,17 +3,16 @@ import angular = require('angular');
 import '@uirouter/angularjs';
 import 'angular-ui-bootstrap';
 
-import '../common/common.module';
+import './profile.controller';
 
 import '../templates';
 
-import {ProfileController} from './profile.controller';
-
 angular
-  .module('app.profile', ['ui.router', 'app.common', 'ui.bootstrap'])
-  .config(stateConfig)
-
-  .controller('ProfileController', ProfileController);
+  .module('app.profile',
+    ['ui.router', 'ui.bootstrap',
+     'app.profile.controller',
+    ])
+  .config(stateConfig);
 
 stateConfig.$inject = ['$stateProvider'];
 

@@ -2,9 +2,13 @@ import angular = require('angular');
 
 import 'circularProgress';
 
+angular
+  .module('app.profile.controller', ['app.common'])
+  .controller('ProfileController', ProfileController);
+
 ProfileController.$inject = ['$scope', 'userService'];
 
-export function ProfileController($scope, userService) {
+function ProfileController($scope, userService) {
   $scope.userService = userService;
 
   $scope.saveUserPreferences = saveUserPreferences;

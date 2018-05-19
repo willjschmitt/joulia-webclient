@@ -1,6 +1,12 @@
+import angular = require('angular');
+
+angular
+  .module('app.public.join', ['app.templates',])
+  .directive('publicJoin', publicJoin);
+
 publicJoin.$inject = [];
 
-export function publicJoin() {
+function publicJoin() {
   return {
     restrict: 'E',
     transclude: true,

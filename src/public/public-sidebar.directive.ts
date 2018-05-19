@@ -1,8 +1,13 @@
+import angular = require('angular');
 import * as $ from 'jquery';
+
+angular
+  .module('app.public.sidebar', ['app.templates',])
+  .directive('publicSidebar', publicSidebar);
 
 publicSidebar.$inject = ['$document'];
 
-export function publicSidebar($document) {
+function publicSidebar($document) {
   return {
     restrict: 'E',
     transclude: true,

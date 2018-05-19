@@ -2,9 +2,8 @@
 import angular = require('angular');
 import 'angular-mocks';
 
-describe('app.public', function () {
-  beforeEach(angular.mock.module('app.public'));
-  beforeEach(angular.mock.module('app.templates'));
+describe('app.public.join', function () {
+  beforeEach(angular.mock.module('app.public.join'));
 
   var $rootScope, $compile;
 

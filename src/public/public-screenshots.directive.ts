@@ -1,8 +1,13 @@
+import angular = require('angular');
 import 'owl.carousel';
+
+angular
+  .module('app.public.screenshots', ['app.templates',])
+  .directive('publicScreenshots', publicScreenshots);
 
 publicScreenshots.$inject = [];
 
-export function publicScreenshots() {
+function publicScreenshots() {
   return {
     restrict: 'E',
     transclude: true,

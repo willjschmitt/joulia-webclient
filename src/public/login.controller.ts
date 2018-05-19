@@ -1,9 +1,9 @@
-(function loadJouliaLoginDirective() {
-  angular
-    .module('app.public')
-    .controller('LoginController', LoginController);
+import angular = require('angular');
 
-  LoginController.$inject = [];
+angular
+  .module('app.public.login', [])
+  .controller('LoginController', LoginController);
 
-  function LoginController() {}
-}());
+LoginController.$inject = [];
+
+function LoginController() {}

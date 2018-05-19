@@ -3,7 +3,7 @@ import angular = require('angular');
 import 'angular-mocks';
 
 describe('app.profile', function () {
-  beforeEach(angular.mock.module('app.profile'));
+  beforeEach(angular.mock.module('app.profile.controller'));
   beforeEach(angular.mock.module('app.templates'));
 
   var $controller, $httpBackend, $rootScope;

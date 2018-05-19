@@ -1,6 +1,12 @@
+import angular = require('angular');
+
+angular
+  .module('app.public.about', ['app.templates',])
+  .directive('publicAbout', publicAbout);
+
 publicAbout.$inject = [];
 
-export function publicAbout() {
+function publicAbout() {
   return {
     restrict: 'E',
     transclude: true,
