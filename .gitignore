@@ -99,9 +99,11 @@ ENV/
 .settings/
 .project
 .cproject
-.pydevproject
+.pydevproject
 
-# Elastic Beanstalk Files
+
+# Elastic Beanstalk Files
+
 .elasticbeanstalk/
 
 #Bower
@@ -114,3 +116,5 @@ vendor/ultimate-flat/
 
 # NPM
 node_modules
+
+temp/
