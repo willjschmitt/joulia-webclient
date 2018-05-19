@@ -26,7 +26,7 @@ export function ProfileController($scope, userService) {
    * Retrieves the loading element in this panel.
    */
   function loadingElement() {
-    return angular.element('#loading');
+    return $('#loading');
   }
 
   /**

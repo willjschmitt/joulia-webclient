@@ -159,9 +159,6 @@ gulp.task('copy-bower-components', function () {
 gulp.task('copy-app',
   ['copy-html', 'copy-css', 'copy-img']);
 
-gulp.task('copy-third-party',
-  ['copy-node-modules', 'copy-bower-components']);
-
 // Builds intermediate JS source and passes it to Karma for unit testing.
 gulp.task('test', ['build'], function(cb) {
   new karma.Server({
@@ -177,7 +174,7 @@ gulp.task('coveralls', ['test'], function() {
 
 gulp.task('travis', ['test', 'coveralls']);
 
-gulp.task('default', ['test', 'bundle', 'copy-third-party']);
+gulp.task('default', ['test', 'bundle']);
 
 gulp.task('watch', ['default'], function() {
   gulp.watch(srcDir + '**/*.*', ['test', 'bundle']);

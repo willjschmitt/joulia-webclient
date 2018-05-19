@@ -1,3 +1,5 @@
+import * as $ from 'jquery';
+
 publicSidebar.$inject = ['$document'];
 
 export function publicSidebar($document) {
@@ -12,7 +14,7 @@ export function publicSidebar($document) {
       // Function used to toggle sidebar from view.
       $scope.toggleSidebar = toggleSidebar;
 
-      $document.on('click', closeSidebar);
+      $($document).on('click', closeSidebar);
 
       /**
        * Toggles the sidebar to be shown or not based on current state.

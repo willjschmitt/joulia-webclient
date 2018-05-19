@@ -1,4 +1,5 @@
 import 'simplePieChart';
+import * as $ from 'jquery';
 
 dial.$inject = ['$interval'];
 
@@ -14,7 +15,7 @@ export function dial($interval) {
     link: function dialController($scope, $element) {
       // Update the pie chart dial color class based on the value.
       // TODO(will): Get duration to work.
-      $element.find('.bemat-pie-chart').simplePieChart();
+      $($element).find('.bemat-pie-chart').simplePieChart();
 
       $interval(updateDial, 500.0);
 
@@ -23,7 +24,7 @@ export function dial($interval) {
        * appropriate color based on the value
        */
       function updateDial() {
-        $element
+        $($element)
           .find('.bemat-pie-chart')
             .simplePieChart('set',
                 parseFloat(($scope.value * 100.0).toPrecision(2).toString()));
@@ -38,11 +39,11 @@ export function dial($interval) {
         };
 
         $.each(colorClasses, function checkAndUpdateColor(name, details) {
-          $element
+          $($element)
             .find('.bemat-pie-chart')
               .removeClass(name);
           if ($scope.value > details.min && $scope.value <= details.max) {
-            $element
+            $($element)
               .find('.bemat-pie-chart')
                 .addClass(name);
           }

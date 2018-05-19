@@ -1,5 +1,6 @@
 /* eslint-disable */
 import angular = require('angular');
+import * as $ from 'jquery';
 import 'angular-mocks';
 
 describe('app.public', function () {
@@ -49,13 +50,13 @@ describe('app.public', function () {
     describe('document click', function() {
       it('closes the sidebar', function() {
         scope.showSidebar = true;
-        $document.click();
+        $($document).click();
         expect(scope.showSidebar).toBeFalsy()
       });
 
       it('leaves the sidebar closed', function() {
         scope.showSidebar = false;
-        $document.click();
+        $($document).click();
         expect(scope.showSidebar).toBeFalsy()
       });
     })
