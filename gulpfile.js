@@ -152,7 +152,7 @@ gulp.task('test', ['build'], function(cb) {
   }, cb).start();
 });
 
-gulp.task('coverals', function() {
+gulp.task('coveralls', function() {
   gulp.src('coverage/**/lcov.info')
       .pipe(coveralls());
 });
