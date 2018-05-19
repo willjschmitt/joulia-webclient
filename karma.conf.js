@@ -91,7 +91,7 @@ module.exports = function(config) {
     // },
 
     preprocessors: {
-      'temp/**/*.js': [ 'browserify' ]
+      'temp/**/*.js': [ 'browserify', 'coverage' ]
     },
 
     browserify: {
