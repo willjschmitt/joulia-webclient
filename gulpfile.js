@@ -159,4 +159,4 @@ gulp.task('coveralls', ['test'], function() {
 
 gulp.task('travis', ['test', 'coveralls']);
 
-gulp.task('default', ['test', 'bundle', 'copy-third-party', 'copy-vendor']);
+gulp.task('default', ['test', 'bundle', 'copy-third-party']);
