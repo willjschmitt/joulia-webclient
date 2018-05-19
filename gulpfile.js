@@ -162,5 +162,6 @@ gulp.task('travis', ['test', 'coveralls']);
 gulp.task('default', ['test', 'bundle', 'copy-third-party']);
 
 gulp.task('watch', ['default'], function() {
-  gulp.watch(srcDir + '**/*.*', ['test', 'bundle'])
+  gulp.watch(srcDir + '**/*.*', ['test', 'bundle']);
+  gulp.watch('./karma.conf.js', ['test', 'bundle']);
 });
