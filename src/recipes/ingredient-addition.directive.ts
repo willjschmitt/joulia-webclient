@@ -1,4 +1,5 @@
 import angular = require('angular');
+import * as $ from 'jquery';
 
 import 'circularProgress';
 
@@ -88,7 +89,7 @@ export function ingredientAddition($interpolate, breweryResources) {
        * Retrieves the loading element in this panel.
        */
       function loadingElement() {
-        return angular.element($element).find('#addition-loading');
+        return $($element).find('#addition-loading');
       }
 
       /**

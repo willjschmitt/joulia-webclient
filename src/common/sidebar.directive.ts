@@ -1,4 +1,5 @@
 import angular = require('angular');
+import * as $ from 'jquery';
 
 sidebar.$inject = ['$rootScope', '$document'];
 
@@ -16,8 +17,7 @@ export function sidebar($rootScope, $document) {
 
       // bemat-admin-common.min.js should have applied this but doing this as
       // a workaround.
-      angular.element($document).find('body')
-        .on('click', '#sidebar-backdrop', $scope.toggleSidebar);
+      $('body').on('click', '#sidebar-backdrop', $scope.toggleSidebar);
 
       $scope.$on('toggleSidebar', handleToggleSidebar);
 
@@ -30,14 +30,14 @@ export function sidebar($rootScope, $document) {
           $scope.sidebarClass = 'SidebarClose';
           // bemat-admin-common.min.js should have applied this but doing this
           // as a workaround.
-          angular.element($document).find('body')
+          $('body')
             .removeClass('sidebar-open')
             .addClass('sidebar-close');
         } else {
           $scope.sidebarClass = 'SidebarOpen';
           // bemat-admin-common.min.js should have applied this but doing this
           // as a workaround.
-          angular.element($document).find('body')
+          $('body')
             .removeClass('sidebar-close')
             .addClass('sidebar-open');
         }

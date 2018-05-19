@@ -16,7 +16,7 @@
  *
  */
 
-var jQuery = require('jquery');
+var jQuery = $ = require('jquery');
 
 "use strict";
 

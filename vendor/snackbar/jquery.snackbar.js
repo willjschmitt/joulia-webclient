@@ -13,7 +13,7 @@
  *
  */
 
-require('jquery');
+var $ = require('jquery');
 
 "use strict";
 

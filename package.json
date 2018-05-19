@@ -87,8 +87,10 @@
     ]
   },
   "browser": {
+    "flexslider": "./node_modules/flexslider/jquery.flexslider.js",
     "jquery": "./node_modules/jquery/dist/jquery.js",
     "iCheck": "./bower_components/iCheck/icheck.js",
+    "Modernizr": "./bower_components/Modernizr/modernizr.custom.js",
     "circularProgress": "./vendor/circularProgress/jquery.circularProgress.js",
     "simplePieChart": "./vendor/simplePieChart/jquery.simplePieChart.js",
     "snackbar": "./vendor/snackbar/jquery.snackbar.js"
@@ -99,7 +101,17 @@
     },
     "peity": {
       "depends": [
-        "jquery:JQuery"
+        "jquery:jQuery"
+      ]
+    },
+    "flexslider": {
+      "depends": [
+        "jquery:jQuery"
+      ]
+    },
+    "iCheck": {
+      "depends": [
+        "jquery:$"
       ]
     }
   }

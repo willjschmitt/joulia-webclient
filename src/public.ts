@@ -1,4 +1,6 @@
 import angular = require('angular');
+import jQuery = require('jquery');
+import 'Modernizr';
 
 import '@uirouter/angularjs';
 import 'angular-resource';
@@ -8,6 +10,12 @@ import 'angular-perfect-scrollbar';
 import './public/public.module';
 
 import './templates';
+
+// Polyfills.
+jQuery.fn.load = function(callback){ $(window).on("load", callback) };
+jQuery.fn.perfectScrollbar = function(){};
+jQuery.fn.selectpicker = function(){};
+jQuery.fn.tooltip = function(){};
 
 angular
   .module('app', [

@@ -106,7 +106,7 @@ gulp.task('build', ['tsc', 'html2js'], function() {});
 gulp.task('bundle-internal', ['build', 'bundle-internal-css'], function () {
   return browserify({
         debug: true,
-        entries: ['./temp/js/joulia-webclient.js'],
+        entries: ['./temp/joulia-webclient.js'],
     })
     .bundle()
     .pipe(source('joulia-webclient.js'))
@@ -118,7 +118,7 @@ gulp.task('bundle-internal', ['build', 'bundle-internal-css'], function () {
 gulp.task('bundle-public', ['build', 'bundle-public-css'], function () {
   return browserify({
         debug: true,
-        entries: ['./temp/js/public.js'],
+        entries: ['./temp/public.js'],
     })
     .bundle()
     .pipe(source('public.js'))
