@@ -160,3 +160,7 @@ gulp.task('coveralls', ['test'], function() {
 gulp.task('travis', ['test', 'coveralls']);
 
 gulp.task('default', ['test', 'bundle', 'copy-third-party']);
+
+gulp.task('watch', ['default'], function() {
+  gulp.watch(srcDir + '**/*.*', ['test', 'bundle'])
+});
