@@ -152,8 +152,10 @@ gulp.task('test', ['build'], function(cb) {
   }, cb).start();
 });
 
-gulp.src('coverage/**/lcov.info')
-  .pipe(coveralls());
+gulp.task('coverals', function() {
+  gulp.src('coverage/**/lcov.info')
+      .pipe(coveralls());
+});
 
 gulp.task('travis', ['test', 'coveralls']);
 
