@@ -102,7 +102,7 @@ gulp.task('bundle-public', ['build'], function () {
     .pipe(gulp.dest(staticDir));
 });
 
-gulp.task('bundle', ['bundle-internal', 'bundle-public', 'copy']);
+gulp.task('bundle', ['bundle-internal', 'bundle-public', 'copy-app']);
 
 gulp.task('copy-html', function () {
   return gulp.src(htmlGlob)
@@ -137,9 +137,11 @@ gulp.task('copy-vendor', function () {
              .pipe(gulp.dest(staticDir + 'vendor/'));
 })
 
-gulp.task('copy',
-  ['copy-html', 'copy-css', 'copy-node-modules', 'copy-bower-components',
-   'copy-vendor']);
+gulp.task('copy-app',
+  ['copy-html', 'copy-css']);
+
+gulp.task('copy-third-party',
+  ['copy-node-modules', 'copy-bower-components', 'copy-vendor']);
 
 // Builds intermediate JS source and passes it to Karma for unit testing.
 gulp.task('test', ['build'], function(cb) {
@@ -149,4 +151,4 @@ gulp.task('test', ['build'], function(cb) {
   }, cb).start();
 });
 
-gulp.task('default', ['test', 'bundle']);
+gulp.task('default', ['test', 'bundle', 'copy-third-party', 'copy-vendor']);

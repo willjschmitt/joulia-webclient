@@ -7,7 +7,7 @@ before_script:
   - 'bower install'
   - 'npm install'
 script:
-  - 'gulp'
+  - 'gulp test'
 notifications:
   email: false
   slack: $SLACK_TOKEN
