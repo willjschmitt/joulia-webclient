@@ -11,7 +11,8 @@ var gulp       = require('gulp'),
     browserify = require("browserify"),
     source     = require('vinyl-source-stream'),
     buffer     = require('vinyl-buffer'),
-    tsify      = require("tsify");
+    tsify      = require("tsify"),
+    coveralls  = require('gulp-coveralls');
 
 var tsProject = ts.createProject({
     removeComments : true,
@@ -150,5 +151,10 @@ gulp.task('test', ['build'], function(cb) {
     singleRun: true
   }, cb).start();
 });
+
+gulp.src('coverage/**/lcov.info')
+  .pipe(coveralls());
+
+gulp.task('travis', ['test', 'coveralls']);
 
 gulp.task('default', ['test', 'bundle', 'copy-third-party', 'copy-vendor']);

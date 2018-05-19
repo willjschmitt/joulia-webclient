@@ -17,6 +17,7 @@
     "eslint-plugin-react": "^6.9.0",
     "gulp": "^3.9.1",
     "gulp-browserify": "^0.5.1",
+    "gulp-coveralls": "^0.1.4",
     "gulp-html2js": "^0.4.2",
     "gulp-sourcemaps": "^2.6.4",
     "gulp-tslint": "^8.1.3",
