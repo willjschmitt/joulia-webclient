@@ -1,3 +1,5 @@
+import 'peity';
+
 valueCard.$inject = ['TimeSeriesUpdater'];
 
 export function valueCard(TimeSeriesUpdater) {

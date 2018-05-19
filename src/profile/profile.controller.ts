@@ -1,5 +1,7 @@
 import angular = require('angular');
 
+import 'circularProgress';
+
 ProfileController.$inject = ['$scope', 'userService'];
 
 export function ProfileController($scope, userService) {

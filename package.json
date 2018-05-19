@@ -9,6 +9,7 @@
     "babel-polyfill": "^6.23.0",
     "babel-preset-es2015": "^6.24.0",
     "browserify": "^16.2.2",
+    "browserify-shim": "^3.8.14",
     "del": "^3.0.0",
     "eslint": "^3.15.0",
     "eslint-config-airbnb": "^14.1.0",
@@ -67,11 +68,29 @@
     "moment": "^2.22.1",
     "nvd3": "^1.8.5",
     "owl.carousel": "^2.3.4",
+    "peity": "^3.3.0",
     "perfect-scrollbar": "^1.3.0",
     "popper.js": "^1.14.3",
     "screenfull": "^3.3.2",
     "ui-select": "^0.19.8",
     "underscore": "^1.9.0",
     "vinyl-buffer": "^1.0.1"
+  },
+  "browserify": {
+    "transform": ["browserify-shim"],
+    "paths": ["./vendor", "./src"]
+  },
+  "browser": {
+    "jquery": "./node_modules/jquery/dist/jquery.js",
+    "iCheck": "./bower_components/iCheck/icheck.js",
+    "circularProgress": "./vendor/circularProgress/jquery.circularProgress.js",
+    "simplePieChart": "./vendor/simplePieChart/jquery.simplePieChart.js",
+    "snackbar": "./vendor/snackbar/jquery.snackbar.js"
+  },
+  "browserify-shim": {
+    "jquery": {
+      "exports": "$"
+    },
+    "peity": {"depends": ["jquery:JQuery"] }
   }
 }

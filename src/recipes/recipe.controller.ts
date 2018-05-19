@@ -1,5 +1,7 @@
 import _ = require('underscore');
 
+import 'circularProgress';
+
 RecipeController.$inject = [
   '$scope', '$stateParams', 'breweryResources', 'recipeCalculations'];
 

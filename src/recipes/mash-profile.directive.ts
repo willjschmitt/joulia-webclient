@@ -1,5 +1,7 @@
 import angular = require('angular');
 
+import 'circularProgress';
+
 mashProfile.$inject = ['breweryResources'];
 
 export function mashProfile(breweryResources) {

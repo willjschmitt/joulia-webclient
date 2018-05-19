@@ -1,3 +1,5 @@
+import 'iCheck';
+
 icheck.$inject = [];
 
 export function icheck() {

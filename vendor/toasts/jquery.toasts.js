@@ -13,23 +13,26 @@
  *
  */
 
+var jQuery = require('jquery');
+
+// Polyfill for String.includes().
+if (!String.prototype.includes) {
+  String.prototype.includes = function(search, start) {
+    'use strict';
+    if (typeof start !== 'number') {
+      start = 0;
+    }
+
+    if (start + search.length > this.length) {
+      return false;
+    } else {
+      return this.indexOf(search, start) !== -1;
+    }
+  };
+}
+
 ;(function ($) {
 	"use strict";
-
-	if (!String.prototype.includes) {
-	  String.prototype.includes = function(search, start) {
-	    'use strict';
-	    if (typeof start !== 'number') {
-	      start = 0;
-	    }
-
-	    if (start + search.length > this.length) {
-	      return false;
-	    } else {
-	      return this.indexOf(search, start) !== -1;
-	    }
-	  };
-	}
 
 	var pluginName	= "toasts",
 		obj 		= "",

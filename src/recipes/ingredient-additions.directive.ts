@@ -1,5 +1,7 @@
 import angular = require('angular');
 
+import 'circularProgress';
+
 ingredientAdditions.$inject = ['breweryResources'];
 
 export function ingredientAdditions(breweryResources) {

@@ -1,3 +1,5 @@
+import 'flexslider';
+
 publicHeader.$inject = [];
 
 export function publicHeader() {

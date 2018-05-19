@@ -1,3 +1,5 @@
+import 'simplePieChart';
+
 dial.$inject = ['$interval'];
 
 export function dial($interval) {
