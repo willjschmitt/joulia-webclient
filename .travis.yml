@@ -11,6 +11,10 @@ script:
 notifications:
   email: false
   slack: $SLACK_TOKEN
+
+# Do full build before a deploy (including copying of node and bower files).
+before_deploy:
+  - 'gulp'
 deploy:
   - provider: gcs
     access_key_id: $GCS_ACCESS_KEY
