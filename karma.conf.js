@@ -1,6 +1,8 @@
 // Karma configuration
 // Generated on Sat Mar 25 2017 11:30:11 GMT-0700 (Pacific Daylight Time)
 
+var path = require('path');
+
 module.exports = function(config) {
   config.set({
 
@@ -15,31 +17,6 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      // Third-party libraries loaded by bower.
-      // TODO(willjschmitt): Remove these when figuring out how to import them
-      // correctly.
-      'node_modules/jquery/dist/jquery.js',
-      'node_modules/flexslider/jquery.flexslider-min.js',
-      'node_modules/owl.carousel/dist/owl.carousel.js',
-
-      // Bower components.
-      // TODO(willjschmitt): Remove these as soon as posible moving to a
-      // browserified bundle.
-      'bower_components/Modernizr/modernizr.custom.js',
-      'bower_components/iCheck/icheck.js',
-
-      // Third-party open-source licensed libaries.
-      'vendor/materialRipple/jquery.materialRipple.js',
-      'vendor/snackbar/jquery.snackbar.js',
-      'vendor/toasts/jquery.toasts.js',
-      'vendor/subheader/jquery.subheader.js',
-      'vendor/linearProgress/jquery.linearProgress.js',
-      'vendor/circularProgress/jquery.circularProgress.js',
-      'vendor/speedDial/jquery.speedDial.js',
-      'vendor/simplePieChart/jquery.simplePieChart.js',
-      'vendor/peity/jquery.peity.min.js',
-
-      // The main source files.
       'temp/**/*.js',
     ],
 
@@ -55,7 +32,6 @@ module.exports = function(config) {
 
     browserify: {
       debug: true,
-      //transform: [ 'brfs' ]
     },
 
     // test results reporter to use
