@@ -27,8 +27,6 @@ const tmpDir = './temp/';
 const distDir = './dist/';
 const staticDir = './dist/static/';
 
-const tmpJsDir = tmpDir + 'js/';
-
 const tmpJsGlob = tmpDir + '**/**.js';
 const tmpTestGlob = tmpDir + '**/**.spec.js';
 
@@ -63,15 +61,41 @@ gulp.task('html2js', function () {
                  base: 'src',
                  name: 'app.templates'
              }))
-             .pipe(gulp.dest(tmpJsDir));
+             .pipe(gulp.dest(tmpDir));
 });
 
 // Compiles TypeScript source files in src/ to temp/js directory.
 gulp.task('tsc', ['lint'], function () {
   return gulp.src(srcGlob)
              .pipe(tsProject())
-             .js.pipe(gulp.dest(tmpJsDir));
+             .js.pipe(gulp.dest(tmpDir));
 })
+
+gulp.task('bundle-internal-css', function () {
+  return  browserify({
+        debug: true,
+        transform: ['browserify-css'],
+        entries: ['./src/css/joulia.js'],
+    })
+    .bundle()
+    .pipe(source('joulia.css.js'))
+    .pipe(buffer())
+    //.pipe(uglify())
+    .pipe(gulp.dest(staticDir));
+});
+
+gulp.task('bundle-public-css', function () {
+  return  browserify({
+        debug: true,
+        transform: ['browserify-css'],
+        entries: ['./src/css/public.js'],
+    })
+    .bundle()
+    .pipe(source('public.css.js'))
+    .pipe(buffer())
+    //.pipe(uglify())
+    .pipe(gulp.dest(staticDir));
+});
 
 // Build task compiles TypeScript and HTML templates into JS in the temp/js
 // directory.
@@ -79,7 +103,7 @@ gulp.task('build', ['tsc', 'html2js'], function() {});
 
 // Browersifies TypeScript compiled files and HTML templates into a single JS
 // bundle.js file.
-gulp.task('bundle-internal', ['build'], function () {
+gulp.task('bundle-internal', ['build', 'bundle-internal-css'], function () {
   return browserify({
         debug: true,
         entries: ['./temp/js/joulia-webclient.js'],
@@ -87,11 +111,11 @@ gulp.task('bundle-internal', ['build'], function () {
     .bundle()
     .pipe(source('joulia-webclient.js'))
     .pipe(buffer())
-    .pipe(uglify())
+    //.pipe(uglify())
     .pipe(gulp.dest(staticDir));
 });
 
-gulp.task('bundle-public', ['build'], function () {
+gulp.task('bundle-public', ['build', 'bundle-public-css'], function () {
   return browserify({
         debug: true,
         entries: ['./temp/js/public.js'],
@@ -99,7 +123,7 @@ gulp.task('bundle-public', ['build'], function () {
     .bundle()
     .pipe(source('public.js'))
     .pipe(buffer())
-    .pipe(uglify())
+    //.pipe(uglify())
     .pipe(gulp.dest(staticDir));
 });
 
@@ -132,17 +156,11 @@ gulp.task('copy-bower-components', function () {
              .pipe(gulp.dest(staticDir + 'bower_components/'));
 })
 
-gulp.task('copy-vendor', function () {
-  const vendorGlob = './vendor/**/**';
-  return gulp.src(vendorGlob)
-             .pipe(gulp.dest(staticDir + 'vendor/'));
-})
-
 gulp.task('copy-app',
   ['copy-html', 'copy-css', 'copy-img']);
 
 gulp.task('copy-third-party',
-  ['copy-node-modules', 'copy-bower-components', 'copy-vendor']);
+  ['copy-node-modules', 'copy-bower-components']);
 
 // Builds intermediate JS source and passes it to Karma for unit testing.
 gulp.task('test', ['build'], function(cb) {

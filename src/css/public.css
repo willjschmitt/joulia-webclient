@@ -1,3 +1,11 @@
+@import url("../../vendor/ultimate-flat/inc/css/bootstrap.min.css");
+@import url("../../vendor/ultimate-flat/style.css");
+@import url("../../vendor/ultimate-flat/inc/css/green.css");
+@import url("../../node_modules/flexslider/flexslider.css");
+@import url("../../node_modules/owl.carousel/dist/assets/owl.carousel.css");
+@import url("../../node_modules/owl.carousel/dist/assets/owl.theme.default.css");
+@import url("../../vendor/ultimate-flat/inc/magnific-popup/magnific-popup.css");
+
 #header,
 #image,
 #video,
