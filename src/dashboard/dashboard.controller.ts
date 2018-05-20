@@ -16,6 +16,7 @@ angular
       'app.common.brewery-resources',
       'app.common.user-service',
       'app.dashboard.add-brewery-modal',
+      'app.dashboard.brewery',
     ])
   .controller('DashboardController', DashboardController);
 

@@ -2,8 +2,10 @@ import angular = require('angular');
 
 import 'circularProgress';
 
+import '../common/user-service.service';
+
 angular
-  .module('app.profile.controller', ['app.common'])
+  .module('app.profile.controller', ['app.common.user-service'])
   .controller('ProfileController', ProfileController);
 
 ProfileController.$inject = ['$scope', 'userService'];

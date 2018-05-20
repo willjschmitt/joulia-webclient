@@ -1,6 +1,5 @@
 import angular = require('angular');
 
-import '../common/common.module';
 import '../templates';
 
 import './login.controller';
@@ -9,7 +8,8 @@ import './public.controller';
 angular
   .module('app.public',
     [
-      'ui.router', 'app.common', 'ui.bootstrap', 'app.templates',
+      'ui.router',
+      'app.templates',
       'app.public.login',
       'app.public.controller',
     ])

@@ -1,4 +1,5 @@
 import angular = require('angular');
+import 'angular-resource';
 
 angular
   .module('app.common.user-resources', ['ngResource',])

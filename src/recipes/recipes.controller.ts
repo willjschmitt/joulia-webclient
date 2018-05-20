@@ -1,10 +1,16 @@
 import angular = require('angular');
 import _ = require('underscore');
+import 'angular-ui-bootstrap';
+
+import '../templates';
+import '../common/brewery-resources.factory';
+import './recipe-card.directive';
 
 angular
   .module('app.recipes.recipes-controller',
     [
-      'ui.router',
+      'ui.bootstrap',
+      'app.templates',
       'app.common.brewery-resources',
       'app.recipes.recipe-card',
     ])

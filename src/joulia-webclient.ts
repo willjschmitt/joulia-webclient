@@ -3,18 +3,17 @@ import jQuery = require('jquery');
 import 'Modernizr';
 
 import '@uirouter/angularjs';
-import 'angular-route';
+import 'angular-resource';
 import 'angular-sanitize';
-import 'angular-ui-bootstrap';
 import 'angular-perfect-scrollbar';
 
 import './brewhouse/brewhouse.module';
-import './common/common.module';
 import './dashboard/dashboard.module';
 import './profile/profile.module';
 import './recipes/recipes.module';
 
-import './templates';
+import './common/joulia-header.directive';
+import './common/sidebar.directive';
 
 // Polyfills.
 jQuery.fn.load = function(callback){ $(window).on("load", callback) };
@@ -24,9 +23,17 @@ jQuery.fn.tooltip = function(){};
 
 angular
   .module('app', [
-    'ui.router', 'ngResource', 'ngSanitize', 'ui.bootstrap', 'app.common',
-    'app.templates', 'app.dashboard', 'app.brewhouse', 'app.recipes',
-    'app.profile', 'perfect_scrollbar',
+    'ui.router',
+    'ngResource',
+    'ngSanitize',
+    'app.dashboard',
+    'app.brewhouse',
+    'app.recipes',
+    'app.profile',
+    'perfect_scrollbar',
+
+    'app.common.joulia-header',
+    'app.common.sidebar',
   ])
   .service('unauthorizedInterceptor', unauthorizedInterceptor)
   .config(routeConfig)

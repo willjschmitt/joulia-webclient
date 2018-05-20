@@ -4,12 +4,9 @@ import 'Modernizr';
 
 import '@uirouter/angularjs';
 import 'angular-resource';
-import 'angular-ui-bootstrap';
 import 'angular-perfect-scrollbar';
 
 import './public/public.module';
-
-import './templates';
 
 // Polyfills.
 jQuery.fn.load = function(callback){ $(window).on("load", callback) };
@@ -19,8 +16,10 @@ jQuery.fn.tooltip = function(){};
 
 angular
   .module('app', [
-    'ui.router', 'ngResource', 'ui.bootstrap', 'app.common', 'app.public',
-    'app.templates', 'perfect_scrollbar',
+    'ui.router',
+    'ngResource',
+    'app.public',
+    'perfect_scrollbar',
   ])
   .config(routeConfig)
   .config(httpConfig)
