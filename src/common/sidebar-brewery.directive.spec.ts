@@ -2,9 +2,10 @@
 import angular = require('angular');
 import 'angular-mocks';
 
-describe('app.common', function () {
-  beforeEach(angular.mock.module('app.common'));
-  beforeEach(angular.mock.module('app.templates'));
+import './sidebar-brewery.directive';
+
+describe('app.common.sidebar-brewery', function () {
+  beforeEach(angular.mock.module('app.common.sidebar-brewery'));
 
   var $rootScope, $compile;
 

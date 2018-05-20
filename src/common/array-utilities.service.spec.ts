@@ -2,9 +2,10 @@
 import angular = require('angular');
 import 'angular-mocks';
 
-describe('app.common array-utilities.service', function () {
-  beforeEach(angular.mock.module('app.common'));
-  beforeEach(angular.mock.module('app.templates'));
+import './array-utilities.service';
+
+describe('app.common.array-utilties array-utilities.service', function () {
+  beforeEach(angular.mock.module('app.common.array-utilities'));
 
   var $rootScope;
 

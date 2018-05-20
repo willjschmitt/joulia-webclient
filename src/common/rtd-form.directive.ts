@@ -1,6 +1,12 @@
+import angular = require('angular');
+
+angular
+  .module('app.common.rtd-form', ['app.templates',])
+  .directive('rtdForm', rtdForm);
+
 rtdForm.$inject = [];
 
-export function rtdForm() {
+function rtdForm() {
   return {
     restrict: 'E',
     transclude: true,

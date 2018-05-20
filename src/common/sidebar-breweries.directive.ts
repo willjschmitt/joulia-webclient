@@ -1,4 +1,18 @@
+import angular = require('angular');
 import _ = require('underscore');
+
+import '../templates';
+import './brewery-resources.factory';
+import './sidebar-brewery.directive';
+
+angular
+  .module('app.common.sidebar-breweries',
+    [
+      'app.templates',
+      'app.common.brewery-resources',
+      'app.common.sidebar-brewery',
+    ])
+  .directive('sidebarBreweries', sidebarBreweries);
 
 sidebarBreweries.$inject = ['breweryResources'];
 

@@ -2,9 +2,10 @@
 import angular = require('angular');
 import 'angular-mocks';
 
+import './joulia-header.directive';
+
 describe('app.common', function () {
-  beforeEach(angular.mock.module('app.common'));
-  beforeEach(angular.mock.module('app.templates'));
+  beforeEach(angular.mock.module('app.common.joulia-header'));
 
   // Mocks the user service, so we can manipulate user preferences from here.
   var user = {};

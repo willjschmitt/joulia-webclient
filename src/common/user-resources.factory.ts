@@ -1,6 +1,12 @@
+import angular = require('angular');
+
+angular
+  .module('app.common.user-resources', ['ngResource',])
+  .factory('userResources', userResources);
+
 userResources.$inject = ['$resource'];
 
-export function userResources($resource) {
+function userResources($resource) {
   return {
     User: $resource('auth/api/user/'),
     UserPreferences: $resource(

@@ -1,6 +1,19 @@
+import angular = require('angular');
+
+import '../templates';
+import './sidebar-sub-menu.directive';
+
+angular
+  .module('app.common.sidebar-brewery',
+    [
+      'app.templates',
+      'app.common.sidebar-sub-menu',
+    ])
+  .directive('sidebarBrewery', sidebarBrewery);
+
 sidebarBrewery.$inject = [];
 
-export function sidebarBrewery() {
+function sidebarBrewery() {
   return {
     restrict: 'A',
     transclude: true,

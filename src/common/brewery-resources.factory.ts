@@ -1,6 +1,12 @@
+import angular = require('angular');
+
+angular
+  .module('app.common.brewery-resources', ['ngResource',])
+  .factory('breweryResources', breweryResources);
+
 breweryResources.$inject = ['$resource'];
 
-export function breweryResources($resource) {
+function breweryResources($resource) {
   const brewingStepChoices = {
     MASH: { value: '0', name: 'Mash' },
     BOIL: { value: '1', name: 'Boil' },

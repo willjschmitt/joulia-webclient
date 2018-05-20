@@ -1,6 +1,14 @@
+import angular = require('angular');
+
+import 'angular-ui-bootstrap';
+
+angular
+  .module('app.common.confirm-delete', ['ui.bootstrap',])
+  .controller('ConfirmDeleteController', ConfirmDeleteController);
+
 ConfirmDeleteController.$inject = ['$scope', '$uibModalInstance', 'name'];
 
-export function ConfirmDeleteController($scope, $uibModalInstance, name) {
+function ConfirmDeleteController($scope, $uibModalInstance, name) {
   $scope.ok = ok;
   $scope.cancel = cancel;
   $scope.name = name;

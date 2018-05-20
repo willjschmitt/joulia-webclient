@@ -1,6 +1,17 @@
+import angular = require('angular');
+
+import '../templates'
+
+angular
+  .module('app.common.toggleable-element',
+    [
+      'app.templates',
+    ])
+  .directive('toggleableElement', toggleableElement);
+
 toggleableElement.$inject = ['TimeSeriesUpdater'];
 
-export function toggleableElement(TimeSeriesUpdater) {
+function toggleableElement(TimeSeriesUpdater) {
   return {
     restrict: 'E',
     transclude: true,

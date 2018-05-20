@@ -1,8 +1,21 @@
 import screenfull = require('screenfull');
+import angular = require('angular');
+
+import '../templates';
+
+import './user-service.service';
+
+angular
+  .module('app.common.joulia-header',
+    [
+      'app.templates',
+      'app.common.user-service',
+    ])
+  .directive('jouliaHeader', jouliaHeader);
 
 jouliaHeader.$inject = ['$rootScope', 'userService'];
 
-export function jouliaHeader($rootScope, userService) {
+function jouliaHeader($rootScope, userService) {
   return {
     restrict: 'E',
     transclude: true,

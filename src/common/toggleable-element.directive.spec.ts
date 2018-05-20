@@ -2,9 +2,10 @@
 import angular = require('angular');
 import 'angular-mocks';
 
-describe('app.common', function () {
-  beforeEach(angular.mock.module('app.common'));
-  beforeEach(angular.mock.module('app.templates'));
+import './toggleable-element.directive';
+
+describe('app.common.toggleable-element', function () {
+  beforeEach(angular.mock.module('app.common.toggleable-element'));
 
   var $controller, $httpBackend, $rootScope, $compile;
 

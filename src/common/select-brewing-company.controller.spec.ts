@@ -2,9 +2,10 @@
 import angular = require('angular');
 import 'angular-mocks';
 
-describe('app.common select-brewing-company.controller', function () {
-  beforeEach(angular.mock.module('app.dashboard'));
-  beforeEach(angular.mock.module('app.templates'));
+import './select-brewing-company.controller'
+
+describe('app.common.select-brewing-company select-brewing-company.controller', function () {
+  beforeEach(angular.mock.module('app.common.select-brewing-company'));
 
   var $controller, $httpBackend, $rootScope, $location;
 

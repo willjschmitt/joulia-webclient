@@ -2,9 +2,10 @@
 import angular = require('angular');
 import 'angular-mocks';
 
-describe('app.common', function () {
-  beforeEach(angular.mock.module('app.common'));
-  beforeEach(angular.mock.module('app.templates'));
+import './sidebar-sub-menu.directive';
+
+describe('app.common.sidebar-sub-menu', function () {
+  beforeEach(angular.mock.module('app.common.sidebar-sub-menu'));
 
   var $rootScope, $compile, $httpBackend;
 

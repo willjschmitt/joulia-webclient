@@ -1,4 +1,9 @@
 import 'iCheck';
+import angular = require('angular');
+
+angular
+  .module('app.common.icheck', [])
+  .directive('icheck', icheck);
 
 icheck.$inject = [];
 

@@ -1,7 +1,18 @@
+import angular = require('angular');
+
+import 'angular-ui-bootstrap';
+
+import './brewery-resources.factory';
+
+angular
+  .module('app.common.select-brewing-company',
+    ['app.common.brewery-resources', 'ui.bootstrap'])
+  .controller('SelectBrewingCompanyController', SelectBrewingCompanyController);
+
 SelectBrewingCompanyController.$inject = [
   '$scope', '$uibModalInstance', 'breweryResources'];
 
-export function SelectBrewingCompanyController(
+function SelectBrewingCompanyController(
     $scope, $uibModalInstance, breweryResources) {
   $scope.brewingCompanys = breweryResources.BrewingCompany.query();
   $scope.ok = ok;

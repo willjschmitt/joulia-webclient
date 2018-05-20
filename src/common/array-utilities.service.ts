@@ -1,6 +1,11 @@
+import angular = require('angular');
 import _ = require('underscore');
 
-export function arrayUtilities() {
+angular
+  .module('app.common.array-utilities', [])
+  .service('arrayUtilities', arrayUtilities);
+
+function arrayUtilities() {
   const self = this;
 
   self.minimumInArrays = minimumInArrays;

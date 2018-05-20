@@ -1,4 +1,12 @@
-export function sidebarUserbox() {
+import angular = require('angular');
+
+import '../templates';
+
+angular
+  .module('app.common.sidebar-userbox', ['app.templates',])
+  .directive('sidebarUserbox', sidebarUserbox);
+
+function sidebarUserbox() {
   return {
     restrict: 'E',
     transclude: true,

@@ -1,8 +1,14 @@
 import angular = require('angular');
 
+import 'ui-select';
+
+angular
+  .module('app.common.searchable-select', ['app.templates', 'ui.select'])
+  .directive('searchableSelect', searchableSelect);
+
 searchableSelect.$inject = ['$interpolate'];
 
-export function searchableSelect($interpolate) {
+function searchableSelect($interpolate) {
   return {
     restrict: 'E',
     transclude: true,

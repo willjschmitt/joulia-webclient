@@ -2,9 +2,12 @@
 import angular = require('angular');
 import 'angular-mocks';
 
-describe('app.common searchable-select.directive', function () {
-  beforeEach(angular.mock.module('app.common'));
-  beforeEach(angular.mock.module('app.templates'));
+import './searchable-select.directive';
+import './brewery-resources.factory';
+
+describe('app.common.searchable-select searchable-select.directive', function () {
+  beforeEach(angular.mock.module('app.common.searchable-select'));
+  beforeEach(angular.mock.module('app.common.brewery-resources'));
 
   var $compile, $httpBackend, $rootScope, breweryResources;
 

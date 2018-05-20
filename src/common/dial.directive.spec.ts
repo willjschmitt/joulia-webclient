@@ -2,9 +2,10 @@
 import angular = require('angular');
 import 'angular-mocks';
 
-describe('app.common', function () {
-  beforeEach(angular.mock.module('app.common'));
-  beforeEach(angular.mock.module('app.templates'));
+import './dial.directive';
+
+describe('app.common.dial', function () {
+  beforeEach(angular.mock.module('app.common.dial'));
 
   var $httpBackend, $rootScope, $compile, $interval;
 

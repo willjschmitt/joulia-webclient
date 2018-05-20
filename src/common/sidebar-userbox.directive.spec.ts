@@ -2,9 +2,10 @@
 import angular = require('angular');
 import 'angular-mocks';
 
-describe('app.common', function () {
-  beforeEach(angular.mock.module('app.common'));
-  beforeEach(angular.mock.module('app.templates'));
+import './sidebar-userbox.directive';
+
+describe('app.common.sidebar-userbox', function () {
+  beforeEach(angular.mock.module('app.common.sidebar-userbox'));
 
   var $rootScope, $compile, $httpBackend;
 

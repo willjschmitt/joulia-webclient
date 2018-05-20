@@ -1,10 +1,16 @@
+import angular = require('angular');
+
+angular
+  .module('app.common.http-status', [])
+  .service('httpStatus', httpStatus);
+
 httpStatus.$inject = [];
 
 /**
  * Provides utilities for checking http status codes, as well as constants
  * for these status codes.
  */
-export function httpStatus() {
+function httpStatus() {
   const self = this;
 
   // TODO(willjschmitt): Add more codes as they are needed.

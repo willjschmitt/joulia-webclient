@@ -2,9 +2,10 @@
 import angular = require('angular');
 import 'angular-mocks';
 
+import './icheck.directive';
+
 describe('app.common', function () {
-  beforeEach(angular.mock.module('app.common'));
-  beforeEach(angular.mock.module('app.templates'));
+  beforeEach(angular.mock.module('app.common.icheck'));
 
   var $httpBackend, $rootScope, $compile;
 

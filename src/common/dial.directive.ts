@@ -1,9 +1,16 @@
 import 'simplePieChart';
 import * as $ from 'jquery';
+import angular = require('angular');
+
+import '../templates';
+
+angular
+  .module('app.common.dial', ['app.templates',])
+  .directive('dial', dial);
 
 dial.$inject = ['$interval'];
 
-export function dial($interval) {
+function dial($interval) {
   return {
     restrict: 'E',
     transclude: true,

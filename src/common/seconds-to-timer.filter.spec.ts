@@ -2,8 +2,10 @@
 import angular = require('angular');
 import 'angular-mocks';
 
-describe('app.common', function () {
-  beforeEach(angular.mock.module('app.common'));
+import './seconds-to-timer.filter';
+
+describe('app.common.seconds-to-timer', function () {
+  beforeEach(angular.mock.module('app.common.seconds-to-timer'));
 
   var $rootScope, $compile;
 

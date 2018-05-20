@@ -1,3 +1,9 @@
+import angular = require('angular');
+
+angular
+  .module('app.common.seconds-to-timer', [])
+  .filter('secondsToTimer', secondsToTimerFilter);
+
 export function secondsToTimerFilter() {
   return function secondsToTimer(secondsAbsolute) {
     const hours = Math.floor(secondsAbsolute / (60.0 * 60.0));

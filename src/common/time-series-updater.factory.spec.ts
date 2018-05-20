@@ -5,9 +5,10 @@ import 'angular-mocks';
 import _ = require('underscore');
 import moment = require('moment');
 
-describe('app.common time-series-socket.service', function () {
-  beforeEach(angular.mock.module('app.common'));
-  beforeEach(angular.mock.module('app.templates'));
+import './time-series-updater.factory';
+
+describe('app.common.time-series-updater time-series-updater.factory', function () {
+  beforeEach(angular.mock.module('app.common.time-series-updater'));
   beforeEach(angular.mock.module(function($provide) {
     $provide.service('timeSeriesSocket', function () {
       this.subscribe = jasmine.createSpy('subscribe');

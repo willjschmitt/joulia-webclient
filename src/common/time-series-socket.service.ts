@@ -1,10 +1,16 @@
+import angular = require('angular');
 import _ = require('underscore');
 
+import 'angular-websocket';
 import 'snackbar';
+
+angular
+  .module('app.common.time-series-socket', ['ngWebSocket',])
+  .service('timeSeriesSocket', timeSeriesSocket);
 
 timeSeriesSocket.$inject = ['$websocket', '$http', '$location'];
 
-export function timeSeriesSocket($websocket, $http, $location) {
+function timeSeriesSocket($websocket, $http, $location) {
   const self = this;
 
   let websocketProtocol;

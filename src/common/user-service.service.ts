@@ -1,3 +1,20 @@
+import angular = require('angular');
+
+import '../templates';
+import './brewery-resources.factory';
+import './http-status.service';
+import './user-resources.factory';
+
+angular
+  .module('app.common.user-service',
+    [
+      'app.templates',
+      'app.common.brewery-resources',
+      'app.common.http-status',
+      'app.common.user-resources',
+    ])
+  .service('userService', userService);
+
 userService.$inject = ['userResources', 'breweryResources', 'httpStatus'];
 
 /**
@@ -10,7 +27,7 @@ userService.$inject = ['userResources', 'breweryResources', 'httpStatus'];
  * sometimes redundantly, to avoid naming collisions, since just "user" would
  * be too common of a name.
  */
-export function userService(userResources, breweryResources, httpStatus) {
+function userService(userResources, breweryResources, httpStatus) {
   const self = this;
 
   self.user = userResources.User.get(handleGetUser, handleFailToGetUser);

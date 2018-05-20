@@ -1,6 +1,14 @@
+import angular = require('angular');
+
+import '../templates';
+
+angular
+  .module('app.common.sidebar-sub-menu', ['app.templates',])
+  .directive('sidebarSubMenu', sidebarSubMenu);
+
 sidebarSubMenu.$inject = [];
 
-export function sidebarSubMenu() {
+function sidebarSubMenu() {
   return {
     restrict: 'EA',
     transclude: true,

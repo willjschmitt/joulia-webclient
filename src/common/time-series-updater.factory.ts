@@ -1,9 +1,22 @@
+import angular = require('angular');
 import _ = require('underscore');
 import moment = require('moment');
 
+import './brewery-resources.factory';
+import './time-series-socket.service';
+
+angular
+  .module('app.common.time-series-updater',
+    [
+      'ngWebSocket',
+      'app.common.brewery-resources',
+      'app.common.time-series-socket',
+    ])
+  .factory('TimeSeriesUpdater', TimeSeriesUpdaterFactory);
+
 TimeSeriesUpdaterFactory.$inject = ['timeSeriesSocket', 'breweryResources'];
 
-export function TimeSeriesUpdaterFactory(timeSeriesSocket, breweryResources) {
+function TimeSeriesUpdaterFactory(timeSeriesSocket, breweryResources) {
   /**
    * Creates an instance of TimeSeriesUpdater
    *

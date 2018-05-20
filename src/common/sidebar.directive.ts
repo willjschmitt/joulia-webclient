@@ -1,9 +1,22 @@
 import angular = require('angular');
 import * as $ from 'jquery';
 
+import '../templates';
+import './sidebar-userbox.directive';
+import './sidebar-breweries.directive';
+
+angular
+  .module('app.common.sidebar',
+    [
+      'app.templates',
+      'app.common.sidebar-userbox',
+      'app.common.sidebar-breweries',
+    ])
+  .directive('sidebar', sidebar);
+
 sidebar.$inject = ['$rootScope', '$document'];
 
-export function sidebar($rootScope, $document) {
+function sidebar($rootScope, $document) {
   return {
     restrict: 'E',
     transclude: true,

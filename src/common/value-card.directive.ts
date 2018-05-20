@@ -1,8 +1,18 @@
+import angular = require('angular');
 import 'peity';
+
+import '../templates';
+
+angular
+  .module('app.common.value-card',
+    [
+      'app.templates',
+    ])
+  .directive('valueCard', valueCard);
 
 valueCard.$inject = ['TimeSeriesUpdater'];
 
-export function valueCard(TimeSeriesUpdater) {
+function valueCard(TimeSeriesUpdater) {
   return {
     restrict: 'E',
     transclude: true,

@@ -4,9 +4,10 @@ import 'angular-mocks';
 
 import inputCheckers = require('./input-checkers');
 
-describe('app.common', function () {
-  beforeEach(angular.mock.module('app.common'));
-  beforeEach(angular.mock.module('app.templates'));
+import './rtd-form.directive';
+
+describe('app.common.rtd-form', function () {
+  beforeEach(angular.mock.module('app.common.rtd-form'));
 
   // Mocks the user service, so we can manipulate user preferences from here.
   var user = {};
