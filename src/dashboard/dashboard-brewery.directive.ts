@@ -1,6 +1,23 @@
+import angular = require('angular');
+import 'angular-ui-bootstrap';
+
+import '../templates';
+import './dashboard-brewhouse.directive';
+import './edit-brewhouse-modal.controller';
+
+angular
+  .module('app.dashboard.brewery',
+    [
+      'ui.bootstrap',
+      'app.templates',
+      'app.dashboard.brewhouse',
+      'app.dashboard.edit-brewhouse-modal',
+    ])
+  .directive('dashboardBrewery', dashboardBrewery);
+
 dashboardBrewery.$inject = ['$uibModal'];
 
-export function dashboardBrewery($uibModal) {
+function dashboardBrewery($uibModal) {
   return {
     restrict: 'E',
     transclude: true,

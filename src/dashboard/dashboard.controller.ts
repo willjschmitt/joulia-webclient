@@ -1,9 +1,28 @@
+import angular = require('angular');
 import _ = require('underscore');
+import 'angular-ui-bootstrap';
+
+import '../templates';
+import '../common/brewery-resources.factory';
+import '../common/user-service.service';
+import './add-brewery-modal.controller';
+import './dashboard-brewery.directive';
+
+angular
+  .module('app.dashboard.controller',
+    [
+      'ui.bootstrap',
+      'app.templates',
+      'app.common.brewery-resources',
+      'app.common.user-service',
+      'app.dashboard.add-brewery-modal',
+    ])
+  .controller('DashboardController', DashboardController);
 
 DashboardController.$inject = [
   '$scope', 'breweryResources', 'userService', '$uibModal'];
 
-export function DashboardController($scope, breweryResources, userService,
+function DashboardController($scope, breweryResources, userService,
     $uibModal) {
   $scope.userService = userService;
 

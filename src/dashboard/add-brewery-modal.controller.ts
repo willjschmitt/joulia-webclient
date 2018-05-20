@@ -1,7 +1,20 @@
+import angular = require('angular');
+import 'angular-ui-bootstrap';
+
+import '../common/brewery-resources.factory';
+
+angular
+  .module('app.dashboard.add-brewery-modal',
+    [
+      'ui.bootstrap',
+      'app.common.brewery-resources',
+    ])
+  .controller('AddBreweryModalController', AddBreweryModalController);
+
 AddBreweryModalController.$inject = [
   '$scope', '$uibModalInstance', 'breweryResources'];
 
-export function AddBreweryModalController(
+function AddBreweryModalController(
     $scope, $uibModalInstance, breweryResources) {
   $scope.newBrewery = new breweryResources.Brewery();
   $scope.brewingCompanys = breweryResources.BrewingCompany.query();

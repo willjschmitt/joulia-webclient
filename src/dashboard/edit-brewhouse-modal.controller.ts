@@ -1,4 +1,16 @@
+import angular = require('angular');
 import * as _ from 'underscore';
+import 'angular-ui-bootstrap';
+
+import '../common/brewery-resources.factory';
+
+angular
+  .module('app.dashboard.edit-brewhouse-modal',
+    [
+      'ui.bootstrap',
+      'app.common.brewery-resources',
+    ])
+  .controller('EditBrewhouseModalController', EditBrewhouseModalController);
 
 EditBrewhouseModalController.$inject = [
   '$scope', '$uibModalInstance', 'breweryResources', 'brewery', 'brewhouse'];
@@ -8,7 +20,7 @@ EditBrewhouseModalController.$inject = [
  * non-null, and brewhouse must be null. If editing, brewery must be null, and
  * brewhouse must be non-null
  */
-export function EditBrewhouseModalController(
+function EditBrewhouseModalController(
     $scope, $uibModalInstance, breweryResources, brewery, brewhouse) {
   if (brewery && brewhouse) {
     throw new Error('Either brewery or brewhouse must be null.');

@@ -2,9 +2,10 @@
 import angular = require('angular');
 import 'angular-mocks';
 
-describe('app.dashboard add-brewhouse-modal.controller', function () {
-  beforeEach(angular.mock.module('app.dashboard'));
-  beforeEach(angular.mock.module('app.templates'));
+import './edit-brewhouse-modal.controller';
+
+describe('app.dashboard.edit-brewhouse-modal', function () {
+  beforeEach(angular.mock.module('app.dashboard.edit-brewhouse-modal'));
 
   var $controller, $httpBackend, $rootScope, $location;
 

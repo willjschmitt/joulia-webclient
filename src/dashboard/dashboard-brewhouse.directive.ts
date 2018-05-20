@@ -1,6 +1,23 @@
+import angular = require('angular');
+import 'angular-ui-bootstrap';
+
+import '../templates';
+import '../common/confirm-delete.controller';
+import './edit-brewhouse-modal.controller';
+
+angular
+  .module('app.dashboard.brewhouse',
+    [
+      'ui.bootstrap',
+      'app.templates',
+      'app.common.confirm-delete',
+      'app.dashboard.edit-brewhouse-modal',
+    ])
+  .directive('dashboardBrewhouse', dashboardBrewhouse);
+
 dashboardBrewhouse.$inject = ['$uibModal'];
 
-export function dashboardBrewhouse($uibModal) {
+function dashboardBrewhouse($uibModal) {
   return {
     restrict: 'E',
     transclude: true,

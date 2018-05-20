@@ -2,9 +2,10 @@
 import angular = require('angular');
 import 'angular-mocks';
 
-describe('app.dashboard', function () {
-  beforeEach(angular.mock.module('app.dashboard'));
-  beforeEach(angular.mock.module('app.templates'));
+import './dashboard.controller';
+
+describe('app.dashboard.controller', function () {
+  beforeEach(angular.mock.module('app.dashboard.controller'));
 
   var $controller, $httpBackend, $rootScope;
 
