@@ -1,6 +1,19 @@
+import angular = require('angular');
+
+import '../templates';
+import '../common/time-series-updater.factory';
+
+angular
+  .module('app.brewhouse.pump',
+    [
+      'app.templates',
+      'app.common.time-series-updater'
+    ])
+  .directive('pump', pump);
+
 pump.$inject = ['TimeSeriesUpdater'];
 
-export function pump(TimeSeriesUpdater) {
+function pump(TimeSeriesUpdater) {
   return {
     restrict: 'E',
     transclude: true,

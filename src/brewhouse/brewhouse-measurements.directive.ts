@@ -1,6 +1,14 @@
+import angular = require('angular');
+
+import '../templates';
+
+angular
+  .module('app.brewhouse.measurements', ['app.templates',])
+  .directive('brewhouseMeasurements', brewhouseMeasurements);
+
 brewhouseMeasurements.$inject = [];
 
-export function brewhouseMeasurements() {
+function brewhouseMeasurements() {
   return {
     restrict: 'EA',
     transclude: true,

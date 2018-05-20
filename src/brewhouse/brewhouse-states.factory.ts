@@ -1,8 +1,15 @@
+import angular = require('angular');
 import * as _ from "underscore";
+
+import '../common/brewery-resources.factory';
+
+angular
+  .module('app.brewhouse.states', ['app.common.brewery-resources',])
+  .factory('brewhouseStates', brewhouseStates);
 
 brewhouseStates.$inject = ['breweryResources'];
 
-export function brewhouseStates(breweryResources) {
+function brewhouseStates(breweryResources) {
   function getStates(softwareReleaseId) {
     const states = breweryResources.BrewingState.query({
       software_release: softwareReleaseId,

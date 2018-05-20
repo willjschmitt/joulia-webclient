@@ -1,6 +1,12 @@
+import angular = require('angular');
+
+angular
+  .module('app.brewhouse.task-list', ['app.templates',])
+  .directive('brewhouseTaskList', brewhouseTaskList);
+
 brewhouseTaskList.$inject = [];
 
-export function brewhouseTaskList() {
+function brewhouseTaskList() {
   return {
     restrict: 'E',
     transclude: true,

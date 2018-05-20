@@ -1,6 +1,19 @@
+import angular = require('angular');
+import '@uirouter/angularjs';
+
+import '../common/brewery-resources.factory';
+
+angular
+  .module('app.brewhouse.controller',
+    [
+      'ui.router',
+      'app.common.brewery-resources',
+    ])
+  .controller('BrewhouseController', BrewhouseController);
+
 BrewhouseController.$inject = ['$scope', 'breweryResources', '$stateParams'];
 
-export function BrewhouseController($scope, breweryResources, $stateParams) {
+function BrewhouseController($scope, breweryResources, $stateParams) {
   $scope.brewhouse = breweryResources.Brewhouse.get(
       { id: $stateParams.brewhouseId }, updateBrewery);
 

@@ -1,7 +1,11 @@
 /* eslint-disable */
-describe('app.brewhouse', function () {
-  beforeEach(angular.mock.module('app.brewhouse'));
-  beforeEach(angular.mock.module('app.templates'));
+import angular = require('angular');
+import 'angular-mocks';
+
+import './brewhouse-task-list.directive';
+
+describe('app.brewhouse.task-list', function () {
+  beforeEach(angular.mock.module('app.brewhouse.task-list'));
 
   var $rootScope, $compile, $interval;
 

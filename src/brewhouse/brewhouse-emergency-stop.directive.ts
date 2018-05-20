@@ -1,6 +1,19 @@
+import angular = require('angular');
+
+import '../templates';
+import '../common/time-series-updater.factory';
+
+angular
+  .module('app.brewhouse.emergency-stop',
+    [
+      'app.templates',
+      'app.common.time-series-updater',
+    ])
+  .directive('brewhouseEmergencyStop', brewhouseEmergencyStop);
+
 brewhouseEmergencyStop.$inject = ['TimeSeriesUpdater'];
 
-export function brewhouseEmergencyStop(TimeSeriesUpdater) {
+function brewhouseEmergencyStop(TimeSeriesUpdater) {
   return {
     restrict: 'E',
     transclude: true,

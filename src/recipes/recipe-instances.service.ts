@@ -1,6 +1,12 @@
+import angular = require('angular');
+
+angular
+  .module('app.recipes.recipe-instances', [])
+  .service('recipeInstances', recipeInstances);
+
 recipeInstances.$inject = ['$http'];
 
-export function recipeInstances($http) {
+function recipeInstances($http) {
   const self = this;
 
   self.launch = launch;

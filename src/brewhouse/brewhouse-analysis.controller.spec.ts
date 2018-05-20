@@ -2,9 +2,10 @@
 import angular = require('angular');
 import 'angular-mocks';
 
-describe('app.brewhouse', function () {
-  beforeEach(angular.mock.module('app.brewhouse'));
-  beforeEach(angular.mock.module('app.templates'));
+import './brewhouse-analysis.controller';
+
+describe('app.brewhouse.analysis', function () {
+  beforeEach(angular.mock.module('app.brewhouse.analysis'));
 
   var $rootScope, $controller;
 

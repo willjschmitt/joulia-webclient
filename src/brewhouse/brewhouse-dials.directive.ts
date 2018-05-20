@@ -1,6 +1,21 @@
+import angular = require('angular');
+
+import '../templates';
+import '../common/dial.directive';
+import '../common/time-series-updater.factory';
+
+angular
+  .module('app.brewhouse.dials',
+    [
+      'app.templates',
+      'app.common.dial',
+      'app.common.time-series-updater',
+    ])
+  .directive('brewhouseDials', brewhouseDials);
+
 brewhouseDials.$inject = ['TimeSeriesUpdater'];
 
-export function brewhouseDials(TimeSeriesUpdater) {
+function brewhouseDials(TimeSeriesUpdater) {
   return {
     restrict: 'E',
     transclude: true,

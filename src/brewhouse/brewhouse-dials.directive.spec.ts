@@ -2,9 +2,10 @@
 import angular = require('angular');
 import 'angular-mocks';
 
-describe('app.brewhouse', function () {
-  beforeEach(angular.mock.module('app.brewhouse'));
-  beforeEach(angular.mock.module('app.templates'));
+import './brewhouse-dials.directive';
+
+describe('app.brewhouse.dials', function () {
+  beforeEach(angular.mock.module('app.brewhouse.dials'));
   beforeEach(angular.mock.module(function($provide) {
     $provide.factory('TimeSeriesUpdater', function () {
       function TimeSeriesUpdater(recipeInstance, name, variableType) {

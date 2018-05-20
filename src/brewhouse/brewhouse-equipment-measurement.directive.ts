@@ -1,6 +1,19 @@
+import angular = require('angular');
+
+import '../templates';
+import '../common/time-series-updater.factory';
+
+angular
+  .module('app.brewhouse.equipment-measurement',
+    [
+      'app.templates',
+      'app.common.time-series-updater',
+    ])
+  .directive('brewhouseEquipmentMeasurement', brewhouseEquipmentMeasurement);
+
 brewhouseEquipmentMeasurement.$inject = ['TimeSeriesUpdater'];
 
-export function brewhouseEquipmentMeasurement(TimeSeriesUpdater) {
+function brewhouseEquipmentMeasurement(TimeSeriesUpdater) {
   return {
     restrict: 'E',
     transclude: true,

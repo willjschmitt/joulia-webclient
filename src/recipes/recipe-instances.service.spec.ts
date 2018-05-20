@@ -2,8 +2,10 @@
 import angular = require('angular');
 import 'angular-mocks';
 
-describe('app.recipes recipe-instances.service', function () {
-  beforeEach(angular.mock.module('app.recipes'));
+import './recipe-instances.service';
+
+describe('app.recipes.recipe-instances recipe-instances.service', function () {
+  beforeEach(angular.mock.module('app.recipes.recipe-instances'));
 
   var $httpBackend;
 

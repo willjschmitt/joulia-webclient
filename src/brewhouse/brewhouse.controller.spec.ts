@@ -4,9 +4,10 @@ import 'angular-mocks';
 
 import moment = require('moment');
 
-describe('app.brewhouse', function () {
-  beforeEach(angular.mock.module('app.brewhouse'));
-  beforeEach(angular.mock.module('app.templates'));
+import './brewhouse.controller';
+
+describe('app.brewhouse.controller', function () {
+  beforeEach(angular.mock.module('app.brewhouse.controller'));
 
   var $controller, $httpBackend, $rootScope;
 

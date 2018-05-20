@@ -10,9 +10,9 @@ import '../common/common.module';
 import '../templates';
 
 import {recipeCalculations} from './recipe-calculations.service';
-import {recipeInstances} from './recipe-instances.service';
+import './recipe-instances.service';
 
-import {EndRecipeModalController} from './end-recipe-modal.controller';
+import './end-recipe-modal.controller';
 import {LaunchRecipeModalController} from './launch-recipe-modal.controller';
 import {RecipeController} from './recipe.controller';
 import {RecipeInstanceRetrospectiveController} from './recipe-instance-retrospective.controller';
@@ -26,14 +26,16 @@ import {recipeFermentation} from './recipe-fermentation.directive';
 import {recipeProperty} from './recipe-property.directive';
 
 angular
-  .module('app.recipes', [
-    'ui.router', 'ngSanitize', 'app.common', 'ui.bootstrap', 'ui.select'])
+  .module('app.recipes',
+    [
+      'ui.router', 'ngSanitize', 'app.common', 'ui.bootstrap', 'ui.select',
+      'app.recipes.end-recipe-modal',
+      'app.recipes.recipe-instances',
+    ])
   .config(stateConfig)
 
   .service('recipeCalculations', recipeCalculations)
-  .service('recipeInstances', recipeInstances)
 
-  .controller('EndRecipeModalController', EndRecipeModalController)
   .controller('LaunchRecipeModalController', LaunchRecipeModalController)
   .controller('RecipeController', RecipeController)
   .controller('RecipeInstanceRetrospectiveController',

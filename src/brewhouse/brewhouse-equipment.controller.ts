@@ -1,7 +1,24 @@
+import angular = require('angular');
+
+import '../common/time-series-updater.factory';
+import './brewhouse-states.factory';
+import './kettle.directive';
+import './pump.directive';
+
+angular
+  .module('app.brewhouse.equipment',
+    [
+      'app.common.time-series-updater',
+      'app.brewhouse.states',
+      'app.brewhouse.kettle',
+      'app.brewhouse.pump',
+    ])
+  .controller('BrewhouseEquipmentController', BrewhouseEquipmentController);
+
 BrewhouseEquipmentController.$inject = [
   '$scope', 'TimeSeriesUpdater', 'brewhouseStates'];
 
-export function BrewhouseEquipmentController(
+function BrewhouseEquipmentController(
     $scope, TimeSeriesUpdater, brewhouseStates) {
   // TODO(willjschmitt): Make this configurable via url params, etc.
   $scope.historyTime = -60.0 * 15.0;  // 15 Minutes.

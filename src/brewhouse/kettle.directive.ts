@@ -1,6 +1,21 @@
+import angular = require('angular');
+
+import '../templates';
+import './brewhouse-equipment-measurement.directive';
+import '../common/time-series-updater.factory';
+
+angular
+  .module('app.brewhouse.kettle',
+    [
+      'app.templates',
+      'app.brewhouse.equipment-measurement',
+      'app.common.time-series-updater',
+    ])
+  .directive('kettle', kettle);
+
 kettle.$inject = ['TimeSeriesUpdater'];
 
-export function kettle(TimeSeriesUpdater) {
+function kettle(TimeSeriesUpdater) {
   return {
     restrict: 'E',
     transclude: true,

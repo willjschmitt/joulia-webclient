@@ -1,6 +1,19 @@
+import angular = require('angular');
+
+import '../templates';
+import '../common/toggleable-element.directive';
+
+angular
+  .module('app.brewhouse.overrides',
+    [
+      'app.templates',
+      'app.common.toggleable-element',
+    ])
+  .directive('brewhouseOverrides', brewhouseOverrides);
+
 brewhouseOverrides.$inject = [];
 
-export function brewhouseOverrides() {
+function brewhouseOverrides() {
   return {
     restrict: 'E',
     transclude: true,

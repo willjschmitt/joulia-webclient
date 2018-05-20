@@ -1,7 +1,24 @@
+import angular = require('angular');
+
+import '../templates';
+import './brewhouse-states.factory';
+import '../common/seconds-to-timer.filter';
+import '../common/time-series-updater.factory';
+
+angular
+  .module('app.brewhouse.status',
+    [
+      'app.templates',
+      'app.brewhouse.states',
+      'app.common.seconds-to-timer',
+      'app.common.time-series-updater',
+    ])
+  .directive('brewhouseStatus', brewhouseStatus);
+
 brewhouseStatus.$inject = [
   'TimeSeriesUpdater', '$interval', 'brewhouseStates'];
 
-export function brewhouseStatus(TimeSeriesUpdater, $interval, brewhouseStates) {
+function brewhouseStatus(TimeSeriesUpdater, $interval, brewhouseStates) {
   return {
     restrict: 'E',
     transclude: true,

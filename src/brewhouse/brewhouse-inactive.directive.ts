@@ -1,8 +1,20 @@
+import angular = require('angular');
 import * as _ from 'underscore';
+
+import '../templates';
+import '../common/brewery-resources.factory';
+
+angular
+  .module('app.brewhouse.inactive',
+    [
+      'app.templates',
+      'app.common.brewery-resources',
+    ])
+  .directive('brewhouseInactive', brewhouseInactive);
 
 brewhouseInactive.$inject = ['breweryResources'];
 
-export function brewhouseInactive(breweryResources) {
+function brewhouseInactive(breweryResources) {
   return {
     restrict: 'E',
     transclude: true,

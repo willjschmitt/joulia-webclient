@@ -1,6 +1,21 @@
+import angular = require('angular');
+
+import '../templates';
+import '../common/user-service.service';
+import '../common/value-card.directive';
+
+angular
+  .module('app.brewhouse.monitoring-cards',
+    [
+      'app.templates',
+      'app.common.user-service',
+      'app.common.value-card',
+    ])
+  .directive('brewhouseMonitoringCards', brewhouseMonitoringCards);
+
 brewhouseMonitoringCards.$inject = ['userService'];
 
-export function brewhouseMonitoringCards(userService) {
+function brewhouseMonitoringCards(userService) {
   return {
     restrict: 'E',
     transclude: true,

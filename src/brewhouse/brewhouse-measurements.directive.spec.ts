@@ -2,9 +2,12 @@
 import angular = require('angular');
 import 'angular-mocks';
 
-describe('app.brewhouse', function () {
-  beforeEach(angular.mock.module('app.brewhouse'));
-  beforeEach(angular.mock.module('app.templates'));
+import './brewhouse-measurements.directive';
+import '../common/brewery-resources.factory';
+
+describe('app.brewhouse.measurements', function () {
+  beforeEach(angular.mock.module('app.brewhouse.measurements'));
+  beforeEach(angular.mock.module('app.common.brewery-resources'));
 
   var $rootScope, $compile, $interval, $httpBackend, breweryResources;
 

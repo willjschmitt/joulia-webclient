@@ -2,9 +2,10 @@
 import angular = require('angular');
 import 'angular-mocks';
 
-describe('app.brewhouse', function () {
-  beforeEach(angular.mock.module('app.brewhouse'));
-  beforeEach(angular.mock.module('app.templates'));
+import './brewhouse-overrides.directive';
+
+describe('app.brewhouse.overrides', function () {
+  beforeEach(angular.mock.module('app.brewhouse.overrides'));
 
   // Mocks the backend for valueCard, which needs to make streaming calls to the
   // server.

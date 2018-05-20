@@ -1,6 +1,24 @@
+import angular = require('angular');
+
+import 'angular-ui-bootstrap';
+
+import '../templates';
+import '../recipes/recipe-instances.service';
+import '../recipes/end-recipe-modal.controller';
+
+angular
+  .module('app.brewhouse.terminator',
+    [
+      'app.templates',
+      'ui.bootstrap',
+      'app.recipes.recipe-instances',
+      'app.recipes.end-recipe-modal',
+    ])
+  .directive('brewhouseTerminator', brewhouseTerminator);
+
 brewhouseTerminator.$inject = ['$http', '$uibModal', 'recipeInstances'];
 
-export function brewhouseTerminator($http, $uibModal, recipeInstances) {
+function brewhouseTerminator($http, $uibModal, recipeInstances) {
   return {
     restrict: 'E',
     transclude: true,

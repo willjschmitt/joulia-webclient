@@ -2,9 +2,10 @@
 import angular = require('angular');
 import 'angular-mocks';
 
-describe('app.brewhouse', function () {
-  beforeEach(angular.mock.module('app.brewhouse'));
-  beforeEach(angular.mock.module('app.templates'));
+import './brewhouse-emergency-stop.directive';
+
+describe('app.brewhouse.emergency-stop', function () {
+  beforeEach(angular.mock.module('app.brewhouse.emergency-stop'));
 
   var $rootScope, $compile, $interval, $httpBackend;
 

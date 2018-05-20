@@ -2,10 +2,23 @@ import * as angular from 'angular';
 import * as d3 from 'd3';
 import * as nv from 'nvd3';
 
+import '../templates';
+import '../common/array-utilities.service';
+import '../common/time-series-updater.factory';
+
+angular
+  .module('app.brewhouse.temperature-plots',
+    [
+      'app.templates',
+      'app.common.array-utilities',
+      'app.common.time-series-updater',
+    ])
+  .directive('brewhouseTemperaturePlots', brewhouseTemperaturePlots);
+
 brewhouseTemperaturePlots.$inject = [
   'TimeSeriesUpdater', 'arrayUtilities', '$interval'];
 
-export function brewhouseTemperaturePlots(
+function brewhouseTemperaturePlots(
     TimeSeriesUpdater, arrayUtilities, $interval) {
   return {
     restrict: 'E',
