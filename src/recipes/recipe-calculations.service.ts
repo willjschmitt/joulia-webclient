@@ -1,6 +1,12 @@
+import angular = require('angular');
+
+angular
+  .module('app.recipes.recipe-calculations', [])
+  .service('recipeCalculations', recipeCalculations);
+
 recipeCalculations.$inject = [];
 
-export function recipeCalculations() {
+function recipeCalculations() {
   const self = this;
 
   self.srmToRGBString = srmToRGBString;

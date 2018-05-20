@@ -2,9 +2,12 @@
 import angular = require('angular');
 import 'angular-mocks';
 
-describe('app.recipes recipe-fermentation.directive', function () {
-  beforeEach(angular.mock.module('app.recipes'));
-  beforeEach(angular.mock.module('app.templates'));
+import './recipe-fermentation.directive';
+import '../common/brewery-resources.factory';
+
+describe('app.recipes.recipe-fermentation', function () {
+  beforeEach(angular.mock.module('app.recipes.recipe-fermentation'));
+  beforeEach(angular.mock.module('app.common.brewery-resources'));
 
   var $compile, $httpBackend, $rootScope, breweryResources;
 

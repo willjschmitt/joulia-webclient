@@ -1,3 +1,20 @@
+import angular = require('angular');
+import '@uirouter/angularjs';
+
+import '../common/brewery-resources.factory';
+import '../brewhouse/brewhouse-measurements.directive';
+import '../brewhouse/brewhouse-temperature-plots.directive';
+
+angular
+  .module('app.recipes.recipe-instance-retrospective-controller',
+    [
+      'ui.router',
+      'app.common.brewery-resources',
+      'app.brewhouse.measurements',
+      'app.brewhouse.temperature-plots',
+    ])
+  .controller('RecipeInstanceRetrospectiveController', RecipeInstanceRetrospectiveController);
+
 RecipeInstanceRetrospectiveController.$inject = [
   '$scope', 'breweryResources', '$stateParams'];
 

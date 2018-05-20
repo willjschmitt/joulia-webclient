@@ -3,9 +3,20 @@ import * as $ from 'jquery';
 
 import 'circularProgress';
 
+import '../templates';
+import '../common/brewery-resources.factory';
+
+angular
+  .module('app.recipes.mash-profile',
+    [
+      'app.templates',
+      'app.common.brewery-resources',
+    ])
+  .directive('mashProfile', mashProfile);
+
 mashProfile.$inject = ['breweryResources'];
 
-export function mashProfile(breweryResources) {
+function mashProfile(breweryResources) {
   return {
     restrict: 'E',
     transclude: true,

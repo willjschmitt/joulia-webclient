@@ -2,9 +2,10 @@
 import angular = require('angular');
 import 'angular-mocks';
 
-describe('app.recipes launch-recipe-modal.controller', function () {
-  beforeEach(angular.mock.module('app.recipes'));
-  beforeEach(angular.mock.module('app.templates'));
+import './launch-recipe-modal.controller';
+
+describe('app.recipes.launch-recipe-modal launch-recipe-modal.controller', function () {
+  beforeEach(angular.mock.module('app.recipes.launch-recipe-modal'));
 
   var $controller, $httpBackend, $rootScope, $location;
 

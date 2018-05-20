@@ -1,6 +1,30 @@
+import angular = require('angular');
 import _ = require('underscore');
+import '@uirouter/angularjs';
 
 import 'circularProgress';
+
+import '../common/brewery-resources.factory';
+import '../common/searchable-select.directive';
+import './ingredient-additions.directive';
+import './mash-profile.directive';
+import './recipe-calculations.service';
+import './recipe-fermentation.directive';
+import './recipe-property.directive';
+
+angular
+  .module('app.recipes.recipe-controller',
+    [
+      'ui.router',
+      'app.common.brewery-resources',
+      'app.common.searchable-select',
+      'app.recipes.mash-profile',
+      'app.recipes.ingredient-additions',
+      'app.recipes.recipe-calculations',
+      'app.recipes.recipe-fermentation',
+      'app.recipes.recipe-property',
+    ])
+  .controller('RecipeController', RecipeController);
 
 RecipeController.$inject = [
   '$scope', '$stateParams', 'breweryResources', 'recipeCalculations'];

@@ -1,4 +1,14 @@
+import angular = require('angular');
 import _ = require('underscore');
+
+angular
+  .module('app.recipes.recipes-controller',
+    [
+      'ui.router',
+      'app.common.brewery-resources',
+      'app.recipes.recipe-card',
+    ])
+  .controller('RecipesController', RecipesController);
 
 RecipesController.$inject = [
   '$scope', '$location', 'breweryResources', '$uibModal'];

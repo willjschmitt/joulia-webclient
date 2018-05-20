@@ -2,9 +2,10 @@
 import angular = require('angular');
 import 'angular-mocks';
 
-describe('app.recipes recipe-property.directive', function () {
-  beforeEach(angular.mock.module('app.recipes'));
-  beforeEach(angular.mock.module('app.templates'));
+import './recipe-property.directive';
+
+describe('app.recipes.recipe-property recipe-property.directive', function () {
+  beforeEach(angular.mock.module('app.recipes.recipe-property'));
 
   var $compile, $rootScope;
 

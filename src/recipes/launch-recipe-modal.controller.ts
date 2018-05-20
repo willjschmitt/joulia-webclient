@@ -1,7 +1,21 @@
+import angular = require('angular');
+
+import 'angular-ui-bootstrap';
+
+import '../common/brewery-resources.factory';
+
+angular
+  .module('app.recipes.launch-recipe-modal',
+    [
+      'ui.bootstrap',
+      'app.common.brewery-resources',
+    ])
+  .controller('LaunchRecipeModalController', LaunchRecipeModalController);
+
 LaunchRecipeModalController.$inject = [
   '$scope', '$uibModalInstance', 'breweryResources'];
 
-export function LaunchRecipeModalController(
+function LaunchRecipeModalController(
     $scope, $uibModalInstance, breweryResources) {
   $scope.brewhouses = breweryResources.Brewhouse.query();
   $scope.selectedBrewhouse = null;

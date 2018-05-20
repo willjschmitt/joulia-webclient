@@ -3,9 +3,22 @@ import * as $ from 'jquery';
 
 import 'circularProgress';
 
+import '../templates';
+import '../common/brewery-resources.factory';
+import '../common/searchable-select.directive';
+
+angular
+  .module('app.recipes.ingredient-addition',
+    [
+      'app.templates',
+      'app.common.brewery-resources',
+      'app.common.searchable-select',
+    ])
+  .directive('ingredientAddition', ingredientAddition);
+
 ingredientAddition.$inject = ['$interpolate', 'breweryResources'];
 
-export function ingredientAddition($interpolate, breweryResources) {
+function ingredientAddition($interpolate, breweryResources) {
   return {
     restrict: 'E',
     transclude: true,

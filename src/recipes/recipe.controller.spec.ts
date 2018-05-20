@@ -1,7 +1,12 @@
 /* eslint-disable */
+import angular = require('angular');
+
+import './recipe.controller';
+import '../common/brewery-resources.factory';
+
 describe('app.recipes recipe.controller', function () {
-  beforeEach(angular.mock.module('app.recipes'));
-  beforeEach(angular.mock.module('app.templates'));
+  beforeEach(angular.mock.module('app.recipes.recipe-controller'));
+  beforeEach(angular.mock.module('app.common.brewery-resources'));
 
   var $controller, $httpBackend, $rootScope, $location, breweryResources;
 

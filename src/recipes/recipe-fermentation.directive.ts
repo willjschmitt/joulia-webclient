@@ -3,9 +3,22 @@ import * as $ from 'jquery';
 
 import 'circularProgress';
 
+import '../templates';
+import '../common/brewery-resources.factory';
+import '../common/searchable-select.directive';
+
+angular
+  .module('app.recipes.recipe-fermentation',
+    [
+      'app.templates',
+      'app.common.brewery-resources',
+      'app.common.searchable-select',
+    ])
+  .directive('recipeFermentation', recipeFermentation);
+
 recipeFermentation.$inject = ['breweryResources'];
 
-export function recipeFermentation(breweryResources) {
+function recipeFermentation(breweryResources) {
   return {
     restrict: 'E',
     transclude: true,

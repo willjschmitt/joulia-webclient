@@ -1,8 +1,29 @@
+import angular = require('angular');
+import 'angular-ui-bootstrap';
+
+import '../templates';
+import '../common/brewery-resources.factory';
+import './launch-recipe-modal.controller';
+import './recipe-instances.service';
+import './recipe-calculations.service';
+
+angular
+  .module('app.recipes.recipe-card',
+    [
+      'ui.bootstrap',
+      'app.templates',
+      'app.common.brewery-resources',
+      'app.recipes.launch-recipe-modal',
+      'app.recipes.recipe-instances',
+      'app.recipes.recipe-calculations',
+    ])
+  .directive('recipeCard', recipeCard);
+
 recipeCard.$inject = [
   '$uibModal', '$http', '$location', 'breweryResources', 'recipeInstances',
   'recipeCalculations'];
 
-export function recipeCard(
+function recipeCard(
     $uibModal, $http, $location, breweryResources, recipeInstances,
     recipeCalculations) {
   return {

@@ -2,9 +2,12 @@
 import angular = require('angular');
 import 'angular-mocks';
 
-describe('app.recipes mash-profile.directive', function () {
-  beforeEach(angular.mock.module('app.recipes'));
-  beforeEach(angular.mock.module('app.templates'));
+import './mash-profile.directive';
+import '../common/brewery-resources.factory';
+
+describe('app.recipes.mash-profile', function () {
+  beforeEach(angular.mock.module('app.recipes.mash-profile'));
+  beforeEach(angular.mock.module('app.common.brewery-resources'));
 
   var $compile, $httpBackend, $rootScope, breweryResources;
 

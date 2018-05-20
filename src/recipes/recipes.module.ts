@@ -1,53 +1,19 @@
 import angular = require('angular');
-
 import '@uirouter/angularjs';
-import 'angular-sanitize';
-import 'angular-ui-bootstrap';
-import 'ui-select';
 
-import '../common/common.module';
-
-import '../templates';
-
-import {recipeCalculations} from './recipe-calculations.service';
-import './recipe-instances.service';
-
-import './end-recipe-modal.controller';
-import {LaunchRecipeModalController} from './launch-recipe-modal.controller';
-import {RecipeController} from './recipe.controller';
-import {RecipeInstanceRetrospectiveController} from './recipe-instance-retrospective.controller';
-import {RecipesController} from './recipes.controller';
-
-import {ingredientAddition} from './ingredient-addition.directive';
-import {ingredientAdditions} from './ingredient-additions.directive';
-import {mashProfile} from './mash-profile.directive';
-import {recipeCard} from './recipe-card.directive';
-import {recipeFermentation} from './recipe-fermentation.directive';
-import {recipeProperty} from './recipe-property.directive';
+import './recipe.controller';
+import './recipe-instance-retrospective.controller';
+import './recipes.controller';
 
 angular
   .module('app.recipes',
     [
-      'ui.router', 'ngSanitize', 'app.common', 'ui.bootstrap', 'ui.select',
-      'app.recipes.end-recipe-modal',
-      'app.recipes.recipe-instances',
+      'ui.router',
+      'app.recipes.recipe-controller',
+      'app.recipes.recipe-instance-retrospective-controller',
+      'app.recipes.recipes-controller',
     ])
-  .config(stateConfig)
-
-  .service('recipeCalculations', recipeCalculations)
-
-  .controller('LaunchRecipeModalController', LaunchRecipeModalController)
-  .controller('RecipeController', RecipeController)
-  .controller('RecipeInstanceRetrospectiveController',
-              RecipeInstanceRetrospectiveController)
-  .controller('RecipesController', RecipesController)
-
-  .directive('ingredientAddition', ingredientAddition)
-  .directive('ingredientAdditions', ingredientAdditions)
-  .directive('mashProfile', mashProfile)
-  .directive('recipeCard', recipeCard)
-  .directive('recipeFermentation', recipeFermentation)
-  .directive('recipeProperty', recipeProperty);
+  .config(stateConfig);
 
 stateConfig.$inject = ['$stateProvider'];
 

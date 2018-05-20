@@ -1,6 +1,14 @@
+import angular = require('angular');
+
+import '../templates';
+
+angular
+  .module('app.recipes.recipe-property', ['app.templates',])
+  .directive('recipeProperty', recipeProperty);
+
 recipeProperty.$inject = [];
 
-export function recipeProperty() {
+function recipeProperty() {
   return {
     restrict: 'E',
     transclude: true,

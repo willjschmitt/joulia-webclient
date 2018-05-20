@@ -2,8 +2,10 @@
 import angular = require('angular');
 import 'angular-mocks';
 
-describe('app.common recipe-calculations.service', function () {
-  beforeEach(angular.mock.module('app.recipes'));
+import './recipe-calculations.service';
+
+describe('app.recipes.recipe-calculations recipe-calculations.service', function () {
+  beforeEach(angular.mock.module('app.recipes.recipe-calculations'));
 
   var $httpBackend;
 

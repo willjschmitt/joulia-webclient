@@ -2,9 +2,12 @@
 import angular = require('angular');
 import 'angular-mocks';
 
-describe('app.recipes', function () {
-  beforeEach(angular.mock.module('app.recipes'));
-  beforeEach(angular.mock.module('app.templates'));
+import './recipes.controller';
+import '../common/brewery-resources.factory';
+
+describe('app.recipes.recipes-controller', function () {
+  beforeEach(angular.mock.module('app.recipes.recipes-controller'));
+  beforeEach(angular.mock.module('app.common.brewery-resources'));
 
   var $controller, $httpBackend, $rootScope, breweryResources;
 

@@ -1,11 +1,11 @@
 /* eslint-disable */
 import angular = require('angular');
 import 'angular-mocks';
-import './recipes.module';
 
-describe('app.recipes', function () {
-  beforeEach(angular.mock.module('app.recipes'));
-  beforeEach(angular.mock.module('app.templates'));
+import './recipe-instance-retrospective.controller';
+
+describe('app.recipes.recipe-instance-retrospective-controller', function () {
+  beforeEach(angular.mock.module('app.recipes.recipe-instance-retrospective-controller'));
 
   var $controller, $httpBackend, $rootScope;
 
