@@ -3,7 +3,7 @@ import angular = require('angular');
 import 'angular-ui-bootstrap';
 
 import '../templates';
-import '../recipes/recipe-instances.service';
+import '../recipes/instance/recipe-instances.service';
 import '../recipes/end-recipe-modal.controller';
 
 angular
@@ -11,7 +11,7 @@ angular
     [
       'app.templates',
       'ui.bootstrap',
-      'app.recipes.recipe-instances',
+      'app.recipes.instance.recipe-instances',
       'app.recipes.end-recipe-modal',
     ])
   .directive('brewhouseTerminator', brewhouseTerminator);

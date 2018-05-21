@@ -1,7 +1,7 @@
 import angular = require('angular');
 
 angular
-  .module('app.recipes.recipe-instances', [])
+  .module('app.recipes.instance.recipe-instances', [])
   .service('recipeInstances', recipeInstances);
 
 recipeInstances.$inject = ['$http'];

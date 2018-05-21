@@ -4,7 +4,7 @@ import 'angular-ui-bootstrap';
 import '../templates';
 import '../common/brewery-resources.factory';
 import './launch-recipe-modal.controller';
-import './recipe-instances.service';
+import './instance/recipe-instances.service';
 import './recipe-calculations.service';
 
 angular
@@ -14,7 +14,7 @@ angular
       'app.templates',
       'app.common.brewery-resources',
       'app.recipes.launch-recipe-modal',
-      'app.recipes.recipe-instances',
+      'app.recipes.instance.recipe-instances',
       'app.recipes.recipe-calculations',
     ])
   .directive('recipeCard', recipeCard);
