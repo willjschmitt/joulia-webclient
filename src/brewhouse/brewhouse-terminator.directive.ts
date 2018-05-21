@@ -4,7 +4,7 @@ import 'angular-ui-bootstrap';
 
 import '../templates';
 import '../recipes/instance/recipe-instances.service';
-import '../recipes/end-recipe-modal.controller';
+import '../recipes/instance/end-recipe-modal.component';
 
 angular
   .module('app.brewhouse.terminator',
@@ -12,7 +12,7 @@ angular
       'app.templates',
       'ui.bootstrap',
       'app.recipes.instance.recipe-instances',
-      'app.recipes.end-recipe-modal',
+      'app.recipes.instance.end-recipe-modal',
     ])
   .directive('brewhouseTerminator', brewhouseTerminator);
 
@@ -32,8 +32,7 @@ function brewhouseTerminator($http, $uibModal, recipeInstances) {
       function endSession() {
         const modalInstance = $uibModal.open({
           animation: true,
-          templateUrl: 'recipes/end-recipe-modal.tpl.html',
-          controller: 'EndRecipeModalController',
+          component: 'endRecipeModal',
         });
 
         modalInstance.result.then(endRecipeInstanceOnServer);
