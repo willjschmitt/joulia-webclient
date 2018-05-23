@@ -3,12 +3,12 @@ import * as $ from 'jquery';
 
 import 'circularProgress';
 
-import '../templates';
-import '../common/brewery-resources.factory';
-import './ingredient/ingredient-addition.component';
+import '../../templates';
+import '../../common/brewery-resources.factory';
+import './ingredient-addition.component';
 
 angular
-  .module('app.recipes.ingredient-additions',
+  .module('app.recipes.ingredient.additions',
     [
       'app.templates',
       'app.common.brewery-resources',
@@ -37,7 +37,7 @@ function ingredientAdditions(breweryResources) {
       // Promise.
       onChange: '&',
     },
-    templateUrl: 'recipes/ingredient-additions.tpl.html',
+    templateUrl: 'recipes/ingredient/ingredient-additions.tpl.html',
     link: function ingredientAdditionsController($scope, $element) {
       $scope.ingredientAdditions = $scope.Resource.query(
           { recipe: $scope.recipe.id });

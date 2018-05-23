@@ -6,7 +6,7 @@ import 'circularProgress';
 
 import '../common/brewery-resources.factory';
 import '../common/searchable-select.directive';
-import './ingredient-additions.directive';
+import './ingredient/ingredient-additions.component';
 import './mash-profile.directive';
 import './recipe-calculations.service';
 import './recipe-fermentation.directive';
@@ -19,7 +19,7 @@ angular
       'app.common.brewery-resources',
       'app.common.searchable-select',
       'app.recipes.mash-profile',
-      'app.recipes.ingredient-additions',
+      'app.recipes.ingredient.additions',
       'app.recipes.recipe-calculations',
       'app.recipes.recipe-fermentation',
       'app.recipes.recipe-property',

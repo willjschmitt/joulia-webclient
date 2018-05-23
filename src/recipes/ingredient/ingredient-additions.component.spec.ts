@@ -3,11 +3,11 @@ import angular = require('angular');
 import 'angular-mocks';
 import {Promise} from 'es6-promise'
 
-import './ingredient-additions.directive';
-import '../common/brewery-resources.factory';
+import './ingredient-additions.component';
+import '../../common/brewery-resources.factory';
 
 describe('app.recipes.ingredient.additions', function () {
-  beforeEach(angular.mock.module('app.recipes.ingredient-additions'));
+  beforeEach(angular.mock.module('app.recipes.ingredient.additions'));
   beforeEach(angular.mock.module('app.common.brewery-resources'));
 
   var $compile, $httpBackend, $rootScope, breweryResources;
@@ -24,7 +24,7 @@ describe('app.recipes.ingredient.additions', function () {
     $httpBackend.verifyNoOutstandingRequest();
   });
 
-  describe('ingredient-additions directive', function () {
+  describe('ingredient-additions component', function () {
     var element, scope, isolatedScope;
     var addition;
     var ingredientSearch;
