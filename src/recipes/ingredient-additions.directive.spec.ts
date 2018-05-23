@@ -36,7 +36,8 @@ describe('app.recipes.ingredient.additions', function () {
             ingredient-resource="searchResource"
             ingredient-html="ingredientHTML"
             resource="resource"
-            default-step="defaultStep">
+            default-step="defaultStep"
+            on-change="onChange()">
         </ingredient-additions>`;
 
     const ingredientId = 1;
@@ -78,11 +79,6 @@ describe('app.recipes.ingredient.additions', function () {
           .respond(function (method, url, data, headers, params) {
             return [200, data];
           });
-      $httpBackend
-        .when('PUT', /brewery\/api\/recipe\/\d+/)
-          .respond(function (method, url, data, headers, params) {
-            return [200, data];
-          });
       additionDelete = $httpBackend
         .when('DELETE', /brewery\/api\/malt_ingredient_addition\/\d+/)
           .respond({});
@@ -94,6 +90,10 @@ describe('app.recipes.ingredient.additions', function () {
       scope.searchResource = breweryResources.MaltIngredientSearch;
       scope.resource = breweryResources.MaltIngredientAddition;
       scope.defaultStep = breweryResources.BREWING_STEP_CHOICES.MASH;
+      scope.onChange = function () {
+        return new Promise((resolve, reject) => resolve());
+      };
+      spyOn(scope, 'onChange').and.callThrough();
       element = $compile(html)(scope);
 
       $httpBackend.expectGET(/brewery\/api\/malt_ingredient\?id=\d+/);
@@ -105,31 +105,31 @@ describe('app.recipes.ingredient.additions', function () {
     describe('addIngredientAddition', function() {
       it('calls add endpoint', function() {
         $httpBackend.expectPOST('brewery/api/malt_ingredient_addition');
-        $httpBackend.expectPUT(/brewery\/api\/recipe\/\d+/);
         expect(isolatedScope.ingredientAdditions.length).toEqual(1);
         isolatedScope.addIngredientAddition();
         $httpBackend.flush();
         expect(isolatedScope.ingredientAdditions.length).toEqual(2);
+        expect(scope.onChange).toHaveBeenCalled();
       });
     });
 
     describe('updateIngredientAddition', function() {
       it('calls update endpoint', function() {
         $httpBackend.expectPUT('brewery/api/malt_ingredient_addition/3');
-        $httpBackend.expectPUT(/brewery\/api\/recipe\/\d+/);
         isolatedScope.updateIngredientAddition(addition);
         $httpBackend.flush();
+        expect(scope.onChange).toHaveBeenCalled();
       });
     });
 
     describe('removeIngredientAddition', function() {
       it('calls delete endpoint', function() {
         $httpBackend.expectDELETE('brewery/api/malt_ingredient_addition/3');
-        $httpBackend.expectPUT(/brewery\/api\/recipe\/\d+/);
         expect(isolatedScope.ingredientAdditions.length).toEqual(1);
         isolatedScope.deleteIngredientAddition(addition);
         $httpBackend.flush();
         expect(isolatedScope.ingredientAdditions.length).toEqual(0);
+        expect(scope.onChange).toHaveBeenCalled();
       });
     });
   });

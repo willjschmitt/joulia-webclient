@@ -31,6 +31,11 @@ function ingredientAdditions(breweryResources) {
       ingredientHtml: '=',
       Resource: '=resource',
       defaultStep: '=',
+
+      // Callback to be called when a change is made to ingredient additions.
+      // Includes adding, removing, or saving an addition. Should return a
+      // Promise.
+      onChange: '&',
     },
     templateUrl: 'recipes/ingredient-additions.tpl.html',
     link: function ingredientAdditionsController($scope, $element) {
@@ -64,7 +69,7 @@ function ingredientAdditions(breweryResources) {
       function doneAdding(ingredientAddition) {
         hideLoadingElement();
         $scope.ingredientAdditions.push(ingredientAddition);
-        $scope.recipe.$update();
+        $scope.onChange();
       }
 
       /**
@@ -74,7 +79,7 @@ function ingredientAdditions(breweryResources) {
         const index = $scope.ingredientAdditions.indexOf(ingredientAddition);
         return ingredientAddition.$delete(() => {
             $scope.ingredientAdditions.splice(index, 1);
-            $scope.recipe.$update();
+            $scope.onChange();
           })
           .$promise;
       }
@@ -85,7 +90,7 @@ function ingredientAdditions(breweryResources) {
       function updateIngredientAddition(ingredientAddition) {
         const index = $scope.ingredientAdditions.indexOf(ingredientAddition);
         return ingredientAddition.$update(() => {
-            $scope.recipe.$update();
+            $scope.onChange();
           })
           .$promise;
       }
