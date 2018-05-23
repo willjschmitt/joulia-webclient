@@ -6,7 +6,7 @@ import {Promise} from 'es6-promise'
 import './ingredient-additions.directive';
 import '../common/brewery-resources.factory';
 
-describe('app.recipes.ingredient.addition', function () {
+describe('app.recipes.ingredient.additions', function () {
   beforeEach(angular.mock.module('app.recipes.ingredient-additions'));
   beforeEach(angular.mock.module('app.common.brewery-resources'));
 
@@ -24,14 +24,14 @@ describe('app.recipes.ingredient.addition', function () {
     $httpBackend.verifyNoOutstandingRequest();
   });
 
-  describe('ingredient-addition directive', function () {
+  describe('ingredient-additions directive', function () {
     var element, scope, isolatedScope;
     var addition;
-    var additionAdd, additionUpdate, additionDelete;
+    var ingredientSearch;
+    var additionQuery, additionAdd, additionUpdate, additionDelete;
     const html = `
         <ingredient-additions
             title="title"
-            ingredient-additions="additions"
             recipe="recipe"
             ingredient-resource="searchResource"
             ingredient-html="ingredientHTML"
@@ -39,10 +39,38 @@ describe('app.recipes.ingredient.addition', function () {
             default-step="defaultStep">
         </ingredient-additions>`;
 
+    const ingredientId = 1;
+    const additionId = 3;
+    const recipeId = 11;
+
     beforeEach(function () {
+      ingredientSearch = $httpBackend
+        .when('GET', /brewery\/api\/malt_ingredient\?id=\d+/)
+        .respond(function(method, url, data, headers, params) {
+          return [200, [{ id: ingredientId }]];
+        });
+
+      addition = new breweryResources.MaltIngredientAddition({
+          id: additionId,
+          ingredient: ingredientId,
+          amount: 100.0,
+          step_added: breweryResources.BREWING_STEP_CHOICES.MASH.value,
+          time_added: 5400,
+        });
+
+      additionQuery = $httpBackend
+        .when('GET', /brewery\/api\/malt_ingredient_addition\?recipe=\d+/)
+        .respond(function(method, url, data, headers, params) {
+          if (!params.hasOwnProperty('recipe')) {
+            throw new Error("missing recipe in malt_ingredient_addition query");
+          }
+          addition.recipe = params.recipe;
+          return [200, [addition]];
+        });
       additionAdd = $httpBackend
         .when('POST', /brewery\/api\/malt_ingredient_addition/)
           .respond(function (method, url, data, headers, params) {
+            //console.log('hi');
             return [200, data];
           });
       additionUpdate = $httpBackend
@@ -62,18 +90,15 @@ describe('app.recipes.ingredient.addition', function () {
 
     beforeEach(function () {
       scope = $rootScope.$new();
-      addition = new breweryResources.MaltIngredientAddition({
-        id: 3,
-        amount: 0.0,
-      });
-      scope.recipe = new breweryResources.Recipe({ id: 11 });
-      scope.additions = [addition];
+      scope.recipe = new breweryResources.Recipe({ id: recipeId });
       scope.searchResource = breweryResources.MaltIngredientSearch;
       scope.resource = breweryResources.MaltIngredientAddition;
       scope.defaultStep = breweryResources.BREWING_STEP_CHOICES.MASH;
       element = $compile(html)(scope);
 
+      $httpBackend.expectGET(/brewery\/api\/malt_ingredient\?id=\d+/);
       scope.$digest();
+      $httpBackend.flush();
       isolatedScope = element.isolateScope();
     });
 
@@ -81,10 +106,10 @@ describe('app.recipes.ingredient.addition', function () {
       it('calls add endpoint', function() {
         $httpBackend.expectPOST('brewery/api/malt_ingredient_addition');
         $httpBackend.expectPUT(/brewery\/api\/recipe\/\d+/);
-        expect(scope.additions).toEqual([addition]);
+        expect(isolatedScope.ingredientAdditions.length).toEqual(1);
         isolatedScope.addIngredientAddition();
         $httpBackend.flush();
-        expect(scope.additions.length).toEqual(2);
+        expect(isolatedScope.ingredientAdditions.length).toEqual(2);
       });
     });
 
@@ -101,10 +126,10 @@ describe('app.recipes.ingredient.addition', function () {
       it('calls delete endpoint', function() {
         $httpBackend.expectDELETE('brewery/api/malt_ingredient_addition/3');
         $httpBackend.expectPUT(/brewery\/api\/recipe\/\d+/);
-        expect(scope.additions).toEqual([addition]);
+        expect(isolatedScope.ingredientAdditions.length).toEqual(1);
         isolatedScope.deleteIngredientAddition(addition);
         $httpBackend.flush();
-        expect(scope.additions).toEqual([]);
+        expect(isolatedScope.ingredientAdditions.length).toEqual(0);
       });
     });
   });

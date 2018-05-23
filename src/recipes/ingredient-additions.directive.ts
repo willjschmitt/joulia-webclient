@@ -26,7 +26,6 @@ function ingredientAdditions(breweryResources) {
       // Human readable title used for the header for the panel.
       title: '=',
 
-      ingredientAdditions: '=',
       recipe: '=',
       ingredientResource: '=',
       ingredientHtml: '=',
@@ -35,6 +34,8 @@ function ingredientAdditions(breweryResources) {
     },
     templateUrl: 'recipes/ingredient-additions.tpl.html',
     link: function ingredientAdditionsController($scope, $element) {
+      $scope.ingredientAdditions = $scope.Resource.query(
+          { recipe: $scope.recipe.id });
       $scope.addIngredientAddition = addIngredientAddition;
       $scope.deleteIngredientAddition = deleteIngredientAddition;
       $scope.updateIngredientAddition = updateIngredientAddition;
@@ -45,7 +46,6 @@ function ingredientAdditions(breweryResources) {
        * Saves and adds new ingredientAddition to recipe.
        */
       function addIngredientAddition() {
-        console.log($scope.Resource);
         const newIngredientAddition = new $scope.Resource({
           recipe: $scope.recipe.id,
           step_added: $scope.defaultStep.value,

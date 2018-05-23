@@ -45,12 +45,6 @@ export function RecipeController(
     }
     $scope.mashPoints = breweryResources.MashPoint.query(
         { recipe: $scope.recipe.id });
-    $scope.maltIngredientAdditions
-        = breweryResources.MaltIngredientAddition.query(
-            { recipe: $scope.recipe.id });
-    $scope.bitteringIngredientAdditions
-        = breweryResources.BitteringIngredientAddition.query(
-            { recipe: $scope.recipe.id });
   }
 
   function doneLoading() {
