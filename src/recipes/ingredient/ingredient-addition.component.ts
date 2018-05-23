@@ -3,12 +3,12 @@ import * as $ from 'jquery';
 
 import 'circularProgress';
 
-import '../templates';
-import '../common/brewery-resources.factory';
-import '../common/searchable-select.directive';
+import '../../templates';
+import '../../common/brewery-resources.factory';
+import '../../common/searchable-select.directive';
 
 angular
-  .module('app.recipes.ingredient-addition',
+  .module('app.recipes.ingredient.addition',
     [
       'app.templates',
       'app.common.brewery-resources',
@@ -33,17 +33,15 @@ function ingredientAddition($interpolate, breweryResources) {
       // HTML to render for each ingredient in the search dropdown.
       ingredientHtml: '=',
 
-      // The array of all additions. Used, so when an ingredientAddition is
-      // removed, it is removed from the parent array.
-      // TODO(willjschmitt): Reconsider passing the array, and rather
-      // broadcast an event.
-      ingredientAdditions: '=additions',
+      // Callback to handle deletion of ingredient addition. This component will
+      // perform the delete call to the server. Should return a promise.
+      onDelete: '&',
 
-      // The recipe the ingredient addition is attached to, so it can be
-      // updated when ingredient additions are updated.
-      recipe: '=recipe',
+      // Callback to handle updates of ingredient addition. This component will
+      // perform the update call to the server. Should return a promise.
+      onUpdate: '&',
     },
-    templateUrl: 'recipes/ingredient-addition.tpl.html',
+    templateUrl: 'recipes/ingredient/ingredient-addition.tpl.html',
     link: function ingredientAdditionsController($scope, $element) {
       $scope.updateIngredientAddition = updateIngredientAddition;
       $scope.removeIngredientAddition = removeIngredientAddition;
@@ -60,8 +58,9 @@ function ingredientAddition($interpolate, breweryResources) {
        */
       function updateIngredientAddition() {
         showLoadingElement();
-        $scope.ingredientAddition.$update(
-          doneUpdating, hideLoadingElement);
+        $scope.onUpdate({ ingredientAddition: $scope.ingredientAddition })
+          .then(doneUpdating)
+          .catch(hideLoadingElement);
       }
 
       /**
@@ -71,7 +70,6 @@ function ingredientAddition($interpolate, breweryResources) {
        */
       function doneUpdating() {
         hideLoadingElement();
-        $scope.recipe.$update();
       }
 
       /**
@@ -79,23 +77,18 @@ function ingredientAddition($interpolate, breweryResources) {
        */
       function removeIngredientAddition() {
         showLoadingElement();
-        const index = $scope.ingredientAdditions.indexOf(
-            $scope.ingredientAddition);
-        $scope.ingredientAddition.$delete(
-            () => doneDeleting(index));
+        $scope.onDelete({ ingredientAddition: $scope.ingredientAddition })
+          .then(doneDeleting)
+          .catch(hideLoadingElement);
       }
 
       /**
        * Handles a successful removal of a ingredient addition. Hides the
        * loading icon and removes the old ingredient to the
        * ingredientAdditions array.
-       *
-       * @param {Number} index The array index the ingredientAddition had in
-       *                       ingredientAdditions.
        */
-      function doneDeleting(index) {
+      function doneDeleting() {
         hideLoadingElement();
-        $scope.ingredientAdditions.splice(index, 1);
       }
 
       /**

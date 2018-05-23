@@ -5,14 +5,14 @@ import 'circularProgress';
 
 import '../templates';
 import '../common/brewery-resources.factory';
-import './ingredient-addition.directive';
+import './ingredient/ingredient-addition.component';
 
 angular
   .module('app.recipes.ingredient-additions',
     [
       'app.templates',
       'app.common.brewery-resources',
-      'app.recipes.ingredient-addition',
+      'app.recipes.ingredient.addition',
     ])
   .directive('ingredientAdditions', ingredientAdditions);
 
@@ -36,6 +36,8 @@ function ingredientAdditions(breweryResources) {
     templateUrl: 'recipes/ingredient-additions.tpl.html',
     link: function ingredientAdditionsController($scope, $element) {
       $scope.addIngredientAddition = addIngredientAddition;
+      $scope.deleteIngredientAddition = deleteIngredientAddition;
+      $scope.updateIngredientAddition = updateIngredientAddition;
       $scope.steps = breweryResources.BREWING_STEP_CHOICES_ordered;
       $scope.units = breweryResources.UNITS_CHOICES_ordered;
 
@@ -43,6 +45,7 @@ function ingredientAdditions(breweryResources) {
        * Saves and adds new ingredientAddition to recipe.
        */
       function addIngredientAddition() {
+        console.log($scope.Resource);
         const newIngredientAddition = new $scope.Resource({
           recipe: $scope.recipe.id,
           step_added: $scope.defaultStep.value,
@@ -61,6 +64,30 @@ function ingredientAdditions(breweryResources) {
       function doneAdding(ingredientAddition) {
         hideLoadingElement();
         $scope.ingredientAdditions.push(ingredientAddition);
+        $scope.recipe.$update();
+      }
+
+      /**
+       * Deletes ingredient addition and removes it from ingredientAdditions.
+       */
+      function deleteIngredientAddition(ingredientAddition) {
+        const index = $scope.ingredientAdditions.indexOf(ingredientAddition);
+        return ingredientAddition.$delete(() => {
+            $scope.ingredientAdditions.splice(index, 1);
+            $scope.recipe.$update();
+          })
+          .$promise;
+      }
+
+      /**
+       * Updates ingredient addition.
+       */
+      function updateIngredientAddition(ingredientAddition) {
+        const index = $scope.ingredientAdditions.indexOf(ingredientAddition);
+        return ingredientAddition.$update(() => {
+            $scope.recipe.$update();
+          })
+          .$promise;
       }
 
       /**
