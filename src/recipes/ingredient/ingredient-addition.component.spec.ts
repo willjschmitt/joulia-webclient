@@ -54,7 +54,7 @@ describe('app.recipes.ingredient.addition', function () {
       element = $compile(html)(scope);
 
       scope.$digest();
-      isolatedScope = element.isolateScope();
+      isolatedScope = element.controller('ingredientAddition');
     });
 
     describe('updateIngredientAddition', function() {
