@@ -6,11 +6,11 @@ import './sidebar-userbox.directive';
 import './sidebar-breweries.directive';
 
 angular
-  .module('app.common.sidebar',
+  .module('app.sidebar.sidebar',
     [
       'app.templates',
-      'app.common.sidebar-userbox',
-      'app.common.sidebar-breweries',
+      'app.sidebar.userbox',
+      'app.sidebar.breweries',
     ])
   .directive('sidebar', sidebar);
 
@@ -23,7 +23,7 @@ function sidebar($rootScope, $document) {
     scope: {
       user: '=',
     },
-    templateUrl: 'common/sidebar.tpl.html',
+    templateUrl: 'sidebar/sidebar.tpl.html',
     link: function sidebarController($scope) {
       $scope.toggleSidebar = toggleSidebar;
       handleToggleSidebar();

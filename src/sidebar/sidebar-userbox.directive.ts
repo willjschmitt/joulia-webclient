@@ -3,7 +3,7 @@ import angular = require('angular');
 import '../templates';
 
 angular
-  .module('app.common.sidebar-userbox', ['app.templates',])
+  .module('app.sidebar.userbox', ['app.templates',])
   .directive('sidebarUserbox', sidebarUserbox);
 
 function sidebarUserbox() {
@@ -13,7 +13,7 @@ function sidebarUserbox() {
     scope: {
       user: '=',
     },
-    templateUrl: 'common/sidebar-userbox.tpl.html',
+    templateUrl: 'sidebar/sidebar-userbox.tpl.html',
     link: function sidebarUserboxController($scope) {
       $scope.fullName = fullName;
 

@@ -3,7 +3,7 @@ import angular = require('angular');
 import '../templates';
 
 angular
-  .module('app.common.sidebar-sub-menu', ['app.templates',])
+  .module('app.sidebar.sub-menu', ['app.templates',])
   .directive('sidebarSubMenu', sidebarSubMenu);
 
 sidebarSubMenu.$inject = [];
@@ -13,7 +13,7 @@ function sidebarSubMenu() {
     restrict: 'EA',
     transclude: true,
     scope: {},
-    templateUrl: 'common/sidebar-sub-menu.tpl.html',
+    templateUrl: 'sidebar/sidebar-sub-menu.tpl.html',
     link: function sidebarSubMenuController() {
     },
   };

@@ -4,8 +4,8 @@ import 'angular-mocks';
 
 import './sidebar-sub-menu.directive';
 
-describe('app.common.sidebar-sub-menu', function () {
-  beforeEach(angular.mock.module('app.common.sidebar-sub-menu'));
+describe('app.sidebar.sub-menu', function () {
+  beforeEach(angular.mock.module('app.sidebar.sub-menu'));
 
   var $rootScope, $compile, $httpBackend;
 

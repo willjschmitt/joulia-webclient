@@ -4,10 +4,10 @@ import '../templates';
 import './sidebar-sub-menu.directive';
 
 angular
-  .module('app.common.sidebar-brewery',
+  .module('app.sidebar.brewery',
     [
       'app.templates',
-      'app.common.sidebar-sub-menu',
+      'app.sidebar.sub-menu',
     ])
   .directive('sidebarBrewery', sidebarBrewery);
 
@@ -21,7 +21,7 @@ function sidebarBrewery() {
       brewery: '=',
       brewhouses: '=',
     },
-    templateUrl: 'common/sidebar-brewery.tpl.html',
+    templateUrl: 'sidebar/sidebar-brewery.tpl.html',
     link: function sidebarBreweryController($scope, $element) {
       $scope.brewhousesClass = 'hide-sub-menu';
       $scope.toggleBrewhouses = function toggleBrewhouses() {

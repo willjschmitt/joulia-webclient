@@ -13,7 +13,7 @@ import './profile/profile.module';
 import './recipes/recipes.module';
 
 import './common/joulia-header.directive';
-import './common/sidebar.directive';
+import './sidebar/sidebar.directive';
 
 // Polyfills.
 jQuery.fn.load = function(callback){ $(window).on("load", callback) };
@@ -33,7 +33,7 @@ angular
     'perfect_scrollbar',
 
     'app.common.joulia-header',
-    'app.common.sidebar',
+    'app.sidebar.sidebar',
   ])
   .service('unauthorizedInterceptor', unauthorizedInterceptor)
   .config(routeConfig)

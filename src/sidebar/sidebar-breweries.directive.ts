@@ -2,15 +2,15 @@ import angular = require('angular');
 import _ = require('underscore');
 
 import '../templates';
-import './brewery-resources.factory';
+import '../common/brewery-resources.factory';
 import './sidebar-brewery.directive';
 
 angular
-  .module('app.common.sidebar-breweries',
+  .module('app.sidebar.breweries',
     [
       'app.templates',
       'app.common.brewery-resources',
-      'app.common.sidebar-brewery',
+      'app.sidebar.brewery',
     ])
   .directive('sidebarBreweries', sidebarBreweries);
 
@@ -21,7 +21,7 @@ export function sidebarBreweries(breweryResources) {
     restrict: 'A',
     transclude: true,
     scope: {},
-    templateUrl: 'common/sidebar-breweries.tpl.html',
+    templateUrl: 'sidebar/sidebar-breweries.tpl.html',
     link: function sidebarBreweriesController($scope) {
       $scope.brewerys = breweryResources.Brewery.query(getBrewhouses);
       $scope.brewhouseMap = {};

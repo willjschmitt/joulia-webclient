@@ -4,8 +4,8 @@ import 'angular-mocks';
 
 import './sidebar-brewery.directive';
 
-describe('app.common.sidebar-brewery', function () {
-  beforeEach(angular.mock.module('app.common.sidebar-brewery'));
+describe('app.sidebar.brewery', function () {
+  beforeEach(angular.mock.module('app.sidebar.brewery'));
 
   var $rootScope, $compile;
 

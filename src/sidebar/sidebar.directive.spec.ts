@@ -4,8 +4,8 @@ import 'angular-mocks';
 
 import './sidebar.directive';
 
-describe('app.common.sidebar', function () {
-  beforeEach(angular.mock.module('app.common.sidebar'));
+describe('app.sidebar.sidebar', function () {
+  beforeEach(angular.mock.module('app.sidebar.sidebar'));
   beforeEach(angular.mock.module('app.templates'));
 
   var $rootScope, $compile, $httpBackend;
