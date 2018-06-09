@@ -13,7 +13,7 @@ import './profile/profile.module';
 import './recipes/recipes.module';
 
 import './common/joulia-header.directive';
-import './sidebar/sidebar.directive';
+import './sidebar/sidebar.component';
 
 // Polyfills.
 jQuery.fn.load = function(callback){ $(window).on("load", callback) };

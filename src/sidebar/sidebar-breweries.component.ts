@@ -3,7 +3,7 @@ import _ = require('underscore');
 
 import '../templates';
 import '../common/brewery-resources.factory';
-import './sidebar-brewery.directive';
+import './sidebar-brewery.component';
 
 angular
   .module('app.sidebar.breweries',

@@ -2,7 +2,7 @@
 import angular = require('angular');
 import 'angular-mocks';
 
-import './sidebar.directive';
+import './sidebar.component';
 
 describe('app.sidebar.sidebar', function () {
   beforeEach(angular.mock.module('app.sidebar.sidebar'));

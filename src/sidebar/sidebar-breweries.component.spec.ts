@@ -2,7 +2,7 @@
 import angular = require('angular');
 import 'angular-mocks';
 
-import './sidebar-breweries.directive';
+import './sidebar-breweries.component';
 
 describe('app.sidebar.breweries', function () {
   beforeEach(angular.mock.module('app.sidebar.breweries'));

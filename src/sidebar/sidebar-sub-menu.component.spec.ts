@@ -2,7 +2,7 @@
 import angular = require('angular');
 import 'angular-mocks';
 
-import './sidebar-sub-menu.directive';
+import './sidebar-sub-menu.component';
 
 describe('app.sidebar.sub-menu', function () {
   beforeEach(angular.mock.module('app.sidebar.sub-menu'));

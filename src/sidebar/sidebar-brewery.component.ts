@@ -1,7 +1,7 @@
 import angular = require('angular');
 
 import '../templates';
-import './sidebar-sub-menu.directive';
+import './sidebar-sub-menu.component';
 
 angular
   .module('app.sidebar.brewery',

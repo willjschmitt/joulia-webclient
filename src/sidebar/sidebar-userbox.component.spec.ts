@@ -2,7 +2,7 @@
 import angular = require('angular');
 import 'angular-mocks';
 
-import './sidebar-userbox.directive';
+import './sidebar-userbox.component';
 
 describe('app.sidebar.userbox', function () {
   beforeEach(angular.mock.module('app.sidebar.userbox'));

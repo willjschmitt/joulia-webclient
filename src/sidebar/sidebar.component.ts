@@ -2,8 +2,8 @@ import angular = require('angular');
 import * as $ from 'jquery';
 
 import '../templates';
-import './sidebar-userbox.directive';
-import './sidebar-breweries.directive';
+import './sidebar-userbox.component';
+import './sidebar-breweries.component';
 
 angular
   .module('app.sidebar.sidebar',
