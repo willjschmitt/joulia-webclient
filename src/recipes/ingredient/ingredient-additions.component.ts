@@ -24,13 +24,13 @@ function ingredientAdditions(breweryResources) {
     transclude: true,
     scope: {
       // Human readable title used for the header for the panel.
-      title: '=',
+      title: '<',
 
-      recipeId: '=',
-      ingredientResource: '=',
-      ingredientHtml: '=',
-      Resource: '=resource',
-      defaultStep: '=',
+      recipeId: '<',
+      ingredientResource: '<',
+      ingredientHtml: '<',
+      Resource: '<resource',
+      defaultStep: '<',
 
       // Callback to be called when a change is made to ingredient additions.
       // Includes adding, removing, or saving an addition. Should return a
@@ -41,47 +41,41 @@ function ingredientAdditions(breweryResources) {
     link: function ingredientAdditionsController($scope, $element) {
       $scope.ingredientAdditions = $scope.Resource.query(
           { recipe: $scope.recipeId });
-      $scope.addIngredientAddition = addIngredientAddition;
-      $scope.deleteIngredientAddition = deleteIngredientAddition;
-      $scope.updateIngredientAddition = updateIngredientAddition;
       $scope.steps = breweryResources.BREWING_STEP_CHOICES_ordered;
       $scope.units = breweryResources.UNITS_CHOICES_ordered;
 
       /**
        * Saves and adds new ingredientAddition to recipe.
        */
-      function addIngredientAddition() {
+      $scope.addIngredientAddition = function addIngredientAddition() {
         const newIngredientAddition = new $scope.Resource({
           recipe: $scope.recipeId,
           step_added: $scope.defaultStep.value,
         });
         showLoadingElement();
-        newIngredientAddition.$save(
-            ingredientAddition => doneAdding(ingredientAddition),
-            hideLoadingElement);
-      }
-
-      /**
-       * Handles a successful addition of a new ingredient addition. Hides
-       * the loading icon and adds the new ingredient to the
-       * ingredientAdditions array.
-       */
-      function doneAdding(ingredientAddition) {
-        hideLoadingElement();
-        $scope.ingredientAdditions.push(ingredientAddition);
-        $scope.onChange();
+        return newIngredientAddition.$save(
+          ingredientAddition => {
+            hideLoadingElement();
+            $scope.ingredientAdditions.push(ingredientAddition);
+            $scope.onChange();
+          },
+          () => {
+            hideLoadingElement();
+          }
+        );
       }
 
       /**
        * Deletes ingredient addition and removes it from ingredientAdditions.
        */
-      function deleteIngredientAddition(ingredientAddition) {
+      $scope.deleteIngredientAddition = function deleteIngredientAddition(
+          ingredientAddition) {
         const index = $scope.ingredientAdditions.indexOf(ingredientAddition);
-        return ingredientAddition.$delete(() => {
+        return ingredientAddition.$delete(
+          () => {
             $scope.ingredientAdditions.splice(index, 1);
             $scope.onChange();
-          })
-          .$promise;
+          });
       }
 
       /**
@@ -89,10 +83,55 @@ function ingredientAdditions(breweryResources) {
        */
       function updateIngredientAddition(ingredientAddition) {
         const index = $scope.ingredientAdditions.indexOf(ingredientAddition);
-        return ingredientAddition.$update(() => {
+        return ingredientAddition.$update(
+          () => {
             $scope.onChange();
-          })
-          .$promise;
+          });
+      }
+
+      /**
+       * Updates ingredient on an ingredient addition.
+       */
+      $scope.updateIngredient = function updateIngredient(
+          ingredientAddition, value) {
+        ingredientAddition.ingredient = value;
+        return updateIngredientAddition(ingredientAddition);
+      }
+
+      /**
+       * Updates amount on an ingredient addition.
+       */
+      $scope.updateAmount = function updateUnits(
+          ingredientAddition, value) {
+        ingredientAddition.amount = value;
+        return updateIngredientAddition(ingredientAddition);
+      }
+
+      /**
+       * Updates units on an ingredient addition.
+       */
+      $scope.updateUnits = function updateUnits(
+          ingredientAddition, value) {
+        ingredientAddition.units = value;
+        return updateIngredientAddition(ingredientAddition);
+      }
+
+      /**
+       * Updates step_added on an ingredient addition.
+       */
+      $scope.updateStepAdded = function updateStepAdded(
+          ingredientAddition, value) {
+        ingredientAddition.step_added = value;
+        return updateIngredientAddition(ingredientAddition);
+      }
+
+      /**
+       * Updates time_added on an ingredient addition.
+       */
+      $scope.updateTimeAdded = function updateTimeAded(
+          ingredientAddition, value) {
+        ingredientAddition.time_added = value;
+        return updateIngredientAddition(ingredientAddition);
       }
 
       /**

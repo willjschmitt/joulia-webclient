@@ -27,11 +27,11 @@
         step-added="ingredientAddition.step_added"
         time-added="ingredientAddition.time_added"
 
-        on-update-ingredient="updateIngredient(value)"
-        on-update-amount="updateAmount(value)"
-        on-update-units="updateUnits(value)"
-        on-update-step-added="updateStepAdded(value)"
-        on-update-time-added="updateTimeAdded(value)"
+        on-update-ingredient="updateIngredient(ingredientAddition, value)"
+        on-update-amount="updateAmount(ingredientAddition, value)"
+        on-update-units="updateUnits(ingredientAddition, value)"
+        on-update-step-added="updateStepAdded(ingredientAddition, value)"
+        on-update-time-added="updateTimeAdded(ingredientAddition, value)"
 
         on-delete="deleteIngredientAddition(ingredientAddition)"
 
