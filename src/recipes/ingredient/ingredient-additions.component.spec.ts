@@ -73,7 +73,6 @@ describe('app.recipes.ingredient.additions', function () {
       additionAdd = $httpBackend
         .when('POST', /brewery\/api\/malt_ingredient_addition/)
           .respond(function (method, url, data, headers, params) {
-            //console.log('hi');
             return [200, data];
           });
       additionUpdate = $httpBackend
@@ -98,10 +97,10 @@ describe('app.recipes.ingredient.additions', function () {
       spyOn(scope, 'onChange').and.callThrough();
       element = $compile(html)(scope);
 
-      $httpBackend.expectGET(/brewery\/api\/malt_ingredient\?id=\d+/);
+      $httpBackend.expectGET(/brewery\/api\/malt_ingredient_addition\?recipe=\d+/);
       scope.$digest();
       $httpBackend.flush();
-      isolatedScope = element.isolateScope();
+      isolatedScope = element.controller('ingredientAdditions');
     });
 
     describe('addIngredientAddition', function() {

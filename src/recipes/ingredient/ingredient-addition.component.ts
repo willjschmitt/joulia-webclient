@@ -63,7 +63,6 @@ function IngredientAdditionController($element, $interpolate, breweryResources) 
   const $scope = this;
 
   $scope.$onChanges = function(changesObj) {
-    console.log(changesObj);
     if (changesObj.ingredient) {
       $scope.ingredientObj = { id: changesObj.ingredient.currentValue };
     }
