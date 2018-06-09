@@ -2,11 +2,11 @@
   <div class="row">
     <div class="col-xs-12 form-group">
       <searchable-select
-          parent="ingredientAddition"
-          attribute="'ingredient'"
-          search-resource="ingredientResource"
-          item-html="ingredientHtml"
-          change="updateIngredientAddition"
+          parent="$ctrl.ingredientObj"
+          attribute="'id'"
+          search-resource="$ctrl.ingredientResource"
+          item-html="$ctrl.ingredientHtml"
+          change="$ctrl.updateIngredient"
           label="'Ingredient'">
       </searchable-select>
       <div
@@ -28,10 +28,11 @@
         <input
             name="time"
             class="form-control"
-            ng-model="userAmount"
+            ng-model="$ctrl.userAmount"
             ng-model-options="{ debounce: 1000 }"
             step="0.01"
-            type="number"/>
+            type="number"
+            ng-change="$ctrl.updateUserAmount($ctrl.userAmount)"/>
         <label>Amount</label>
       </div>
     </div>
@@ -41,8 +42,9 @@
             name="stepAddedSelector"
             id="stepAddedSelector"
             class="form-control"
-            ng-options="unit.value as unit.name for unit in units"
-            ng-model="ingredientAddition.units">
+            ng-options="unit.value as unit.name for unit in $ctrl.unitsOptions"
+            ng-model="$ctrl.units"
+            ng-change="$ctrl.updateUnits($ctrl.units)">
         </select>
         <label>Units</label>
       </div>
@@ -52,11 +54,11 @@
         <input
             name="time"
             class="form-control"
-            ng-model="ingredientAddition.time_added"
+            ng-model="$ctrl.timeAdded"
             ng-model-options="{ debounce: 1000 }"
             step="1"
             type="number"
-            ng-change="updateIngredientAddition()" />
+            ng-change="$ctrl.updateTimeAdded($ctrl.timeAdded)" />
         <label>Time (min)</label>
       </div>
     </div>
@@ -66,15 +68,15 @@
             name="stepAddedSelector"
             id="stepAddedSelector"
             class="form-control"
-            ng-options="step.value as step.name for step in steps"
-            ng-model="ingredientAddition.step_added"
-            ng-change="updateIngredientAddition()">
+            ng-options="step.value as step.name for step in $ctrl.steps"
+            ng-model="$ctrl.stepAdded"
+            ng-change="$ctrl.updateStepAdded($ctrl.stepAdded)">
         </select>
         <label>Step added</label>
       </div>
     </div>
     <div class="col-xs-1">
-      <a href="" ng-click="removeIngredientAddition()">
+      <a href="" ng-click="$ctrl.removeIngredientAddition()">
         <i class="material-icons">delete</i>
       </a>
     </div>

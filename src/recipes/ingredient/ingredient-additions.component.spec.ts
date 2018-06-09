@@ -32,7 +32,7 @@ describe('app.recipes.ingredient.additions', function () {
     const html = `
         <ingredient-additions
             title="title"
-            recipe="recipe"
+            recipe-id="recipeId"
             ingredient-resource="searchResource"
             ingredient-html="ingredientHTML"
             resource="resource"
@@ -86,7 +86,7 @@ describe('app.recipes.ingredient.additions', function () {
 
     beforeEach(function () {
       scope = $rootScope.$new();
-      scope.recipe = new breweryResources.Recipe({ id: recipeId });
+      scope.recipeId = recipeId;
       scope.searchResource = breweryResources.MaltIngredientSearch;
       scope.resource = breweryResources.MaltIngredientAddition;
       scope.defaultStep = breweryResources.BREWING_STEP_CHOICES.MASH;

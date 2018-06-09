@@ -1,6 +1,6 @@
 {{label}}<ui-select
     ng-model="parent[attribute]"
-    ng-change="change()"
+    ng-change="change(parent[attribute])"
     theme="bootstrap">
   <ui-select-match placeholder="{{ label }}">
     {{ $select.selected.name }}

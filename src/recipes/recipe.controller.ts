@@ -31,8 +31,10 @@ RecipeController.$inject = [
 
 export function RecipeController(
     $scope, $stateParams, breweryResources, recipeCalculations) {
+  $scope.recipeId = $stateParams.recipeId;
+
   $scope.recipe = breweryResources.Recipe.get(
-    { id: $stateParams.recipeId }, recipeUpdated);
+    { id: $scope.recipeId }, recipeUpdated);
 
   $scope.beerStyleSearch = breweryResources.BeerStyleSearch;
   $scope.beerStyleHTML = '<div>{{ name }}</div>';

@@ -20,11 +20,23 @@
     <ingredient-addition
         class="row"
         ng-repeat="ingredientAddition in ingredientAdditions"
-        addition="ingredientAddition"
-        ingredient-resource="ingredientResource"
-        ingredient-html="ingredientHtml"
+
+        ingredient="ingredientAddition.ingredient"
+        amount="ingredientAddition.amount"
+        units="ingredientAddition.units"
+        step-added="ingredientAddition.step_added"
+        time-added="ingredientAddition.time_added"
+
+        on-update-ingredient="updateIngredient(value)"
+        on-update-amount="updateAmount(value)"
+        on-update-units="updateUnits(value)"
+        on-update-step-added="updateStepAdded(value)"
+        on-update-time-added="updateTimeAdded(value)"
+
         on-delete="deleteIngredientAddition(ingredientAddition)"
-        on-update="updateIngredientAddition(ingredientAddition)">
+
+        ingredient-resource="ingredientResource"
+        ingredient-html="ingredientHtml">
     </ingredient-addition>
 
     <div class="row">
