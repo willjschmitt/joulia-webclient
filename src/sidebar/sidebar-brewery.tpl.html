@@ -13,13 +13,14 @@
   </span>
 </a>
 <ul sidebar-sub-menu ng-class="brewhousesClass">
-  <li
-      ng-repeat="brewhouse in brewhouses">
-    <a href="#!/brewhouse/{{brewhouse.id}}">
-      {{ brewhouse.name }}&nbsp;
-      <span class="label label-warning" ng-if="brewhouse.active">
-        Active
-      </span>
-    </a>
-  </li>
+  <div class="submenu-inner-wrapper">
+    <li ng-repeat="brewhouse in brewhouses">
+      <a href="#!/brewhouse/{{brewhouse.id}}">
+        {{ brewhouse.name }}&nbsp;
+        <span class="label label-warning" ng-if="brewhouse.active">
+          Active
+        </span>
+      </a>
+    </li>
+  </div>
 </ul>
