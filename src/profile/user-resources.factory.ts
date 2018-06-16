@@ -2,7 +2,7 @@ import angular = require('angular');
 import 'angular-resource';
 
 angular
-  .module('app.common.user-resources', ['ngResource',])
+  .module('app.profile.user-resources', ['ngResource',])
   .factory('userResources', userResources);
 
 userResources.$inject = ['$resource'];

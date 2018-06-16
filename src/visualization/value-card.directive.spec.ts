@@ -4,8 +4,8 @@ import 'angular-mocks';
 
 import './value-card.directive';
 
-describe('app.common.value-card', function () {
-  beforeEach(angular.mock.module('app.common.value-card'));
+describe('app.visualization.value-card', function () {
+  beforeEach(angular.mock.module('app.visualization.value-card'));
   beforeEach(angular.mock.module(function($provide) {
     $provide.factory('TimeSeriesUpdater', function () {
       function TimeSeriesUpdater(recipeInstance, name, variableType) {

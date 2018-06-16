@@ -3,13 +3,13 @@ import angular = require('angular');
 
 import '../templates';
 
-import './user-service.service';
+import '../profile/user-service.service';
 
 angular
   .module('app.common.joulia-header',
     [
       'app.templates',
-      'app.common.user-service',
+      'app.profile.user-service',
     ])
   .directive('jouliaHeader', jouliaHeader);
 

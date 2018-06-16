@@ -1,15 +1,15 @@
 import angular = require('angular');
 
 import '../templates';
-import '../common/user-service.service';
-import '../common/value-card.directive';
+import '../profile/user-service.service';
+import '../visualization/value-card.directive';
 
 angular
   .module('app.brewhouse.monitoring-cards',
     [
       'app.templates',
-      'app.common.user-service',
-      'app.common.value-card',
+      'app.profile.user-service',
+      'app.visualization.value-card',
     ])
   .directive('brewhouseMonitoringCards', brewhouseMonitoringCards);
 

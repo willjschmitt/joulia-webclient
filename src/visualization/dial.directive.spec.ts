@@ -4,8 +4,8 @@ import 'angular-mocks';
 
 import './dial.directive';
 
-describe('app.common.dial', function () {
-  beforeEach(angular.mock.module('app.common.dial'));
+describe('app.visualization.dial', function () {
+  beforeEach(angular.mock.module('app.visualization.dial'));
 
   var $httpBackend, $rootScope, $compile, $interval;
 

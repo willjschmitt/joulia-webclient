@@ -2,8 +2,8 @@
 import angular = require('angular');
 import 'angular-mocks';
 
-describe('app.common.user-service', function () {
-  beforeEach(angular.mock.module('app.common.user-service'));
+describe('app.profile.user-service', function () {
+  beforeEach(angular.mock.module('app.profile.user-service'));
 
   var $controller, $httpBackend, $rootScope, $compile, $location;
 

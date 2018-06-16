@@ -5,7 +5,7 @@ import angular = require('angular');
 import '../templates';
 
 angular
-  .module('app.common.dial', ['app.templates',])
+  .module('app.visualization.dial', ['app.templates',])
   .directive('dial', dial);
 
 dial.$inject = ['$interval'];
@@ -18,7 +18,7 @@ function dial($interval) {
       title: '=',
       value: '=',
     },
-    templateUrl: 'common/dial.tpl.html',
+    templateUrl: 'visualization/dial.tpl.html',
     link: function dialController($scope, $element) {
       // Update the pie chart dial color class based on the value.
       // TODO(will): Get duration to work.

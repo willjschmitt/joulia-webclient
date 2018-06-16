@@ -4,7 +4,7 @@ import 'peity';
 import '../templates';
 
 angular
-  .module('app.common.value-card',
+  .module('app.visualization.value-card',
     [
       'app.templates',
     ])
@@ -31,7 +31,7 @@ function valueCard(TimeSeriesUpdater) {
       // requesting historical data.
       historyTime: '=',
     },
-    templateUrl: 'common/value-card.tpl.html',
+    templateUrl: 'visualization/value-card.tpl.html',
     link: function valueCardController($scope) {
       // Give us all the little line things for the little cards.
       $('.peity-line').peity('line', { height: 28, width: 64 });

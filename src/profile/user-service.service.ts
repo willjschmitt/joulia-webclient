@@ -1,17 +1,17 @@
 import angular = require('angular');
 
 import '../templates';
-import './brewery-resources.factory';
-import './http-status.service';
+import '../common/brewery-resources.factory';
+import '../common/http-status.service';
 import './user-resources.factory';
 
 angular
-  .module('app.common.user-service',
+  .module('app.profile.user-service',
     [
       'app.templates',
       'app.common.brewery-resources',
       'app.common.http-status',
-      'app.common.user-resources',
+      'app.profile.user-resources',
     ])
   .service('userService', userService);
 

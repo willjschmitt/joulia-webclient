@@ -1,14 +1,14 @@
 import angular = require('angular');
 
 import '../templates';
-import '../common/dial.directive';
+import '../visualization/dial.directive';
 import '../common/time-series-updater.factory';
 
 angular
   .module('app.brewhouse.dials',
     [
       'app.templates',
-      'app.common.dial',
+      'app.visualization.dial',
       'app.common.time-series-updater',
     ])
   .directive('brewhouseDials', brewhouseDials);
