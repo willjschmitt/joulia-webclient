@@ -13,11 +13,13 @@ sidebarBrewery.$inject = [];
 
 function sidebarBrewery() {
   return {
+    // Make this an element component once figuring out how to maintain the CSS
+    // for li elements correctly.
     restrict: 'A',
     transclude: true,
     scope: {
-      brewery: '=',
-      brewhouses: '=',
+      brewery: '<',
+      brewhouses: '<',
     },
     templateUrl: 'sidebar/sidebar-brewery.tpl.html',
     link: function sidebarBreweryController($scope, $element) {

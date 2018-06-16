@@ -24,11 +24,11 @@ describe('app.sidebar.breweries', function () {
     var element, scope, isolatedScope;
     var breweryQuery, brewhouseQuery;
 
-    const html = `<ul sidebar-breweries></ul>`;
+    const html = `<sidebar-breweries></sidebar-breweries>`;
 
     beforeEach(function () {
       breweryQuery = $httpBackend.when('GET', 'brewery/api/brewery')
-        .respond([]);
+        .respond([{ name: 'Foo', id: 0 }, { name: 'Bar', id: 1 }]);
 
       brewhouseQuery = $httpBackend.when('GET', 'brewery/api/brewhouse')
         .respond([]);
@@ -41,26 +41,21 @@ describe('app.sidebar.breweries', function () {
         $httpBackend.expectGET('brewery/api/brewhouse');
         element = $compile(html)(scope);
         $httpBackend.flush();
-        isolatedScope = element.isolateScope();
+        isolatedScope = element.controller('sidebarBreweries');
       });
 
       it('contains brewerys', function () {
-        isolatedScope.brewerys = [
-          { name: 'Foo', brewhouse: [] },
-          { name: 'Bar', brewhouse: [] },
-        ];
         scope.$digest();
 
-        expect(element.children()[1].innerHTML).toContain('Foo');
-        expect(element.children()[2].innerHTML).toContain('Bar');
+        const ul = $(element.children()[0]);
+        expect(ul.children()[1].innerHTML).toContain('Foo');
+        expect(ul.children()[2].innerHTML).toContain('Bar');
       });
 
     });
 
     describe('mapBreweryToBrewhouse', function () {
       it('maps correctly', function () {
-        breweryQuery.respond([{ name: 'Foo', id: 0 }, { name: 'Bar', id: 1 }]);
-
         const brewhouse0 = { name: 'Foo', id: 0, brewery: 0 };
         const brewhouse1 = { name: 'Bar', id: 1, brewery: 1 };
         const brewhouse2 = { name: 'Baz', id: 2, brewery: 1 };
@@ -71,7 +66,7 @@ describe('app.sidebar.breweries', function () {
         $httpBackend.expectGET('brewery/api/brewhouse');
         element = $compile(html)(scope);
         $httpBackend.flush();
-        isolatedScope = element.isolateScope();
+        isolatedScope = element.controller('sidebarBreweries');
 
 
         // TODO(willjschmitt): Figure out how to compare this to a populated

@@ -1,9 +1,11 @@
-<li class="nav-main-heading">
-  <span class="sidebar-mini-hide">Equipment</span>
-</li>
-<li
-    sidebar-brewery
-    ng-repeat="brewery in brewerys"
-    brewery="brewery"
-    brewhouses="brewhouseMap[brewery.id]">
-</li>
+<ul>
+  <li class="nav-main-heading">
+    <span class="sidebar-mini-hide">Equipment</span>
+  </li>
+  <li
+      sidebar-brewery
+      ng-repeat="brewery in $ctrl.brewerys"
+      brewery="brewery"
+      brewhouses="$ctrl.brewhouseMap[brewery.id]">
+  </li>
+</ul>
