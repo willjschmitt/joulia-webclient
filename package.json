@@ -54,7 +54,7 @@
     "@types/underscore": "^1.8.8",
     "@uirouter/angularjs": "latest",
     "angular": "1.6.6",
-    "angular-perfect-scrollbar": "git://github.com/willjschmitt/angular-perfect-scrollbar#488b878eb2500959ceefdb0f12fdfedc432b7b10",
+    "angular-perfect-scrollbar": "^0.2.0",
     "angular-resource": "1.6.6",
     "angular-route": "1.6.6",
     "angular-sanitize": "1.6.6",
