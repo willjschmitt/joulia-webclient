@@ -36,12 +36,16 @@ const cssGlob = srcDir + '**/**.css';
 const imgGlob = srcDir + 'img/**/*.*';
 const srcTestGlob = srcDir + '**/**.spec.ts';
 
-// Removes temp and dist directories.
-gulp.task('clean', function (cb) {
-  del([tmpDir], function(){
-    del([distDir], cb);
-  });
+gulp.task('clean-temp', function () {
+  return del([tmpDir]);
 });
+
+gulp.task('clean-dist', function () {
+  return del([distDir]);
+})
+
+// Removes temp and dist directories.
+gulp.task('clean', ['clean-temp', 'clean-dist']);
 
 // Runs tslint on the original source TypeScript files.
 gulp.task('lint', function() {
@@ -54,7 +58,7 @@ gulp.task('lint', function() {
 
 // Builds HTML template files into a joulia.templates Angular module at
 // temp/joulia.js.
-gulp.task('html2js', function () {
+gulp.task('html2js', ['clean'], function () {
   return gulp.src('src/**/**.tpl.html')
              .pipe(html2js('templates.js', {
                  adapter: 'angular',
@@ -65,13 +69,13 @@ gulp.task('html2js', function () {
 });
 
 // Compiles TypeScript source files in src/ to temp/js directory.
-gulp.task('tsc', ['lint'], function () {
+gulp.task('tsc', ['lint', 'clean'], function () {
   return gulp.src(srcGlob)
              .pipe(tsProject())
              .js.pipe(gulp.dest(tmpDir));
 })
 
-gulp.task('bundle-internal-css', function () {
+gulp.task('bundle-internal-css', ['clean'], function () {
   return  browserify({
         debug: true,
         transform: ['browserify-css'],
@@ -84,7 +88,7 @@ gulp.task('bundle-internal-css', function () {
     .pipe(gulp.dest(staticDir));
 });
 
-gulp.task('bundle-public-css', function () {
+gulp.task('bundle-public-css', ['clean'], function () {
   return  browserify({
         debug: true,
         transform: ['browserify-css'],
@@ -103,7 +107,7 @@ gulp.task('build', ['tsc', 'html2js'], function() {});
 
 // Browersifies TypeScript compiled files and HTML templates into a single JS
 // bundle.js file.
-gulp.task('bundle-internal', ['build', 'bundle-internal-css'], function () {
+gulp.task('bundle-internal', ['build', 'bundle-internal-css', 'clean'], function () {
   return browserify({
         debug: true,
         entries: ['./temp/joulia-webclient.js'],
@@ -115,7 +119,7 @@ gulp.task('bundle-internal', ['build', 'bundle-internal-css'], function () {
     .pipe(gulp.dest(staticDir));
 });
 
-gulp.task('bundle-public', ['build', 'bundle-public-css'], function () {
+gulp.task('bundle-public', ['build', 'bundle-public-css', 'clean'], function () {
   return browserify({
         debug: true,
         entries: ['./temp/public.js'],
@@ -129,17 +133,17 @@ gulp.task('bundle-public', ['build', 'bundle-public-css'], function () {
 
 gulp.task('bundle', ['bundle-internal', 'bundle-public', 'copy-app']);
 
-gulp.task('copy-html', function () {
+gulp.task('copy-html', ['clean'], function () {
   return gulp.src(htmlGlob)
              .pipe(gulp.dest(staticDir));
 })
 
-gulp.task('copy-css', function () {
+gulp.task('copy-css', ['clean'], function () {
   return gulp.src(cssGlob)
              .pipe(gulp.dest(staticDir));
 })
 
-gulp.task('copy-img', function () {
+gulp.task('copy-img', ['clean'], function () {
   return gulp.src(imgGlob)
              .pipe(gulp.dest(staticDir + 'img/'));
 })

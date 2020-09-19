@@ -4,7 +4,7 @@ import 'angular-ui-bootstrap';
 
 import '../templates';
 import '../common/brewery-resources.factory';
-import '../common/user-service.service';
+import '../profile/user-service.service';
 import './add-brewery-modal.controller';
 import './dashboard-brewery.directive';
 
@@ -14,7 +14,7 @@ angular
       'ui.bootstrap',
       'app.templates',
       'app.common.brewery-resources',
-      'app.common.user-service',
+      'app.profile.user-service',
       'app.dashboard.add-brewery-modal',
       'app.dashboard.brewery',
     ])

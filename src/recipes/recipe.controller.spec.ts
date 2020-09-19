@@ -27,9 +27,7 @@ describe('app.recipes recipe.controller', function () {
     var controller, scope;
     var recipeGet;
     var beerStyleQuery;
-    var maltIngredientQuery, bitteringIngredientQuery;
     var mashPointQuery;
-    var maltIngredientAdditionQuery, bitteringIngredientAdditionQuery;
 
     beforeEach(function () {
       recipeGet = $httpBackend.when('GET', 'brewery/api/recipe/12')
@@ -38,75 +36,12 @@ describe('app.recipes recipe.controller', function () {
       $httpBackend.expectGET('brewery/api/recipe/12');
     });
 
-    // Define responses for the non-recipe-specific items (e.g: beer style, and
-    // ingredients.
-    beforeEach(function () {
-      maltIngredientQuery = $httpBackend.when(
-          'GET', 'brewery/api/malt_ingredient')
-        .respond([
-          { id: 1, name: "US 2-Row" },
-          { id: 3, name: "Maris Otter" }]);
-
-      bitteringIngredientQuery = $httpBackend.when(
-          'GET', 'brewery/api/bittering_ingredient')
-        .respond([
-          { id: 1, name: "Mosaic" },
-          { id: 3, name: "Galaxy" }]);
-    });
-
     // Define responses for queries for foreign items attached to the recipe.
     beforeEach(function () {
       mashPointQuery = $httpBackend.whenGET(
           /brewery\/api\/mash_point\?recipe=\d+/).respond([]);
 
-      maltIngredientAdditionQuery = $httpBackend.when(
-          'GET', /brewery\/api\/malt_ingredient_addition\?recipe=\d+/)
-        .respond(function(method, url, data, headers, params) {
-          if (!params.hasOwnProperty('recipe')) {
-            throw new Error("missing recipe in malt_ingredient_addition query");
-          }
-          return [
-            200,
-            [
-              {
-                id: 1,
-                recipe: params.recipe,
-                ingredient: 1,
-                amount: 100.0,
-                step_added: breweryResources.BREWING_STEP_CHOICES.MASH.value,
-                time_added: 5400,
-              },
-            ],
-          ];
-        });
-
-      bitteringIngredientAdditionQuery = $httpBackend.when(
-          'GET', /brewery\/api\/bittering_ingredient_addition\?recipe=\d+/)
-        .respond(function(method, url, data, headers, params) {
-          if (!params.hasOwnProperty('recipe')) {
-            throw new Error(
-              "missing recipe in bittering_ingredient_addition query");
-          }
-          return [
-            200,
-            [
-              {
-                id: 1,
-                recipe: params.recipe,
-                ingredient: 1,
-                amount: 100.0,
-                step_added: breweryResources.BREWING_STEP_CHOICES.BOIL.value,
-                time_added: 3600,
-              },
-            ],
-          ];
-        });
-
       $httpBackend.expectGET(/brewery\/api\/mash_point\?recipe=\d+/);
-      $httpBackend.expectGET(
-          /brewery\/api\/malt_ingredient_addition\?recipe=\d+/);
-      $httpBackend.expectGET(
-          /brewery\/api\/bittering_ingredient_addition\?recipe=\d+/);
     });
 
     var recipeUpdate;

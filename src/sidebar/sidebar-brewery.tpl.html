@@ -1,0 +1,26 @@
+<a href="" ng-click="toggleBrewhouses()">
+  <span class="menu-item-ico">
+    <i class="material-icons">location_city</i>
+  </span>
+  <span class="menu-item-name">
+    {{ brewery.name }}&nbsp;
+    <span class="badge badge-success">
+      {{ brewhouses.length }}
+    </span>
+  </span>
+  <span class='menu-item-submenu-arrow'>
+    <i class='fa fa-angle-right'></i>
+  </span>
+</a>
+<ul sidebar-sub-menu ng-class="brewhousesClass">
+  <div class="submenu-inner-wrapper">
+    <li ng-repeat="brewhouse in brewhouses">
+      <a href="#!/brewhouse/{{brewhouse.id}}">
+        {{ brewhouse.name }}&nbsp;
+        <span class="label label-warning" ng-if="brewhouse.active">
+          Active
+        </span>
+      </a>
+    </li>
+  </div>
+</ul>

@@ -6,7 +6,7 @@ import 'circularProgress';
 
 import '../common/brewery-resources.factory';
 import '../common/searchable-select.directive';
-import './ingredient-additions.directive';
+import './ingredient/ingredient-additions.component';
 import './mash-profile.directive';
 import './recipe-calculations.service';
 import './recipe-fermentation.directive';
@@ -19,7 +19,7 @@ angular
       'app.common.brewery-resources',
       'app.common.searchable-select',
       'app.recipes.mash-profile',
-      'app.recipes.ingredient-additions',
+      'app.recipes.ingredient.additions',
       'app.recipes.recipe-calculations',
       'app.recipes.recipe-fermentation',
       'app.recipes.recipe-property',
@@ -31,8 +31,10 @@ RecipeController.$inject = [
 
 export function RecipeController(
     $scope, $stateParams, breweryResources, recipeCalculations) {
+  $scope.recipeId = $stateParams.recipeId;
+
   $scope.recipe = breweryResources.Recipe.get(
-    { id: $stateParams.recipeId }, recipeUpdated);
+    { id: $scope.recipeId }, recipeUpdated);
 
   $scope.beerStyleSearch = breweryResources.BeerStyleSearch;
   $scope.beerStyleHTML = '<div>{{ name }}</div>';
@@ -45,12 +47,6 @@ export function RecipeController(
     }
     $scope.mashPoints = breweryResources.MashPoint.query(
         { recipe: $scope.recipe.id });
-    $scope.maltIngredientAdditions
-        = breweryResources.MaltIngredientAddition.query(
-            { recipe: $scope.recipe.id });
-    $scope.bitteringIngredientAdditions
-        = breweryResources.BitteringIngredientAddition.query(
-            { recipe: $scope.recipe.id });
   }
 
   function doneLoading() {

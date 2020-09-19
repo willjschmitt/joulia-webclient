@@ -3,8 +3,8 @@ import 'angular-ui-bootstrap';
 
 import '../templates';
 import '../common/brewery-resources.factory';
-import './launch-recipe-modal.controller';
-import './recipe-instances.service';
+import './instance/launch-recipe-modal.component';
+import './instance/recipe-instances.service';
 import './recipe-calculations.service';
 
 angular
@@ -13,8 +13,8 @@ angular
       'ui.bootstrap',
       'app.templates',
       'app.common.brewery-resources',
-      'app.recipes.launch-recipe-modal',
-      'app.recipes.recipe-instances',
+      'app.recipes.instance.launch-recipe-modal',
+      'app.recipes.instance.recipe-instances',
       'app.recipes.recipe-calculations',
     ])
   .directive('recipeCard', recipeCard);
@@ -63,8 +63,7 @@ function recipeCard(
       function launch() {
         const modalInstance = $uibModal.open({
           animation: true,
-          templateUrl: 'recipes/launch-recipe-modal.tpl.html',
-          controller: 'LaunchRecipeModalController',
+          component: 'launchRecipeModal',
         });
 
         modalInstance.result

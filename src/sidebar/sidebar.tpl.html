@@ -1,0 +1,63 @@
+<aside
+    id="left-content"
+    data-toggle="open"
+    data-default="open"
+    data-size=""
+    style="height: 100%;"
+    ng-class="sidebarClass">
+  <header class="header-container" ng-click="toggleSidebar()">
+    <div class="header-wrapper">
+      <div id="header-brand">
+        <div class="logo padding-left-2">
+          <span class="logo-image">J</span>
+          <span class="logo-text">Joulia</span>
+        </div>
+      </div>
+    </div>
+  </header>
+  <div id="sidebar-wrapper" perfect-scrollbar>
+    <sidebar-userbox user="user"></sidebar-userbox>
+
+    <nav id="sidebar">
+      <ul>
+        <li>
+          <a href="#!/dashboard">
+            <span class="menu-item-ico">
+              <i class="material-icons">dashboard</i>
+            </span>
+            <span class="menu-item-name">Dashboard</span>
+          </a>
+        </li>
+      </ul>
+
+      <ul>
+        <li>
+          <a href="#!/profile">
+            <span class="menu-item-ico">
+              <i class="material-icons">settings</i>
+            </span>
+            <span class="menu-item-name">User Profile</span>
+          </a>
+        </li>
+      </ul>
+
+      <ul>
+        <li>
+          <a href="#!/recipes">
+            <span class="menu-item-ico">
+              <i class="material-icons">collections_bookmark</i>
+            </span>
+            <span class="menu-item-name">Recipes</span>
+          </a>
+        </li>
+
+      </ul>
+
+      <!-- TODO(willjschmitt): Consider alternative if this causes alignment
+           issues from not containing all child li's in the parent ul. -->
+      <sidebar-breweries></sidebar-breweries>
+
+    </nav>
+
+  </div>
+</aside>
