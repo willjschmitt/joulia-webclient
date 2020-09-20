@@ -1,8 +1,6 @@
 'use strict';
 
 var gulp       = require('gulp'),
-    uglify     = require('gulp-uglify'),
-    sourcemaps = require('gulp-sourcemaps'),
     ts         = require('gulp-typescript'),
     tslint     = require('gulp-tslint'),
     del        = require('del'),
@@ -11,7 +9,6 @@ var gulp       = require('gulp'),
     browserify = require("browserify"),
     source     = require('vinyl-source-stream'),
     buffer     = require('vinyl-buffer'),
-    tsify      = require("tsify"),
     coveralls  = require('gulp-coveralls');
 
 var tsProject = ts.createProject({
@@ -27,14 +24,10 @@ const tmpDir = './temp/';
 const distDir = './dist/';
 const staticDir = './dist/static/';
 
-const tmpJsGlob = tmpDir + '**/**.js';
-const tmpTestGlob = tmpDir + '**/**.spec.js';
-
 const srcGlob = srcDir + '**/**.ts';
 const htmlGlob = srcDir + '*.html';
 const cssGlob = srcDir + '**/**.css';
 const imgGlob = srcDir + 'img/**/*.*';
-const srcTestGlob = srcDir + '**/**.spec.ts';
 
 // Removes temp and dist directories.
 gulp.task('clean', function (cb) {
@@ -69,7 +62,7 @@ gulp.task('tsc', ['lint'], function () {
   return gulp.src(srcGlob)
              .pipe(tsProject())
              .js.pipe(gulp.dest(tmpDir));
-})
+});
 
 gulp.task('bundle-internal-css', function () {
   return  browserify({
@@ -80,7 +73,6 @@ gulp.task('bundle-internal-css', function () {
     .bundle()
     .pipe(source('joulia.css.js'))
     .pipe(buffer())
-    //.pipe(uglify())
     .pipe(gulp.dest(staticDir));
 });
 
@@ -111,7 +103,6 @@ gulp.task('bundle-internal', ['build', 'bundle-internal-css'], function () {
     .bundle()
     .pipe(source('joulia-webclient.js'))
     .pipe(buffer())
-    //.pipe(uglify())
     .pipe(gulp.dest(staticDir));
 });
 
@@ -123,7 +114,6 @@ gulp.task('bundle-public', ['build', 'bundle-public-css'], function () {
     .bundle()
     .pipe(source('public.js'))
     .pipe(buffer())
-    //.pipe(uglify())
     .pipe(gulp.dest(staticDir));
 });
 
@@ -132,29 +122,29 @@ gulp.task('bundle', ['bundle-internal', 'bundle-public', 'copy-app']);
 gulp.task('copy-html', function () {
   return gulp.src(htmlGlob)
              .pipe(gulp.dest(staticDir));
-})
+});
 
 gulp.task('copy-css', function () {
   return gulp.src(cssGlob)
              .pipe(gulp.dest(staticDir));
-})
+});
 
 gulp.task('copy-img', function () {
   return gulp.src(imgGlob)
              .pipe(gulp.dest(staticDir + 'img/'));
-})
+});
 
 gulp.task('copy-node-modules', function () {
   const nodeGlob = './node_modules/**/**';
   return gulp.src(nodeGlob)
              .pipe(gulp.dest(staticDir + 'node_modules/'));
-})
+});
 
 gulp.task('copy-bower-components', function () {
   const bowerGlob = './bower_components/**/**';
   return gulp.src(bowerGlob)
              .pipe(gulp.dest(staticDir + 'bower_components/'));
-})
+});
 
 gulp.task('copy-app',
   ['copy-html', 'copy-css', 'copy-img']);
@@ -172,7 +162,7 @@ gulp.task('coveralls', ['test'], function() {
       .pipe(coveralls());
 });
 
-gulp.task('travis', ['test', 'coveralls']);
+gulp.task('ci', ['test', 'coveralls']);
 
 gulp.task('default', ['test', 'bundle']);
 
