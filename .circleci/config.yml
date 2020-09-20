@@ -1,0 +1,114 @@
+# yarn run is used to run things instead of just ng cli.
+
+version: 2.1
+
+orbs:
+  gcp-gcs: t3n/gcs@0.1.3
+
+jobs:
+  # Stands up environment, installing dependencies.
+  # Restores and saves our cache of node_modules.
+  environment:
+    docker:
+      - image: circleci/node:10-browsers
+
+    working_directory: /tmp/workspace
+
+    steps:
+      - checkout
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+
+      - run: yarn install
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+
+      - persist_to_workspace:
+          root: /tmp/workspace
+          paths:
+            - "**"
+
+  # Runs angular tests.
+  # Also restores and saves our cache of node_modules.
+  test:
+    docker:
+      - image: circleci/node:10-browsers
+
+    working_directory: /tmp/workspace
+
+    steps:
+      - attach_workspace:
+          at: /tmp/workspace
+
+      - run: sudo npm install -g gulp
+
+      - run:
+          name: Run angular tests.
+          command: gulp ci
+
+  # Builds a distributable bundle for production.
+  build:
+    docker:
+      - image: circleci/node:10-browsers
+
+    working_directory: /tmp/workspace
+
+    steps:
+      - attach_workspace:
+          at: /tmp/workspace
+
+      - run: sudo npm install -g gulp
+
+      - run:
+          name: Build bundle.
+          command: gulp bundle
+
+      - persist_to_workspace:
+          root: /tmp/workspace
+          paths:
+            - dist
+
+  # Rsyncs data to GCS bucket.
+  deploy-to-gcs-bucket:
+    docker:
+      - image: google/cloud-sdk
+
+    steps:
+      - attach_workspace:
+          at: /tmp/workspace
+
+      - gcp-gcs/gcs-rsync:
+          gcloud-service-key: GCLOUD_SERVICE_KEY
+          google-project-id: GOOGLE_PROJECT_ID
+          bucket: "static.joulia.io"
+          source: "dist"
+          options: "-a public-read -h \"Cache-Control:private, max-age=0, no-transform\""
+
+
+workflows:
+  version: 2
+
+  test_and_deploy:
+    jobs:
+      - environment
+      - test:
+          requires:
+            - environment
+      - build:
+          requires:
+            - test
+      - deploy-to-gcs-bucket:
+          requires:
+            - build
+          filters:
+            branches:
+              only:
+                - master
