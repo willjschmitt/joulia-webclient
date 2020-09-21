@@ -1,5 +1,5 @@
-import screenfull = require('screenfull');
-import angular = require('angular');
+import * as screenfull from 'screenfull';
+import * as angular from 'angular';
 
 import '../templates';
 

@@ -1,4 +1,4 @@
-import angular = require('angular');
+import * as angular from 'angular';
 
 import 'ui-select';
 
@@ -54,7 +54,10 @@ function searchableSelect($interpolate) {
        * Refresh items with a search query performed against the server.
        */
       function refreshItems(searchParameter?) {
-        const searchTerms = {};
+        const searchTerms = {
+          id: undefined,
+          search: undefined,
+        };
         if ($scope.parent !== null && $scope.parent !== undefined
             && $scope.parent[$scope.attribute] !== null
             && $scope.parent[$scope.attribute] !== undefined) {

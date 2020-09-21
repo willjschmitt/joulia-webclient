@@ -1,4 +1,4 @@
-import angular = require('angular');
+import * as angular from 'angular';
 
 import '../templates';
 import '../common/toggleable-element.directive';

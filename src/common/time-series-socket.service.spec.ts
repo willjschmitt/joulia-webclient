@@ -1,10 +1,10 @@
 /* eslint-disable */
-import angular = require('angular');
+import * as angular from 'angular';
 import 'angular-mocks';
 import 'angular-websocket';
 import 'angular-websocket/dist/angular-websocket-mock';
 
-import _ = require('underscore');
+import * as _ from 'underscore';
 
 import './time-series-socket.service';
 
@@ -39,7 +39,7 @@ describe('app.common time-series-socket.service', function () {
 
   describe('timeSeriesSocket service', function () {
     var timeSeriesSocket;
-    function Subscriber (recipeInstance, name, callback) {
+    function Subscriber (recipeInstance, name, callback?): void {
       const self = this;
       self.recipeInstance = recipeInstance;
       self.name = name;
@@ -50,7 +50,7 @@ describe('app.common time-series-socket.service', function () {
           self.recievedData.push(sample)
         });
       };
-    };
+    }
 
     beforeEach(inject(function (_timeSeriesSocket_) {
       timeSeriesSocket = _timeSeriesSocket_;

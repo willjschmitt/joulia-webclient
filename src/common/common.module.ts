@@ -1,4 +1,4 @@
-import angular = require('angular');
+import * as angular from 'angular';
 
 import './confirm-delete.controller';
 import './select-brewing-company.controller';

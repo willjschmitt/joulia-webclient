@@ -1,5 +1,5 @@
 /* eslint-disable */
-import angular = require('angular');
+import * as angular from 'angular';
 import 'angular-mocks';
 
 import './joulia-header.directive';
@@ -8,7 +8,10 @@ describe('app.common', function () {
   beforeEach(angular.mock.module('app.common.joulia-header'));
 
   // Mocks the user service, so we can manipulate user preferences from here.
-  var user = {};
+  var user = {
+    first_name: null,
+    last_name: null,
+  };
   beforeEach(angular.mock.module(function($provide) {
     $provide.service('userService', function () {
       const self = this;

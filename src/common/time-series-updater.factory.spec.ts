@@ -1,9 +1,9 @@
 /* eslint-disable */
-import angular = require('angular');
+import * as angular from 'angular';
 import 'angular-mocks';
 
-import _ = require('underscore');
-import moment = require('moment');
+import * as _ from 'underscore';
+import * as moment from 'moment';
 
 import './time-series-updater.factory';
 
@@ -75,8 +75,8 @@ describe('app.common.time-series-updater time-series-updater.factory', function 
       });
 
       it('ignores old samples provided', function () {
-        const time1 = new moment().subtract(21, 'minutes');
-        const time2 = new moment().subtract(19, 'minutes');
+        const time1 = moment().subtract(21, 'minutes');
+        const time2 = moment().subtract(19, 'minutes');
         const samples = [
           {sensor: 12, time: time1.toISOString(), value: 10.0},
           {sensor: 12, time: time2.toISOString(), value: 11.0},
@@ -93,14 +93,14 @@ describe('app.common.time-series-updater time-series-updater.factory', function 
       it('removes existing old samples', function () {
         const timeSeriesUpdater = new TimeSeriesUpdater(
           recipeInstance, sensorName, 'value', twentyMinutesAgo);
-        const time1 = new moment().subtract(21, 'minutes');
-        const time2 = new moment().subtract(19, 'minutes');
+        const time1 = moment().subtract(21, 'minutes');
+        const time2 = moment().subtract(19, 'minutes');
         timeSeriesUpdater.dataPoints = [
           [time1, 10.0],
           [time2, 11.0],
         ]
-        const time3 = new moment();
-        const time4 = new moment();
+        const time3 = moment();
+        const time4 = moment();
         const samples = [
           {sensor: 12, time: time3.toISOString(), value: 12.0},
           {sensor: 12, time: time4.toISOString(), value: 13.0},
@@ -117,14 +117,14 @@ describe('app.common.time-series-updater time-series-updater.factory', function 
       it('leaves data without time', function () {
         const timeSeriesUpdater = new TimeSeriesUpdater(
           recipeInstance, sensorName, 'value');
-        const time1 = new moment().subtract(21, 'minutes');
-        const time2 = new moment();
+        const time1 = moment().subtract(21, 'minutes');
+        const time2 = moment();
         timeSeriesUpdater.dataPoints = [
           [time1, 10.0],
           [time2, 11.0],
         ]
-        const time3 = new moment();
-        const time4 = new moment();
+        const time3 = moment();
+        const time4 = moment();
         const samples = [
           {sensor: 12, time: time3.toISOString(), value: 12.0},
           {sensor: 12, time: time4.toISOString(), value: 13.0},

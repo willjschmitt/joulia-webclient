@@ -1,4 +1,4 @@
-import angular = require('angular');
+import * as angular from 'angular';
 
 angular
   .module('app.common.rtd-form', ['app.templates',])

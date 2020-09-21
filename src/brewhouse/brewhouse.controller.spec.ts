@@ -1,8 +1,8 @@
 /* eslint-disable */
-import angular = require('angular');
+import * as angular from 'angular';
 import 'angular-mocks';
 
-import moment = require('moment');
+import * as moment from 'moment';
 
 import './brewhouse.controller';
 

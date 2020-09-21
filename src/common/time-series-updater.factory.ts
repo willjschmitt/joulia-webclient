@@ -1,6 +1,6 @@
-import angular = require('angular');
-import _ = require('underscore');
-import moment = require('moment');
+import * as angular from 'angular';
+import * as _ from 'underscore';
+import * as moment from 'moment';
 
 import './brewery-resources.factory';
 import './time-series-socket.service';

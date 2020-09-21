@@ -1,4 +1,4 @@
-import angular = require('angular');
+import * as angular from 'angular';
 import * as $ from 'jquery';
 
 import 'circularProgress';
@@ -149,7 +149,7 @@ function ingredientAddition($interpolate, breweryResources) {
 
         // This happens when the dependent variable is changed, and the change
         // from the first variable is still detected.
-        if (changedAmount + changedUserAmount + changedUnitsToGrams > 1) {
+        if (+changedAmount + +changedUserAmount + +changedUnitsToGrams > 1) {
           throw new Error(''.concat(
               'More than one watched variable changed, which should not',
               ` happen. changedUserAmount: ${changedUserAmount}; `,

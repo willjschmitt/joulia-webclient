@@ -1,8 +1,8 @@
 /* eslint-disable */
-import angular = require('angular');
+import * as angular from 'angular';
 import 'angular-mocks';
 
-import inputCheckers = require('./input-checkers');
+import * as inputCheckers from './input-checkers';
 
 import './rtd-form.directive';
 

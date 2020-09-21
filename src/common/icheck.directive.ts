@@ -1,5 +1,5 @@
-import 'iCheck';
-import angular = require('angular');
+import 'icheck';
+import * as angular from 'angular';
 
 angular
   .module('app.common.icheck', [])

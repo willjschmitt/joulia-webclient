@@ -1,5 +1,5 @@
-import angular = require('angular');
-import _ = require('underscore');
+import * as angular from 'angular';
+import * as _ from 'underscore';
 
 import 'angular-websocket';
 import 'snackbar';
@@ -174,6 +174,7 @@ function timeSeriesSocket($websocket, $http, $location) {
       recipe_instance: subscriber.recipeInstance,
       sensor: subscriber.sensor,
       subscribe: true,
+      history_time: undefined,
     };
     if (subscriber.historyTime !== null
         && subscriber.historyTime !== undefined) {

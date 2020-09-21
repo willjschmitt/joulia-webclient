@@ -1,4 +1,4 @@
-import angular = require('angular');
+import * as angular from 'angular';
 
 import '../common/time-series-updater.factory';
 import './brewhouse-states.factory';

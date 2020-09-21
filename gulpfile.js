@@ -1,21 +1,37 @@
 'use strict';
 
-var gulp       = require('gulp'),
+const
+    gulp       = require('gulp'),
     ts         = require('gulp-typescript'),
     tslint     = require('gulp-tslint'),
     del        = require('del'),
     karma      = require('karma'),
-    html2js    = require('gulp-html2js'),
+    gulpHtml2js = require('gulp-html2js'),
     browserify = require("browserify"),
     source     = require('vinyl-source-stream'),
     buffer     = require('vinyl-buffer'),
-    coveralls  = require('gulp-coveralls');
+    gulpCoveralls  = require('gulp-coveralls');
 
-var tsProject = ts.createProject({
-    removeComments : true,
-    //noImplicitAny : true,
-    target : 'es5',
-    module : 'commonjs',
+const { series, parallel } = require('gulp');
+
+const tsProject = ts.createProject({
+    // allowSyntheticDefaultImports: true,
+    // sourceMap: true,
+    // declaration: false,
+    module: "commonjs",
+    moduleResolution: "node",
+    // emitDecoratorMetadata: true,
+    // experimentalDecorators: true,
+    target: "es2015",
+    // typeRoots: [
+    //     "node_modules/@types"
+    // ],
+    // lib: [
+    //     "es2015",
+    //     "dom",
+    //     "esnext.asynciterable"
+    // ],
+    // sourceType: "module"
 });
 
 
@@ -30,41 +46,43 @@ const cssGlob = srcDir + '**/**.css';
 const imgGlob = srcDir + 'img/**/*.*';
 
 // Removes temp and dist directories.
-gulp.task('clean', function (cb) {
+function clean(cb) {
   del([tmpDir], function(){
     del([distDir], cb);
   });
-});
+}
+exports.clean = clean;
 
 // Runs tslint on the original source TypeScript files.
-gulp.task('lint', function() {
+function lint () {
   return gulp.src(srcGlob)
              .pipe(tslint({
                  formatter: "verbose"
              }))
              .pipe(tslint.report());
-});
+}
+exports.lint = lint;
 
 // Builds HTML template files into a joulia.templates Angular module at
 // temp/joulia.js.
-gulp.task('html2js', function () {
+function html2js() {
   return gulp.src('src/**/**.tpl.html')
-             .pipe(html2js('templates.js', {
+             .pipe(gulpHtml2js('templates.js', {
                  adapter: 'angular',
                  base: 'src',
                  name: 'app.templates'
              }))
              .pipe(gulp.dest(tmpDir));
-});
+}
 
 // Compiles TypeScript source files in src/ to temp/js directory.
-gulp.task('tsc', ['lint'], function () {
+function tsc() {
   return gulp.src(srcGlob)
              .pipe(tsProject())
              .js.pipe(gulp.dest(tmpDir));
-});
+}
 
-gulp.task('bundle-internal-css', function () {
+function bundleInternalCss() {
   return  browserify({
         debug: true,
         transform: ['browserify-css'],
@@ -74,9 +92,9 @@ gulp.task('bundle-internal-css', function () {
     .pipe(source('joulia.css.js'))
     .pipe(buffer())
     .pipe(gulp.dest(staticDir));
-});
+}
 
-gulp.task('bundle-public-css', function () {
+function bundlePublicCss() {
   return  browserify({
         debug: true,
         transform: ['browserify-css'],
@@ -85,88 +103,91 @@ gulp.task('bundle-public-css', function () {
     .bundle()
     .pipe(source('public.css.js'))
     .pipe(buffer())
-    //.pipe(uglify())
     .pipe(gulp.dest(staticDir));
-});
+}
+exports.bundlePublicCss = bundlePublicCss;
 
 // Build task compiles TypeScript and HTML templates into JS in the temp/js
 // directory.
-gulp.task('build', ['tsc', 'html2js'], function() {});
+const build = parallel(tsc, html2js);
+exports.build = build;
 
 // Browersifies TypeScript compiled files and HTML templates into a single JS
 // bundle.js file.
-gulp.task('bundle-internal', ['build', 'bundle-internal-css'], function () {
-  return browserify({
-        debug: true,
-        entries: ['./temp/joulia-webclient.js'],
-    })
-    .bundle()
-    .pipe(source('joulia-webclient.js'))
-    .pipe(buffer())
-    .pipe(gulp.dest(staticDir));
-});
+const bundleInternal = series(
+    parallel(build, bundleInternalCss),
+    function bundleInternal() {
+        return browserify({
+            debug: true,
+            entries: ['./temp/joulia-webclient.js'],
+        })
+            .bundle()
+            .pipe(source('joulia-webclient.js'))
+            .pipe(buffer())
+            .pipe(gulp.dest(staticDir));
+    }
+);
 
-gulp.task('bundle-public', ['build', 'bundle-public-css'], function () {
-  return browserify({
-        debug: true,
-        entries: ['./temp/public.js'],
-    })
-    .bundle()
-    .pipe(source('public.js'))
-    .pipe(buffer())
-    .pipe(gulp.dest(staticDir));
-});
+const bundlePublic = series(
+    parallel(build, bundlePublicCss),
+    function bundlePublic() {
+        return browserify({
+            debug: true,
+            entries: ['./temp/public.js'],
+        })
+            .bundle()
+            .pipe(source('public.js'))
+            .pipe(buffer())
+            .pipe(gulp.dest(staticDir));
+    }
+);
+exports.bundlePublic = bundlePublic;
 
-gulp.task('bundle', ['bundle-internal', 'bundle-public', 'copy-app']);
-
-gulp.task('copy-html', function () {
+function copyHtml() {
   return gulp.src(htmlGlob)
              .pipe(gulp.dest(staticDir));
-});
+}
 
-gulp.task('copy-css', function () {
+function copyCss() {
   return gulp.src(cssGlob)
              .pipe(gulp.dest(staticDir));
-});
+}
 
-gulp.task('copy-img', function () {
+function copyImg() {
   return gulp.src(imgGlob)
              .pipe(gulp.dest(staticDir + 'img/'));
-});
+}
 
-gulp.task('copy-node-modules', function () {
-  const nodeGlob = './node_modules/**/**';
-  return gulp.src(nodeGlob)
-             .pipe(gulp.dest(staticDir + 'node_modules/'));
-});
+const copyApp = parallel(copyHtml, copyCss, copyImg);
 
-gulp.task('copy-bower-components', function () {
-  const bowerGlob = './bower_components/**/**';
-  return gulp.src(bowerGlob)
-             .pipe(gulp.dest(staticDir + 'bower_components/'));
-});
-
-gulp.task('copy-app',
-  ['copy-html', 'copy-css', 'copy-img']);
+const bundle = series(bundleInternal, bundlePublic, copyApp);
+exports.bundle = bundle;
 
 // Builds intermediate JS source and passes it to Karma for unit testing.
-gulp.task('test', ['build'], function(cb) {
-  new karma.Server({
-    configFile: __dirname + '/karma.conf.js',
-    singleRun: true
-  }, cb).start();
-});
+const test = series(
+    build,
+    function test(cb) {
+      new karma.Server({
+        configFile: __dirname + '/karma.conf.js',
+        singleRun: true
+      }, cb).start();
+    });
+exports.test = test;
 
-gulp.task('coveralls', ['test'], function() {
-  gulp.src('coverage/**/lcov.info')
-      .pipe(coveralls());
-});
+const coveralls = series(
+    test, function coveralls() {
+      gulp.src('coverage/**/lcov.info')
+          .pipe(gulpCoveralls());
+    });
 
-gulp.task('ci', ['test', 'coveralls']);
+const ci = parallel(test, coveralls);
+exports.ci = ci;
 
-gulp.task('default', ['test', 'bundle']);
+exports.default = parallel(test, bundle);
 
-gulp.task('watch', ['default'], function() {
-  gulp.watch(srcDir + '**/*.*', ['test', 'bundle']);
-  gulp.watch('./karma.conf.js', ['test', 'bundle']);
-});
+exports.watch = series(
+    exports.default,
+    function watch() {
+      gulp.watch(srcDir + '**/*.*', ['test', 'bundle']);
+      gulp.watch('./karma.conf.js', ['test', 'bundle']);
+    });

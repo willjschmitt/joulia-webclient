@@ -1,5 +1,5 @@
-import angular = require('angular');
-import _ = require('underscore');
+import * as angular from 'angular';
+import * as _ from 'underscore';
 
 angular
   .module('app.common.array-utilities', [])

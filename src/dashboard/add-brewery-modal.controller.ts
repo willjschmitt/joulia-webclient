@@ -1,4 +1,5 @@
-import angular = require('angular');
+import * as angular from 'angular';
+
 import 'angular-ui-bootstrap';
 
 import '../common/brewery-resources.factory';

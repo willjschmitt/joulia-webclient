@@ -2,7 +2,7 @@
 @import url("../../vendor/bemat-admin/css/themes/theme-default/bemat-admin.css");
 @import url("../../vendor/bemat-admin/vendor/google-code-prettify/prettify-tomorrow.css");
 @import url("../../vendor/bemat-admin/vendor/nvd3/nv.d3.css");
-@import url("node_modules/angular-ui-select/select.min.css");
+@import url("../../node_modules/angular-ui-select/select.min.css");
 
 .ju-btn-panel {
   width: 100%;

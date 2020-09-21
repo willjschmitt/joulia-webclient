@@ -1,4 +1,4 @@
-import angular = require('angular');
+import * as angular from 'angular';
 
 import '../templates';
 import './brewery-resources.factory';
@@ -53,6 +53,6 @@ function userService(userResources, breweryResources, httpStatus) {
       self.loggedIn = false;
       return;
     }
-    throw new Error('Unexpected failure in getting user: ', response);
+    throw new Error(`Unexpected failure in getting user: ${response}`);
   }
 }

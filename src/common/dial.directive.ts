@@ -1,6 +1,6 @@
 import 'simplePieChart';
 import * as $ from 'jquery';
-import angular = require('angular');
+import * as angular from 'angular';
 
 import '../templates';
 
@@ -22,7 +22,7 @@ function dial($interval) {
     link: function dialController($scope, $element) {
       // Update the pie chart dial color class based on the value.
       // TODO(will): Get duration to work.
-      $($element).find('.bemat-pie-chart').simplePieChart();
+      ($($element).find('.bemat-pie-chart') as any).simplePieChart();
 
       $interval(updateDial, 500.0);
 
@@ -31,10 +31,9 @@ function dial($interval) {
        * appropriate color based on the value
        */
       function updateDial() {
-        $($element)
-          .find('.bemat-pie-chart')
-            .simplePieChart('set',
-                parseFloat(($scope.value * 100.0).toPrecision(2).toString()));
+        ($($element).find('.bemat-pie-chart') as any)
+          .simplePieChart('set',
+              parseFloat(($scope.value * 100.0).toPrecision(2).toString()));
 
         // Maps a range to color for the dial.
         const colorClasses = {

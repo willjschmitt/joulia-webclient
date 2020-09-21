@@ -1,5 +1,5 @@
 /* eslint-disable */
-import angular = require('angular');
+import * as angular from 'angular';
 import 'angular-mocks';
 
 import './brewhouse-status.directive';
